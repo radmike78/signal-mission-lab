@@ -49,6 +49,7 @@ jobs:
       - run: python -m bandit -r backend -q
       - run: npm ci --prefix web --ignore-scripts
       - run: npm audit --prefix web --audit-level=moderate
+      - run: node --test tests_web/mission.test.mjs
       - run: npm run build --prefix web
       - run: python scripts/package_web.py
       - run: npx --prefix web playwright install --with-deps chromium
@@ -56,6 +57,7 @@ jobs:
         run: |
           python -m http.server 8070 --bind 127.0.0.1 --directory web/dist &
           NODE_PATH="$PWD/web/node_modules" node scripts/browser-check.cjs
+          NODE_PATH="$PWD/web/node_modules" node scripts/mission-check.cjs
       - name: Connected learning browser journeys
         run: |
           NODE_PATH="$PWD/web/node_modules" node scripts/connected-check.cjs

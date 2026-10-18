@@ -8,7 +8,7 @@ const fs=require('fs');
  const errors=[]; page.on('pageerror',e=>errors.push(e.message));
  await page.goto(process.env.SML_URL||'http://127.0.0.1:8070');
  const assert=(ok,message)=>{if(!ok)throw new Error(message)};
- await page.getByRole('heading',{name:'Mission',exact:true}).waitFor();
+ await page.getByRole('heading',{name:'What is your mission?',exact:true}).waitFor();
  fs.mkdirSync('artifacts/screenshots',{recursive:true});
  async function snap(name){await page.screenshot({path:`artifacts/screenshots/${name}.png`,fullPage:true})}
  await snap('mission');

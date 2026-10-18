@@ -43,3 +43,9 @@ See the current [persistent learning/security report](docs/PERSISTENCE_REPORT.md
 Screenshots: [mission](docs/screenshots/mission.png), [MDMP](docs/screenshots/mdmp.png), [graph](docs/screenshots/knowledge-graph.png), [architecture](docs/screenshots/architecture.png), [troubleshooting](docs/screenshots/troubleshoot.png), [assessment](docs/screenshots/assessment.png), [session review](docs/screenshots/instructor.png), [mentor](docs/screenshots/mentor.png), [mobile](docs/screenshots/mobile-mission.png).
 
 Connected screenshots: [instructor cohort](docs/screenshots/connected-instructor.png) and [learner results](docs/screenshots/connected-learner.png).
+
+## Mission-first guided workspace
+
+The homepage asks **What is your mission?** and branches through five questions into an explained equipment research shortlist, conceptual architecture and validation questions. See [UI and mission-flow details](docs/UI_MISSION_FLOW.md). Guidance stays local and uses supplied fictional choices. Equipment interfaces and suitability are never inferred.
+
+[New homepage](docs/screenshots/mission-home.png) · [Guided questions](docs/screenshots/mission-questions.png) · [Mission brief](docs/screenshots/mission-recommendation.png) · [Mobile](docs/screenshots/mission-home-mobile.png)
