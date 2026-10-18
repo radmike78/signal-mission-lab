@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "review_status": "illustrative_unverified",
+  "relationships": [
+    {
+      "from": "afatds",
+      "to": "cpce",
+      "kind": "shared mission context",
+      "status": "conceptual",
+      "note": "Both are mission applications; actual interoperability is not asserted."
+    },
+    {
+      "from": "q53",
+      "to": "afatds",
+      "kind": "fires ecosystem",
+      "status": "conceptual",
+      "note": "Both support fires-related functions; interface details are intentionally not represented."
+    },
+    {
+      "from": "jnn",
+      "to": "cpce",
+      "kind": "transport support category",
+      "status": "conceptual",
+      "note": "Network transport is a general dependency, not proof of specific compatibility."
+    },
+    {
+      "from": "cpn",
+      "to": "dcgsa",
+      "kind": "transport support category",
+      "status": "conceptual",
+      "note": "Generic connectivity relationship only."
+    },
+    {
+      "from": "cpce",
+      "to": "dcgsa",
+      "kind": "information-sharing context",
+      "status": "conceptual",
+      "note": "No system-specific data exchange or configuration is implied."
+    }
+  ]
+}
