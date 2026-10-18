@@ -17,6 +17,13 @@ class SecurityTests(unittest.TestCase):
         self.assertNotIn("eval(", script)
         self.assertNotIn("new Function(", script)
 
+    def test_worksheet_never_transmits_data(self):
+        script = (ROOT / "app.js").read_text()
+        self.assertIn("function worksheet()", script)
+        self.assertIn("navigator.clipboard.writeText", script)
+        self.assertNotIn("fetch('/api", script)
+        self.assertNotIn("localStorage.setItem", script)
+
     def test_no_external_code(self):
         html = (ROOT / "index.html").read_text()
         self.assertNotIn("<script src=\"https://", html)
