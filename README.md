@@ -46,6 +46,6 @@ Connected screenshots: [instructor cohort](docs/screenshots/connected-instructor
 
 ## Mission-first guided workspace
 
-The homepage asks **What is your mission?** and branches through five questions into an explained equipment research shortlist, conceptual architecture and validation questions. See [UI and mission-flow details](docs/UI_MISSION_FLOW.md). Guidance stays local and uses supplied fictional choices. Equipment interfaces and suitability are never inferred.
+The homepage asks **What is your mission?** Users enter a fictional training description; a local rule-based interpreter asks for missing or ambiguous details before producing an explained equipment research shortlist, conceptual architecture and validation questions. See [UI and mission-flow details](docs/UI_MISSION_FLOW.md). Raw text stays local and is discarded after analysis. Users can review and correct the recognized fields; sensitive-content screening is heuristic, not a classification guarantee. Equipment interfaces and suitability are never inferred.
 
 [New homepage](docs/screenshots/mission-home.png) · [Guided questions](docs/screenshots/mission-questions.png) · [Mission brief](docs/screenshots/mission-recommendation.png) · [Mobile](docs/screenshots/mission-home-mobile.png)

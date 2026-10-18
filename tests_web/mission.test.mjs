@@ -20,11 +20,16 @@ test('Disruption and access priorities change the teaching plan',()=>{
  assert.equal(recommendation({...base,priority:'access'}).emphasis,'Identity and authorized access');
  assert.notDeepEqual(recommendation({...base,priority:'access'}).questions,recommendation({...base,priority:'continuity'}).questions);
 });
-test('Unknown or cross-mission inputs are rejected',()=>{
- for(const answers of [{...base,mission:'real-opord'},{...base,echelon:'unknown'},{...base,systems:[]},{...base,systems:['afatds','afatds']},{...base,mission:'command',systems:['q53']},{...base,setting:'1 OR 1=1'}])assert.throws(()=>validateAnswers(answers));
+test('Unknown or invalid recommendation inputs are rejected',()=>{
+ for(const answers of [{...base,mission:'real-opord'},{...base,echelon:'unknown'},{...base,systems:[]},{...base,systems:['afatds','afatds']},{...base,systems:['unknown-system']},{...base,setting:'1 OR 1=1'}])assert.throws(()=>validateAnswers(answers));
 });
 test('Exploration is also a complete guided path',()=>{
  const result=recommendation({mission:'explore',echelon:'battalion',systems:['radio'],setting:'single',priority:'continuity'});
  assert.deepEqual(result.equipment.map(e=>e.id),['radio']);
  assert.match(result.summary,/Battalion/);
+});
+
+test('Mixed supported systems retain readable labels',()=>{
+ const result=recommendation({...base,systems:['afatds','dcgsa']});
+ assert.equal(result.services[0].detail,'AFATDS · DCGS-A');
 });

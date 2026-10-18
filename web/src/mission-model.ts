@@ -18,8 +18,8 @@ export const systemChoices:Record<Mission,{id:string;title:string;detail:string}
 };
 export function validateAnswers(value:Answers):void{
  if(!missionOptions.some(m=>m.id===value.mission)||!['battalion','brigade','division'].includes(value.echelon)||!['single','distributed','disrupted'].includes(value.setting)||!['availability','access','continuity'].includes(value.priority))throw Error('Choose a supplied fictional training option.');
- const permitted=systemChoices[value.mission].map(s=>s.id);
- if(!value.systems.length||value.systems.length>3||new Set(value.systems).size!==value.systems.length||value.systems.some(s=>!permitted.includes(s)))throw Error('Choose systems within this training mission.');
+ const permitted=['afatds','q53','dcgsa','cpce','radio'];
+ if(!value.systems.length||value.systems.length>5||new Set(value.systems).size!==value.systems.length||value.systems.some(s=>!permitted.includes(s)))throw Error('Choose supported systems for this training mission.');
 }
 export function recommendation(value:Answers){
  validateAnswers(value);
@@ -30,10 +30,10 @@ export function recommendation(value:Answers){
   id==='jnn'||id==='cpn'?'Compare transport-node families while studying a distributed exercise. Variant suitability is unknown.':
   id==='radio'&&!value.systems.includes(id)?'Study an alternate communications category for the synthetic interruption exercise.':
   id==='q53'?'Include radar operators and maintainers in the learning discussion. Signal support does not establish radar interfaces.':
-  'Included because you selected this application or communications outcome.'}));
+  'Candidate for the described training outcome; confirm its relevance with the supported system owner.'}));
  const emphasis=value.priority==='access'?'Identity and authorized access':value.priority==='continuity'?'Recovery and alternate service concepts':'End-to-end service availability';
  const services=[
-  {title:'User outcome',detail:systems.filter(s=>s!=='q53').map(s=>systemChoices[value.mission].find(x=>x.id===s)?.title||s).join(' · ')||'Supported application and users'},
+  {title:'User outcome',detail:systems.filter(s=>s!=='q53').map(s=>Object.values(systemChoices).flat().find(x=>x.id===s)?.title||s).join(' · ')||'Supported application and users'},
   {title:'Supporting services',detail:value.priority==='access'?'Identity · authorization · application health':'Application health · identity · name resolution'},
   {title:'Transport concepts',detail:value.setting==='single'?'Local network · switching · cabling':'Local network · inter-site transport · service reachability'},
   {title:'Support foundation',detail:value.setting==='disrupted'?'Power · maintenance · recovery rehearsal':'Power · maintenance · responsible owners'}

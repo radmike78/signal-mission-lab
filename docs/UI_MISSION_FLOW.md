@@ -1,25 +1,25 @@
-# Mission-first UI update — 18 October 2026
+# Text-first mission flow — 18 October 2026
 
-## Experience
+The charcoal/olive homepage asks **What is your mission?** and accepts a short fictional training description. Users confirm that it contains only fictional, non-sensitive information. Examples fill the text box without automatically submitting it.
 
-The default screen now asks **What is your mission?** Four starting paths cover command-post support, fires-team support, intelligence-team support and an exploratory beginner route. The interface uses charcoal surfaces, olive accents, Signal-inspired line icons and restrained echelon symbols. No camouflage, combat imagery, remote fonts or third-party styles are used.
+## Interpretation and clarification
 
-A five-question guide collects supplied fictional choices for mission, echelon, systems/outcomes, exercise environment and learning priority. The questions branch for fires and beginner paths. System choices are required, multiple selections are supported, back/start-over controls are available, and the current brief survives navigation to other learning areas within the open page. Reload starts a new local guide; answers are not uploaded or persisted.
+A local, deterministic interpreter recognizes supported mission categories, echelons, system names, environment descriptions and learning priorities. Clear information is reused. Missing or conflicting fields trigger targeted follow-up questions; a sufficiently complete description goes directly to recommendations. The readback shows the interpreted fields and lets users correct any of them.
 
-## Results
+This is a bounded rule-based feature, not general-purpose natural-language understanding or a generative model. Unrecognized requests need clarification and may be mapped only to the supported training categories. Mixed fires/intelligence descriptions retain their named systems while asking for a primary focus. Negated system names are excluded where the rule can recognize the negation. Complex language, indirect references and unfamiliar synonyms can still be misunderstood; users must review the readback.
 
-- Selected applications or system categories appear with a reason for inclusion and links to source/unknowns profiles.
-- Distributed scenarios add JNN/WIN-T and CPN as transport-family comparison topics; disrupted scenarios add a radio category. These are educational research candidates, not recommended allocations, purchases or verified variants.
-- A conceptual layer model groups user outcomes, supporting services, transport concepts and support foundations. It varies with the answers and links to the service-dependency simulator.
-- Radar is explicitly excluded from implied application links. No AN/TPQ-53 interface is established by the diagram. Echelon selection does not infer equipment quantities or force structure.
-- Validation questions adapt to mission, environment and priority. The flow links to MDMP practice for further learning.
+Users who do not know the systems can request a suggested study starting point. This proposes a catalog research candidate, not an operational allocation. Results explain equipment candidates, service-dependency layers and validation questions. Interface, version, quantity and real-world suitability remain unverified. Radar is not drawn as an established application connection.
 
-The guide has no free-text planning intake, coordinates, network addressing, frequency fields or upload interface. The short training boundary remains visible. Existing doctrine, source provenance, assessments, troubleshooting, persistent instructor/learner workflows and the original `/legacy/` application remain available.
+## Privacy and safeguards
+
+Raw descriptions stay in component memory in the current browser tab. They are cleared after analysis, rejection or reset and are never sent to the API, placed in URLs, saved to browser storage or included in saved learning records. The retained brief contains only bounded, recognized categories. Reload clears it. In-page navigation preserves the bounded brief.
+
+The text box is limited to 1,200 characters. Screening rejects common classification/control markers, credentials, IP addresses, coordinates, frequencies, operational-plan indicators, hidden controls, external URLs and common instruction-override patterns. Rejected text is cleared without being echoed. Rendering uses React text nodes, not raw HTML, and the interpreter executes no instructions or external calls.
+
+Screening is heuristic and cannot identify every sensitive item or real operational plan. It is not a DLP or classification system. The user confirmation and explicit fictional-training boundary remain required; do not enter classified information, CUI, COMSEC, actual unit identifiers or real network plans.
 
 ## Validation
 
-Five deterministic model tests cover candidate selection, unknown-interface limits, environment/priority branches, input validation and the beginner route. Strict TypeScript and Vite build pass. Browser journeys cover a fires recommendation, beginner route, required-answer gating, reset, preservation across navigation, source/simulator links and 390px mobile overflow checks. Existing training and connected account workflows are also tested after the theme update.
+Unit tests cover full descriptions, skipped questions, missing/ambiguous information, mixed systems, negations, numeric false positives, rejected sensitive examples and instruction overrides, plus the existing recommendation rules. Browser tests cover direct recommendations, targeted follow-ups, corrections/navigation, rejection/clearing, absence of raw-text persistence, beginner guidance and mobile overflow. Existing learning and connected-account journeys remain in CI.
 
-Screenshots: `docs/screenshots/mission-home.png`, `mission-questions.png`, `mission-recommendation.png`, `mission-home-mobile.png`, and `mission-result-mobile.png`. These use supplied fictional scenarios only. See the latest PR checks for full CI results.
-
-Remaining limits: no generative recommendations, no verified version-specific equipment configuration, no equipment counts, no operational connectivity plan and no production-readiness claim. Publication and SME review gates remain unchanged.
+Screenshots in `docs/screenshots/mission-home.png`, `mission-questions.png`, `mission-recommendation.png`, `mission-home-mobile.png` and `mission-result-mobile.png` use synthetic descriptions. Latest CI results are available in PR #1.
