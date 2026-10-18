@@ -1,15 +1,15 @@
-# Implementation milestones
+# Delivery stages
 
-## Implemented
-Static educational UI: fictional mission intake, local-only mission-analysis staff worksheet, branching synthetic guided exercises with decision feedback, doctrine overview, cross-branch equipment exploration, synthetic service-dependency model, troubleshooting exercises, formative assessment, basic catalog tests, security policy and deployment headers.
+## Validated milestone (18 October 2026)
 
-## Next engineering milestones (not implemented)
-1. Normalize catalog into typed records and a source-backed, versioned relationship graph. Add review/admin workflow and citations.
-2. Replace static UI with accessible React/TypeScript components, navigation and saved local practice progress.
-3. Add a deterministic synthetic scenario engine, branchable diagnostic evidence, design editor and measurable scoring.
-4. Add FastAPI/PostgreSQL API with migration tests, authentication/authorization, quotas and audit events.
-5. Add human-reviewed retrieval with source citations, prompt-injection defenses and model evaluation; no operational recommendations.
-6. Add instructor authoring, training cohort management, analytics and accessibility testing.
-7. Add deployment automation, backup/restore drills, security tests, DAST/SAST, dependency scans and monitoring.
+Preserved root prototype; added React/TypeScript static client, mission requirements matrix, guided MDMP practice, provenance-aware equipment exploration, interactive service graph, diagnostic scoring, shared formative questions, session review and deterministic citation retrieval. Added separately tested FastAPI endpoints, CI validation/artifact packaging and a non-root API container definition. See `IMPLEMENTATION_REPORT.md` for exact evidence and screenshots.
 
-Each milestone must meet security, source provenance, accessibility and learning-outcome acceptance criteria before release.
+## Remaining stages
+
+1. Expand typed content schemas and public-source coverage; obtain human doctrine/equipment review. No compatibility claim can be promoted by inference.
+2. Implement OIDC identity, server-enforced learner/instructor/cohort authorization and PostgreSQL persistence, with ownership/isolation tests, migrations, deletion and backup/restore drills.
+3. Connect UI to authenticated persistence; add instructor authoring and analytics. Current session review is a preview only.
+4. Implement a generative mentor only after reviewed corpus, prompt-injection/source-poisoning evaluations, citation entailment checks, abstention tests, budgets and secure credential setup.
+5. Complete secure live deployment, accessibility review, image scans, secret scanning/SAST/DAST, monitoring and incident-response rehearsals.
+
+Every stage must pass functional, security, source-provenance and learning-outcome acceptance criteria. Current work is not production readiness.

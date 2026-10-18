@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "claims": [
+    {
+      "id": "q53-purpose",
+      "subject": "q53",
+      "statement": "The Army describes AN/TPQ-53 as a counterfire target acquisition radar.",
+      "source_title": "Systems engineering expertise leads to increased counterfire target acquisition radar capabilities",
+      "url": "https://www.army.mil/article/91357/systems_engineering_expertise_leads_to_increased_counterfire_target_acquisition_radar_capabilities",
+      "published": "2012-11-16",
+      "locator": "Opening system description",
+      "retrieved": "2026-10-18",
+      "reviewer": "Automated source check; human SME review pending",
+      "status": "source_checked",
+      "scope": "Historical purpose only; current variants and interfaces unknown"
+    },
+    {
+      "id": "mdmp-method",
+      "subject": "MDMP",
+      "statement": "MDMP is a systematic staff planning process supporting commander decisions; practice and staff training are necessary.",
+      "source_title": "Military Decision-Making Process // Organizing and Conducting Planning",
+      "url": "https://www.army.mil/article/271773/military_decision_making_process_organizing_and_conducting_planning",
+      "published": "2023-11-17",
+      "locator": "Opening two paragraphs",
+      "retrieved": "2026-10-18",
+      "reviewer": "Automated source check; human doctrine review pending",
+      "status": "source_checked",
+      "scope": "Training overview; does not establish current FM 5-0 edition"
+    }
+  ]
+}

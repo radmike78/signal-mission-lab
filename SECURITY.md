@@ -26,3 +26,6 @@ Track OWASP Top 10 risks in code review: access control, misconfiguration, suppl
 - Run CI, static analysis and a dependency/secret scan.
 - Verify accessibility and functional tests.
 - Confirm no real operational data in seed content or example screenshots.
+
+## React/API milestone (18 October 2026)
+The root static prototype remains unchanged. The new React app has no uploads or free-text planning input and only stores bounded numeric practice results in sessionStorage. The separate FastAPI service accepts strict enumerated/numeric JSON, rejects extra fields and limits actual body bytes to 2048 before parsing. No external retrieval or LLM tools run at request time. No authenticated instructor or database service exists yet. See `docs/IMPLEMENTATION_REPORT.md` for tests and unresolved OWASP release gates; the earlier static-only description applies to the original app.

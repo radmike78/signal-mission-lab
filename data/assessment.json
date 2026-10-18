@@ -1,0 +1,32 @@
+[
+  {
+    "id": "mission",
+    "question": "What comes before hardware selection?",
+    "options": [
+      "Mission and information requirements",
+      "Assume interfaces"
+    ],
+    "answer": 0,
+    "rationale": "Start with the supported user's outcome."
+  },
+  {
+    "id": "interop",
+    "question": "Does IP reachability establish interoperability?",
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "answer": 1,
+    "rationale": "Documented interfaces and versions still require validation."
+  },
+  {
+    "id": "identity",
+    "question": "Reachable application, failed sign-in: what should you inspect?",
+    "options": [
+      "Only cabling",
+      "Identity dependency"
+    ],
+    "answer": 1,
+    "rationale": "Transport and authentication are separate dependencies."
+  }
+]
