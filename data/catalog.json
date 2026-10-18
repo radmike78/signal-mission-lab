@@ -1,0 +1,309 @@
+{
+  "doctrine": [
+    {
+      "id": "ADP 5-0",
+      "name": "The Operations Process",
+      "topics": [
+        "planning",
+        "preparation",
+        "execution",
+        "assessment"
+      ],
+      "note": "Review current publication and applicability."
+    },
+    {
+      "id": "FM 5-0",
+      "name": "Planning and Orders Production",
+      "topics": [
+        "MDMP",
+        "orders",
+        "mission analysis"
+      ],
+      "note": "Review current edition."
+    },
+    {
+      "id": "ADP 6-0",
+      "name": "Mission Command",
+      "topics": [
+        "command and control",
+        "mission command"
+      ],
+      "note": "Review current edition."
+    },
+    {
+      "id": "FM 6-0",
+      "name": "Commander and Staff Organization and Operations",
+      "topics": [
+        "staff",
+        "running estimates",
+        "coordination"
+      ],
+      "note": "Review current edition."
+    },
+    {
+      "id": "FM 6-02",
+      "name": "Signal Support to Operations",
+      "topics": [
+        "signal",
+        "communications"
+      ],
+      "note": "Review current edition."
+    },
+    {
+      "id": "FM 3-09",
+      "name": "Fire Support and Field Artillery Operations",
+      "topics": [
+        "fires",
+        "field artillery"
+      ],
+      "note": "Review current edition."
+    },
+    {
+      "id": "FM 3-0",
+      "name": "Operations",
+      "topics": [
+        "operational context"
+      ],
+      "note": "Review current edition."
+    }
+  ],
+  "equipment": [
+    {
+      "id": "jnn",
+      "name": "JNN / WIN-T",
+      "category": "Signal transport",
+      "description": "Legacy tactical network infrastructure family; variants and configurations differ.",
+      "capabilities": [
+        "Transport concepts",
+        "Networking fundamentals"
+      ],
+      "dependencies": [
+        "Power",
+        "Local networking",
+        "Transport availability"
+      ],
+      "roles": [
+        "Signal staff",
+        "Network maintainers"
+      ],
+      "confidence": "Overview only"
+    },
+    {
+      "id": "cpn",
+      "name": "CPN",
+      "category": "Signal transport",
+      "description": "Tactical network node family; inspect version-specific public references.",
+      "capabilities": [
+        "Local connectivity",
+        "Transport concepts"
+      ],
+      "dependencies": [
+        "Power",
+        "Local networking"
+      ],
+      "roles": [
+        "Signal maintainers"
+      ],
+      "confidence": "Overview only"
+    },
+    {
+      "id": "cpce",
+      "name": "CPCE",
+      "category": "Mission command",
+      "description": "Command Post Computing Environment; supports mission command workflows.",
+      "capabilities": [
+        "Mission command workflows",
+        "Shared situational awareness"
+      ],
+      "dependencies": [
+        "Endpoints",
+        "Identity services",
+        "Application services",
+        "Transport"
+      ],
+      "roles": [
+        "Mission command operators",
+        "Signal staff",
+        "System maintainers"
+      ],
+      "confidence": "Functional overview"
+    },
+    {
+      "id": "dcgsa",
+      "name": "DCGS-A",
+      "category": "Intelligence",
+      "description": "Distributed Common Ground System–Army; intelligence information workflows.",
+      "capabilities": [
+        "Intelligence information processing",
+        "Information dissemination concepts"
+      ],
+      "dependencies": [
+        "Endpoints",
+        "Application services",
+        "Storage",
+        "Authorized access"
+      ],
+      "roles": [
+        "Intelligence personnel",
+        "System maintainers",
+        "Signal staff"
+      ],
+      "confidence": "Functional overview"
+    },
+    {
+      "id": "afatds",
+      "name": "AFATDS",
+      "category": "Fires",
+      "description": "Advanced Field Artillery Tactical Data System; fires command-and-control functions.",
+      "capabilities": [
+        "Fires information workflows",
+        "Staff coordination"
+      ],
+      "dependencies": [
+        "Authorized endpoints",
+        "Application services",
+        "Approved interfaces",
+        "Transport"
+      ],
+      "roles": [
+        "Fires operators",
+        "Fires system maintainers",
+        "Signal staff"
+      ],
+      "confidence": "Functional overview"
+    },
+    {
+      "id": "q53",
+      "name": "AN/TPQ-53",
+      "category": "Fires sensor",
+      "description": "Counterfire radar system. Radar-specific technical interfaces require authoritative documentation.",
+      "capabilities": [
+        "Radar-related information workflows"
+      ],
+      "dependencies": [
+        "Power",
+        "Radar system support",
+        "Approved interfaces",
+        "Authorized communications support"
+      ],
+      "roles": [
+        "Radar operators",
+        "Radar maintainers",
+        "Signal staff"
+      ],
+      "confidence": "Functional overview"
+    },
+    {
+      "id": "radio",
+      "name": "Tactical radio systems",
+      "category": "Signal transport",
+      "description": "Multiple families and variants with different capabilities and approvals.",
+      "capabilities": [
+        "Radio communications concepts"
+      ],
+      "dependencies": [
+        "Power",
+        "Authorized configuration",
+        "Maintainer support"
+      ],
+      "roles": [
+        "Radio operators",
+        "Signal maintainers"
+      ],
+      "confidence": "Category only"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "fires",
+      "name": "Fictional DIVARTY fires coordination CPX",
+      "echelon": "Division",
+      "unit": "Field Artillery",
+      "exercise": "CPX",
+      "objective": "Study information exchange among a fictional fires headquarters, subordinate organizations, and supporting systems.",
+      "systems": [
+        "afatds",
+        "q53",
+        "cpce"
+      ],
+      "questions": [
+        "Which organizations own each system and service?",
+        "What documented interfaces and versions need verification?",
+        "How would an application fault differ from a transport fault?",
+        "What evidence would support acceptance testing?"
+      ]
+    },
+    {
+      "id": "brigade",
+      "name": "Fictional brigade communications exercise",
+      "echelon": "Brigade",
+      "unit": "Mixed",
+      "exercise": "COMMEX",
+      "objective": "Study generic communications dependencies across a fictional brigade headquarters and subordinate units.",
+      "systems": [
+        "jnn",
+        "cpn",
+        "cpce"
+      ],
+      "questions": [
+        "Which essential information exchanges are simulated?",
+        "Which service dependencies are single points of failure?",
+        "How will users report faults?"
+      ]
+    },
+    {
+      "id": "intelligence",
+      "name": "Fictional intelligence staff CPX",
+      "echelon": "Brigade",
+      "unit": "Intelligence",
+      "exercise": "CPX",
+      "objective": "Explore mission application availability and authorized information sharing in a synthetic environment.",
+      "systems": [
+        "dcgsa",
+        "cpce"
+      ],
+      "questions": [
+        "What are the identity and storage dependencies?",
+        "How is a service problem distinguished from a network problem?"
+      ]
+    }
+  ],
+  "faults": [
+    {
+      "id": "dns",
+      "name": "Synthetic name resolution failure",
+      "symptom": "Training application can be reached by simulated IP but not hostname.",
+      "checks": [
+        "Inspect synthetic resolver status",
+        "Compare name lookup to IP reachability",
+        "Check client DNS configuration"
+      ],
+      "root": "Simulated DNS service unavailable",
+      "lesson": "Network reachability alone does not guarantee application usability."
+    },
+    {
+      "id": "identity",
+      "name": "Synthetic authentication outage",
+      "symptom": "Users can reach the training application but cannot sign in.",
+      "checks": [
+        "Verify synthetic service health",
+        "Review simulated authentication logs",
+        "Check identity provider dependency"
+      ],
+      "root": "Simulated identity provider unavailable",
+      "lesson": "Application access depends on identity services as well as transport."
+    },
+    {
+      "id": "power",
+      "name": "Synthetic edge power failure",
+      "symptom": "A fictional node and its connected users lose all service.",
+      "checks": [
+        "Inspect synthetic device power",
+        "Check link indicators",
+        "Verify service restoration after power recovery"
+      ],
+      "root": "Simulated power loss",
+      "lesson": "Start troubleshooting at the lowest failed dependency."
+    }
+  ]
+}
