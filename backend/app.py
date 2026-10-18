@@ -1,11 +1,33 @@
-"""Read-only/bounded API. Intentionally no authentication or learner persistence yet."""
+"""Bounded training API with optional authenticated persistent learning."""
+import os
+import sqlite3
+from pathlib import Path
 from typing import Literal
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 from pydantic import BaseModel, ConfigDict, Field
 from . import core
 from .limits import BodyLimit
+from .learning import router as learning_router
 app = FastAPI(title="Signal Mission Lab", docs_url=None, redoc_url=None, openapi_url=None)
 app.add_middleware(BodyLimit)
+app.add_middleware(TrustedHostMiddleware,allowed_hosts=os.environ.get("SML_ALLOWED_HOSTS","localhost,127.0.0.1,testserver").split(","))
+app.include_router(learning_router)
+
+@app.exception_handler(RequestValidationError)
+async def validation_error(request, error):
+    # Never echo submitted credential values or arbitrary input in validation errors.
+    return JSONResponse({"detail":"Invalid request fields or values"}, status_code=422)
+
+@app.exception_handler(sqlite3.DatabaseError)
+async def database_error(request, error):
+    return JSONResponse({"detail":"Learning service unavailable"},status_code=503,headers={"Cache-Control":"no-store"})
+
+import psycopg
+app.add_exception_handler(psycopg.Error,database_error)
 class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
 class Diagnosis(StrictModel):
@@ -19,7 +41,13 @@ async def boundary(request, call_next):
     response = await call_next(request)
     response.headers["Cache-Control"] = "no-store"
     response.headers["X-Content-Type-Options"] = "nosniff"
-    response.headers["Content-Security-Policy"] = "default-src 'none'; frame-ancestors 'none'"
+    if request.url.path.startswith("/api/") or request.url.path == "/health":
+        response.headers["Content-Security-Policy"] = "default-src 'none'; frame-ancestors 'none'"
+    else:
+        response.headers["Content-Security-Policy"] = "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'"
+    response.headers["Referrer-Policy"] = "no-referrer"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
     return response
 @app.get("/health")
 def health(): return {"status":"ok", "scope":"synthetic training"}
@@ -42,3 +70,7 @@ def assessment_grade(body: Answers):
 def diagnose(body: Diagnosis):
     try: return core.diagnose(body.fault, body.checks, body.diagnosis)
     except ValueError as error: raise HTTPException(422, str(error)) from error
+
+# Optional same-origin packaging: no CORS, no browser-selected API destinations.
+if os.environ.get('SML_SERVE_WEB') == '1':
+    app.mount('/', StaticFiles(directory=Path(__file__).resolve().parents[1]/'web/dist',html=True),name='web')

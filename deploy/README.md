@@ -1,3 +1,7 @@
+# Deployment overview
+
+For current persistent-account setup, use [ACCOUNTS.md](ACCOUNTS.md). That runbook covers database migrations, separate administrative/runtime identities, credential provisioning, quotas, deletion, TLS and same-origin hosting. The notes below describe the initial static milestone and are retained as historical context; the service now has optional accounts and persistence.
+
 # Deployment boundary
 
 The React application is a self-contained static training build. It does not send learner inputs to the API. Build with `npm ci --prefix web --ignore-scripts && npm run build --prefix web && python scripts/package_web.py`. Publish only `web/dist` to a static host that enforces `_headers`. The original application remains under `/legacy/`.

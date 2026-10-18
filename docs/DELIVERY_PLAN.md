@@ -13,3 +13,9 @@ Preserved root prototype; added React/TypeScript static client, mission requirem
 5. Complete secure live deployment, accessibility review, image scans, secret scanning/SAST/DAST, monitoring and incident-response rehearsals.
 
 Every stage must pass functional, security, source-provenance and learning-outcome acceptance criteria. Current work is not production readiness.
+
+## Persistent learning milestone (18 October 2026)
+
+Added PostgreSQL persistence, administrator-provisioned synthetic accounts with hashed/expiring/revocable tokens, instructor-owned cohorts, memberships, assignments, server-scored attempts, deletion and minimal audit events. Connected learner/instructor UI uses the same-origin API while offline training is preserved. Added authorization/isolation tests, PostgreSQL integration and backup/restore CI, plus a constrained container check. See `PERSISTENCE_REPORT.md` and `deploy/ACCOUNTS.md`.
+
+The earlier remaining-stage list is historical: basic persistence/cohort authorization is now implemented. Organizational OIDC/MFA, custom instructor authoring, expanded analytics, reviewed sources, generative mentor evaluation and live deployment/security/accessibility review remain incomplete.
