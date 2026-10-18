@@ -20,12 +20,12 @@ def requirements(scenario_id):
         ("Continuity", "Exercise director", "Rehearse a fictional service interruption and recovery"),
         ("Acceptance", "Supported staff and Signal", "Demonstrate the fictional user outcome and record evidence")]]}
 def mentor(topic):
-    topics = {"mdmp": "mdmp-method", "radar": "q53-purpose"}
+    topics = {"mdmp": "mdmp-method", "radar": "q53-purpose", "signal": "fm6-signal-role", "estimates": "fm6-running-estimates", "operations": "adp5-operations-process", "planning": "fm602-planning", "c2": "adp6-c2"}
     claim_id = topics.get(topic)
     claim = next((c for c in load("sources.json")["claims"] if c["id"] == claim_id), None)
     if claim is None:
         return {"answer": "Insufficient reviewed evidence. Ask an instructor to review a public source.", "citations": [], "mode": "deterministic retrieval; no generative AI"}
-    return {"answer": claim["statement"], "citations": [claim], "mode": "deterministic retrieval; no generative AI", "limitation": "Historical public source; no interface, current-edition or interoperability validation."}
+    return {"answer": claim["statement"], "citations": [claim], "mode": "deterministic retrieval; no generative AI", "limitation": claim["scope"]}
 def diagnose(fault_id, checks, diagnosis):
     faults = catalog()["faults"]
     fault = next((f for f in faults if f["id"] == fault_id), None)

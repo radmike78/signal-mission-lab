@@ -59,7 +59,7 @@ def graph(): return core.graph()
 def requirements(scenario_id: Literal["fires","brigade","intelligence"]):
     return core.requirements(scenario_id)
 @app.get("/api/mentor/{topic}")
-def mentor(topic: Literal["mdmp","radar","unknown"]): return core.mentor(topic)
+def mentor(topic: Literal["mdmp","radar","signal","estimates","operations","planning","c2","unknown"]): return core.mentor(topic)
 @app.get("/api/assessment")
 def assessment(): return [{k:v for k,v in q.items() if k not in {"answer","rationale"}} for q in core.QUIZ]
 @app.post("/api/assessment")

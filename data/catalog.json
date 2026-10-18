@@ -19,16 +19,16 @@
         "orders",
         "mission analysis"
       ],
-      "note": "Review current edition."
+      "note": "APD lists Change 1 dated 11 August 2025. PDF content retrieval pending."
     },
     {
       "id": "ADP 6-0",
-      "name": "Mission Command",
+      "name": "Command and Control",
       "topics": [
         "command and control",
         "mission command"
       ],
-      "note": "Review current edition."
+      "note": "APD active record: 7 July 2026. Source reading available; human doctrine review pending."
     },
     {
       "id": "FM 6-0",
@@ -132,7 +132,7 @@
       "id": "dcgsa",
       "name": "DCGS-A",
       "category": "Intelligence",
-      "description": "Distributed Common Ground System–Army; intelligence information workflows.",
+      "description": "Distributed Common Ground System\u2013Army; intelligence information workflows.",
       "capabilities": [
         "Intelligence information processing",
         "Information dissemination concepts"
