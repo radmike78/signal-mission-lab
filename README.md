@@ -3,7 +3,7 @@
 An **unofficial, educational** Army Signal learning prototype. Learn technical fundamentals, study publicly releasable equipment concepts, and practice translating **fictional** exercise objectives into communications requirements.
 
 ## Start
-Open `index.html` in a browser. No installation, account, server, or API key required.
+Run `python3 -m http.server 8000` from the repository directory, then open `http://localhost:8000`. The browser loads the local JSON catalog via HTTP. No account, API key, or external service required.
 
 ## Current prototype
 - Fictional COMMEX / CPX / WFX scenario intake
