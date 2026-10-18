@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "classification": "SYNTHETIC TRAINING ONLY",
+  "exercises": [
+    {
+      "id": "service-triage-01",
+      "title": "Brigade CPX: application unavailable",
+      "difficulty": "foundation",
+      "context": "A fictional brigade CPX uses a generic training application. Several learners report they cannot access it.",
+      "learning_objectives": [
+        "Distinguish service availability from transport reachability",
+        "Identify service owners and verification evidence",
+        "Explain escalation responsibilities"
+      ],
+      "start": "report",
+      "nodes": [
+        {
+          "id": "report",
+          "prompt": "A fictional application is unavailable. What is the best initial approach?",
+          "choices": [
+            {
+              "text": "Assume the transport is down",
+              "next": "guess"
+            },
+            {
+              "text": "Define the affected users and collect symptoms",
+              "next": "scope"
+            }
+          ]
+        },
+        {
+          "id": "guess",
+          "feedback": "Avoid assigning a cause without evidence.",
+          "choices": [
+            {
+              "text": "Collect scope and symptoms",
+              "next": "scope"
+            }
+          ]
+        },
+        {
+          "id": "scope",
+          "evidence": "Users report the training site opens, but login fails. Network transport appears healthy in the simulation.",
+          "prompt": "Which dependency should you investigate next?",
+          "choices": [
+            {
+              "text": "Simulated identity service",
+              "next": "identity"
+            },
+            {
+              "text": "Replace every simulated network device",
+              "next": "replace"
+            }
+          ]
+        },
+        {
+          "id": "replace",
+          "feedback": "Replacing unrelated components does not isolate a fault.",
+          "choices": [
+            {
+              "text": "Review service dependencies",
+              "next": "scope"
+            }
+          ]
+        },
+        {
+          "id": "identity",
+          "evidence": "Synthetic identity health check reports unavailable; application service is running.",
+          "prompt": "What is an appropriate training conclusion?",
+          "choices": [
+            {
+              "text": "Document evidence, involve the service owner, validate recovery",
+              "next": "complete"
+            },
+            {
+              "text": "Declare all systems interoperable",
+              "next": "wrong"
+            }
+          ]
+        },
+        {
+          "id": "wrong",
+          "feedback": "Successful access does not establish interoperability between different systems.",
+          "choices": [
+            {
+              "text": "Return to evidence-based conclusion",
+              "next": "identity"
+            }
+          ]
+        },
+        {
+          "id": "complete",
+          "terminal": true,
+          "feedback": "Completed. Root cause in this fictional scenario: identity service outage. The learner used symptoms and evidence to narrow the fault domain."
+        }
+      ]
+    },
+    {
+      "id": "planning-01",
+      "title": "DIVARTY CPX: mission requirements discovery",
+      "difficulty": "intermediate",
+      "context": "A fictional fires staff requests support for several training systems. No interface compatibility has been verified.",
+      "learning_objectives": [
+        "Clarify purpose and information requirements",
+        "Separate system ownership from transport support",
+        "Document unknown interfaces"
+      ],
+      "start": "request",
+      "nodes": [
+        {
+          "id": "request",
+          "prompt": "What should Signal clarify first?",
+          "choices": [
+            {
+              "text": "Mission purpose, participants, data requirements and system owners",
+              "next": "clarify"
+            },
+            {
+              "text": "Assume all systems share a common interface",
+              "next": "assume"
+            }
+          ]
+        },
+        {
+          "id": "assume",
+          "feedback": "Shared networking technologies do not prove application interoperability.",
+          "choices": [
+            {
+              "text": "Clarify requirements",
+              "next": "clarify"
+            }
+          ]
+        },
+        {
+          "id": "clarify",
+          "evidence": "The fictional staff identifies mission objectives and responsible system specialists. Specific versions and approved interfaces are unknown.",
+          "prompt": "How should the team proceed?",
+          "choices": [
+            {
+              "text": "Document unknowns and request authoritative version-specific evidence",
+              "next": "complete"
+            },
+            {
+              "text": "Invent a connection design",
+              "next": "assume"
+            }
+          ]
+        },
+        {
+          "id": "complete",
+          "terminal": true,
+          "feedback": "Completed. Requirements and unknowns were documented without making unsupported compatibility claims."
+        }
+      ]
+    }
+  ]
+}
