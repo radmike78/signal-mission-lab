@@ -1,7 +1,7 @@
 # Implementation milestones
 
 ## Implemented
-Static educational UI: fictional mission intake, doctrine overview, cross-branch equipment exploration, synthetic service-dependency model, troubleshooting exercises, formative assessment, basic catalog tests, security policy and deployment headers.
+Static educational UI: fictional mission intake, local-only mission-analysis staff worksheet, doctrine overview, cross-branch equipment exploration, synthetic service-dependency model, troubleshooting exercises, formative assessment, basic catalog tests, security policy and deployment headers.
 
 ## Next engineering milestones (not implemented)
 1. Normalize catalog into typed records and a source-backed, versioned relationship graph. Add review/admin workflow and citations.
