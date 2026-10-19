@@ -12,7 +12,7 @@ const fs=require('fs');
  fs.mkdirSync('artifacts/screenshots',{recursive:true});
  async function snap(name){await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:`artifacts/screenshots/${name}.png`,fullPage:true})}
  await snap('mission');
- const nav=async(name)=>{await page.getByRole('navigation').getByRole('button',{name:new RegExp(name+'$')}).click()};
+ const nav=async(name)=>{const label=name==='Instructor'?'My training':name;const button=page.getByRole('navigation').getByRole('button',{name:new RegExp(label+'$')});if(!await button.isVisible())await page.getByText('More learning tools',{exact:true}).click();await button.click()};
  await page.getByRole('button',{name:'New to the technology? Learn IT foundations →',exact:true}).click();
  await page.getByRole('heading',{name:'IT foundations for Signal Soldiers',exact:true}).waitFor();
  await page.getByLabel('The host and its resource/storage health',{exact:true}).check();

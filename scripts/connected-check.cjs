@@ -20,7 +20,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
   const errors=[];for(const page of [teacher,learner])page.on('pageerror',e=>errors.push(e.message));
   async function connect(page,identity){
    await page.goto('http://127.0.0.1:8073');
-   await page.getByRole('navigation').getByRole('button',{name:/Instructor$/}).click();
+   await page.getByRole('navigation').getByRole('button',{name:/My training$/}).click();
    await page.getByLabel('Lab access credential').fill(identity.access_token);
    await page.getByRole('button',{name:'Connect account',exact:true}).click();
    await page.getByRole('button',{name:'Disconnect account',exact:true}).waitFor();
@@ -82,7 +82,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
   const leaked=await learner.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}}));
   if(leaked.includes(identities.learner.access_token))throw Error('Credential entered browser storage');
   await learner.reload();
-  await learner.getByRole('navigation').getByRole('button',{name:/Instructor$/}).click();
+  await learner.getByRole('navigation').getByRole('button',{name:/My training$/}).click();
   await learner.getByRole('button',{name:'Connect account',exact:true}).waitFor();
   if(await learner.getByLabel('Lab access credential').inputValue())throw Error('Credential persisted across reload');
   await learner.getByLabel('Lab access credential').fill(identities.learner.access_token);

@@ -14,7 +14,7 @@ Administrators provision a synthetic learner or instructor with `python -m backe
 
 The database stores only SHA-256 hashes of these high-entropy credentials. There is no self-registration or API role selection. Revoke all credentials for an account with `python -m backend.manage revoke ACCOUNT_UUID`. Expired and revoked credentials fail every subsequent API authentication check. Already authenticated in-flight requests may finish.
 
-In the browser, open Instructor → Accounts and cohorts and connect with the lab credential. It remains in component memory, is omitted from cookies/browser storage/URLs and clears on reload, disconnect or 401. Instructor credentials and learner credentials produce different server-authorized views. These are administrator-managed lab credentials, not organizational SSO/MFA. OIDC, recovery and MFA remain deployment-stage work.
+In the browser, open My training → Accounts and cohorts and connect with the lab credential. It remains in component memory, is omitted from cookies/browser storage/URLs and clears on reload, disconnect or 401. Instructor credentials and learner credentials produce different server-authorized views. These are administrator-managed lab credentials, not organizational SSO/MFA. OIDC, recovery and MFA remain deployment-stage work.
 
 ## Learning workflow and retention
 

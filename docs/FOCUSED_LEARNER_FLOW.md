@@ -2,6 +2,8 @@
 
 19 October 2026. The primary troubleshooting path now presents a reported symptom and one evidence check at a time. A learner views the invented result, reads the observation and advances. Explanations, example code, mission context, earlier evidence and source detail are optional disclosures. The final decision follows the checks and reveals a recovery/acceptance plan only when the evidence supports it.
 
+Primary navigation now shows Mission, Troubleshoot and My training. MDMP, equipment/source exploration, architecture, assessments, mentor and IT foundations remain under More learning tools. The mission result links directly to focused service-problem practice.
+
 ## Interaction and scope
 
 - One current check is visible. Check position is separate from evidence exposure; previous/review navigation preserves the case's collected evidence.
