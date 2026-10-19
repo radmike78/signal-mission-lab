@@ -59,6 +59,7 @@ jobs:
           python -m http.server 8070 --bind 127.0.0.1 --directory web/dist &
           NODE_PATH="$PWD/web/node_modules" node scripts/browser-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/mission-check.cjs
+          NODE_PATH="$PWD/web/node_modules" node scripts/troubleshooting-check.cjs
       - name: Connected learning browser journeys
         run: |
           NODE_PATH="$PWD/web/node_modules" node scripts/connected-check.cjs

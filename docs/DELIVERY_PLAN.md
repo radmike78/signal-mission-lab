@@ -39,3 +39,7 @@ Added OCI Containerfile, loopback-only systemd Quadlet, optional file-mounted ru
 ## IT foundations curriculum (19 October 2026)
 
 Added nine introductory lessons, vendor/reference directory, knowledge checks and a synthetic dependency lab. Public technology references are validated separately from Army equipment claims. See `IT_FOUNDATIONS_AND_MANUAL_GAPS.md` for the explicit absence of an equipment-TM implementation corpus, required public references and remaining review/depth gaps.
+
+## Mission troubleshooting workbench (19 October 2026)
+
+Added evidence-gated synthetic builder, routing and satellite-dependency cases to the existing Troubleshoot area. Learners interpret observations, select a supported recovery, identify acceptance checks and explain mission impact. No actual equipment operation or recovery is simulated. See `TROUBLESHOOTING_WORKBENCH.md` and `RESEARCH_ACQUISITION_REPORT.md` for source boundaries, validation and missing manuals. Deep comprehension assessment, SME review, instructor persistence for these cases and real equipment procedures remain outstanding.
