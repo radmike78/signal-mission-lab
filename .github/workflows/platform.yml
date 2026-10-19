@@ -44,7 +44,7 @@ jobs:
           docker exec ${{ job.services.postgres.id }} pg_dump -U sml -d sml > /tmp/sml-backup.sql
           docker exec ${{ job.services.postgres.id }} createdb -U sml sml_restore
           docker exec -i ${{ job.services.postgres.id }} psql -v ON_ERROR_STOP=1 -U sml -d sml_restore < /tmp/sml-backup.sql
-          test "$(docker exec ${{ job.services.postgres.id }} psql -U sml -d sml_restore -Atc 'SELECT count(*) FROM schema_versions')" = "1"
+          test "$(docker exec ${{ job.services.postgres.id }} psql -U sml -d sml_restore -Atc 'SELECT count(*) FROM schema_versions')" = "2"
 
       - run: python -m pip_audit -r backend/requirements.txt
       - run: python -m bandit -r backend -q

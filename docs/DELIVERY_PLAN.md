@@ -51,3 +51,7 @@ Added a source-scoped GAIT purpose record and overview-only PacStar/IQ-Core stud
 ## Pre-site preparation brief (19 October 2026)
 
 Added a mission-scoped, fixed-choice preparation checklist covering intent, parts/prerequisites, architecture evidence, external coordination, build/recovery rehearsal and end-to-end acceptance. Unassigned owners and blocked/unreviewed items remain visible. A downloadable plain-text training brief includes responsibilities, expected evidence, risks and remaining boundaries; it never establishes equipment readiness. The state is local and clears with the mission. Strict build and 38 web model tests pass locally. Browser CI validates export contents, state changes and reset. Real parts lists, operational plans, external approvals and equipment-specific procedures remain outside this feature.
+
+## Connected recovery assignments (19 October 2026)
+
+Instructors can assign all three recovery cases, learners submit bounded choices for server scoring, and owned-cohort summaries show latest-result coverage and evidence/decision gaps. Schema version 2 additively preserves existing data; update runtime grants before deployment. Offline and connected practice share the same editorial content. See `CONNECTED_RECOVERY.md` for rubric, migration, validation and limitations.

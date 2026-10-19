@@ -53,3 +53,14 @@ CREATE INDEX IF NOT EXISTS assignment_cohort ON assignments(cohort_id);
 CREATE INDEX IF NOT EXISTS attempt_assignment ON attempts(assignment_id, learner_id);
 CREATE INDEX IF NOT EXISTS attempt_learner ON attempts(learner_id);
 INSERT INTO schema_versions(version) VALUES (1) ON CONFLICT (version) DO NOTHING;
+CREATE TABLE IF NOT EXISTS recovery_assignments (
+ assignment_id TEXT PRIMARY KEY REFERENCES assignments(id) ON DELETE CASCADE,
+ case_id TEXT NOT NULL CHECK (case_id IN ('builder','routing','satellite'))
+);
+CREATE TABLE IF NOT EXISTS recovery_attempts (
+ attempt_id TEXT PRIMARY KEY REFERENCES attempts(id) ON DELETE CASCADE,
+ case_id TEXT NOT NULL CHECK (case_id IN ('builder','routing','satellite')),
+ evidence_count INTEGER NOT NULL CHECK (evidence_count BETWEEN 0 AND 4),
+ decision_supported INTEGER NOT NULL CHECK (decision_supported IN (0,1))
+);
+INSERT INTO schema_versions(version) VALUES (2) ON CONFLICT (version) DO NOTHING;

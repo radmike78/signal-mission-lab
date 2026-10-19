@@ -3,7 +3,7 @@ from typing import Literal, Annotated
 from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, Response
 from pydantic import BaseModel, ConfigDict, Field
-from . import core
+from . import core, recovery
 from .security import principal, store_dependency
 from .store import Store, identifier, now
 router=APIRouter(prefix='/api/learning')
@@ -16,11 +16,13 @@ class CohortInput(Strict):
 class MemberInput(Strict):
     learner_id: str = Field(pattern=r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
 class AssignmentInput(Strict):
-    activity: Literal['assessment','dns','identity','power']
+    activity: Literal['assessment','dns','identity','power','builder','routing','satellite']
 class Submission(Strict):
     answers: dict[str,int] = Field(default_factory=dict,max_length=3)
     checks: list[int] = Field(default_factory=list,max_length=3)
     diagnosis: Literal['dns','identity','power'] | None = None
+    evidence: list[str] = Field(default_factory=list,max_length=4)
+    decision: str | None = Field(default=None,max_length=24)
 
 def instructor(user):
     if user['role']!='instructor':raise HTTPException(403,'Instructor access required')
@@ -89,9 +91,11 @@ def progress(cohort_id:UUID,user:User,db:Database):
     with db.transaction() as connection:
         cohort=owner(db,connection,user,cohort_id)
         members=db.execute(connection,'SELECT learner_id FROM memberships WHERE cohort_id=? ORDER BY learner_id LIMIT 100',(str(cohort_id),)).fetchall()
-        assignments=db.execute(connection,'SELECT * FROM assignments WHERE cohort_id=? ORDER BY created_at,id LIMIT 100',(str(cohort_id),)).fetchall()
-        attempts=db.execute(connection,'SELECT t.* FROM attempts t JOIN assignments a ON a.id=t.assignment_id JOIN memberships m ON m.cohort_id=a.cohort_id AND m.learner_id=t.learner_id WHERE a.cohort_id=? ORDER BY t.created_at DESC,t.id LIMIT 500',(str(cohort_id),)).fetchall()
-    return {'cohort':cohort,'members':[dict(x) for x in members],'assignments':[dict(x) for x in assignments],'attempts':[dict(x) for x in attempts]}
+        assignments=db.execute(connection,'SELECT a.id,a.cohort_id,a.created_at,COALESCE(r.case_id,a.activity) AS activity FROM assignments a LEFT JOIN recovery_assignments r ON r.assignment_id=a.id WHERE a.cohort_id=? ORDER BY a.created_at,a.id LIMIT 100',(str(cohort_id),)).fetchall()
+        attempts=db.execute(connection,'SELECT t.*,r.case_id,r.evidence_count,r.decision_supported FROM attempts t LEFT JOIN recovery_attempts r ON r.attempt_id=t.id JOIN assignments a ON a.id=t.assignment_id JOIN memberships m ON m.cohort_id=a.cohort_id AND m.learner_id=t.learner_id WHERE a.cohort_id=? ORDER BY t.created_at DESC,t.id LIMIT 500',(str(cohort_id),)).fetchall()
+        latest=db.execute(connection,'SELECT * FROM (SELECT t.*,r.case_id,r.evidence_count,r.decision_supported,ROW_NUMBER() OVER (PARTITION BY t.learner_id,t.assignment_id ORDER BY t.created_at DESC,t.id DESC) AS position FROM attempts t LEFT JOIN recovery_attempts r ON r.attempt_id=t.id JOIN assignments a ON a.id=t.assignment_id JOIN memberships m ON m.cohort_id=a.cohort_id AND m.learner_id=t.learner_id WHERE a.cohort_id=?) ranked WHERE position=1',(str(cohort_id),)).fetchall()
+    members,assignments,attempts=([dict(x) for x in rows] for rows in (members,assignments,attempts))
+    return {'cohort':cohort,'members':members,'assignments':assignments,'attempts':attempts[:500], 'summary':recovery.summarize(members,assignments,[dict(x) for x in latest])}
 @router.post('/cohorts/{cohort_id}/assignments',status_code=201)
 def assign(cohort_id:UUID,body:AssignmentInput,user:User,db:Database):
     key=identifier()
@@ -100,13 +104,15 @@ def assign(cohort_id:UUID,body:AssignmentInput,user:User,db:Database):
         db.execute(connection,'UPDATE cohorts SET callsign=callsign WHERE id=?',(str(cohort_id),))
         count=db.execute(connection,'SELECT count(*) AS n FROM assignments WHERE cohort_id=?',(str(cohort_id),)).fetchone()['n']
         if count>=100:raise HTTPException(409,'Assignment limit reached')
-        db.execute(connection,'INSERT INTO assignments(id,cohort_id,activity,created_at) VALUES (?,?,?,?)',(key,str(cohort_id),body.activity,now()))
+        db.execute(connection,'INSERT INTO assignments(id,cohort_id,activity,created_at) VALUES (?,?,?,?)',(key,str(cohort_id),'assessment' if body.activity in recovery.CASES else body.activity,now()))
+        if body.activity in recovery.CASES:
+            db.execute(connection,'INSERT INTO recovery_assignments(assignment_id,case_id) VALUES (?,?)',(key,body.activity))
         db.audit(connection,user['id'],'assignment.created',key)
     return {'id':key,'activity':body.activity,'cohort_id':str(cohort_id)}
 @router.get('/assignments')
 def assignments(user:User,db:Database):
     with db.transaction() as connection:
-        rows=db.execute(connection,'SELECT a.id,a.cohort_id,a.activity,a.created_at,c.callsign FROM assignments a JOIN cohorts c ON c.id=a.cohort_id JOIN memberships m ON m.cohort_id=a.cohort_id WHERE m.learner_id=? ORDER BY a.created_at,a.id LIMIT 100',(user['id'],)).fetchall()
+        rows=db.execute(connection,'SELECT a.id,a.cohort_id,COALESCE(r.case_id,a.activity) AS activity,a.created_at,c.callsign FROM assignments a LEFT JOIN recovery_assignments r ON r.assignment_id=a.id JOIN cohorts c ON c.id=a.cohort_id JOIN memberships m ON m.cohort_id=a.cohort_id WHERE m.learner_id=? ORDER BY a.created_at,a.id LIMIT 100',(user['id'],)).fetchall()
     return [dict(row) for row in rows]
 @router.post('/assignments/{assignment_id}/attempts',status_code=201)
 def submit(assignment_id:UUID,body:Submission,user:User,db:Database):
@@ -114,12 +120,17 @@ def submit(assignment_id:UUID,body:Submission,user:User,db:Database):
     with db.transaction() as connection:
         # Serialize this learner's attempts and membership checks with deletion/revocation.
         db.execute(connection,'UPDATE accounts SET lock_version=lock_version WHERE id=?',(user['id'],))
-        row=db.execute(connection,'SELECT a.activity,a.cohort_id FROM assignments a JOIN memberships m ON m.cohort_id=a.cohort_id WHERE a.id=? AND m.learner_id=?',(str(assignment_id),user['id'])).fetchone()
+        row=db.execute(connection,'SELECT COALESCE(r.case_id,a.activity) AS activity,a.cohort_id FROM assignments a LEFT JOIN recovery_assignments r ON r.assignment_id=a.id JOIN memberships m ON m.cohort_id=a.cohort_id WHERE a.id=? AND m.learner_id=?',(str(assignment_id),user['id'])).fetchone()
         if not row:raise HTTPException(404,'Assignment not found')
         count=db.execute(connection,'SELECT count(*) AS n FROM attempts WHERE assignment_id=? AND learner_id=?',(str(assignment_id),user['id'])).fetchone()['n']
         if count>=20:raise HTTPException(409,'Attempt limit reached')
         try:
-            if row['activity']=='assessment':
+            if row['activity'] in recovery.CASES:
+                if body.answers or body.checks or body.diagnosis or body.decision is None:raise ValueError('Recovery choices required')
+                result=recovery.grade(row['activity'],body.evidence,body.decision);score,total=result['score'],result['total']
+            elif body.evidence or body.decision is not None:
+                raise ValueError('Unexpected recovery fields')
+            elif row['activity']=='assessment':
                 if body.checks or body.diagnosis:raise ValueError('Unexpected diagnostic fields')
                 result=core.grade(body.answers);score,total=result['score'],result['total']
             else:
@@ -128,10 +139,12 @@ def submit(assignment_id:UUID,body:Submission,user:User,db:Database):
         except ValueError as error:raise HTTPException(422,str(error)) from error
         key,timestamp=identifier(),now()
         db.execute(connection,'INSERT INTO attempts(id,assignment_id,cohort_id,learner_id,score,total,created_at) VALUES (?,?,?,?,?,?,?)',(key,str(assignment_id),row['cohort_id'],user['id'],score,total,timestamp))
+        if row['activity'] in recovery.CASES:
+            db.execute(connection,'INSERT INTO recovery_attempts(attempt_id,case_id,evidence_count,decision_supported) VALUES (?,?,?,?)',(key,row['activity'],result['evidence_count'],int(result['decision_supported'])))
         db.audit(connection,user['id'],'attempt.submitted',key)
     return {'id':key,'assignment_id':str(assignment_id),'score':score,'total':total,'created_at':timestamp,'feedback':result}
 @router.get('/attempts')
 def my_attempts(user:User,db:Database):
     with db.transaction() as connection:
-        rows=db.execute(connection,'SELECT t.id,t.assignment_id,t.score,t.total,t.created_at,a.activity FROM attempts t JOIN assignments a ON a.id=t.assignment_id WHERE t.learner_id=? ORDER BY t.created_at DESC,t.id LIMIT 100',(user['id'],)).fetchall()
+        rows=db.execute(connection,'SELECT t.id,t.assignment_id,t.score,t.total,t.created_at,COALESCE(r.case_id,a.activity) AS activity FROM attempts t JOIN assignments a ON a.id=t.assignment_id LEFT JOIN recovery_assignments r ON r.assignment_id=a.id WHERE t.learner_id=? ORDER BY t.created_at DESC,t.id LIMIT 100',(user['id'],)).fetchall()
     return [dict(row) for row in rows]

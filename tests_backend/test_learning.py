@@ -111,7 +111,7 @@ class LearningTests(unittest.TestCase):
  def test_schema_migration_is_repeatable(self):
   self.db.migrate()
   with self.db.transaction() as connection:
-   self.assertEqual(self.db.execute(connection,'SELECT count(*) AS n FROM schema_versions').fetchone()['n'],1)
+   self.assertEqual(self.db.execute(connection,'SELECT count(*) AS n FROM schema_versions').fetchone()['n'],2)
  def test_attempt_limit(self):
   c=self.cohort();self.enroll(c);a=self.assignment(c)
   for _ in range(20):
@@ -132,3 +132,54 @@ class LearningTests(unittest.TestCase):
    rows=self.db.execute(connection,'SELECT * FROM audit_events').fetchall()
   content=str([dict(row) for row in rows])
   for account in self.created:self.assertNotIn(account['access_token'],content)
+ def test_recovery_assignments_score_and_summarize_latest_result(self):
+  c=self.cohort();self.enroll(c);a=self.assignment(c,'builder')
+  self.assertEqual(self.call('GET','/assignments',self.learner).json()[0]['activity'],'builder')
+  path=f'/assignments/{a}/attempts'
+  self.assertEqual(self.call('POST',path,self.outsider,json={'evidence':[],'decision':'partial'}).status_code,404)
+  partial=self.call('POST',path,self.learner,json={'evidence':['log'],'decision':'rerun'})
+  self.assertEqual(partial.status_code,201);self.assertEqual(partial.json()['score'],1)
+  summary=self.call('GET',f'/cohorts/{c}/progress').json()['summary']
+  self.assertEqual(summary['assigned_pairs'],1);self.assertEqual(summary['attempted_pairs'],1)
+  self.assertEqual(summary['recovery_gaps']['builder'],{'attempted':1,'evidence_gap':1,'decision_gap':1})
+  body={'evidence':['script','log','state','contract'],'decision':'partial'}
+  self.assertEqual(self.call('POST',path,self.learner,json={**body,'score':5}).status_code,422)
+  complete=self.call('POST',path,self.learner,json=body)
+  self.assertEqual(complete.status_code,201);self.assertEqual(complete.json()['score'],5)
+  summary=self.call('GET',f'/cohorts/{c}/progress').json()['summary']
+  self.assertEqual(summary['latest_complete_pairs'],1)
+  self.assertEqual(summary['recovery_gaps']['builder'],{'attempted':1,'evidence_gap':0,'decision_gap':0})
+  self.assertEqual(self.call('GET',f'/cohorts/{c}/progress',self.other).status_code,404)
+  self.call('DELETE',f'/cohorts/{c}/members/'+self.learner['account_id'])
+  self.assertEqual(self.call('GET','/attempts',self.learner).json(),[])
+  with self.db.transaction() as connection:
+   self.assertEqual(self.db.execute(connection,'SELECT count(*) AS n FROM recovery_attempts r JOIN attempts t ON t.id=r.attempt_id WHERE t.assignment_id=?',(a,)).fetchone()['n'],0)
+ def test_recovery_rejects_forged_duplicate_and_mixed_choices(self):
+  c=self.cohort();self.enroll(c);a=self.assignment(c,'routing');p=f'/assignments/{a}/attempts'
+  for body in [{'evidence':['shell'],'decision':'area'},{'evidence':['neighbor','neighbor'],'decision':'area'},{'evidence':[],'decision':'partial'},{'evidence':[],'decision':'area','answers':{'mission':0}},{'evidence':[],'decision':'area','checks':[0]},{'evidence':[],'decision':'area','diagnosis':'dns'}]:
+   self.assertEqual(self.call('POST',p,self.learner,json=body).status_code,422)
+  self.assertEqual(self.call('GET','/attempts',self.learner).json(),[])
+  old=self.assignment(c,'dns')
+  self.assertEqual(self.call('POST',f'/assignments/{old}/attempts',self.learner,json={'checks':[0],'diagnosis':'dns','decision':'area'}).status_code,422)
+ def test_all_recovery_cases_and_unattempted_coverage(self):
+  from backend.recovery import CASES
+  c=self.cohort();self.enroll(c)
+  for id,case in CASES.items():
+   a=self.assignment(c,id)
+   self.assertEqual(self.call('GET',f'/cohorts/{c}/progress').json()['summary']['unattempted_pairs'],1)
+   r=self.call('POST',f'/assignments/{a}/attempts',self.learner,json={'evidence':case['required'],'decision':case['answer']})
+   self.assertEqual(r.status_code,201);self.assertTrue(r.json()['feedback']['supported'])
+  activities={r['activity'] for r in self.call('GET','/attempts',self.learner).json()}
+  self.assertEqual(activities,set(CASES))
+ def test_additive_migration_is_idempotent_and_preserves_legacy_attempts(self):
+  c=self.cohort();self.enroll(c);a=self.assignment(c,'dns')
+  self.call('POST',f'/assignments/{a}/attempts',self.learner,json={'checks':[0,1,2],'diagnosis':'dns'})
+  with self.db.transaction() as connection:
+   self.db.execute(connection,'DROP TABLE recovery_attempts')
+   self.db.execute(connection,'DROP TABLE recovery_assignments')
+   self.db.execute(connection,'DELETE FROM schema_versions WHERE version=2')
+  self.db.migrate();self.db.migrate()
+  self.assertEqual(self.call('GET','/attempts',self.learner).json()[0]['score'],100)
+  with self.db.transaction() as connection:
+   versions=self.db.execute(connection,'SELECT version FROM schema_versions ORDER BY version').fetchall()
+   self.assertEqual([r['version'] for r in versions],[1,2])

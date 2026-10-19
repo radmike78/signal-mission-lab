@@ -4,7 +4,7 @@
 
 The service supports PostgreSQL for deployment. SQLite is an explicitly test-only adapter. Production PostgreSQL URLs must specify `sslmode=verify-full` with a trusted server certificate. Connection, statement and lock timeouts are configured. Inject connection URLs through your secret manager; do not paste them into chat or commit them.
 
-Use a separate schema-owner/administrative credential to run `python -m backend.manage migrate`. Migrations are explicit and repeatable; the API does not create or alter tables. Version 1 is a fresh-schema migration, not an upgrade path from a prior deployed database (none existed in the repository).
+Use a separate schema-owner/administrative credential to run `python -m backend.manage migrate`. Migrations are explicit and repeatable; the API does not create or alter tables. Version 1 creates the original schema. Version 2 additively creates recovery assignment/attempt extensions; it preserves legacy records. Reapply runtime grants after migrating. See `docs/CONNECTED_RECOVERY.md` for deployment and rollback constraints.
 
 Create a `sml_runtime` database login through approved administrative tooling, then apply `deploy/runtime-grants.sql`. Use that runtime identity for the API. The API can read account roles, lock account rows, delete accounts, manage learning rows and append audit events. It cannot provision accounts, create/revoke access tokens, modify schema or delete audits. Runtime database grants protect against schema modification; API owner/membership checks protect cohort-level data. PostgreSQL row-level security is not implemented.
 
@@ -24,7 +24,7 @@ In the browser, open Instructor → Accounts and cohorts and connect with the la
 4. Learner submits structured choices through the same-origin API. The service validates and scores them, storing only activity references, synthetic IDs, numeric scores and timestamps.
 5. Instructor reviews owned cohort results; learners can read only their own attempts.
 
-Limits: 100 cohorts per instructor, 100 members and assignments per cohort, 20 attempts per learner/assignment. Lists return at most 100 records; cohort progress returns the latest 500 attempts. Pagination and long-running course analytics are not implemented. All activities are formative, with public practice questions; this is not examination or qualification software.
+Limits: 100 cohorts per instructor, 100 members and assignments per cohort, 20 attempts per learner/assignment. Lists return at most 100 records; cohort progress returns the latest 500 attempts. The latest-result cohort summary is independent of the 500-row history window. Pagination and long-running course analytics are not implemented. All activities are formative, with public practice questions; this is not examination or qualification software.
 
 Removing a learner deletes their attempts for that cohort. Deleting a cohort removes its memberships, assignments and attempts. The learner can explicitly delete their own account; instructor deletion also cascades through owned cohorts. Minimal audit events retain generated IDs, action names and timestamps without credentials or exercise text. Set organizational retention requirements before live deployment; automatic audit aging is not implemented.
 
