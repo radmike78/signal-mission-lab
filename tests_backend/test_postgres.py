@@ -79,6 +79,10 @@ class PostgreSQLTests(unittest.TestCase):
     with self.store.transaction() as connection:
      connection.execute(sql.SQL('SET LOCAL ROLE {}').format(sql.Identifier(role)))
      self.store.execute(connection,'UPDATE recovery_attempts SET evidence_count=0 WHERE attempt_id=?',(attempt,))
+   with self.assertRaises(psycopg.errors.InsufficientPrivilege):
+    with self.store.transaction() as connection:
+     connection.execute(sql.SQL('SET LOCAL ROLE {}').format(sql.Identifier(role)))
+     self.store.execute(connection,'DELETE FROM recovery_attempts WHERE attempt_id=?',(attempt,))
    with self.store.transaction() as connection:
     connection.execute(sql.SQL('SET LOCAL ROLE {}').format(sql.Identifier(role)))
     self.store.execute(connection,'DELETE FROM attempts WHERE id=?',(attempt,))

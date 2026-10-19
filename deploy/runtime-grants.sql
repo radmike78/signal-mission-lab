@@ -10,4 +10,4 @@ GRANT INSERT ON audit_events TO sml_runtime;
 -- No CREATE, DROP, token issuance/revocation, account provisioning or audit deletion
 -- privileges are granted to the API identity. Use a separate administrative role.
 
-GRANT SELECT, INSERT, DELETE ON recovery_assignments, recovery_attempts TO sml_runtime;
+GRANT SELECT, INSERT ON recovery_assignments, recovery_attempts TO sml_runtime;
