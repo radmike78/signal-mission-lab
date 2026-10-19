@@ -32,6 +32,7 @@ export function LearningPanel(){
  async function refresh(current:Session){
   const nextCohorts=await api<Cohort[]>('/cohorts',current.token);setCohorts(nextCohorts);
   if(progress&&!nextCohorts.some(c=>c.id===progress.cohort.id))setProgress(null);
+  else if(current.account.role==='instructor'&&progress)setProgress(await api<Progress>('/cohorts/'+progress.cohort.id+'/progress',current.token));
   if(current.account.role==='learner'){
    const nextAssignments=await api<Assignment[]>('/assignments',current.token);setAssignments(nextAssignments);
    setAttempts(await api<Attempt[]>('/attempts',current.token));
