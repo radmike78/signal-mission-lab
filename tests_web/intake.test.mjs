@@ -57,3 +57,11 @@ test('GAIT and vendor automation study names remain distinct and honor negation'
  const excluded=interpretDescription('A fictional brigade training exercise with CPN, without GAIT, excluding PacStar, no IQ-Core.');
  assert.deepEqual(excluded.answers.systems,['cpn']);
 });
+
+test('BCCS and TSI stacks are explicit study choices, not inferred from a generic stack',()=>{
+ const x=interpretDescription('A fictional brigade at one training site needs BCCS/TSI stacks for command post recovery.');
+ assert.deepEqual(x.answers.systems,['bccs','tsi']);
+ assert.deepEqual(interpretDescription('A fictional brigade uses Tactical Server Infrastructure v2a and Battle Command Common Services.').answers.systems,['bccs','tsi']);
+ assert.deepEqual(interpretDescription('A fictional brigade uses TSIv3, without BCCS.').answers.systems,['tsi']);
+ assert.equal(interpretDescription('A fictional brigade needs a server stack.').answers.systems,undefined);
+});

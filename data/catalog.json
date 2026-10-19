@@ -869,12 +869,14 @@
         "Public-purpose study"
       ],
       "dependencies": [
-        "Power and sustainment: investigate",
-        "Applicable version and interface documentation: verify"
+        "Power, host and storage health: investigate using the applicable baseline",
+        "Virtual workload and required identity/name/time services: verify for the affected task",
+        "Application health and an authorized dummy user-task acceptance test: verify"
       ],
       "roles": [
-        "System owner",
-        "Signal support coordinator"
+        "Supported application owner",
+        "Server/virtualization maintainer",
+        "Signal service owner"
       ],
       "confidence": "Purpose source available"
     },
@@ -1622,6 +1624,26 @@
         "Signal support coordinator"
       ],
       "confidence": "Overview only"
+    },
+    {
+      "id": "bccs",
+      "name": "Battle Command Common Services (BCCS) stacks",
+      "category": "Compute infrastructure",
+      "description": "Legacy mission-command server stacks discussed in public Army readiness reporting. Exact components, software and current applicability require version-specific documentation.",
+      "capabilities": [
+        "Mission-command hosting study"
+      ],
+      "dependencies": [
+        "Power, host and storage health: investigate using the applicable baseline",
+        "Virtual workload and required identity/name/time services: verify for the affected task",
+        "Application health and an authorized dummy user-task acceptance test: verify"
+      ],
+      "roles": [
+        "Supported application owner",
+        "Server/virtualization maintainer",
+        "Signal service owner"
+      ],
+      "confidence": "Purpose source available"
     }
   ],
   "scenarios": [

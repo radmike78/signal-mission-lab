@@ -158,6 +158,18 @@
       "retrieved": "2026-10-19",
       "status": "content_checked",
       "human_review": "pending"
+    },
+    {
+      "id": "army-bccs",
+      "title": "Army: BCCS stack readiness context",
+      "url": "https://www.army.mil/article/109664/mirroring_home_station_and_deployed_mission_command_systems_improves_soldier_readiness",
+      "kind": "Army context",
+      "edition": "2013-08-26",
+      "locator": "BCCS server stacks and readiness discussion",
+      "scope": "Historical context only; not an operator manual, validated component map or current software baseline.",
+      "retrieved": "2026-10-19",
+      "status": "content_checked",
+      "human_review": "pending"
     }
   ],
   "vendors": [
@@ -326,10 +338,12 @@
       ],
       "source_ids": [
         "hyperv",
-        "broadcom"
+        "broadcom",
+        "army-bccs"
       ],
       "system_ids": [
-        "tsi"
+        "tsi",
+        "bccs"
       ]
     },
     {
@@ -371,11 +385,13 @@
         "A database replacement is not justified by a VLAN mismatch."
       ],
       "source_ids": [
-        "cisco-vlan"
+        "cisco-vlan",
+        "army-bccs"
       ],
       "system_ids": [
         "baseband",
-        "tsi"
+        "tsi",
+        "bccs"
       ]
     },
     {
@@ -465,12 +481,14 @@
         "A responding application is inconsistent with every server being off."
       ],
       "source_ids": [
-        "ms-dns"
+        "ms-dns",
+        "army-bccs"
       ],
       "system_ids": [
         "cpce",
         "dcgsa",
-        "tsi"
+        "tsi",
+        "bccs"
       ]
     },
     {
@@ -512,12 +530,14 @@
         "A reachable VM does not prove its attached storage is usable."
       ],
       "source_ids": [
-        "netapp"
+        "netapp",
+        "army-bccs"
       ],
       "system_ids": [
         "tsi",
         "dcgsa",
-        "edge"
+        "edge",
+        "bccs"
       ]
     },
     {
@@ -652,11 +672,13 @@
         "Resource use alone does not establish recovery."
       ],
       "source_ids": [
-        "nist-recovery"
+        "nist-recovery",
+        "army-bccs"
       ],
       "system_ids": [
         "tsi",
-        "power"
+        "power",
+        "bccs"
       ]
     },
     {
@@ -699,11 +721,13 @@
       ],
       "source_ids": [
         "nist-zt",
-        "ms-dns"
+        "ms-dns",
+        "army-bccs"
       ],
       "system_ids": [
         "baseband",
-        "tsi"
+        "tsi",
+        "bccs"
       ]
     }
   ]

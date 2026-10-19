@@ -896,6 +896,32 @@
       "reviewer": "Automated primary-source check; human SME review pending",
       "status": "source_checked",
       "scope": "Historical architecture purpose only. GAIT points of presence are not automatically the WIN-T Point of Presence vehicle system. Current provisioning, interfaces and readiness unknown."
+    },
+    {
+      "id": "bccs-purpose",
+      "subject": "bccs",
+      "statement": "The Army\u2019s 2013 IADS readiness article describes Battle Command Common Services server stacks supporting mission-command readiness and ongoing training.",
+      "source_title": "Mirroring home station and deployed mission command systems improves Soldier readiness",
+      "url": "https://www.army.mil/article/109664/mirroring_home_station_and_deployed_mission_command_systems_improves_soldier_readiness",
+      "published": "2013-08-26",
+      "locator": "BCCS server stacks discussion; paragraph beginning With our Battle Command Common Services",
+      "retrieved": "2026-10-19",
+      "reviewer": "Automated primary-source check; human SME review pending",
+      "status": "source_checked",
+      "scope": "Historical server-stack context only; no exact services, hardware, hypervisor, version, parts or current deployment established."
+    },
+    {
+      "id": "tsi-modernization-context",
+      "subject": "tsi",
+      "statement": "A 2025 Army article describes variant-scoped TSI infrastructure modernization involving VMware, Microsoft Hyper-V and modular/container approaches.",
+      "source_title": "Modernizing tactical infrastructure",
+      "url": "https://www.army.mil/article/288657/modernizing_tactical_infrastructure",
+      "published": "2025-11-24",
+      "locator": "Tactical Services Infrastructure v5/v1 Microsoft Hyper-V in-place upgrade; Cloud-enabled modular infrastructure",
+      "retrieved": "2026-10-19",
+      "reviewer": "Automated primary-source check; human SME review pending",
+      "status": "source_checked",
+      "scope": "Reported initiatives and source terminology only. Not proof of a universal/current hypervisor, migration procedure or version-to-hardware mapping. Tactical Server and Tactical Services terminology require applicability review."
     }
   ]
 }

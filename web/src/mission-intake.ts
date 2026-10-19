@@ -26,7 +26,7 @@ export function interpretDescription(text:string):Intake{
  ['jnn',/\bJNN\b/],['cpn',/\b(?:BnCPN|CPN)\b/],['tcn',/\bTCN\b/],['thn',/\bTHN\b/],['rhn',/\bRHN\b/],['pop',/\bpoint of presence\b/],['sne',/\bSNE\b/],
  ['gait',/\bGAIT\b/],['pacstar',/\bPacStar\b/],['iq-core',/\bIQ[ -]?Core\b/],
  ['stt',/\bSTT\b/],['trilos',/\bTRILOS\b/],['hclos',/\bHCLOS\b/],['t2c2',/\bT2C2\b/],['smart-t',/\bSMART[ -]?T\b/],['snap',/\bSNAP\b/],['dket',/\bDKET\b/],['snn',/\bSNN\b/],
- ['ngtt',/\bNGTT\b/],['ngc2',/\bNGC2\b/],['scout',/\bSCOUT[ -]Medium\b/],['itn',/\bITN\b/],['nett-warrior',/\bNett Warrior\b/],['sincgars',/\bSINCGARS\b/],['tsi',/\bTSI(?:v[23])?\b/],
+ ['ngtt',/\bNGTT\b/],['ngc2',/\bNGC2\b/],['scout',/\bSCOUT[ -]Medium\b/],['itn',/\bITN\b/],['nett-warrior',/\bNett Warrior\b/],['sincgars',/\bSINCGARS\b/],['bccs',/\bBCCS\b|\bBattle Command Common Services\b/],['tsi',/\bTSI(?:[ -]*v(?:ersion)?[ -]*[1235][a-z]?)?\b|\bTactical (?:Server|Services) Infrastructure\b/],
  ...(['117','150','152','158','160','162','163'] as const).map(n=>['prc'+n,new RegExp('\\b(?:AN[ /-]*)?PRC[ -]*'+n+'\\b','i')] as [string,RegExp])
  ];
  for(const [id,pattern] of additional)if(positive(value,pattern)&&!systems.includes(id))systems.push(id);

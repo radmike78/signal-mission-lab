@@ -59,3 +59,7 @@ Instructors can assign all three recovery cases, learners submit bounded choices
 ## Focused learner flow (19 October 2026)
 
 Troubleshooting now presents one symptom and one check at a time, with optional explanations/code and a final evidence-backed recovery decision. Older incidents and detailed mission evidence are collapsed on entry. Connected scoring and saved results are preserved. See `FOCUSED_LEARNER_FLOW.md` for interaction, validation and limitations.
+
+## BCCS and TSI stack coverage (19 October 2026)
+
+Added distinct BCCS stack coverage, fuller TSI aliases, scoped public Army references, mission-intake recognition and links from existing computing lessons. No mandatory course or navigation area was added. Catalog now contains 87 entries. Exact stack baselines and equipment procedures remain pending; see `BCCS_TSI_COVERAGE.md`.

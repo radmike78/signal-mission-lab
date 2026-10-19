@@ -586,7 +586,14 @@
       "tier": "Cross-tier / enabling",
       "kind": "Compute infrastructure",
       "aliases": [
-        "TSI"
+        "TSI",
+        "Tactical Server Infrastructure",
+        "Tactical Services Infrastructure",
+        "TSI stack",
+        "TSI stacks",
+        "TSIv2",
+        "TSIv2a",
+        "TSIv3"
       ],
       "review_status": "source_checked",
       "lifecycle": "Unknown; source-date context only",
@@ -595,7 +602,7 @@
       "source_date": "2022-07-20",
       "locator": "TSIv3 hardware paragraph",
       "checked_at": "2026-10-19",
-      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+      "limitations": "Sources use Tactical Server Infrastructure and Tactical Services Infrastructure in different contexts. Hardware/software lineage and version mapping require review; no universal hypervisor, stack composition, current fielding or interoperability established."
     },
     {
       "id": "ngtt",
@@ -1354,6 +1361,25 @@
       "locator": "IT foundations vendor directory",
       "checked_at": "2026-10-19",
       "limitations": "No specific configuration, current fielding, supported-device matrix or equipment interoperability established."
+    },
+    {
+      "id": "bccs",
+      "tier": "Cross-tier / enabling",
+      "kind": "Compute infrastructure",
+      "aliases": [
+        "BCCS",
+        "Battle Command Common Services",
+        "BCCS stack",
+        "BCCS stacks"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Legacy designation in public historical reporting; unit inventory unknown",
+      "source_url": "https://www.army.mil/article/109664/mirroring_home_station_and_deployed_mission_command_systems_improves_soldier_readiness",
+      "source_title": "Mirroring home station and deployed mission command systems improves Soldier readiness",
+      "source_date": "2013-08-26",
+      "locator": "BCCS server stacks discussion in IADS readiness reporting",
+      "checked_at": "2026-10-19",
+      "limitations": "Purpose/context only. No stack composition, current baseline, configuration, parts list or interoperability verified."
     }
   ],
   "gaps": [
