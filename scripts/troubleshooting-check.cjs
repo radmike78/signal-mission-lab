@@ -21,7 +21,7 @@ const fs=require('node:fs');
  await w.getByText('Review progress or decide early',{exact:true}).click();
  await w.getByRole('button',{name:'Decide with current evidence',exact:true}).click();
  await w.getByLabel('Treat this as partial completion and follow the scoped recovery plan',{exact:true}).check();
- await w.getByRole('button',{name:'Review recovery decision',exact:true}).click();
+ await w.getByRole('button',{name:'Check my decision',exact:true}).click();
  await w.getByRole('heading',{name:'Decision needs review',exact:true}).waitFor();
  if(await w.getByRole('heading',{name:'Recovery and acceptance plan',exact:true}).count())throw Error('Recovery plan exposed without evidence');
  await w.getByRole('button',{name:'Review checks',exact:true}).click();
@@ -34,14 +34,14 @@ const fs=require('node:fs');
   }
  }
  await finishChecks();
- await w.getByRole('button',{name:'Review recovery decision',exact:true}).click();
+ await w.getByRole('button',{name:'Check my decision',exact:true}).click();
  await w.getByRole('heading',{name:'Decision supported by collected evidence',exact:true}).waitFor();
  for(const [id,answer] of [['routing','Escalate the documented area mismatch for a scoped correction'],['satellite','Track the hub acceptance blocker and coordinate the approved test']]){
   await w.getByLabel('Issue to work on',{exact:true}).selectOption(id);
   if(await w.getByRole('status').count())throw Error('Case switch retained feedback');
   await finishChecks();
   await w.getByLabel(answer,{exact:true}).check();
-  await w.getByRole('button',{name:'Review recovery decision',exact:true}).click();
+  await w.getByRole('button',{name:'Check my decision',exact:true}).click();
   await w.getByRole('heading',{name:'Decision supported by collected evidence',exact:true}).waitFor();
   await page.screenshot({path:`artifacts/screenshots/troubleshooting-${id}.png`,fullPage:true});
  }
