@@ -35,7 +35,7 @@ const fs=require('node:fs');
  await nav('Mission');await nav('Troubleshoot');
  if(await workbench.getByLabel('Mission troubleshooting case',{exact:true}).inputValue()!=='builder')throw Error('Workbench state survived navigation');
  // The original incidents remain present alongside the new workbench.
- await page.getByLabel('Synthetic incident',{exact:true}).selectOption('power');
+ await page.getByLabel('Synthetic incident').selectOption('power');
  if(errors.length)throw Error(errors.join('\n'));
  console.log('Troubleshooting browser journeys passed: evidence gate, all cases, reset, navigation, mobile, legacy incident.');
  }finally{await browser.close();}
