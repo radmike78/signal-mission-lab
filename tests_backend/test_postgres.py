@@ -62,6 +62,7 @@ class PostgreSQLTests(unittest.TestCase):
   with self.store.transaction() as connection:
    connection.execute(sql.SQL('CREATE ROLE {} NOLOGIN').format(sql.Identifier(role)))
    script=(Path(__file__).resolve().parents[1]/'deploy/runtime-grants.sql').read_text()
+   script='\n'.join(line for line in script.splitlines() if not line.lstrip().startswith('--'))
    for statement in script.replace('sml_runtime',sql.Identifier(role).as_string(connection)).split(';'):
     if statement.strip():connection.execute(statement)
    self.store.execute(connection,'INSERT INTO cohorts(id,owner_id,callsign,created_at) VALUES (?,?,?,?)',(cohort,teacher['account_id'],'Alpha',now()))
