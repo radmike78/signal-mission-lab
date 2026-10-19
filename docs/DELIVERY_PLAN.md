@@ -31,3 +31,7 @@ Expanded public catalog coverage across upper/lower TI, WIN-T, ITN, SATCOM, radi
 ## Security and source-publication gate (19 October 2026 UTC)
 
 Added public-API throttling, additional response-header protections and adversarial checks. Added a no-network build-time provenance gate for the curated corpus. See `OWASP_SECURITY_REVIEW.md` for the 2025 risk mapping, validation and open release gates. Approved public-document parsing/search remains a future milestone; no upload/RAG service is enabled.
+
+## Rootless Podman packaging (19 October 2026)
+
+Added OCI Containerfile, loopback-only systemd Quadlet, optional file-mounted runtime database secret and dedicated rootless Podman CI. See `deploy/PODMAN.md`. Real-host TLS/proxy, secret/DB configuration, SELinux/boot behavior and deployment acceptance remain open.

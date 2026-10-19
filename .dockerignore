@@ -7,3 +7,9 @@
 artifacts
 docs/screenshots
 .git
+**/*.key
+**/*.pem
+**/*.p12
+**/*.pfx
+**/.ssh
+**/secrets

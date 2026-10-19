@@ -41,3 +41,7 @@ Use read-only filesystem, UID 10001, dropped capabilities, no-new-privileges, re
 SQLite tests exercise API ownership, membership, role boundaries, credentials, quotas, deletion and persistence locally. CI repeats the suite against PostgreSQL, checks relational constraints and a restricted DB role, and runs a synthetic pg_dump/restore drill into another database. CI also builds the application container and checks it under constrained runtime settings. These synthetic checks do not replace encrypted off-site backups or a real-host restore exercise.
 
 No real users, operational data or paid services are provisioned by this code. Before a public release: choose identity/hosting providers, configure durable secrets and TLS, verify production DB grants and backups, add monitoring and incident response, complete broader security/accessibility testing, and verify the documentation corpus.
+
+## File-mounted database credentials
+
+Podman deployment can set `SML_DATABASE_URL_FILE` to a mounted secret path rather than exposing the URL in the environment. The reader limits content to 4,096 characters, rejects empty/multiline values and fails if both URL settings are supplied. Existing PostgreSQL TLS and least-privilege policies still apply. See [PODMAN.md](PODMAN.md) for rootless deployment and separate administrator/runtime secret handling.

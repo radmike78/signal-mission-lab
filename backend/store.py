@@ -84,6 +84,20 @@ class Store:
 
 def configured_store():
     url=os.environ.get('SML_DATABASE_URL')
+    secret_file=os.environ.get('SML_DATABASE_URL_FILE')
+    if url and secret_file:
+        raise ValueError('Configure one database credential source')
+    if secret_file:
+        try:
+            with Path(secret_file).open(encoding='utf-8') as stream:
+                raw=stream.read(4097)
+            if len(raw)>4096:
+                raise ValueError('Invalid database credential file')
+            url=raw.strip()
+            if not url or '\n' in url or '\r' in url:
+                raise ValueError('Invalid database credential file')
+        except (OSError, UnicodeError) as error:
+            raise ValueError('Database credential file unavailable') from error
     if not url:
         raise ValueError('Persistence is not configured')
     return Store(url, testing=os.environ.get('SML_ENV')=='test')

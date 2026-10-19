@@ -15,3 +15,7 @@ Before exposing any API: enforce HTTPS at a trusted reverse proxy; set the actua
 Future learner/instructor service: select an OIDC provider, implement server-validated roles and cohort ownership checks, use PostgreSQL on a private network with TLS and a separate migration role. Do not deploy persistent learning records until authorization, isolation, deletion, backup and restore tests pass. The current session review is not an authenticated instructor dashboard.
 
 No deployment credentials are required for local validation. Live hosting needs the owner's chosen account/project, domain and deployment identity. Any generative mentor needs a provider decision, secret configuration, budgets, a reviewed corpus and prompt-injection evaluations. Do not put secrets into source control or chat.
+
+## Current Podman deployment path
+
+Use [PODMAN.md](PODMAN.md) for the current rootless OCI/Quadlet workflow. It supersedes historical Docker-only and no-runtime-validation notes above. The image includes UI/API/legacy content; persistent PostgreSQL is separate. A dedicated Podman CI job builds and exercises the constrained image; actual host deployment is not performed by this repository change.
