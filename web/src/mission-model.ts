@@ -25,7 +25,7 @@ export function validateAnswers(value:Answers):void{
 export function recommendation(value:Answers){
  validateAnswers(value);
  const systems=[...value.systems];
- const selectedTransport=['jnn','cpn','tcn','thn','rhn','stt','stt-plus','trilos','hclos','t2c2','smart-t','snap','dket','phoenix-d','phoenix-e','snn','ngtt','scout','htll','wint-inc1','wint-inc2'].some(id=>systems.includes(id));
+ const selectedTransport=['jnn','cpn','tcn','thn','rhn','stt','stt-plus','trilos','hclos','t2c2','smart-t','snap','dket','phoenix-d','phoenix-e','snn','ngtt','scout','htll','wint-inc1','wint-inc2','gait'].some(id=>systems.includes(id));
  const transport=value.setting==='single'||selectedTransport?[]:['jnn','cpn'];
  if(value.setting==='disrupted'&&!systems.includes('radio'))transport.push('radio');
  const equipment=[...new Set([...systems,...transport])].map(id=>({id,reason:

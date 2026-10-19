@@ -1,0 +1,9 @@
+# Pre-site preparation brief
+
+The mission result now includes six editorial preparation checkpoints. Each has a purpose and expected evidence, a supplied fictional owner role and a supplied rehearsal state. A rehearsed item without an owner remains unresolved. A blocked item is counted explicitly. Even a fully assigned/rehearsed checklist reports only “Synthetic preparation reviewed,” with an explicit lack of real readiness, authorization or interoperability verification.
+
+The download uses a locally generated text Blob with a constant filename. Content is bounded mission choices, catalog identifiers, fixed role/status values and editorial prompts. No raw description, free text, real address, quantity, setting, credential or source document is included. No API, file upload, model call, account persistence or browser-storage write is added. A missing variant-specific parts checklist remains a planning gap, not an inferred bill of materials.
+
+Model validation rejects missing/duplicate/unknown checkpoints, unsupported owners and states, and unsupported mission/catalog inputs. Three new model tests cover unresolved ownership, blocked status, the complete-review boundary and rejection of forged/free-text values. Strict production build and all 38 web model tests pass locally. Source and catalog gates are unchanged. UI browser checks cover checkbox-free fixed selections, downloaded brief content, reset and mobile layout; review CI results before calling those verified.
+
+The readiness prompts are editorial training scaffolding, not quoted Army checklists. Technical and learning-outcome review remains pending. Missing interfaces, exact parts, software applicability, service prerequisites and operational acceptance criteria need approved references and qualified review. See `RESEARCH_ACQUISITION_REPORT.md`.

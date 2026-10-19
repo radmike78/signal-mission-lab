@@ -47,3 +47,7 @@ Added evidence-gated synthetic builder, routing and satellite-dependency cases t
 ## GAIT and vendor coverage (19 October 2026)
 
 Added a source-scoped GAIT purpose record and overview-only PacStar/IQ-Core study entries, with vendor NCM provenance in IT foundations. Catalog now has 86 entries; equipment variants, vendor integrations and interoperability remain incomplete and unverified. See `GAIT_AND_VENDOR_COVERAGE.md`.
+
+## Pre-site preparation brief (19 October 2026)
+
+Added a mission-scoped, fixed-choice preparation checklist covering intent, parts/prerequisites, architecture evidence, external coordination, build/recovery rehearsal and end-to-end acceptance. Unassigned owners and blocked/unreviewed items remain visible. A downloadable plain-text training brief includes responsibilities, expected evidence, risks and remaining boundaries; it never establishes equipment readiness. The state is local and clears with the mission. Strict build and 38 web model tests pass locally. Browser CI validates export contents, state changes and reset. Real parts lists, operational plans, external approvals and equipment-specific procedures remain outside this feature.
