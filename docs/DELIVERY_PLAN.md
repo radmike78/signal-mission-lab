@@ -19,3 +19,7 @@ Every stage must pass functional, security, source-provenance and learning-outco
 Added PostgreSQL persistence, administrator-provisioned synthetic accounts with hashed/expiring/revocable tokens, instructor-owned cohorts, memberships, assignments, server-scored attempts, deletion and minimal audit events. Connected learner/instructor UI uses the same-origin API while offline training is preserved. Added authorization/isolation tests, PostgreSQL integration and backup/restore CI, plus a constrained container check. See `PERSISTENCE_REPORT.md` and `deploy/ACCOUNTS.md`.
 
 The earlier remaining-stage list is historical: basic persistence/cohort authorization is now implemented. Organizational OIDC/MFA, custom instructor authoring, expanded analytics, reviewed sources, generative mentor evaluation and live deployment/security/accessibility review remain incomplete.
+
+## Requirements and evidence worksheet milestone (19 October 2026 UTC)
+
+Mission briefs now include observable user-outcome criteria, self-reported synthetic observations, equipment dependency/coordination prompts, scoped source claims and conceptual relationships with missing interface evidence. See `REQUIREMENTS_REPORT.md`. This closes part of the requirements-analysis gap; multiple exchange modeling, authoritative interface coverage and human review remain outstanding.

@@ -49,3 +49,5 @@ Connected screenshots: [instructor cohort](docs/screenshots/connected-instructor
 The homepage asks **What is your mission?** Users enter a fictional training description; a local rule-based interpreter asks for missing or ambiguous details before producing an explained equipment research shortlist, conceptual architecture and validation questions. See [UI and mission-flow details](docs/UI_MISSION_FLOW.md). Raw text stays local and is discarded after analysis. Users can review and correct the recognized fields; sensitive-content screening is heuristic, not a classification guarantee. Equipment interfaces and suitability are never inferred.
 
 [New homepage](docs/screenshots/mission-home.png) · [Guided questions](docs/screenshots/mission-questions.png) · [Mission brief](docs/screenshots/mission-recommendation.png) · [Mobile](docs/screenshots/mission-home-mobile.png)
+
+Mission briefs also include a [requirements and evidence worksheet](docs/REQUIREMENTS_REPORT.md): choose a synthetic user outcome, review acceptance criteria and inspect the equipment evidence ledger. Simulation observations never establish equipment interoperability.
