@@ -1,7 +1,7 @@
 """Offline checks for introductory IT lessons; vendor evidence is not Army adoption."""
 from .provenance import validate_url
 VENDOR_HOSTS=frozenset({'learn.microsoft.com','www.cisco.com','docs.paloaltonetworks.com',
-                        'docs.netapp.com','www.redhat.com','knowledge.broadcom.com'})
+                        'docs.netapp.com','www.redhat.com','knowledge.broadcom.com','defense-solutions.curtisswright.com'})
 
 def validate_technology(content, catalog):
     if content['review_status'] != 'human_review_pending':

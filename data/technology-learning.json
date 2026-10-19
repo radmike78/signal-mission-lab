@@ -146,6 +146,18 @@
       "retrieved": "2026-10-19",
       "status": "content_checked",
       "human_review": "pending"
+    },
+    {
+      "id": "iq-core-ncm",
+      "title": "Curtiss-Wright: IQ-Core NCM",
+      "url": "https://defense-solutions.curtisswright.com/products/networking-communications/tactical-networking/iq-core-software/ncm",
+      "kind": "Vendor education",
+      "edition": "Undated product overview; retrieved 19 October 2026",
+      "locator": "Manage Multi-Vendor Infrastructures and Configure and Manage the Network sections",
+      "scope": "Vendor description of network monitoring, configuration and troubleshooting. Not an operator manual or verified Army integration.",
+      "retrieved": "2026-10-19",
+      "status": "content_checked",
+      "human_review": "pending"
     }
   ],
   "vendors": [
@@ -258,6 +270,19 @@
         "army-switch"
       ],
       "army_context": "The installation article reports replacement with Juniper switches, showing vendor diversity."
+    },
+    {
+      "id": "pacstar",
+      "name": "Curtiss-Wright / PacStar",
+      "technologies": [
+        "IQ-Core Network Communications Manager (NCM)",
+        "Network-management automation",
+        "Modular platform awareness"
+      ],
+      "source_ids": [
+        "iq-core-ncm"
+      ],
+      "army_context": "Vendor technology study only. Army system-to-model mapping, installed plugins and versioned task/recovery behavior remain unverified. Learn the underlying networking and service tasks before relying on management automation."
     }
   ],
   "lessons": [

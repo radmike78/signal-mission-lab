@@ -49,3 +49,11 @@ test('Named upper and lower TI systems retain distinct catalog identifiers',()=>
  for(const id of ['wint-inc2','tcn','trilos','prc158','prc163'])assert.ok(a.systems.includes(id),id);
  assert.equal(interpretDescription('Fictional brigade exercise without PRC-160. Use CPCE at one location for user access.').answers.systems.includes('prc160'),false);
 });
+
+test('GAIT and vendor automation study names remain distinct and honor negation',()=>{
+ const found=interpretDescription('A fictional brigade training exercise at one site uses GAIT, PacStar and IQ-Core for command post recovery.');
+ assert.deepEqual(found.answers.systems,['gait','pacstar','iq-core']);
+ assert.equal(found.answers.systems.includes('pop'),false);
+ const excluded=interpretDescription('A fictional brigade training exercise with CPN, without GAIT, excluding PacStar, no IQ-Core.');
+ assert.deepEqual(excluded.answers.systems,['cpn']);
+});

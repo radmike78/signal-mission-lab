@@ -883,6 +883,19 @@
       "reviewer": "Automated public-source check; human equipment review pending",
       "status": "source_checked",
       "scope": "Source-date public purpose only; no interface specifications or current fielding established."
+    },
+    {
+      "id": "gait-purpose",
+      "subject": "gait",
+      "statement": "In its 2021 overview, the Army describes GAIT as a network transport design interconnecting Regional Hub Nodes and GAIT points of presence.",
+      "source_title": "Global network super highway postures Army for multi-domain operations",
+      "url": "https://www.army.mil/article/248248/global_network_super_highway_postures_army_for_multi_domain_operations",
+      "published": "2021-07-07",
+      "locator": "Reducing complexity for the user",
+      "retrieved": "2026-10-19",
+      "reviewer": "Automated primary-source check; human SME review pending",
+      "status": "source_checked",
+      "scope": "Historical architecture purpose only. GAIT points of presence are not automatically the WIN-T Point of Presence vehicle system. Current provisioning, interfaces and readiness unknown."
     }
   ]
 }

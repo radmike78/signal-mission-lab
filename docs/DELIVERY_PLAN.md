@@ -43,3 +43,7 @@ Added nine introductory lessons, vendor/reference directory, knowledge checks an
 ## Mission troubleshooting workbench (19 October 2026)
 
 Added evidence-gated synthetic builder, routing and satellite-dependency cases to the existing Troubleshoot area. Learners interpret observations, select a supported recovery, identify acceptance checks and explain mission impact. No actual equipment operation or recovery is simulated. See `TROUBLESHOOTING_WORKBENCH.md` and `RESEARCH_ACQUISITION_REPORT.md` for source boundaries, validation and missing manuals. Deep comprehension assessment, SME review, instructor persistence for these cases and real equipment procedures remain outstanding.
+
+## GAIT and vendor coverage (19 October 2026)
+
+Added a source-scoped GAIT purpose record and overview-only PacStar/IQ-Core study entries, with vendor NCM provenance in IT foundations. Catalog now has 86 entries; equipment variants, vendor integrations and interoperability remain incomplete and unverified. See `GAIT_AND_VENDOR_COVERAGE.md`.

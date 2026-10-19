@@ -362,7 +362,7 @@
       "tier": "Upper TI",
       "kind": "Network node",
       "aliases": [
-        "Modular Communication Node–Advanced Enclave"
+        "Modular Communication Node\u2013Advanced Enclave"
       ],
       "review_status": "source_checked",
       "lifecycle": "Unknown; source-date context only",
@@ -1132,7 +1132,7 @@
       "tier": "Mission application",
       "kind": "Mounted mission system",
       "aliases": [
-        "Joint Battle Command–Platform (JBC P)"
+        "Joint Battle Command\u2013Platform (JBC P)"
       ],
       "review_status": "source_checked",
       "lifecycle": "Unknown; source-date context only",
@@ -1148,7 +1148,7 @@
       "tier": "Mission application",
       "kind": "Mounted mission software",
       "aliases": [
-        "Mounted Mission Command–Software (MMC S)"
+        "Mounted Mission Command\u2013Software (MMC S)"
       ],
       "review_status": "source_checked",
       "lifecycle": "Unknown; source-date context only",
@@ -1164,7 +1164,7 @@
       "tier": "Cross-tier / enabling",
       "kind": "Modernization effort",
       "aliases": [
-        "Mounted Mission Command–Transport (MMC T)"
+        "Mounted Mission Command\u2013Transport (MMC T)"
       ],
       "review_status": "source_checked",
       "lifecycle": "Unknown; source-date context only",
@@ -1302,6 +1302,58 @@
       "locator": "Full page timed out",
       "checked_at": "2026-10-19",
       "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "gait",
+      "tier": "Upper TI",
+      "kind": "Transport architecture",
+      "aliases": [
+        "GAIT"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/248248/global_network_super_highway_postures_army_for_multi_domain_operations",
+      "source_title": "Global network super highway postures Army for multi-domain operations",
+      "source_date": "2021-07-07",
+      "locator": "Reducing complexity for the user",
+      "checked_at": "2026-10-19",
+      "limitations": "No specific configuration, current fielding, supported-device matrix or equipment interoperability established."
+    },
+    {
+      "id": "pacstar",
+      "tier": "Enabling technology",
+      "kind": "Vendor platform",
+      "aliases": [
+        "PacStar",
+        "Curtiss-Wright"
+      ],
+      "review_status": "overview_only",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "",
+      "source_title": "Vendor curriculum references; Army equipment mapping not established",
+      "source_date": "Unknown",
+      "locator": "IT foundations vendor directory",
+      "checked_at": "2026-10-19",
+      "limitations": "No specific configuration, current fielding, supported-device matrix or equipment interoperability established."
+    },
+    {
+      "id": "iq-core",
+      "tier": "Enabling technology",
+      "kind": "Software",
+      "aliases": [
+        "IQ-Core",
+        "iqcore",
+        "NCM",
+        "ROAM"
+      ],
+      "review_status": "overview_only",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "",
+      "source_title": "Vendor curriculum references; Army equipment mapping not established",
+      "source_date": "Unknown",
+      "locator": "IT foundations vendor directory",
+      "checked_at": "2026-10-19",
+      "limitations": "No specific configuration, current fielding, supported-device matrix or equipment interoperability established."
     }
   ],
   "gaps": [
