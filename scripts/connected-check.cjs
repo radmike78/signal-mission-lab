@@ -50,9 +50,11 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
   const recoveryId=await assigned.locator('option').filter({hasText:'builder'}).getAttribute('value');
   await assigned.selectOption(recoveryId);
   const workbench=learner.locator('.diagnostic-workbench');
-  if(await workbench.getByLabel('Mission troubleshooting case').count())throw Error('Assigned case can be changed');
+  if(await workbench.getByLabel('Issue to work on').count())throw Error('Assigned case can be changed');
+  await workbench.getByRole('button',{name:'Show the check result',exact:true}).click();
+  await workbench.getByText('Review progress or decide early',{exact:true}).click();
+  await workbench.getByRole('button',{name:'Decide with current evidence',exact:true}).click();
   await workbench.getByLabel('Rerun the whole builder immediately',{exact:true}).check();
-  await workbench.getByRole('button',{name:'Inspect the synthetic error record',exact:true}).click();
   await workbench.getByRole('button',{name:'Submit recovery attempt to instructor',exact:true}).click();
   await learner.getByRole('status').getByText(/Saved server-scored recovery result: 1\/5/).waitFor();
   await teacher.getByRole('button',{name:'Refresh saved learning',exact:true}).click();
@@ -60,7 +62,10 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
   await gapRow.getByRole('cell').nth(2).filter({hasText:/^1$/}).waitFor();
   if(await gapRow.getByRole('cell').allTextContents().then(v=>v.join('|'))!=='Understand a failed build|1|1|1')throw Error('Recovery gaps not visible');
   await assigned.selectOption(recoveryId);
-  for(const b of await workbench.locator('.grid button').all())await b.click();
+  for(let i=0;i<4;i++){
+   await workbench.getByRole('button',{name:'Show the check result',exact:true}).click();
+   await workbench.getByRole('button',{name:i<3?'Next check':'Choose a recovery',exact:true}).click();
+  }
   await workbench.getByLabel('Treat this as partial completion and follow the scoped recovery plan',{exact:true}).check();
   await workbench.getByRole('button',{name:'Submit recovery attempt to instructor',exact:true}).click();
   await learner.getByRole('status').getByText(/Saved server-scored recovery result: 5\/5/).waitFor();

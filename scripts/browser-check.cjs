@@ -72,6 +72,7 @@ const fs=require('fs');
  assert((await page.getByRole('status').innerText()).includes('power'),'outage status');
  await snap('architecture');
  await nav('Troubleshoot');
+ await page.getByText('Other practice incidents',{exact:true}).click();
  await page.getByLabel('Inspect synthetic resolver status').check();
  await page.getByLabel('Proposed diagnosis').selectOption('dns');
  await page.getByRole('button',{name:'Submit diagnosis'}).click();
