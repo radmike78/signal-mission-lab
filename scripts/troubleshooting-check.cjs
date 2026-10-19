@@ -14,6 +14,7 @@ const fs=require('node:fs');
  if(await page.getByLabel('Synthetic incident').isVisible())throw Error('Other incidents expanded by default');
  if(await w.locator('.current-check').count()!==1)throw Error('More than one current check');
  await w.getByRole('button',{name:'Show the check result',exact:true}).click();
+ await page.waitForFunction(()=>document.activeElement?.classList.contains('check-observation'));
  if(await w.locator('pre').isVisible())throw Error('Script expanded by default');
  await w.getByText('Look inside the example script',{exact:true}).click();
  await w.locator('pre').waitFor();
