@@ -18,3 +18,7 @@ The starter catalog contains illustrative **unverified overviews**. It is not a 
 4. Separate doctrinal statements from editorial teaching examples.
 5. Use synthetic and sanitized exercises only.
 6. Review updates before publishing; preserve a change history.
+
+## Catalog coverage metadata
+
+`equipment-coverage.json` tracks one scope record per catalog entry. `source_checked` denotes retrieved public-purpose evidence with human review pending; `retrieval_pending` denotes a blocked discovery and must not be promoted into a source claim; `overview_only` denotes an editorial category or legacy overview. `complete` remains false. Upper/lower TI tags are editorial navigation aids, not documented interface edges. Programs, families, software, services and individual hardware must remain distinguishable. New system inclusion never establishes current fielding or equipment interoperability.

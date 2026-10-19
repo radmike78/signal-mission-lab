@@ -43,3 +43,9 @@ test('Unrecognized markup remains data and is not executed',()=>{
  const result=interpretDescription('For a fictional brigade exercise use CPCE <script>alert(1)</script> at one location for recovery.');
  assert.equal(result.answers.mission,'command');assert.equal(result.answers.setting,'single');
 });
+
+test('Named upper and lower TI systems retain distinct catalog identifiers',()=>{
+ const a=interpretDescription('Fictional brigade exercise with WIN-T Increment 2, TCN, TRILOS, AN/PRC-158 and PRC-163 at one location for user access.').answers;
+ for(const id of ['wint-inc2','tcn','trilos','prc158','prc163'])assert.ok(a.systems.includes(id),id);
+ assert.equal(interpretDescription('Fictional brigade exercise without PRC-160. Use CPCE at one location for user access.').answers.systems.includes('prc160'),false);
+});

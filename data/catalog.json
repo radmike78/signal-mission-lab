@@ -132,7 +132,7 @@
       "id": "dcgsa",
       "name": "DCGS-A",
       "category": "Intelligence",
-      "description": "Distributed Common Ground System\u2013Army; intelligence information workflows.",
+      "description": "Distributed Common Ground System–Army; intelligence information workflows.",
       "capabilities": [
         "Intelligence information processing",
         "Information dissemination concepts"
@@ -211,6 +211,1363 @@
         "Signal maintainers"
       ],
       "confidence": "Category only"
+    },
+    {
+      "id": "wint-inc1",
+      "name": "WIN-T Increment 1",
+      "category": "Program / family",
+      "description": "At-the-halt network family. Historical overview; current distribution unknown.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "wint-inc2",
+      "name": "WIN-T Increment 2",
+      "category": "Program / family",
+      "description": "Mobile tactical network family. Fielding baseline is source-date specific.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "thn",
+      "name": "Tactical Hub Node (THN)",
+      "category": "Network node",
+      "description": "Division node identified in the 2016 overview.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "rhn",
+      "name": "Regional Hub Node (RHN)",
+      "category": "Reachback infrastructure",
+      "description": "Fixed regional node identified in the historical overview.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "tcn",
+      "name": "Tactical Communications Node (TCN)",
+      "category": "Network node",
+      "description": "Backbone node supporting command posts.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "pop",
+      "name": "Point of Presence (PoP)",
+      "category": "Vehicle package",
+      "description": "Vehicle network package for mobile mission command.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "sne",
+      "name": "Soldier Network Extension (SNE)",
+      "category": "Vehicle package",
+      "description": "Vehicle package extending network access toward lower echelons.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "vwp",
+      "name": "Vehicle Wireless Package (VWP)",
+      "category": "Vehicle package",
+      "description": "Local network extension package described in the historical baseline.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "nosc",
+      "name": "Network Operations and Security Center (NOSC)",
+      "category": "Network management",
+      "description": "Management capability described for WIN-T Increment 2.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "stt",
+      "name": "Satellite Transportable Terminal (STT)",
+      "category": "Satellite terminal",
+      "description": "Satellite terminal listed with JNN and battalion nodes.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "stt-plus",
+      "name": "Satellite Transportable Terminal Plus (STT+)",
+      "category": "Satellite terminal",
+      "description": "At-the-halt satellite terminal described with TCN.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "hclos",
+      "name": "High Capacity Line of Sight (HCLOS)",
+      "category": "Terrestrial transport",
+      "description": "Transmission assemblage named in Signal School training.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "trilos",
+      "name": "Terrestrial Transmission Line of Sight (TRILOS)",
+      "category": "Terrestrial transport",
+      "description": "Terrestrial radio transport described in Guard modernization.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "t2c2",
+      "name": "Transportable Tactical Command Communications (T2C2)",
+      "category": "Satellite terminal",
+      "description": "Inflatable satellite terminal family; Lite is separately identified in the source.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "smart-t",
+      "name": "SMART-T",
+      "category": "Satellite terminal",
+      "description": "Satellite terminal listed in the historical SATCOM portfolio.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "snap",
+      "name": "SNAP satellite terminal family",
+      "category": "Satellite terminal",
+      "description": "Access-point terminal family listed in the historical portfolio.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "dket",
+      "name": "Deployable Earth Terminal (DKET)",
+      "category": "Satellite terminal",
+      "description": "Deployable earth terminal listed in the historical portfolio.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "phoenix-d",
+      "name": "Phoenix satellite terminal family / D-Model",
+      "category": "Satellite terminal",
+      "description": "D-Model is contrasted with the modular E-Model.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "phoenix-e",
+      "name": "Phoenix E-Model",
+      "category": "Satellite terminal",
+      "description": "Modular ground satellite terminal described for ESB-E formations.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "snn",
+      "name": "Scalable Network Node (SNN)",
+      "category": "Network node",
+      "description": "Smaller ESB-E terminals identified alongside Phoenix E.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "gbs",
+      "name": "Global Broadcast Service (GBS)",
+      "category": "Broadcast receive capability",
+      "description": "Broadcast capability for one-way large-file delivery.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "grrip",
+      "name": "Global Rapid Response Information Package (GRRIP)",
+      "category": "Communications package",
+      "description": "Package named in the historical SATCOM portfolio.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "mcn-ae",
+      "name": "Modular Communication Node–Advanced Enclave",
+      "category": "Network node",
+      "description": "Expeditionary node identified for intelligence information exchange.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "direct",
+      "name": "DIRECT disaster communications suite",
+      "category": "Communications package",
+      "description": "Guard disaster-response communications suite for first responders.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "sincgars",
+      "name": "SINCGARS / RT-1523 family",
+      "category": "Combat net radio",
+      "description": "Radio family and waveform are distinct concepts; both need variant-specific study.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "leader",
+      "name": "HMS Leader radio family",
+      "category": "Tactical radio family",
+      "description": "Two-channel handheld family; variants require separate validation.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "prc148d",
+      "name": "AN/PRC-148D",
+      "category": "Tactical radio variant",
+      "description": "Leader radio variant named in the waveform overview.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "prc163",
+      "name": "AN/PRC-163",
+      "category": "Tactical radio variant",
+      "description": "Leader radio variant named in the waveform overview.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "manpack",
+      "name": "HMS Manpack radio family",
+      "category": "Tactical radio family",
+      "description": "Two-channel manpack family; variants require separate validation.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "prc158",
+      "name": "AN/PRC-158",
+      "category": "Tactical radio variant",
+      "description": "Manpack variant named in the waveform overview.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "prc162",
+      "name": "AN/PRC-162",
+      "category": "Tactical radio variant",
+      "description": "Manpack variant named in the waveform overview.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "cnr",
+      "name": "Combat Net Radio modernization",
+      "category": "Modernization effort",
+      "description": "SINCGARS radio modernization effort identified by the source; current variant coverage pending.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "itn",
+      "name": "Integrated Tactical Network (ITN)",
+      "category": "Capability suite",
+      "description": "Capability suite combining radios, user devices and transport; not one equipment item.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "nett-warrior",
+      "name": "Nett Warrior end-user devices",
+      "category": "End-user device family",
+      "description": "Ruggedized user-device capability supporting dismounted information workflows.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "vha",
+      "name": "Variable Height Antenna (VHA)",
+      "category": "Antenna / relay concept",
+      "description": "Elevated radio relay concept demonstrated during the reported exercise.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "jenm",
+      "name": "Joint Enterprise Network Manager (JENM)",
+      "category": "Management software",
+      "description": "Tactical-edge radio network management capability.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "tsi",
+      "name": "Tactical Server Infrastructure (TSI)",
+      "category": "Compute infrastructure",
+      "description": "Server hardware described with CPCE; the cited article discusses TSIv3 development.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "ngtt",
+      "name": "Next Generation Tactical Terminal (NGTT)",
+      "category": "Modernization effort",
+      "description": "Multi-orbit terminal development described in the source; current delivery status unknown.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "mom",
+      "name": "Multi-Orbit Modem (MOM)",
+      "category": "Modernization effort",
+      "description": "Multi-orbit modem development described in the source; timelines remain unverified.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "saams",
+      "name": "SATCOM as a Managed Service (SaaMS)",
+      "category": "Service / acquisition model",
+      "description": "Commercial service-acquisition approach, not an individual terminal.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "ngc2",
+      "name": "Next Generation Command and Control (NGC2)",
+      "category": "Modernization ecosystem",
+      "description": "Software, data, transport and infrastructure ecosystem; not one radio or node.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "lcn-t",
+      "name": "Large Communications Node–Tactical (LCN-T)",
+      "category": "Discovery pending",
+      "description": "Public discovery entry only. Node purpose and replacement details await full-source retrieval.",
+      "capabilities": [
+        "Source retrieval pending"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Discovery only"
+    },
+    {
+      "id": "nite",
+      "name": "Network Integration Technology Enhancement (NITE)",
+      "category": "Discovery pending",
+      "description": "Public discovery entry only. Refresh scope awaits full-source retrieval.",
+      "capabilities": [
+        "Source retrieval pending"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Discovery only"
+    },
+    {
+      "id": "satcom-fot",
+      "name": "SATCOM Family of Terminals",
+      "category": "Discovery pending",
+      "description": "Public discovery entry only. Family membership and variants await full-source retrieval.",
+      "capabilities": [
+        "Source retrieval pending"
+      ],
+      "dependencies": [
+        "Power and sustainment: investigate",
+        "Applicable version and interface documentation: verify"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Discovery only"
+    },
+    {
+      "id": "prc117",
+      "name": "AN/PRC-117 family",
+      "category": "Tactical radio / mounted integration",
+      "description": "Multiband manpack family identified in the 2010 depot article.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "prc150",
+      "name": "AN/PRC-150",
+      "category": "Tactical radio / mounted integration",
+      "description": "HF manpack radio identified in the depot article.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "prc152",
+      "name": "AN/PRC-152 family",
+      "category": "Tactical radio / mounted integration",
+      "description": "Multiband handheld family identified in the depot article.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "vrc103",
+      "name": "AN/VRC-103",
+      "category": "Tactical radio / mounted integration",
+      "description": "Mounted radio system named in the historical depot workload.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "vrc104",
+      "name": "AN/VRC-104",
+      "category": "Tactical radio / mounted integration",
+      "description": "Radio amplification system named in the historical depot workload.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "vrc110",
+      "name": "AN/VRC-110",
+      "category": "Tactical radio / mounted integration",
+      "description": "Vehicle amplifier named in the historical depot workload.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "prc160",
+      "name": "AN/PRC-160",
+      "category": "Discovery pending",
+      "description": "Public discovery entry only. HF modernization details await full-source retrieval.",
+      "capabilities": [
+        "Source retrieval pending"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Discovery only"
+    },
+    {
+      "id": "scout",
+      "name": "SCOUT-Medium",
+      "category": "Satellite terminal",
+      "description": "Satellite terminal identified for a planned 2024 MEO assessment.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "htll",
+      "name": "HT/LL LEO / MEO SATCOM",
+      "category": "Transport technology",
+      "description": "Commercial multi-orbit transport explored in the reported assessment.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "seeker",
+      "name": "Seeker / Auto-PACE",
+      "category": "Transport management software",
+      "description": "Transport aggregation and automatic path selection software described in the assessment.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "hf",
+      "name": "HF radio category",
+      "category": "Enabling study category",
+      "description": "Editorial coverage category. Equipment models and authoritative public-purpose claims are not yet registered.",
+      "capabilities": [
+        "Study scope only"
+      ],
+      "dependencies": [
+        "Public variant references pending"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Category only"
+    },
+    {
+      "id": "tacsat",
+      "name": "Narrowband TACSAT category",
+      "category": "Enabling study category",
+      "description": "Editorial coverage category. Equipment models and authoritative public-purpose claims are not yet registered.",
+      "capabilities": [
+        "Study scope only"
+      ],
+      "dependencies": [
+        "Public variant references pending"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Category only"
+    },
+    {
+      "id": "retrans",
+      "name": "Retransmission and antenna support",
+      "category": "Enabling study category",
+      "description": "Editorial coverage category. Equipment models and authoritative public-purpose claims are not yet registered.",
+      "capabilities": [
+        "Study scope only"
+      ],
+      "dependencies": [
+        "Public variant references pending"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Category only"
+    },
+    {
+      "id": "tropo",
+      "name": "Troposcatter transport category",
+      "category": "Enabling study category",
+      "description": "Editorial coverage category. Equipment models and authoritative public-purpose claims are not yet registered.",
+      "capabilities": [
+        "Study scope only"
+      ],
+      "dependencies": [
+        "Public variant references pending"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Category only"
+    },
+    {
+      "id": "baseband",
+      "name": "Baseband routing, switching and voice",
+      "category": "Enabling study category",
+      "description": "Editorial coverage category. Equipment models and authoritative public-purpose claims are not yet registered.",
+      "capabilities": [
+        "Study scope only"
+      ],
+      "dependencies": [
+        "Public variant references pending"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Category only"
+    },
+    {
+      "id": "cabling",
+      "name": "Fiber and copper distribution",
+      "category": "Enabling study category",
+      "description": "Editorial coverage category. Equipment models and authoritative public-purpose claims are not yet registered.",
+      "capabilities": [
+        "Study scope only"
+      ],
+      "dependencies": [
+        "Public variant references pending"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Category only"
+    },
+    {
+      "id": "power",
+      "name": "Power, grounding and environmental support",
+      "category": "Enabling study category",
+      "description": "Editorial coverage category. Equipment models and authoritative public-purpose claims are not yet registered.",
+      "capabilities": [
+        "Study scope only"
+      ],
+      "dependencies": [
+        "Public variant references pending"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Category only"
+    },
+    {
+      "id": "edge",
+      "name": "Edge compute and cloud infrastructure",
+      "category": "Enabling study category",
+      "description": "Editorial coverage category. Equipment models and authoritative public-purpose claims are not yet registered.",
+      "capabilities": [
+        "Study scope only"
+      ],
+      "dependencies": [
+        "Public variant references pending"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Category only"
+    },
+    {
+      "id": "wireless",
+      "name": "Command-post wireless and cellular",
+      "category": "Enabling study category",
+      "description": "Editorial coverage category. Equipment models and authoritative public-purpose claims are not yet registered.",
+      "capabilities": [
+        "Study scope only"
+      ],
+      "dependencies": [
+        "Public variant references pending"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Category only"
+    },
+    {
+      "id": "uno",
+      "name": "Unified Network Operations (UNO)",
+      "category": "Enabling study category",
+      "description": "Editorial coverage category. Equipment models and authoritative public-purpose claims are not yet registered.",
+      "capabilities": [
+        "Study scope only"
+      ],
+      "dependencies": [
+        "Public variant references pending"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Category only"
+    },
+    {
+      "id": "crypto",
+      "name": "Public cryptographic-device overview",
+      "category": "Enabling study category",
+      "description": "Editorial coverage category. Equipment models and authoritative public-purpose claims are not yet registered.",
+      "capabilities": [
+        "Study scope only"
+      ],
+      "dependencies": [
+        "Public variant references pending"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Category only"
+    },
+    {
+      "id": "jbc-p",
+      "name": "Joint Battle Command–Platform (JBC-P)",
+      "category": "Mounted mission system",
+      "description": "Mounted situational-awareness hardware and software described in the 2024 article.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "mmc-s",
+      "name": "Mounted Mission Command–Software (MMC-S)",
+      "category": "Mounted mission software",
+      "description": "TAK-based software modernization described for JBC-P.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "mmc-t",
+      "name": "Mounted Mission Command–Transport (MMC-T)",
+      "category": "Modernization effort",
+      "description": "Mounted transport modernization described in the article; current delivery not verified.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "cpi2",
+      "name": "Command Post Integrated Infrastructure (CPI2)",
+      "category": "Command-post infrastructure",
+      "description": "Vehicle-based modular command-post capability described in the source.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "itn-aviation",
+      "name": "ITN Aviation Demonstration Kit",
+      "category": "Aviation integration kit",
+      "description": "Experimental aviation radio and tablet kit described in the source.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "axs",
+      "name": "Artillery Execution Suite (AXS)",
+      "category": "Modernization effort",
+      "description": "Experimental fires software described in the 2024 article.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "trc170",
+      "name": "AN/TRC-170",
+      "category": "Terrestrial transport",
+      "description": "Troposcatter terminal identified in the historical depot article.",
+      "capabilities": [
+        "Public-purpose study"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Purpose source available"
+    },
+    {
+      "id": "prc154",
+      "name": "AN/PRC-154 / 154A Rifleman Radio",
+      "category": "Discovery pending",
+      "description": "Historical public discovery entry only; full-source retrieval and lifecycle review pending.",
+      "capabilities": [
+        "Source retrieval pending"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Discovery only"
+    },
+    {
+      "id": "prc155",
+      "name": "AN/PRC-155 Manpack",
+      "category": "Discovery pending",
+      "description": "Historical public discovery entry only; full-source retrieval and lifecycle review pending.",
+      "capabilities": [
+        "Source retrieval pending"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Discovery only"
+    },
+    {
+      "id": "psc5",
+      "name": "AN/PSC-5",
+      "category": "Discovery pending",
+      "description": "Historical public discovery entry only; full-source retrieval and lifecycle review pending.",
+      "capabilities": [
+        "Source retrieval pending"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Discovery only"
+    },
+    {
+      "id": "trc190",
+      "name": "AN/TRC-190",
+      "category": "Discovery pending",
+      "description": "Historical public discovery entry only; technical scope and variants await retrieval.",
+      "capabilities": [
+        "Source retrieval pending"
+      ],
+      "dependencies": [
+        "Applicable variant documentation",
+        "Power and sustainment: investigate"
+      ],
+      "roles": [
+        "System owner",
+        "Signal support coordinator"
+      ],
+      "confidence": "Discovery only"
     }
   ],
   "scenarios": [

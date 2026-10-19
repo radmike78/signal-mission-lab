@@ -23,3 +23,7 @@ The earlier remaining-stage list is historical: basic persistence/cohort authori
 ## Requirements and evidence worksheet milestone (19 October 2026 UTC)
 
 Mission briefs now include observable user-outcome criteria, self-reported synthetic observations, equipment dependency/coordination prompts, scoped source claims and conceptual relationships with missing interface evidence. See `REQUIREMENTS_REPORT.md`. This closes part of the requirements-analysis gap; multiple exchange modeling, authoritative interface coverage and human review remain outstanding.
+
+## Tactical equipment coverage expansion (19 October 2026 UTC)
+
+Expanded public catalog coverage across upper/lower TI, WIN-T, ITN, SATCOM, radios, mounted systems and modernization. Added network-area/type filters, coverage metadata in the graph API and explicit mission catalog selections. See `EQUIPMENT_COVERAGE.md`. Exhaustive variant inventory, current fielding and interface validation remain open; blocked discoveries stay pending.

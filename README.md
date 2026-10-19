@@ -51,3 +51,7 @@ The homepage asks **What is your mission?** Users enter a fictional training des
 [New homepage](docs/screenshots/mission-home.png) · [Guided questions](docs/screenshots/mission-questions.png) · [Mission brief](docs/screenshots/mission-recommendation.png) · [Mobile](docs/screenshots/mission-home-mobile.png)
 
 Mission briefs also include a [requirements and evidence worksheet](docs/REQUIREMENTS_REPORT.md): choose a synthetic user outcome, review acceptance criteria and inspect the equipment evidence ledger. Simulation observations never establish equipment interoperability.
+
+## Upper/lower tactical internet and modernization catalog
+
+The equipment explorer now covers public WIN-T node/terminal families, tactical radios, ITN, mounted/dismounted systems, modern transport and enabling study categories. Browse by network area or capability type, inspect provenance, and select catalog entries during mission clarification. Read the [equipment coverage register](docs/EQUIPMENT_COVERAGE.md) for the exact included entries, blocked references and remaining gaps. This is not an exhaustive Army inventory or a verified interoperability database.

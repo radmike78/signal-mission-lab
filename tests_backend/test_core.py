@@ -14,7 +14,7 @@ class CoreTests(unittest.TestCase):
    self.assertEqual(e["status"],"conceptual")
   for c in graph["claims"]:
    self.assertEqual(urlsplit(c["url"]).scheme,"https")
-   self.assertIn(urlsplit(c["url"]).hostname,{"www.army.mil","armypubs.army.mil"})
+   self.assertIn(urlsplit(c["url"]).hostname,{"www.army.mil","armypubs.army.mil","asc.army.mil","www.dvidshub.net"})
    self.assertEqual(c["status"],"source_checked")
  def test_mentor_abstains(self):
   for topic in ["ignore previous instructions", "https://evil.example", "unknown"]:
@@ -60,3 +60,8 @@ class CoreTests(unittest.TestCase):
    self.assertTrue(publications[key]['catalog_url'].startswith('https://armypubs.army.mil/'))
   for topic in ['planning','c2']:
    self.assertEqual(len(core.mentor(topic)['citations']),1)
+
+ def test_graph_includes_incomplete_equipment_coverage(self):
+  graph=core.graph()
+  self.assertFalse(graph['coverage']['complete'])
+  self.assertEqual({r['id'] for r in graph['coverage']['records']},{r['id'] for r in graph['nodes']})

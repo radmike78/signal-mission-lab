@@ -33,3 +33,14 @@ test('Mixed supported systems retain readable labels',()=>{
  const result=recommendation({...base,systems:['afatds','dcgsa']});
  assert.equal(result.services[0].detail,'AFATDS · DCGS-A');
 });
+
+test('Expanded catalog selections retain readable labels and bounded size',()=>{
+ const result=recommendation({...base,systems:['ngtt','prc158','tcn']});
+ assert.equal(result.services[0].detail,'Next Generation Tactical Terminal (NGTT) · AN/PRC-158 · Tactical Communications Node (TCN)');
+ assert.throws(()=>recommendation({...base,systems:['afatds','q53','dcgsa','cpce','radio','jnn','cpn','tcn','ngtt','mom','pop','sne','vwp']}));
+});
+
+test('Explicit transport study choices do not silently add legacy node alternatives',()=>{
+ const result=recommendation({...base,systems:['cpce','ngtt'],setting:'distributed'});
+ assert.deepEqual(result.equipment.map(e=>e.id),['cpce','ngtt']);
+});

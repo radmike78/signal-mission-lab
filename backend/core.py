@@ -8,7 +8,7 @@ def catalog():
     return load("catalog.json")
 def graph():
     data = catalog()
-    return {"nodes": data["equipment"], "edges": load("relationships.json")["relationships"], "claims": load("sources.json")["claims"]}
+    return {"nodes": data["equipment"], "edges": load("relationships.json")["relationships"], "claims": load("sources.json")["claims"], "coverage": load("equipment-coverage.json")}
 def requirements(scenario_id):
     scenario = next((s for s in catalog()["scenarios"] if s["id"] == scenario_id), None)
     if scenario is None:

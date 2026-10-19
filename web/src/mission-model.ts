@@ -1,3 +1,4 @@
+import {equipmentOptions} from './equipment-options.ts';
 /** Deterministic teaching recommendations. No operational inputs or compatibility inference. */
 export const missionOptions=[
  {id:'command',title:'Connect a command post',detail:'Help a fictional staff share information and maintain services.',icon:'network',tag:'COMMAND & CONTROL'},
@@ -18,13 +19,14 @@ export const systemChoices:Record<Mission,{id:string;title:string;detail:string}
 };
 export function validateAnswers(value:Answers):void{
  if(!missionOptions.some(m=>m.id===value.mission)||!['battalion','brigade','division'].includes(value.echelon)||!['single','distributed','disrupted'].includes(value.setting)||!['availability','access','continuity'].includes(value.priority))throw Error('Choose a supplied fictional training option.');
- const permitted=['afatds','q53','dcgsa','cpce','radio'];
- if(!value.systems.length||value.systems.length>5||new Set(value.systems).size!==value.systems.length||value.systems.some(s=>!permitted.includes(s)))throw Error('Choose supported systems for this training mission.');
+ const permitted:string[]=equipmentOptions.map(e=>e.id);
+ if(!value.systems.length||value.systems.length>12||new Set(value.systems).size!==value.systems.length||value.systems.some(s=>!permitted.includes(s)))throw Error('Choose supported systems for this training mission.');
 }
 export function recommendation(value:Answers){
  validateAnswers(value);
  const systems=[...value.systems];
- const transport=value.setting==='single'?[]:['jnn','cpn'];
+ const selectedTransport=['jnn','cpn','tcn','thn','rhn','stt','stt-plus','trilos','hclos','t2c2','smart-t','snap','dket','phoenix-d','phoenix-e','snn','ngtt','scout','htll','wint-inc1','wint-inc2'].some(id=>systems.includes(id));
+ const transport=value.setting==='single'||selectedTransport?[]:['jnn','cpn'];
  if(value.setting==='disrupted'&&!systems.includes('radio'))transport.push('radio');
  const equipment=[...new Set([...systems,...transport])].map(id=>({id,reason:
   id==='jnn'||id==='cpn'?'Compare transport-node families while studying a distributed exercise. Variant suitability is unknown.':
@@ -33,7 +35,7 @@ export function recommendation(value:Answers){
   'Candidate for the described training outcome; confirm its relevance with the supported system owner.'}));
  const emphasis=value.priority==='access'?'Identity and authorized access':value.priority==='continuity'?'Recovery and alternate service concepts':'End-to-end service availability';
  const services=[
-  {title:'User outcome',detail:systems.filter(s=>s!=='q53').map(s=>Object.values(systemChoices).flat().find(x=>x.id===s)?.title||s).join(' · ')||'Supported application and users'},
+  {title:'User outcome',detail:systems.filter(s=>s!=='q53').map(s=>equipmentOptions.find(x=>x.id===s)?.title||s).join(' · ')||'Supported application and users'},
   {title:'Supporting services',detail:value.priority==='access'?'Identity · authorization · application health':'Application health · identity · name resolution'},
   {title:'Transport concepts',detail:value.setting==='single'?'Local network · switching · cabling':'Local network · inter-site transport · service reachability'},
   {title:'Support foundation',detail:value.setting==='disrupted'?'Power · maintenance · recovery rehearsal':'Power · maintenance · responsible owners'}

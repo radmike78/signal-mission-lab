@@ -21,6 +21,15 @@ export function interpretDescription(text:string):Intake{
  const issue=screenDescription(text);if(issue)throw Error(issue);
  const value=text.normalize('NFKC');const answers:Draft={};const ambiguous:Field[]=[];
  const systems=[['afatds',/\bAFATDS\b/],['q53',/\b(?:AN[\s/-]*)?(?:TPQ|Q)[\s-]*53\b/],['dcgsa',/\bDCGS[\s-]*A\b/],['cpce',/\bCPCE\b/],['radio',/\b(?:radios?|voice communication)\b/]].filter(([,pattern])=>positive(value,pattern as RegExp)).map(([id])=>id as string);
+ const additional:[string,RegExp][]=[
+ ['wint-inc1',/\bWIN[ -]?T\s*(?:Increment|Inc[ .]*)\s*1\b/],['wint-inc2',/\bWIN[ -]?T\s*(?:Increment|Inc[ .]*)\s*2\b/],
+ ['jnn',/\bJNN\b/],['cpn',/\b(?:BnCPN|CPN)\b/],['tcn',/\bTCN\b/],['thn',/\bTHN\b/],['rhn',/\bRHN\b/],['pop',/\bpoint of presence\b/],['sne',/\bSNE\b/],
+ ['stt',/\bSTT\b/],['trilos',/\bTRILOS\b/],['hclos',/\bHCLOS\b/],['t2c2',/\bT2C2\b/],['smart-t',/\bSMART[ -]?T\b/],['snap',/\bSNAP\b/],['dket',/\bDKET\b/],['snn',/\bSNN\b/],
+ ['ngtt',/\bNGTT\b/],['ngc2',/\bNGC2\b/],['scout',/\bSCOUT[ -]Medium\b/],['itn',/\bITN\b/],['nett-warrior',/\bNett Warrior\b/],['sincgars',/\bSINCGARS\b/],['tsi',/\bTSI(?:v[23])?\b/],
+ ...(['117','150','152','158','160','162','163'] as const).map(n=>['prc'+n,new RegExp('\\b(?:AN[ /-]*)?PRC[ -]*'+n+'\\b','i')] as [string,RegExp])
+ ];
+ for(const [id,pattern] of additional)if(positive(value,pattern)&&!systems.includes(id))systems.push(id);
+ if(systems.length>12)throw Error('Describe up to 12 systems in one training mission.');
  if(systems.length)answers.systems=systems;
  const domains:Mission[]=[];
  if(systems.includes('afatds')||systems.includes('q53')||positive(value,/\b(?:artillery|fires|radar)\b/))domains.push('fires');
