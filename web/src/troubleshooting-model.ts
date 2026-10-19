@@ -1,6 +1,6 @@
 /** Editorial synthetic cases: no commands, live equipment, or operational inputs. */
 export type CaseId='builder'|'routing'|'satellite';
-type Evidence={id:string;label:string;observation:string;meaning:string};
+type Evidence={id:string;label:string;observation:string;meaning:string;code?:string};
 type Choice={id:string;label:string;feedback:string};
 type TrainingCase={id:CaseId;title:string;mission:string;symptom:string;evidence:Evidence[];required:string[];choices:Choice[];answer:string;recovery:string[];handoff:string;sourceIds:string[]};
 export const diagnosticSources=[
@@ -13,7 +13,15 @@ export const diagnosticSources=[
 export const diagnosticCases:TrainingCase[]=[
  {id:'builder',title:'Understand a failed build',mission:'A fictional staff needs its training application ready for a rehearsal. Explain what the automation completed before deciding how to recover.',symptom:'The fictional builder reports complete, but the application is unavailable.',
  evidence:[
- {id:'script',label:'Read the synthetic script operations',observation:'1. Create the training workload. 2. Attach its training data volume. 3. Register the application service. The wrapper prints “complete” after those operations.',meaning:'Manual equivalents: create the workload, attach the required data, then register the service. A final message alone cannot prove all three succeeded.'},
+ {id:'script',label:'Read the synthetic script operations',code:`# Display-only toy example. No Army builder or system changes.
+$workloadCreated = $true
+$dataAttached = $false
+Write-Output 'Workload created'
+Write-Error 'Training volume not found' -ErrorAction Continue
+# A nonterminating error allows later statements to run.
+$serviceRegistered = $true
+Write-Output 'complete'
+# Completion text does not establish that $dataAttached is true.`,observation:'1. Create the training workload. 2. Attach its training data volume. 3. Register the application service. The wrapper prints “complete” after those operations.',meaning:'Manual equivalents: create the workload, attach the required data, then register the service. A final message alone cannot prove all three succeeded.'},
  {id:'log',label:'Inspect the synthetic error record',observation:'Workload created. Data-volume attachment failed: requested training volume not found. Error logged; wrapper continued. Service registration attempted.',meaning:'In this invented case the attachment failure did not stop the wrapper. Error handling must explicitly distinguish success from partial completion.'},
  {id:'state',label:'Inspect resulting state',observation:'Workload exists. Required data volume is absent. Service registration exists. Application health check fails: data unavailable.',meaning:'The failed step has downstream consequences. A full rerun may duplicate objects; an existing workload is not evidence of readable data.'},
  {id:'contract',label:'Read the synthetic recovery contract',observation:'This exercise builder cannot safely recreate an existing workload. The exercise recovery plan allows attaching a corrected dummy volume to the existing workload, then checking the application.',meaning:'Recovery must respect observed state and documented rerun behavior. This invented contract says nothing about an actual Army builder.'}],required:['script','log','state','contract'],
