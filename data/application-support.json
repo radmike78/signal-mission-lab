@@ -1,0 +1,136 @@
+{
+  "sources": [
+    {
+      "id": "cpce",
+      "title": "First Army trained on new software suite that enhances warfighting capability",
+      "published": "2022-01-31",
+      "url": "https://www.army.mil/article/253602"
+    },
+    {
+      "id": "fires",
+      "title": "Global fires coordination provides multiple strike options for the commander",
+      "published": "2014-09-25",
+      "url": "https://www.army.mil/article/134343"
+    },
+    {
+      "id": "a365",
+      "title": "Army 365 rollout to bolster communications, interoperability",
+      "published": "2021-05-18",
+      "url": "https://www.army.mil/article/246384"
+    },
+    {
+      "id": "cpof",
+      "title": "Mirroring home station and deployed mission command systems improves Soldier readiness",
+      "published": "2013-08-26",
+      "url": "https://www.army.mil/article/109664"
+    }
+  ],
+  "applications": [
+    {
+      "id": "cpof",
+      "name": "CPOF \u2014 Command Post of the Future",
+      "status": "public_context",
+      "purpose": "Collaborative planning and situational awareness. Historical predecessor to CPCE.",
+      "access": "Legacy mission-command environment; local client and server baseline must be identified.",
+      "owner": "Operations / mission-command application owner",
+      "source_ids": [
+        "cpof"
+      ]
+    },
+    {
+      "id": "cpce",
+      "name": "CPCE \u2014 Command Post Computing Environment",
+      "status": "public_context",
+      "purpose": "Supports a shared operational picture and staff planning.",
+      "access": "Suite of software and services hosted on associated server infrastructure; confirm the approved user-access method for the fielded version.",
+      "owner": "Operations / mission-command application and server owners",
+      "source_ids": [
+        "cpce"
+      ]
+    },
+    {
+      "id": "jadocs",
+      "name": "JADOCS \u2014 Joint Automated Deep Operations Coordination System",
+      "status": "public_context",
+      "purpose": "Shared situational awareness and joint coordination. This reference covers IT support only.",
+      "access": "The 2014 source describes software on approved unit laptops; this is not a current installation baseline.",
+      "owner": "Application owner / fires staff",
+      "source_ids": [
+        "fires"
+      ]
+    },
+    {
+      "id": "afatds",
+      "name": "AFATDS / Fires Command Web",
+      "status": "public_context",
+      "purpose": "Fires planning and coordination software. This reference covers IT support only.",
+      "access": "The 2014 source distinguishes AFATDS hardware from a browser-based Fires Command Web interface. Confirm the fielded variant.",
+      "owner": "Application owner / fires staff",
+      "source_ids": [
+        "fires"
+      ]
+    },
+    {
+      "id": "teams",
+      "name": "Army 365 \u2014 Teams",
+      "status": "public_context",
+      "purpose": "Collaboration, messaging and meetings.",
+      "access": "Enterprise-hosted service; approved client, browser and device access depend on current policy.",
+      "owner": "Enterprise service desk / collaboration owner",
+      "source_ids": [
+        "a365"
+      ]
+    },
+    {
+      "id": "email",
+      "name": "Army 365 \u2014 email",
+      "status": "public_context",
+      "purpose": "Organizational email and communication.",
+      "access": "Enterprise service; determine the approved mail client or browser access with the service desk.",
+      "owner": "Enterprise service desk / messaging owner",
+      "source_ids": [
+        "a365"
+      ]
+    },
+    {
+      "id": "sharepoint",
+      "name": "Army 365 \u2014 SharePoint",
+      "status": "public_context",
+      "purpose": "Shared information and collaboration sites.",
+      "access": "Enterprise-hosted service; confirm approved access and site permissions with the owner.",
+      "owner": "Site owner / enterprise service desk",
+      "source_ids": [
+        "a365"
+      ]
+    },
+    {
+      "id": "fss",
+      "name": "FSS \u2014 identification needed",
+      "status": "identification_pending",
+      "purpose": "",
+      "access": "The acronym alone does not identify the application.",
+      "owner": "Confirm the public full product name or vendor with the application owner.",
+      "source_ids": []
+    }
+  ],
+  "checks": [
+    {
+      "id": "launch",
+      "name": "Application will not open",
+      "first": "Determine whether the problem affects one approved endpoint or several. Confirm the approved software baseline with the endpoint owner.",
+      "why": "A local launch failure is different from a shared service outage. Do not disable endpoint protection or reinstall blindly."
+    },
+    {
+      "id": "login",
+      "name": "Sign-in fails",
+      "first": "Determine whether one user, one device or multiple users are affected. Ask the identity owner to check account status, certificate validity and device time through approved procedures.",
+      "why": "Opening the application does not prove authentication is healthy. Never collect passwords, PINs or private keys."
+    },
+    {
+      "id": "data",
+      "name": "Application opens but shared information is missing",
+      "first": "Use a dummy training item to compare the local view with an authorized second user. Ask the service owner to verify service health, permissions and the expected data source.",
+      "why": "A working screen does not prove that shared data is current. Do not assume a routing fault or change firewall rules without evidence."
+    }
+  ]
+}
