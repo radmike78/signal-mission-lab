@@ -24,3 +24,18 @@ class ApplicationSupportTests(unittest.TestCase):
                 self.assertTrue(app['source_ids'])
                 self.assertTrue(app['purpose'])
         self.assertEqual(next(a for a in data['applications'] if a['id']=='fss')['status'], 'identification_pending')
+
+    def test_introductions_reject_unsafe_or_unsubstantiated_content(self):
+        from copy import deepcopy
+        from backend.application_support import validate_applications
+        original = json.loads((Path(__file__).resolve().parents[1] / 'data/application-support.json').read_text())
+        self.assertEqual(validate_applications(original)['system_introductions'], 26)
+        for mutation in ('url', 'missing', 'pending', 'duplicate', 'status'):
+            data = deepcopy(original)
+            if mutation == 'url': data['sources'][0]['url'] = 'https://www.army.mil.evil.test/article/1'
+            if mutation == 'missing': data['applications'][0]['source_ids'] = ['unknown']
+            if mutation == 'pending': data['applications'][-1]['purpose'] = 'Unverified expansion'
+            if mutation == 'duplicate': data['applications'].append(data['applications'][0])
+            if mutation == 'status': data['applications'][0]['status'] = 'verified_interoperability'
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                validate_applications(data)

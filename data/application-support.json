@@ -4,25 +4,79 @@
       "id": "cpce",
       "title": "First Army trained on new software suite that enhances warfighting capability",
       "published": "2022-01-31",
-      "url": "https://www.army.mil/article/253602"
+      "url": "https://www.army.mil/article/253602/first_army_trained_on_new_software_suite_that_enhances_warfighting_capability"
     },
     {
       "id": "fires",
       "title": "Global fires coordination provides multiple strike options for the commander",
       "published": "2014-09-25",
-      "url": "https://www.army.mil/article/134343"
+      "url": "https://www.army.mil/article/134343/global_fires_coordination_provides_multiple_strike_options_for_the_commander"
     },
     {
       "id": "a365",
       "title": "Army 365 rollout to bolster communications, interoperability",
       "published": "2021-05-18",
-      "url": "https://www.army.mil/article/246384"
+      "url": "https://www.army.mil/article/246384/army_365_rollout_to_bolster_communications_interoperability"
     },
     {
       "id": "cpof",
       "title": "Mirroring home station and deployed mission command systems improves Soldier readiness",
       "published": "2013-08-26",
-      "url": "https://www.army.mil/article/109664"
+      "url": "https://www.army.mil/article/109664/mirroring_home_station_and_deployed_mission_command_systems_improves_soldier_readiness"
+    },
+    {
+      "id": "convergence",
+      "title": "Army mission command convergence efforts laying foundation for tactical data fabric",
+      "published": "2022-07-20",
+      "url": "https://www.army.mil/article/258579/armys_mission_command_convergence_efforts_laying_foundation_for_tactical_data_fabric"
+    },
+    {
+      "id": "transformation",
+      "title": "Experimentation, fielding activity driving Army mission command transformation",
+      "published": "2023-02-06",
+      "url": "https://www.army.mil/article/263765/experimentation_fielding_activity_driving_armys_mission_command_transformation"
+    },
+    {
+      "id": "tak",
+      "title": "Soldiers assess enhanced communications in the Indo-Pacific",
+      "published": "2021-09-14",
+      "url": "https://www.army.mil/article/250279/soldiers_assess_enhanced_communications_in_the_indo_pacific"
+    },
+    {
+      "id": "gccsa",
+      "title": "The Army unseen technology provides a critical link to Joint operations",
+      "published": "2014-01-28",
+      "url": "https://www.army.mil/article/118623/the_armys_unseen_technology_provides_a_critical_link_to_joint_operations"
+    },
+    {
+      "id": "jtic2s",
+      "title": "Army enters into development phase of the joint targeting fires product",
+      "published": "2024-02-27",
+      "url": "https://www.army.mil/article/274043/army_enters_into_development_phase_of_the_joint_targeting_fires_product"
+    },
+    {
+      "id": "ngc2",
+      "title": "Army leaders: Next Generation Command and Control ready to scale",
+      "published": "2026-07-31",
+      "url": "https://www.army.mil/article/294284/army_leaders_next_generation_command_and_control_ready_to_scale"
+    },
+    {
+      "id": "bcs3",
+      "title": "Sustainment System Mission Command retires, moves logistics to the web",
+      "published": "2014-06-30",
+      "url": "https://www.army.mil/article/129005/sustainment_system_mission_command_retires_moves_logistics_to_the_web"
+    },
+    {
+      "id": "mounted",
+      "title": "Transforming in Contact",
+      "published": "2024-08-15",
+      "url": "https://www.army.mil/article/278935/transforming_in_contact"
+    },
+    {
+      "id": "modern-infra",
+      "title": "Modernizing tactical infrastructure",
+      "published": "2025-11-24",
+      "url": "https://www.army.mil/article/288657/modernizing_tactical_infrastructure"
     }
   ],
   "applications": [
@@ -35,7 +89,12 @@
       "owner": "Operations / mission-command application owner",
       "source_ids": [
         "cpof"
-      ]
+      ],
+      "users": "Commanders and operations staff",
+      "example": "Staff members compare a dummy training overlay and discuss a planning change.",
+      "failure_impact": "A shared view may be unavailable or differ between workstations.",
+      "baseline": "Legacy context; confirm whether the unit still uses it.",
+      "signal_role": "Coordinate approved endpoint, access, connectivity and service-health checks with the application owner. Exact dependencies require version-specific documentation."
     },
     {
       "id": "cpce",
@@ -46,7 +105,12 @@
       "owner": "Operations / mission-command application and server owners",
       "source_ids": [
         "cpce"
-      ]
+      ],
+      "users": "Commanders and staff sections",
+      "example": "A training staff shares a planning update and confirms another authorized user can see it.",
+      "failure_impact": "The screen may open while a shared service or its information is unavailable.",
+      "baseline": "Public context; fielded increment and local configuration vary.",
+      "signal_role": "Coordinate approved endpoint, access, connectivity and service-health checks with the application owner. Exact dependencies require version-specific documentation."
     },
     {
       "id": "jadocs",
@@ -57,7 +121,12 @@
       "owner": "Application owner / fires staff",
       "source_ids": [
         "fires"
-      ]
+      ],
+      "users": "Joint coordination and fires staff",
+      "example": "An application owner checks that authorized training users can access the same dummy coordination workspace.",
+      "failure_impact": "Users may lose access to their coordination workspace.",
+      "baseline": "Historical laptop example; current baseline unverified.",
+      "signal_role": "Coordinate approved endpoint, access, connectivity and service-health checks with the application owner. Exact dependencies require version-specific documentation."
     },
     {
       "id": "afatds",
@@ -68,7 +137,12 @@
       "owner": "Application owner / fires staff",
       "source_ids": [
         "fires"
-      ]
+      ],
+      "users": "Fires staff and trained application operators",
+      "example": "An operator verifies availability of the approved training application with its support owner.",
+      "failure_impact": "The supported staff cannot complete its application workflow.",
+      "baseline": "Historical source; AFATDS and a browser interface are not interchangeable installations.",
+      "signal_role": "Coordinate approved endpoint, access, connectivity and service-health checks with the application owner. Exact dependencies require version-specific documentation."
     },
     {
       "id": "teams",
@@ -79,7 +153,12 @@
       "owner": "Enterprise service desk / collaboration owner",
       "source_ids": [
         "a365"
-      ]
+      ],
+      "users": "Soldiers and staff collaborating across sections",
+      "example": "Participants join an approved training meeting and check audio.",
+      "failure_impact": "Users may be unable to join meetings or exchange messages.",
+      "baseline": "Enterprise policy and supported access methods require current confirmation.",
+      "signal_role": "Coordinate approved endpoint, access, connectivity and service-health checks with the application owner. Exact dependencies require version-specific documentation."
     },
     {
       "id": "email",
@@ -90,7 +169,12 @@
       "owner": "Enterprise service desk / messaging owner",
       "source_ids": [
         "a365"
-      ]
+      ],
+      "users": "Soldiers and organizational mail users",
+      "example": "A user sends a harmless training message and confirms receipt.",
+      "failure_impact": "Messages may not arrive even though the client opens.",
+      "baseline": "Enterprise policy and supported access methods require current confirmation.",
+      "signal_role": "Coordinate approved endpoint, access, connectivity and service-health checks with the application owner. Exact dependencies require version-specific documentation."
     },
     {
       "id": "sharepoint",
@@ -101,7 +185,316 @@
       "owner": "Site owner / enterprise service desk",
       "source_ids": [
         "a365"
-      ]
+      ],
+      "users": "Staff teams and site owners",
+      "example": "An authorized user finds the correct training document and checks its version.",
+      "failure_impact": "A site may load while a document or permission is missing.",
+      "baseline": "Site ownership and permissions vary.",
+      "signal_role": "Coordinate approved endpoint, access, connectivity and service-health checks with the application owner. Exact dependencies require version-specific documentation."
+    },
+    {
+      "id": "wintak",
+      "name": "WinTAK \u2014 Windows Tactical Assault Kit",
+      "status": "public_context",
+      "purpose": "A Windows map-based application for shared situational awareness.",
+      "access": "Windows application; server and transport arrangements depend on the approved deployment.",
+      "owner": "Windows users supporting a shared picture / designated technical support owner",
+      "source_ids": [
+        "tak"
+      ],
+      "users": "Windows users supporting a shared picture",
+      "example": "A training team compares a dummy map overlay on two authorized devices.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "Windows application; server and transport arrangements depend on the approved deployment.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "atak",
+      "name": "ATAK \u2014 Android Tactical Assault Kit",
+      "status": "public_context",
+      "purpose": "An Android map-based application for situational awareness and collaboration.",
+      "access": "Android application, not a Windows laptop installer; approved device, plugins and services vary.",
+      "owner": "Soldiers using approved Android end-user devices / designated technical support owner",
+      "source_ids": [
+        "tak"
+      ],
+      "users": "Soldiers using approved Android end-user devices",
+      "example": "Two authorized training users confirm that a dummy overlay is shared.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "Android application, not a Windows laptop installer; approved device, plugins and services vary.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "tais",
+      "name": "TAIS \u2014 Tactical Airspace Integration System",
+      "status": "public_context",
+      "purpose": "Supports airspace planning and coordination.",
+      "access": "Specialized capability; do not infer a standalone laptop installation or CPCE integration from its name.",
+      "owner": "Airspace staff / designated technical support owner",
+      "source_ids": [
+        "convergence"
+      ],
+      "users": "Airspace staff",
+      "example": "The airspace application owner confirms access to a dummy training workspace.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "Specialized capability; do not infer a standalone laptop installation or CPCE integration from its name.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "amps",
+      "name": "AMPS \u2014 Aviation Mission Planning System",
+      "status": "public_context",
+      "purpose": "Supports aviation mission planning.",
+      "access": "Approved workstation and hosting requirements need the fielded software documentation.",
+      "owner": "Aviation planners and trained operators / designated technical support owner",
+      "source_ids": [
+        "convergence"
+      ],
+      "users": "Aviation planners and trained operators",
+      "example": "An aviation planner verifies that the approved training planning environment is available.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "Approved workstation and hosting requirements need the fielded software documentation.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "amdws",
+      "name": "AMDWS \u2014 Air and Missile Defense Workstation",
+      "status": "public_context",
+      "purpose": "Supports air and missile defense situational awareness.",
+      "access": "The 2023 source describes CPCE convergence activity, not universal completion or a current installation baseline.",
+      "owner": "Air-defense staff / designated technical support owner",
+      "source_ids": [
+        "transformation"
+      ],
+      "users": "Air-defense staff",
+      "example": "The application owner checks the availability of the approved training display.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "The 2023 source describes CPCE convergence activity, not universal completion or a current installation baseline.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "enfire",
+      "name": "ENFIRE \u2014 engineer reconnaissance and surveying toolset",
+      "status": "public_context",
+      "purpose": "A toolset for collecting and sharing engineer terrain information.",
+      "access": "Toolset and application requirements vary; verify the specific fielded configuration.",
+      "owner": "Engineer reconnaissance and survey teams / designated technical support owner",
+      "source_ids": [
+        "convergence"
+      ],
+      "users": "Engineer reconnaissance and survey teams",
+      "example": "An engineer checks that a dummy training terrain product can be accessed by an authorized teammate.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "Toolset and application requirements vary; verify the specific fielded configuration.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "cyber-su",
+      "name": "Cyber SU \u2014 Cyber Situational Understanding",
+      "status": "public_context",
+      "purpose": "Helps staff understand cyber conditions relevant to their decisions.",
+      "access": "Public convergence context only; supported data sources and access require approved documentation.",
+      "owner": "Staff cyber-support personnel / designated technical support owner",
+      "source_ids": [
+        "transformation"
+      ],
+      "users": "Staff cyber-support personnel",
+      "example": "A training user checks that the expected dummy information view is available.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "Public convergence context only; supported data sources and access require approved documentation.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "gccsa",
+      "name": "GCCS-A \u2014 Global Command and Control System\u2013Army",
+      "status": "public_context",
+      "purpose": "Provides strategic/theater command-and-control context and an Army connection to joint information.",
+      "access": "Historical 2014 description; current architecture and fielding are not established here.",
+      "owner": "Higher-echelon and joint-capable headquarters staff / designated technical support owner",
+      "source_ids": [
+        "gccsa"
+      ],
+      "users": "Higher-echelon and joint-capable headquarters staff",
+      "example": "A training team distinguishes a display problem from an unavailable upstream source.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "Historical 2014 description; current architecture and fielding are not established here.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "jtic2s",
+      "name": "JTIC2S \u2014 Joint Targeting Integrated Command and Coordination Suite",
+      "status": "public_context",
+      "purpose": "A modernization effort for joint and Army coordination software.",
+      "access": "The 2024 article describes development and planned JADOCS replacement; it does not prove local fielding or compatibility.",
+      "owner": "Trained joint coordination and fires staff / designated technical support owner",
+      "source_ids": [
+        "jtic2s"
+      ],
+      "users": "Trained joint coordination and fires staff",
+      "example": "A support team identifies the approved application baseline and responsible owner before a training event.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "The 2024 article describes development and planned JADOCS replacement; it does not prove local fielding or compatibility.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "bcs3",
+      "name": "BCS3 \u2014 Battle Command Sustainment Support System",
+      "status": "public_context",
+      "purpose": "Historical logistics visibility and reporting capability.",
+      "access": "Historical reference: the 2014 source describes web transition and legacy sustainment; local/current use is unverified.",
+      "owner": "Sustainment staff / designated technical support owner",
+      "source_ids": [
+        "bcs3"
+      ],
+      "users": "Sustainment staff",
+      "example": "A training user checks whether a dummy logistics report is current and identifies its source.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "Historical reference: the 2014 source describes web transition and legacy sustainment; local/current use is unverified.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "sustainment",
+      "name": "LOGSTAT and sustainment-running-estimate capabilities",
+      "status": "public_context",
+      "purpose": "Help sustainment staff assemble logistics status and maintain their estimate.",
+      "access": "Capabilities, not a single product named LOGSTAT; the 2023 source describes development activity.",
+      "owner": "Sustainment staff and reporting owners / designated technical support owner",
+      "source_ids": [
+        "transformation"
+      ],
+      "users": "Sustainment staff and reporting owners",
+      "example": "The staff compares the time and owner of a dummy report with the displayed summary.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "Capabilities, not a single product named LOGSTAT; the 2023 source describes development activity.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "ngc2",
+      "name": "NGC2 \u2014 Next Generation Command and Control",
+      "status": "public_context",
+      "purpose": "An evolving command-and-control ecosystem connecting applications and shared data.",
+      "access": "The July 2026 Army announcement describes scaling after prototyping; it is not evidence of universal fielding.",
+      "owner": "Commanders, staff and their technical support teams / designated technical support owner",
+      "source_ids": [
+        "ngc2"
+      ],
+      "users": "Commanders, staff and their technical support teams",
+      "example": "A training team identifies its approved apps, data owners and support boundaries before testing access.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "The July 2026 Army announcement describes scaling after prototyping; it is not evidence of universal fielding.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "tsi",
+      "name": "TSI \u2014 Tactical Server Infrastructure",
+      "status": "public_context",
+      "purpose": "Hosts mission-command computing services and applications.",
+      "access": "Infrastructure, not a laptop application; stack version, capacity and recovery procedures need applicable documentation.",
+      "owner": "Server administrators and supported application owners / designated technical support owner",
+      "source_ids": [
+        "transformation"
+      ],
+      "users": "Server administrators and supported application owners",
+      "example": "A support team distinguishes a powered server from a healthy hosted training service.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "Infrastructure, not a laptop application; stack version, capacity and recovery procedures need applicable documentation.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "bccs",
+      "name": "BCCS \u2014 Battle Command Common Services",
+      "status": "public_context",
+      "purpose": "A server-stack foundation for mission-command services.",
+      "access": "Legacy server-stack context; do not infer exact components or software from the BCCS name.",
+      "owner": "Server administrators and supported application owners / designated technical support owner",
+      "source_ids": [
+        "cpof"
+      ],
+      "users": "Server administrators and supported application owners",
+      "example": "A support team identifies the approved hosted service owner before a dummy user-task test.",
+      "failure_impact": "The supported user may lose access to the expected information or workflow; verify scope before assigning a cause.",
+      "baseline": "Legacy server-stack context; do not infer exact components or software from the BCCS name.",
+      "signal_role": "Coordinate endpoint or hosting health, approved access, transport and service ownership. Confirm exact requirements with the application owner; these are general support categories, not verified interfaces."
+    },
+    {
+      "id": "dcgsa",
+      "name": "DCGS-A \u2014 Distributed Common Ground System\u2013Army",
+      "status": "public_context",
+      "purpose": "Supports intelligence information processing and dissemination.",
+      "access": "Confirm the fielded variant and approved endpoint or hosting arrangement. This overview does not establish a laptop installation.",
+      "owner": "Intelligence personnel / designated support owner",
+      "source_ids": [
+        "modern-infra"
+      ],
+      "users": "Intelligence personnel",
+      "example": "An authorized training user checks access to the approved application or service with its owner before a dummy user-task test.",
+      "failure_impact": "The user may be unable to access the expected information or complete the supported workflow.",
+      "baseline": "Source-date public context only. Current fielding, exact dependencies and interoperability require applicable documentation.",
+      "signal_role": "Coordinate the endpoint, hosting, access and connectivity checks with the designated owner. For transport, confirm service availability separately from application health."
+    },
+    {
+      "id": "jbc-p",
+      "name": "JBC-P \u2014 Joint Battle Command\u2013Platform",
+      "status": "public_context",
+      "purpose": "Mounted situational-awareness hardware and software.",
+      "access": "Confirm the fielded variant and approved endpoint or hosting arrangement. This overview does not establish a laptop installation.",
+      "owner": "Mounted users and supported staff / designated support owner",
+      "source_ids": [
+        "mounted"
+      ],
+      "users": "Mounted users and supported staff",
+      "example": "An authorized training user checks access to the approved application or service with its owner before a dummy user-task test.",
+      "failure_impact": "The user may be unable to access the expected information or complete the supported workflow.",
+      "baseline": "Source-date public context only. Current fielding, exact dependencies and interoperability require applicable documentation.",
+      "signal_role": "Coordinate the endpoint, hosting, access and connectivity checks with the designated owner. For transport, confirm service availability separately from application health."
+    },
+    {
+      "id": "mmc-s",
+      "name": "MMC-S \u2014 Mounted Mission Command\u2013Software",
+      "status": "public_context",
+      "purpose": "Software modernization for mounted mission command.",
+      "access": "Confirm the fielded variant and approved endpoint or hosting arrangement. This overview does not establish a laptop installation.",
+      "owner": "Mounted users and application owners / designated support owner",
+      "source_ids": [
+        "mounted"
+      ],
+      "users": "Mounted users and application owners",
+      "example": "An authorized training user checks access to the approved application or service with its owner before a dummy user-task test.",
+      "failure_impact": "The user may be unable to access the expected information or complete the supported workflow.",
+      "baseline": "Source-date public context only. Current fielding, exact dependencies and interoperability require applicable documentation.",
+      "signal_role": "Coordinate the endpoint, hosting, access and connectivity checks with the designated owner. For transport, confirm service availability separately from application health."
+    },
+    {
+      "id": "mmc-t",
+      "name": "MMC-T \u2014 Mounted Mission Command\u2013Transport",
+      "status": "public_context",
+      "purpose": "Transport modernization supporting mounted mission command.",
+      "access": "Confirm the fielded variant and approved endpoint or hosting arrangement. This overview does not establish a laptop installation.",
+      "owner": "Mounted users and transport support personnel / designated support owner",
+      "source_ids": [
+        "mounted"
+      ],
+      "users": "Mounted users and transport support personnel",
+      "example": "An authorized training user checks access to the approved application or service with its owner before a dummy user-task test.",
+      "failure_impact": "The user may be unable to access the expected information or complete the supported workflow.",
+      "baseline": "Source-date public context only. Current fielding, exact dependencies and interoperability require applicable documentation.",
+      "signal_role": "Coordinate the endpoint, hosting, access and connectivity checks with the designated owner. For transport, confirm service availability separately from application health."
+    },
+    {
+      "id": "axs",
+      "name": "AXS \u2014 Artillery Execution Suite",
+      "status": "public_context",
+      "purpose": "Modernizing fires software; this introduction covers application support awareness only.",
+      "access": "Confirm the fielded variant and approved endpoint or hosting arrangement. This overview does not establish a laptop installation.",
+      "owner": "Trained fires application operators / designated support owner",
+      "source_ids": [
+        "mounted"
+      ],
+      "users": "Trained fires application operators",
+      "example": "An authorized training user checks access to the approved application or service with its owner before a dummy user-task test.",
+      "failure_impact": "The user may be unable to access the expected information or complete the supported workflow.",
+      "baseline": "Source-date public context only. Current fielding, exact dependencies and interoperability require applicable documentation.",
+      "signal_role": "Coordinate the endpoint, hosting, access and connectivity checks with the designated owner. For transport, confirm service availability separately from application health."
     },
     {
       "id": "fss",
@@ -132,5 +525,6 @@
       "first": "Use a dummy training item to compare the local view with an authorized second user. Ask the service owner to verify service health, permissions and the expected data source.",
       "why": "A working screen does not prove that shared data is current. Do not assume a routing fault or change firewall rules without evidence."
     }
-  ]
+  ],
+  "editorial_notice": "Training examples, failure impacts, support roles and first checks are editorial teaching prompts. Sources establish scoped public context, not local configurations or verified interoperability."
 }
