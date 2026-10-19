@@ -22,3 +22,7 @@ The starter catalog contains illustrative **unverified overviews**. It is not a 
 ## Catalog coverage metadata
 
 `equipment-coverage.json` tracks one scope record per catalog entry. `source_checked` denotes retrieved public-purpose evidence with human review pending; `retrieval_pending` denotes a blocked discovery and must not be promoted into a source claim; `overview_only` denotes an editorial category or legacy overview. `complete` remains false. Upper/lower TI tags are editorial navigation aids, not documented interface edges. Programs, families, software, services and individual hardware must remain distinguishable. New system inclusion never establishes current fielding or equipment interoperability.
+
+## Offline source publication gate
+
+Run `python scripts/validate_sources.py` before publishing changes to the curated corpus. CI runs the same gate. It validates source origins/URL forms, unique IDs, known subjects, source state, page/publication bindings and equipment scope metadata. It performs no network requests or document parsing. Human releasability and source-content review remain mandatory; a URL allowlist and metadata check do not approve restricted content or prove citation entailment. There is still no document-upload or PDF ingestion service.

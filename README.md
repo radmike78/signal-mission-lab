@@ -55,3 +55,5 @@ Mission briefs also include a [requirements and evidence worksheet](docs/REQUIRE
 ## Upper/lower tactical internet and modernization catalog
 
 The equipment explorer now covers public WIN-T node/terminal families, tactical radios, ITN, mounted/dismounted systems, modern transport and enabling study categories. Browse by network area or capability type, inspect provenance, and select catalog entries during mission clarification. Read the [equipment coverage register](docs/EQUIPMENT_COVERAGE.md) for the exact included entries, blocked references and remaining gaps. This is not an exhaustive Army inventory or a verified interoperability database.
+
+Run `python scripts/validate_sources.py` to validate curated source metadata before publication. See the [OWASP control review and release gaps](docs/OWASP_SECURITY_REVIEW.md). The command does not ingest documents or determine releasability.

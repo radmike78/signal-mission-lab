@@ -46,3 +46,26 @@ def principal(request: Request):
     if not account:
         raise HTTPException(401,'Access token expired, revoked or invalid',headers={'WWW-Authenticate':'Bearer'})
     return account
+
+# Public training endpoints also consume server resources. Keep this separate
+# from authenticated-account limits, and do not trust user-supplied proxy headers.
+public_limiter = RateLimiter()
+
+class PublicAPILimit:
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        path = scope.get('path', '')
+        account = path == '/api/learning' or path.startswith('/api/learning/')
+        if scope['type'] == 'http' and path.startswith('/api/') and not account:
+            client = scope.get('client')
+            key = 'public:' + (client[0] if client else 'unknown')
+            try:
+                public_limiter.check(key, 120)
+            except HTTPException as error:
+                from starlette.responses import JSONResponse
+                response = JSONResponse({'detail': error.detail}, status_code=error.status_code,
+                                        headers={**(error.headers or {}), 'Cache-Control': 'no-store'})
+                return await response(scope, receive, send)
+        return await self.app(scope, receive, send)

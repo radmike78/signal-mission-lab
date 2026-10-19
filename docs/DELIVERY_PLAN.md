@@ -27,3 +27,7 @@ Mission briefs now include observable user-outcome criteria, self-reported synth
 ## Tactical equipment coverage expansion (19 October 2026 UTC)
 
 Expanded public catalog coverage across upper/lower TI, WIN-T, ITN, SATCOM, radios, mounted systems and modernization. Added network-area/type filters, coverage metadata in the graph API and explicit mission catalog selections. See `EQUIPMENT_COVERAGE.md`. Exhaustive variant inventory, current fielding and interface validation remain open; blocked discoveries stay pending.
+
+## Security and source-publication gate (19 October 2026 UTC)
+
+Added public-API throttling, additional response-header protections and adversarial checks. Added a no-network build-time provenance gate for the curated corpus. See `OWASP_SECURITY_REVIEW.md` for the 2025 risk mapping, validation and open release gates. Approved public-document parsing/search remains a future milestone; no upload/RAG service is enabled.

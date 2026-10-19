@@ -11,9 +11,11 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 from pydantic import BaseModel, ConfigDict, Field
 from . import core
 from .limits import BodyLimit
+from .security import PublicAPILimit
 from .learning import router as learning_router
 app = FastAPI(title="Signal Mission Lab", docs_url=None, redoc_url=None, openapi_url=None)
 app.add_middleware(BodyLimit)
+app.add_middleware(PublicAPILimit)
 app.add_middleware(TrustedHostMiddleware,allowed_hosts=os.environ.get("SML_ALLOWED_HOSTS","localhost,127.0.0.1,testserver").split(","))
 app.include_router(learning_router)
 
@@ -47,7 +49,11 @@ async def boundary(request, call_next):
         response.headers["Content-Security-Policy"] = "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'"
     response.headers["Referrer-Policy"] = "no-referrer"
     response.headers["X-Frame-Options"] = "DENY"
-    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
+    response.headers["Cross-Origin-Resource-Policy"] = "same-origin"
+    if request.url.scheme == "https":
+        response.headers["Strict-Transport-Security"] = "max-age=31536000"
     return response
 @app.get("/health")
 def health(): return {"status":"ok", "scope":"synthetic training"}
