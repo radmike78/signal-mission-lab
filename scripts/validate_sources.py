@@ -5,12 +5,14 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from backend.provenance import validate_corpus
+from backend.technology import validate_technology
 
 def main():
     try:
         values = [json.loads((ROOT / 'data' / name).read_text(encoding='utf-8'))
                   for name in ['catalog.json', 'sources.json', 'publications.json', 'equipment-coverage.json']]
         result = validate_corpus(*values)
+        result.update(validate_technology(json.loads((ROOT / "data/technology-learning.json").read_text(encoding="utf-8")), values[0]))
     except (ValueError, KeyError, TypeError, OSError):
         print('Source publication checks failed. Review corpus metadata locally; no input echoed.', file=sys.stderr)
         return 1

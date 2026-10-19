@@ -61,3 +61,7 @@ Run `python scripts/validate_sources.py` to validate curated source metadata bef
 ## Podman container deployment
 
 Build the OCI image with `podman build --format oci -f deploy/Containerfile -t localhost/signal-mission-lab:reviewed .`. Rootless systemd Quadlet configuration, file-mounted PostgreSQL secrets, smoke checks and operational instructions are in [the Podman runbook](deploy/PODMAN.md). The default listener is loopback only. Live TLS, database/identity setup and host acceptance remain required.
+
+## IT foundations for Soldiers
+
+Open **IT foundations** from the navigation or homepage. Nine introductory lessons explain computing/VMs, switching, routing, DNS/identity, storage, firewalls, containers, recovery and security. Vendor examples have scoped public references and are separated from verified Army applicability. Use the synthetic dependency lab to connect the concepts to a user outcome. See [curriculum and manual gaps](docs/IT_FOUNDATIONS_AND_MANUAL_GAPS.md).

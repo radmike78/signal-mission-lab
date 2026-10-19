@@ -35,3 +35,7 @@ Added public-API throttling, additional response-header protections and adversar
 ## Rootless Podman packaging (19 October 2026)
 
 Added OCI Containerfile, loopback-only systemd Quadlet, optional file-mounted runtime database secret and dedicated rootless Podman CI. See `deploy/PODMAN.md`. Real-host TLS/proxy, secret/DB configuration, SELinux/boot behavior and deployment acceptance remain open.
+
+## IT foundations curriculum (19 October 2026)
+
+Added nine introductory lessons, vendor/reference directory, knowledge checks and a synthetic dependency lab. Public technology references are validated separately from Army equipment claims. See `IT_FOUNDATIONS_AND_MANUAL_GAPS.md` for the explicit absence of an equipment-TM implementation corpus, required public references and remaining review/depth gaps.

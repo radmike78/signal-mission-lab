@@ -26,3 +26,7 @@ The starter catalog contains illustrative **unverified overviews**. It is not a 
 ## Offline source publication gate
 
 Run `python scripts/validate_sources.py` before publishing changes to the curated corpus. CI runs the same gate. It validates source origins/URL forms, unique IDs, known subjects, source state, page/publication bindings and equipment scope metadata. It performs no network requests or document parsing. Human releasability and source-content review remain mandatory; a URL allowlist and metadata check do not approve restricted content or prove citation entailment. There is still no document-upload or PDF ingestion service.
+
+## Vendor and general IT education
+
+`technology-learning.json` separates Army-context articles, vendor documentation and general standards references. The offline gate validates each source against its own origin class without broadening Army equipment claim origins. Product behavior, an Army-reported example and a verified Army system-to-product mapping are different evidence scopes. All new curriculum retains human_review_pending; metadata-only references are labeled and must not be described as full-text reviewed manuals.
