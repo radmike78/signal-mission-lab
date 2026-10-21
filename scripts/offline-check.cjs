@@ -22,7 +22,7 @@ const fs=require('node:fs');
  // Lazy-loaded Signal products must work even though never opened online.
  for(const name of ['Signal Products','Applications','IT foundations','MDMP','Knowledge graph','Architecture','Mentor','Troubleshoot','Assessment']){
   await nav(name);await page.getByRole('heading',{name,exact:true}).waitFor();
-  if(name==='Signal Products')await page.getByRole('heading',{name:'Signal products',exact:true}).waitFor();
+  if(name==='Signal Products')await page.getByLabel('Signal product',{exact:true}).waitFor();
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),name+' overflows mobile');
  }
  for(const group of await page.locator('fieldset').all())await group.getByRole('radio').first().check();
