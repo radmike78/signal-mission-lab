@@ -1,0 +1,10 @@
+# Optional drop-in for signal-mission-lab.container.d/accounts.conf.
+# Configure a reachable PRIVATE PostgreSQL service and CA before installing.
+# The secret must contain the runtime-role URL with sslmode=verify-full.
+[Container]
+Secret=sml-db-runtime,type=mount,target=sml-db-runtime,uid=10001,gid=10001,mode=0400
+Environment=SML_DATABASE_URL_FILE=/run/secrets/sml-db-runtime
+# Mount only your database CA (not a directory of credentials). With SELinux,
+# use a private copy because :Z relabels this host path.
+Volume=%h/.config/signal-mission-lab/db-ca.crt:/run/db-ca.crt:ro,Z
+# URL must include sslrootcert=/run/db-ca.crt and a certificate-matching hostname.

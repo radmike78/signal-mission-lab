@@ -1,0 +1,22 @@
+name: Podman validation
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  rootless-podman:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install rootless Podman tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y podman uidmap slirp4netns
+      - name: Validate rootless Quadlet generation
+        run: |
+          QUADLET_UNIT_DIRS="$PWD/deploy/quadlet" /usr/lib/systemd/system-generators/podman-system-generator --user --dryrun > /tmp/sml-quadlet.service
+          test -s /tmp/sml-quadlet.service
+          grep -q "signal-mission-lab" /tmp/sml-quadlet.service
+      - name: Build OCI image and run constrained rootless checks
+        run: bash scripts/podman-smoke.sh

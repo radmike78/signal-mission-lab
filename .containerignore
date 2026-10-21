@@ -1,0 +1,15 @@
+**/node_modules
+**/dist
+**/__pycache__
+**/.env
+**/.env.*
+**/*.db
+artifacts
+docs/screenshots
+.git
+**/*.key
+**/*.pem
+**/*.p12
+**/*.pfx
+**/.ssh
+**/secrets

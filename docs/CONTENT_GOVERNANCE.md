@@ -18,3 +18,15 @@ The starter catalog contains illustrative **unverified overviews**. It is not a 
 4. Separate doctrinal statements from editorial teaching examples.
 5. Use synthetic and sanitized exercises only.
 6. Review updates before publishing; preserve a change history.
+
+## Catalog coverage metadata
+
+`equipment-coverage.json` tracks one scope record per catalog entry. `source_checked` denotes retrieved public-purpose evidence with human review pending; `retrieval_pending` denotes a blocked discovery and must not be promoted into a source claim; `overview_only` denotes an editorial category or legacy overview. `complete` remains false. Upper/lower TI tags are editorial navigation aids, not documented interface edges. Programs, families, software, services and individual hardware must remain distinguishable. New system inclusion never establishes current fielding or equipment interoperability.
+
+## Offline source publication gate
+
+Run `python scripts/validate_sources.py` before publishing changes to the curated corpus. CI runs the same gate. It validates source origins/URL forms, unique IDs, known subjects, source state, page/publication bindings and equipment scope metadata. It performs no network requests or document parsing. Human releasability and source-content review remain mandatory; a URL allowlist and metadata check do not approve restricted content or prove citation entailment. There is still no document-upload or PDF ingestion service.
+
+## Vendor and general IT education
+
+`technology-learning.json` separates Army-context articles, vendor documentation and general standards references. The offline gate validates each source against its own origin class without broadening Army equipment claim origins. Product behavior, an Army-reported example and a verified Army system-to-product mapping are different evidence scopes. All new curriculum retains human_review_pending; metadata-only references are labeled and must not be described as full-text reviewed manuals.

@@ -1,0 +1,1395 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-19",
+  "complete": false,
+  "scope": "Public Army tactical communications families and enabling capabilities. Not an exhaustive Army property inventory.",
+  "tier_note": "Upper/lower TI are editorial browse labels. Cross-tier systems and modern converged networks do not have universal tier boundaries.",
+  "records": [
+    {
+      "id": "wint-inc1",
+      "tier": "Upper TI",
+      "kind": "Program / family",
+      "aliases": [
+        "WIN-T Increment 1"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168300/",
+      "source_title": "WIN-T Increment 1",
+      "source_date": "2016-06-02",
+      "locator": "Main Components",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "wint-inc2",
+      "tier": "Upper TI",
+      "kind": "Program / family",
+      "aliases": [
+        "WIN-T Increment 2"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168302/",
+      "source_title": "WIN-T Increment 2",
+      "source_date": "2016-06-02",
+      "locator": "Main Components",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "thn",
+      "tier": "Upper TI",
+      "kind": "Network node",
+      "aliases": [
+        "THN"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168300/",
+      "source_title": "WIN-T Increment 1",
+      "source_date": "2016-06-02",
+      "locator": "Main Components",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "rhn",
+      "tier": "Upper TI",
+      "kind": "Reachback infrastructure",
+      "aliases": [
+        "RHN"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168300/",
+      "source_title": "WIN-T Increment 1",
+      "source_date": "2016-06-02",
+      "locator": "Main Components",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "tcn",
+      "tier": "Upper TI",
+      "kind": "Network node",
+      "aliases": [
+        "TCN"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168302/",
+      "source_title": "WIN-T Increment 2",
+      "source_date": "2016-06-02",
+      "locator": "Main Components",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "pop",
+      "tier": "Upper TI",
+      "kind": "Vehicle package",
+      "aliases": [
+        "PoP"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168302/",
+      "source_title": "WIN-T Increment 2",
+      "source_date": "2016-06-02",
+      "locator": "Main Components",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "sne",
+      "tier": "Cross-tier / enabling",
+      "kind": "Vehicle package",
+      "aliases": [
+        "SNE"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168302/",
+      "source_title": "WIN-T Increment 2",
+      "source_date": "2016-06-02",
+      "locator": "Main Components",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "vwp",
+      "tier": "Cross-tier / enabling",
+      "kind": "Vehicle package",
+      "aliases": [
+        "VWP"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168302/",
+      "source_title": "WIN-T Increment 2",
+      "source_date": "2016-06-02",
+      "locator": "Main Components",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "nosc",
+      "tier": "Upper TI",
+      "kind": "Network management",
+      "aliases": [
+        "NOSC"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168302/",
+      "source_title": "WIN-T Increment 2",
+      "source_date": "2016-06-02",
+      "locator": "Main Components",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "stt",
+      "tier": "Upper TI",
+      "kind": "Satellite terminal",
+      "aliases": [
+        "STT"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168300/",
+      "source_title": "WIN-T Increment 1",
+      "source_date": "2016-06-02",
+      "locator": "Main Components",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "stt-plus",
+      "tier": "Upper TI",
+      "kind": "Satellite terminal",
+      "aliases": [
+        "STT+"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168302/",
+      "source_title": "WIN-T Increment 2",
+      "source_date": "2016-06-02",
+      "locator": "Main Components",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "hclos",
+      "tier": "Upper TI",
+      "kind": "Terrestrial transport",
+      "aliases": [
+        "HCLOS"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.dvidshub.net/news/440334/signal-school-graduates-first-25h-course",
+      "source_title": "Signal School graduates first 25H course",
+      "source_date": "2023-03-14",
+      "locator": "Training equipment paragraph",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "trilos",
+      "tier": "Upper TI",
+      "kind": "Terrestrial transport",
+      "aliases": [
+        "TRILOS"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/222695/army_fielding_unified_expeditionary_network_equipment_to_national_guard",
+      "source_title": "Army fielding unified expeditionary network equipment to National Guard",
+      "source_date": "2019-06-03",
+      "locator": "Equipment fielding and DIRECT descriptions",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "t2c2",
+      "tier": "Upper TI",
+      "kind": "Satellite terminal",
+      "aliases": [
+        "T2C2"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/222695/army_fielding_unified_expeditionary_network_equipment_to_national_guard",
+      "source_title": "Army fielding unified expeditionary network equipment to National Guard",
+      "source_date": "2019-06-03",
+      "locator": "Equipment fielding and DIRECT descriptions",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "smart-t",
+      "tier": "Upper TI",
+      "kind": "Satellite terminal",
+      "aliases": [
+        "SMART-T"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168305/",
+      "source_title": "Satellite Communications (SATCOM)",
+      "source_date": "2016-06-02",
+      "locator": "Capabilities list",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "snap",
+      "tier": "Upper TI",
+      "kind": "Satellite terminal",
+      "aliases": [
+        "SNAP satellite terminal family"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168305/",
+      "source_title": "Satellite Communications (SATCOM)",
+      "source_date": "2016-06-02",
+      "locator": "Capabilities list",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "dket",
+      "tier": "Upper TI",
+      "kind": "Satellite terminal",
+      "aliases": [
+        "DKET"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168305/",
+      "source_title": "Satellite Communications (SATCOM)",
+      "source_date": "2016-06-02",
+      "locator": "Capabilities list",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "phoenix-d",
+      "tier": "Upper TI",
+      "kind": "Satellite terminal",
+      "aliases": [
+        "Phoenix satellite terminal family / D-Model"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/252007/phoenix_e_model_satellite_terminal_supports_larger_echelons_transport_diversity",
+      "source_title": "Phoenix E-Model satellite terminal supports larger echelons, transport diversity",
+      "source_date": "2021-11-16",
+      "locator": "Opening terminal and ESB-E descriptions",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "phoenix-e",
+      "tier": "Upper TI",
+      "kind": "Satellite terminal",
+      "aliases": [
+        "Phoenix E-Model"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/252007/phoenix_e_model_satellite_terminal_supports_larger_echelons_transport_diversity",
+      "source_title": "Phoenix E-Model satellite terminal supports larger echelons, transport diversity",
+      "source_date": "2021-11-16",
+      "locator": "Opening terminal and ESB-E descriptions",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "snn",
+      "tier": "Upper TI",
+      "kind": "Network node",
+      "aliases": [
+        "SNN"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/252007/phoenix_e_model_satellite_terminal_supports_larger_echelons_transport_diversity",
+      "source_title": "Phoenix E-Model satellite terminal supports larger echelons, transport diversity",
+      "source_date": "2021-11-16",
+      "locator": "Opening terminal and ESB-E descriptions",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "gbs",
+      "tier": "Upper TI",
+      "kind": "Broadcast receive capability",
+      "aliases": [
+        "GBS"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/222695/army_fielding_unified_expeditionary_network_equipment_to_national_guard",
+      "source_title": "Army fielding unified expeditionary network equipment to National Guard",
+      "source_date": "2019-06-03",
+      "locator": "Equipment fielding and DIRECT descriptions",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "grrip",
+      "tier": "Upper TI",
+      "kind": "Communications package",
+      "aliases": [
+        "GRRIP"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168305/",
+      "source_title": "Satellite Communications (SATCOM)",
+      "source_date": "2016-06-02",
+      "locator": "Capabilities list",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "mcn-ae",
+      "tier": "Upper TI",
+      "kind": "Network node",
+      "aliases": [
+        "Modular Communication Node\u2013Advanced Enclave"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/222695/army_fielding_unified_expeditionary_network_equipment_to_national_guard",
+      "source_title": "Army fielding unified expeditionary network equipment to National Guard",
+      "source_date": "2019-06-03",
+      "locator": "Equipment fielding and DIRECT descriptions",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "direct",
+      "tier": "Cross-tier / enabling",
+      "kind": "Communications package",
+      "aliases": [
+        "DIRECT disaster communications suite"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/222695/army_fielding_unified_expeditionary_network_equipment_to_national_guard",
+      "source_title": "Army fielding unified expeditionary network equipment to National Guard",
+      "source_date": "2019-06-03",
+      "locator": "Equipment fielding and DIRECT descriptions",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "sincgars",
+      "tier": "Lower TI",
+      "kind": "Combat net radio",
+      "aliases": [
+        "SINCGARS / RT-1523 family"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://asc.army.mil/web/news-waves-across-space/",
+      "source_title": "Waves Across Space",
+      "source_date": "Publication date not verified",
+      "locator": "Flexible Waves and Expanding Waveform Capabilities",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "leader",
+      "tier": "Lower TI",
+      "kind": "Tactical radio family",
+      "aliases": [
+        "HMS Leader radio family"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://asc.army.mil/web/news-waves-across-space/",
+      "source_title": "Waves Across Space",
+      "source_date": "Publication date not verified",
+      "locator": "Flexible Waves and Expanding Waveform Capabilities",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "prc148d",
+      "tier": "Lower TI",
+      "kind": "Tactical radio variant",
+      "aliases": [
+        "AN/PRC-148D"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://asc.army.mil/web/news-waves-across-space/",
+      "source_title": "Waves Across Space",
+      "source_date": "Publication date not verified",
+      "locator": "Flexible Waves and Expanding Waveform Capabilities",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "prc163",
+      "tier": "Lower TI",
+      "kind": "Tactical radio variant",
+      "aliases": [
+        "AN/PRC-163"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://asc.army.mil/web/news-waves-across-space/",
+      "source_title": "Waves Across Space",
+      "source_date": "Publication date not verified",
+      "locator": "Flexible Waves and Expanding Waveform Capabilities",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "manpack",
+      "tier": "Lower TI",
+      "kind": "Tactical radio family",
+      "aliases": [
+        "HMS Manpack radio family"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://asc.army.mil/web/news-waves-across-space/",
+      "source_title": "Waves Across Space",
+      "source_date": "Publication date not verified",
+      "locator": "Flexible Waves and Expanding Waveform Capabilities",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "prc158",
+      "tier": "Lower TI",
+      "kind": "Tactical radio variant",
+      "aliases": [
+        "AN/PRC-158"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://asc.army.mil/web/news-waves-across-space/",
+      "source_title": "Waves Across Space",
+      "source_date": "Publication date not verified",
+      "locator": "Flexible Waves and Expanding Waveform Capabilities",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "prc162",
+      "tier": "Lower TI",
+      "kind": "Tactical radio variant",
+      "aliases": [
+        "AN/PRC-162"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://asc.army.mil/web/news-waves-across-space/",
+      "source_title": "Waves Across Space",
+      "source_date": "Publication date not verified",
+      "locator": "Flexible Waves and Expanding Waveform Capabilities",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "cnr",
+      "tier": "Lower TI",
+      "kind": "Modernization effort",
+      "aliases": [
+        "Combat Net Radio modernization"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://asc.army.mil/web/news-waves-across-space/",
+      "source_title": "Waves Across Space",
+      "source_date": "Publication date not verified",
+      "locator": "Flexible Waves and Expanding Waveform Capabilities",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "itn",
+      "tier": "Cross-tier / enabling",
+      "kind": "Capability suite",
+      "aliases": [
+        "ITN"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/264225/stryking_towards_networked_battlefield_communications",
+      "source_title": "Stryking towards networked battlefield communications",
+      "source_date": "2023-02-23",
+      "locator": "ITN equipment and Nett Warrior descriptions",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "nett-warrior",
+      "tier": "Lower TI",
+      "kind": "End-user device family",
+      "aliases": [
+        "Nett Warrior end-user devices"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/264225/stryking_towards_networked_battlefield_communications",
+      "source_title": "Stryking towards networked battlefield communications",
+      "source_date": "2023-02-23",
+      "locator": "ITN equipment and Nett Warrior descriptions",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "vha",
+      "tier": "Lower TI",
+      "kind": "Antenna / relay concept",
+      "aliases": [
+        "VHA"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/264225/stryking_towards_networked_battlefield_communications",
+      "source_title": "Stryking towards networked battlefield communications",
+      "source_date": "2023-02-23",
+      "locator": "ITN equipment and Nett Warrior descriptions",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "jenm",
+      "tier": "Cross-tier / enabling",
+      "kind": "Management software",
+      "aliases": [
+        "JENM"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/168304/",
+      "source_title": "Joint Enterprise Network Manager",
+      "source_date": "2016-05-20",
+      "locator": "Description",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "tsi",
+      "tier": "Cross-tier / enabling",
+      "kind": "Compute infrastructure",
+      "aliases": [
+        "TSI",
+        "Tactical Server Infrastructure",
+        "Tactical Services Infrastructure",
+        "TSI stack",
+        "TSI stacks",
+        "TSIv2",
+        "TSIv2a",
+        "TSIv3"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/258579/armys_mission_command_convergence_efforts_laying_foundation_for_tactical_data_fabric",
+      "source_title": "Army mission command convergence efforts laying foundation for tactical data fabric",
+      "source_date": "2022-07-20",
+      "locator": "TSIv3 hardware paragraph",
+      "checked_at": "2026-10-19",
+      "limitations": "Sources use Tactical Server Infrastructure and Tactical Services Infrastructure in different contexts. Hardware/software lineage and version mapping require review; no universal hypervisor, stack composition, current fielding or interoperability established."
+    },
+    {
+      "id": "ngtt",
+      "tier": "Upper TI",
+      "kind": "Modernization effort",
+      "aliases": [
+        "NGTT"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/281863/multiple_paths_lead_to_network_resiliency",
+      "source_title": "Multiple Paths Lead to Network Resiliency",
+      "source_date": "Publication date not verified",
+      "locator": "Many Become One / Multiple Means to Resiliency",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "mom",
+      "tier": "Upper TI",
+      "kind": "Modernization effort",
+      "aliases": [
+        "MOM"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/281863/multiple_paths_lead_to_network_resiliency",
+      "source_title": "Multiple Paths Lead to Network Resiliency",
+      "source_date": "Publication date not verified",
+      "locator": "Many Become One / Multiple Means to Resiliency",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "saams",
+      "tier": "Upper TI",
+      "kind": "Service / acquisition model",
+      "aliases": [
+        "SaaMS"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/281863/multiple_paths_lead_to_network_resiliency",
+      "source_title": "Multiple Paths Lead to Network Resiliency",
+      "source_date": "Publication date not verified",
+      "locator": "Many Become One / Multiple Means to Resiliency",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "ngc2",
+      "tier": "Cross-tier / enabling",
+      "kind": "Modernization ecosystem",
+      "aliases": [
+        "NGC2"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/295991/new_contract_awards_support_army_next_generation_command_and_control_software_delivery_to_i_corps",
+      "source_title": "New contract awards support Army Next Generation Command and Control software delivery to I Corps",
+      "source_date": "2026-10-07",
+      "locator": "Opening awards and ecosystem descriptions",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "lcn-t",
+      "tier": "Upper TI",
+      "kind": "Discovery pending",
+      "aliases": [
+        "LCN-T"
+      ],
+      "review_status": "retrieval_pending",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://cpec2in.army.mil/Organizations/PM-Tactical-Network/Mission-Network/TNT-ATH/",
+      "source_title": "TNT-ATH program page",
+      "source_date": "Undated; retrieval blocked",
+      "locator": "Search discovery only; full page returned 403",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "nite",
+      "tier": "Upper TI",
+      "kind": "Discovery pending",
+      "aliases": [
+        "NITE"
+      ],
+      "review_status": "retrieval_pending",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://cpec2in.army.mil/Organizations/PM-Tactical-Network/Mission-Network/TNT-ATH/",
+      "source_title": "TNT-ATH program page",
+      "source_date": "Undated; retrieval blocked",
+      "locator": "Search discovery only; full page returned 403",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "satcom-fot",
+      "tier": "Upper TI",
+      "kind": "Discovery pending",
+      "aliases": [
+        "SATCOM Family of Terminals"
+      ],
+      "review_status": "retrieval_pending",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://cpec2in.army.mil/Organizations/PM-Tactical-Network/Satellite-Communications/SATCOM-FOT/",
+      "source_title": "SATCOM Family of Terminals",
+      "source_date": "Undated; retrieval blocked",
+      "locator": "Search discovery only; full page returned 403",
+      "checked_at": "2026-10-19",
+      "limitations": "No variant-level interoperability, current fielding, configuration or availability established."
+    },
+    {
+      "id": "jnn",
+      "tier": "Upper TI",
+      "kind": "Signal transport",
+      "aliases": [
+        "JNN",
+        "WIN-T",
+        "WIN T"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; current fielding not verified",
+      "source_url": "https://www.army.mil/article/168300/",
+      "source_title": "WIN-T Increment 1",
+      "source_date": "2016-06-02",
+      "locator": "Main Components",
+      "checked_at": "2026-10-19",
+      "limitations": "Overview only; source coverage tracked separately."
+    },
+    {
+      "id": "cpn",
+      "tier": "Upper TI",
+      "kind": "Signal transport",
+      "aliases": [
+        "BnCPN"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; current fielding not verified",
+      "source_url": "https://www.army.mil/article/168300/",
+      "source_title": "WIN-T Increment 1",
+      "source_date": "2016-06-02",
+      "locator": "Main Components",
+      "checked_at": "2026-10-19",
+      "limitations": "Overview only; source coverage tracked separately."
+    },
+    {
+      "id": "cpce",
+      "tier": "Mission application",
+      "kind": "Mission command",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Unknown; current fielding not verified",
+      "source_url": "",
+      "source_title": "Existing catalog overview",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Overview only; source coverage tracked separately."
+    },
+    {
+      "id": "dcgsa",
+      "tier": "Mission application",
+      "kind": "Intelligence",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Unknown; current fielding not verified",
+      "source_url": "",
+      "source_title": "Existing catalog overview",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Overview only; source coverage tracked separately."
+    },
+    {
+      "id": "afatds",
+      "tier": "Mission application",
+      "kind": "Fires",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Unknown; current fielding not verified",
+      "source_url": "",
+      "source_title": "Existing catalog overview",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Overview only; source coverage tracked separately."
+    },
+    {
+      "id": "q53",
+      "tier": "Mission application",
+      "kind": "Fires sensor",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Unknown; current fielding not verified",
+      "source_url": "",
+      "source_title": "Existing catalog overview",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Overview only; source coverage tracked separately."
+    },
+    {
+      "id": "radio",
+      "tier": "Lower TI",
+      "kind": "Signal transport",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Unknown; current fielding not verified",
+      "source_url": "",
+      "source_title": "Existing catalog overview",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Overview only; source coverage tracked separately."
+    },
+    {
+      "id": "prc117",
+      "tier": "Lower TI",
+      "kind": "Tactical radio / mounted integration",
+      "aliases": [
+        "PRC 117 family"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/33479/tobyhanna_technicians_begin_new_joint_radio_mission",
+      "source_title": "Tobyhanna technicians begin new joint radio mission",
+      "source_date": "2010-01-25",
+      "locator": "Radio and amplifier list",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "prc150",
+      "tier": "Lower TI",
+      "kind": "Tactical radio / mounted integration",
+      "aliases": [
+        "PRC 150"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/33479/tobyhanna_technicians_begin_new_joint_radio_mission",
+      "source_title": "Tobyhanna technicians begin new joint radio mission",
+      "source_date": "2010-01-25",
+      "locator": "Radio and amplifier list",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "prc152",
+      "tier": "Lower TI",
+      "kind": "Tactical radio / mounted integration",
+      "aliases": [
+        "PRC 152 family"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/33479/tobyhanna_technicians_begin_new_joint_radio_mission",
+      "source_title": "Tobyhanna technicians begin new joint radio mission",
+      "source_date": "2010-01-25",
+      "locator": "Radio and amplifier list",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "vrc103",
+      "tier": "Lower TI",
+      "kind": "Tactical radio / mounted integration",
+      "aliases": [
+        "VRC 103"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/33479/tobyhanna_technicians_begin_new_joint_radio_mission",
+      "source_title": "Tobyhanna technicians begin new joint radio mission",
+      "source_date": "2010-01-25",
+      "locator": "Radio and amplifier list",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "vrc104",
+      "tier": "Lower TI",
+      "kind": "Tactical radio / mounted integration",
+      "aliases": [
+        "VRC 104"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/33479/tobyhanna_technicians_begin_new_joint_radio_mission",
+      "source_title": "Tobyhanna technicians begin new joint radio mission",
+      "source_date": "2010-01-25",
+      "locator": "Radio and amplifier list",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "vrc110",
+      "tier": "Lower TI",
+      "kind": "Tactical radio / mounted integration",
+      "aliases": [
+        "VRC 110"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/33479/tobyhanna_technicians_begin_new_joint_radio_mission",
+      "source_title": "Tobyhanna technicians begin new joint radio mission",
+      "source_date": "2010-01-25",
+      "locator": "Radio and amplifier list",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "prc160",
+      "tier": "Lower TI",
+      "kind": "Discovery pending",
+      "aliases": [
+        "PRC 160"
+      ],
+      "review_status": "retrieval_pending",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.lineofdeparture.army.mil/Journals/Army-Communicator/Archive/Spring-2025/AN-PRC-160-Upgrade/",
+      "source_title": "Fort Eisenhower Receives Comms Technology Upgrade",
+      "source_date": "Spring 2025",
+      "locator": "Full page returned 403",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "scout",
+      "tier": "Upper TI",
+      "kind": "Satellite terminal",
+      "aliases": [
+        "SCOUT Medium"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/274494/multi_orbit_satcom_to_boost_army_network_resiliency_capability_in_large_scale_combat_operations",
+      "source_title": "Multi-orbit SATCOM to boost Army network resiliency",
+      "source_date": "2024-03-13",
+      "locator": "Assessment / Automating PACE",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "htll",
+      "tier": "Upper TI",
+      "kind": "Transport technology",
+      "aliases": [
+        "HT/LL LEO / MEO SATCOM"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/274494/multi_orbit_satcom_to_boost_army_network_resiliency_capability_in_large_scale_combat_operations",
+      "source_title": "Multi-orbit SATCOM to boost Army network resiliency",
+      "source_date": "2024-03-13",
+      "locator": "Assessment / Automating PACE",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "seeker",
+      "tier": "Upper TI",
+      "kind": "Transport management software",
+      "aliases": [
+        "Seeker / Auto PACE"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/274494/multi_orbit_satcom_to_boost_army_network_resiliency_capability_in_large_scale_combat_operations",
+      "source_title": "Multi-orbit SATCOM to boost Army network resiliency",
+      "source_date": "2024-03-13",
+      "locator": "Assessment / Automating PACE",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "hf",
+      "tier": "Lower TI",
+      "kind": "Enabling study category",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Not applicable: study category",
+      "source_url": "",
+      "source_title": "Editorial category; no equipment claim",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Not a fielded equipment claim. No configurations, keys, fills, controlled material or COMSEC procedures."
+    },
+    {
+      "id": "tacsat",
+      "tier": "Lower TI",
+      "kind": "Enabling study category",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Not applicable: study category",
+      "source_url": "",
+      "source_title": "Editorial category; no equipment claim",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Not a fielded equipment claim. No configurations, keys, fills, controlled material or COMSEC procedures."
+    },
+    {
+      "id": "retrans",
+      "tier": "Lower TI",
+      "kind": "Enabling study category",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Not applicable: study category",
+      "source_url": "",
+      "source_title": "Editorial category; no equipment claim",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Not a fielded equipment claim. No configurations, keys, fills, controlled material or COMSEC procedures."
+    },
+    {
+      "id": "tropo",
+      "tier": "Upper TI",
+      "kind": "Enabling study category",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Not applicable: study category",
+      "source_url": "",
+      "source_title": "Editorial category; no equipment claim",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Not a fielded equipment claim. No configurations, keys, fills, controlled material or COMSEC procedures."
+    },
+    {
+      "id": "baseband",
+      "tier": "Upper TI",
+      "kind": "Enabling study category",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Not applicable: study category",
+      "source_url": "",
+      "source_title": "Editorial category; no equipment claim",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Not a fielded equipment claim. No configurations, keys, fills, controlled material or COMSEC procedures."
+    },
+    {
+      "id": "cabling",
+      "tier": "Cross-tier / enabling",
+      "kind": "Enabling study category",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Not applicable: study category",
+      "source_url": "",
+      "source_title": "Editorial category; no equipment claim",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Not a fielded equipment claim. No configurations, keys, fills, controlled material or COMSEC procedures."
+    },
+    {
+      "id": "power",
+      "tier": "Cross-tier / enabling",
+      "kind": "Enabling study category",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Not applicable: study category",
+      "source_url": "",
+      "source_title": "Editorial category; no equipment claim",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Not a fielded equipment claim. No configurations, keys, fills, controlled material or COMSEC procedures."
+    },
+    {
+      "id": "edge",
+      "tier": "Cross-tier / enabling",
+      "kind": "Enabling study category",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Not applicable: study category",
+      "source_url": "",
+      "source_title": "Editorial category; no equipment claim",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Not a fielded equipment claim. No configurations, keys, fills, controlled material or COMSEC procedures."
+    },
+    {
+      "id": "wireless",
+      "tier": "Cross-tier / enabling",
+      "kind": "Enabling study category",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Not applicable: study category",
+      "source_url": "",
+      "source_title": "Editorial category; no equipment claim",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Not a fielded equipment claim. No configurations, keys, fills, controlled material or COMSEC procedures."
+    },
+    {
+      "id": "uno",
+      "tier": "Cross-tier / enabling",
+      "kind": "Enabling study category",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Not applicable: study category",
+      "source_url": "",
+      "source_title": "Editorial category; no equipment claim",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Not a fielded equipment claim. No configurations, keys, fills, controlled material or COMSEC procedures."
+    },
+    {
+      "id": "crypto",
+      "tier": "Cross-tier / enabling",
+      "kind": "Enabling study category",
+      "aliases": [],
+      "review_status": "overview_only",
+      "lifecycle": "Not applicable: study category",
+      "source_url": "",
+      "source_title": "Editorial category; no equipment claim",
+      "source_date": "Not established",
+      "locator": "Public-source review needed",
+      "checked_at": "2026-10-19",
+      "limitations": "Not a fielded equipment claim. No configurations, keys, fills, controlled material or COMSEC procedures."
+    },
+    {
+      "id": "jbc-p",
+      "tier": "Mission application",
+      "kind": "Mounted mission system",
+      "aliases": [
+        "Joint Battle Command\u2013Platform (JBC P)"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/278935/transforming_in_contact",
+      "source_title": "Transforming in Contact",
+      "source_date": "2024-08-15",
+      "locator": "Boosting Situational Awareness",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "mmc-s",
+      "tier": "Mission application",
+      "kind": "Mounted mission software",
+      "aliases": [
+        "Mounted Mission Command\u2013Software (MMC S)"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/278935/transforming_in_contact",
+      "source_title": "Transforming in Contact",
+      "source_date": "2024-08-15",
+      "locator": "Boosting Situational Awareness",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "mmc-t",
+      "tier": "Cross-tier / enabling",
+      "kind": "Modernization effort",
+      "aliases": [
+        "Mounted Mission Command\u2013Transport (MMC T)"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/278935/transforming_in_contact",
+      "source_title": "Transforming in Contact",
+      "source_date": "2024-08-15",
+      "locator": "Boosting Situational Awareness",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "cpi2",
+      "tier": "Cross-tier / enabling",
+      "kind": "Command-post infrastructure",
+      "aliases": [
+        "Command Post Integrated Infrastructure (CPI2)"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/278935/transforming_in_contact",
+      "source_title": "Transforming in Contact",
+      "source_date": "2024-08-15",
+      "locator": "Comms On-The-Move",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "itn-aviation",
+      "tier": "Cross-tier / enabling",
+      "kind": "Aviation integration kit",
+      "aliases": [
+        "ITN Aviation Demonstration Kit"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/278935/transforming_in_contact",
+      "source_title": "Transforming in Contact",
+      "source_date": "2024-08-15",
+      "locator": "Air Assault Communications",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "axs",
+      "tier": "Mission application",
+      "kind": "Modernization effort",
+      "aliases": [
+        "Artillery Execution Suite (AXS)"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/278935/transforming_in_contact",
+      "source_title": "Transforming in Contact",
+      "source_date": "2024-08-15",
+      "locator": "A More Flexible Fires Application",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "trc170",
+      "tier": "Upper TI",
+      "kind": "Terrestrial transport",
+      "aliases": [
+        "TRC 170"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/175570/techs_salvage_vital_equipment_from_fire_ravaged_system",
+      "source_title": "Techs salvage vital equipment from fire ravaged system",
+      "source_date": "2016-09-22",
+      "locator": "Opening terminal description",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "prc154",
+      "tier": "Lower TI",
+      "kind": "Discovery pending",
+      "aliases": [
+        "PRC 154 / 154A Rifleman Radio"
+      ],
+      "review_status": "retrieval_pending",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/133792/Army_radio_lab_continues_to_grow/",
+      "source_title": "Historical Army radio training / sustainment discovery",
+      "source_date": "Date pending retrieval",
+      "locator": "Full page returned 429",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "prc155",
+      "tier": "Lower TI",
+      "kind": "Discovery pending",
+      "aliases": [
+        "PRC 155 Manpack"
+      ],
+      "review_status": "retrieval_pending",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/133792/Army_radio_lab_continues_to_grow/",
+      "source_title": "Historical Army radio training / sustainment discovery",
+      "source_date": "Date pending retrieval",
+      "locator": "Full page returned 429",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "psc5",
+      "tier": "Lower TI",
+      "kind": "Discovery pending",
+      "aliases": [
+        "PSC 5"
+      ],
+      "review_status": "retrieval_pending",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/134187/soldier_based_training",
+      "source_title": "Historical Army radio training / sustainment discovery",
+      "source_date": "Date pending retrieval",
+      "locator": "Full page returned 429",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "trc190",
+      "tier": "Upper TI",
+      "kind": "Discovery pending",
+      "aliases": [
+        "TRC 190"
+      ],
+      "review_status": "retrieval_pending",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/89776/tobyhanna_employees_reset_retrofit_mission_expands_capabilities_of_critical_army_communications_sys",
+      "source_title": "Tobyhanna communications reset and retrofit",
+      "source_date": "Date pending retrieval",
+      "locator": "Full page timed out",
+      "checked_at": "2026-10-19",
+      "limitations": "No current fielding, variants, configuration or interoperability established."
+    },
+    {
+      "id": "gait",
+      "tier": "Upper TI",
+      "kind": "Transport architecture",
+      "aliases": [
+        "GAIT"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "https://www.army.mil/article/248248/global_network_super_highway_postures_army_for_multi_domain_operations",
+      "source_title": "Global network super highway postures Army for multi-domain operations",
+      "source_date": "2021-07-07",
+      "locator": "Reducing complexity for the user",
+      "checked_at": "2026-10-19",
+      "limitations": "No specific configuration, current fielding, supported-device matrix or equipment interoperability established."
+    },
+    {
+      "id": "pacstar",
+      "tier": "Enabling technology",
+      "kind": "Vendor platform",
+      "aliases": [
+        "PacStar",
+        "Curtiss-Wright"
+      ],
+      "review_status": "overview_only",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "",
+      "source_title": "Vendor curriculum references; Army equipment mapping not established",
+      "source_date": "Unknown",
+      "locator": "IT foundations vendor directory",
+      "checked_at": "2026-10-19",
+      "limitations": "No specific configuration, current fielding, supported-device matrix or equipment interoperability established."
+    },
+    {
+      "id": "iq-core",
+      "tier": "Enabling technology",
+      "kind": "Software",
+      "aliases": [
+        "IQ-Core",
+        "iqcore",
+        "NCM",
+        "ROAM"
+      ],
+      "review_status": "overview_only",
+      "lifecycle": "Unknown; source-date context only",
+      "source_url": "",
+      "source_title": "Vendor curriculum references; Army equipment mapping not established",
+      "source_date": "Unknown",
+      "locator": "IT foundations vendor directory",
+      "checked_at": "2026-10-19",
+      "limitations": "No specific configuration, current fielding, supported-device matrix or equipment interoperability established."
+    },
+    {
+      "id": "bccs",
+      "tier": "Cross-tier / enabling",
+      "kind": "Compute infrastructure",
+      "aliases": [
+        "BCCS",
+        "Battle Command Common Services",
+        "BCCS stack",
+        "BCCS stacks"
+      ],
+      "review_status": "source_checked",
+      "lifecycle": "Legacy designation in public historical reporting; unit inventory unknown",
+      "source_url": "https://www.army.mil/article/109664/mirroring_home_station_and_deployed_mission_command_systems_improves_soldier_readiness",
+      "source_title": "Mirroring home station and deployed mission command systems improves Soldier readiness",
+      "source_date": "2013-08-26",
+      "locator": "BCCS server stacks discussion in IADS readiness reporting",
+      "checked_at": "2026-10-19",
+      "limitations": "Purpose/context only. No stack composition, current baseline, configuration, parts list or interoperability verified."
+    }
+  ],
+  "gaps": [
+    "Exact LIN/NSN and variant coverage requires an approved public authoritative inventory; no unit property books requested.",
+    "HF, narrowband TACSAT, retransmission, mounted integration kits and legacy radio variants require additional public references.",
+    "Tropo, older multichannel assemblages, strategic/enterprise transport and baseband variants require additional public references.",
+    "SCN/MCN/LCN-T variant taxonomy, other newer SATCOM terminal families require full-source retrieval and review.",
+    "Routers, switches, servers, fiber/copper, antennas, power and environmental support need public variant-level references.",
+    "Public cryptographic-device purpose coverage is pending; no keys, fills, COMSEC procedures or material accepted.",
+    "Commercial cellular, private 5G, edge/cloud, UNO and emerging transport require current-source review.",
+    "All current fielding, lifecycle and interface assertions need source-specific human review."
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "review_status": "human_review_pending",
+  "cases": [
+    {
+      "id": "builder",
+      "title": "Understand a failed build",
+      "mission": "A fictional staff needs its training application ready for a rehearsal. Explain what the automation completed before deciding how to recover.",
+      "symptom": "The fictional builder reports complete, but the application is unavailable.",
+      "evidence": [
+        {
+          "id": "script",
+          "label": "Read the synthetic script operations",
+          "code": "# Display-only toy example. No Army builder or system changes.\n$workloadCreated = $true\n$dataAttached = $false\nWrite-Output 'Workload created'\nWrite-Error 'Training volume not found' -ErrorAction Continue\n# A nonterminating error allows later statements to run.\n$serviceRegistered = $true\nWrite-Output 'complete'\n# Completion text does not establish that $dataAttached is true.",
+          "observation": "1. Create the training workload. 2. Attach its training data volume. 3. Register the application service. The wrapper prints “complete” after those operations.",
+          "meaning": "Manual equivalents: create the workload, attach the required data, then register the service. A final message alone cannot prove all three succeeded."
+        },
+        {
+          "id": "log",
+          "label": "Inspect the synthetic error record",
+          "observation": "Workload created. Data-volume attachment failed: requested training volume not found. Error logged; wrapper continued. Service registration attempted.",
+          "meaning": "In this invented case the attachment failure did not stop the wrapper. Error handling must explicitly distinguish success from partial completion."
+        },
+        {
+          "id": "state",
+          "label": "Inspect resulting state",
+          "observation": "Workload exists. Required data volume is absent. Service registration exists. Application health check fails: data unavailable.",
+          "meaning": "The failed step has downstream consequences. A full rerun may duplicate objects; an existing workload is not evidence of readable data."
+        },
+        {
+          "id": "contract",
+          "label": "Read the synthetic recovery contract",
+          "observation": "This exercise builder cannot safely recreate an existing workload. The exercise recovery plan allows attaching a corrected dummy volume to the existing workload, then checking the application.",
+          "meaning": "Recovery must respect observed state and documented rerun behavior. This invented contract says nothing about an actual Army builder."
+        }
+      ],
+      "required": [
+        "script",
+        "log",
+        "state",
+        "contract"
+      ],
+      "choices": [
+        {
+          "id": "rerun",
+          "label": "Rerun the whole builder immediately",
+          "feedback": "The recovery contract says recreation is unsafe. First establish what changed; a repeated run may make partial state harder to recover."
+        },
+        {
+          "id": "execution",
+          "label": "Relax script security settings",
+          "feedback": "The evidence identifies a missing data dependency, not a script authorization failure. Weakening a security control does not resolve that dependency."
+        },
+        {
+          "id": "partial",
+          "label": "Treat this as partial completion and follow the scoped recovery plan",
+          "feedback": "Supported: correlate the failed operation with actual state and the documented recovery contract, then verify the user outcome."
+        }
+      ],
+      "answer": "partial",
+      "recovery": [
+        "Preserve the synthetic error and state evidence before changing anything.",
+        "Correct the dummy-volume dependency using the exercise recovery contract; do not recreate existing objects.",
+        "Verify data readability and application health, then rehearse the intended user task.",
+        "Update the build preflight checks and error handling so a failed dependency cannot be reported as a successful build."
+      ],
+      "handoff": "Brief: the workload and registration existed, but missing data blocked the mission task. Explain the manual attachment operation, recovery scope and acceptance result.",
+      "sourceIds": [
+        "ps-errors",
+        "ps-scripts"
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Separate tunnel health from routing",
+      "mission": "A fictional remote classroom needs a training application. Identify the failing checkpoint without changing unrelated services.",
+      "symptom": "The synthetic dashboard shows a tunnel established, but the training application is unreachable.",
+      "evidence": [
+        {
+          "id": "underlay",
+          "label": "Check underlay and tunnel evidence",
+          "observation": "Synthetic transport peer reachable. Tunnel security session established. Tunnel peer registration present.",
+          "meaning": "These observations support the modeled tunnel checkpoint. They do not establish OSPF adjacency, learned routes, bidirectional payload delivery or application health."
+        },
+        {
+          "id": "neighbor",
+          "label": "Inspect adjacency evidence",
+          "observation": "The invented point-to-point training link has no established OSPF neighbor. Diagnostic comparison reports different area identifiers at the two ends.",
+          "meaning": "A mismatch can prevent adjacency. This case provides an explicit design and mismatch; do not infer either from a real JNN/CPN label."
+        },
+        {
+          "id": "route",
+          "label": "Inspect route and service evidence",
+          "observation": "Required training destination route is absent. Local application health is good. No end-to-end user task has passed.",
+          "meaning": "A missing route can block access to an otherwise healthy application. Establish routes and test both directions before claiming service restoration."
+        },
+        {
+          "id": "baseline",
+          "label": "Read approved exercise baseline",
+          "observation": "Both fictional endpoints should use the same exercise area identifier. Changes require instructor approval and a recorded rollback point. No live values or commands are supplied.",
+          "meaning": "Use the approved baseline to distinguish intended settings from observed mismatches; avoid changing tunnel phase, timers or security controls on speculation."
+        }
+      ],
+      "required": [
+        "underlay",
+        "neighbor",
+        "route",
+        "baseline"
+      ],
+      "choices": [
+        {
+          "id": "done",
+          "label": "Declare the network ready because the tunnel is up",
+          "feedback": "Tunnel establishment does not establish adjacency, routing or a usable mission service."
+        },
+        {
+          "id": "area",
+          "label": "Escalate the documented area mismatch for a scoped correction",
+          "feedback": "Supported: evidence isolates the modeled adjacency mismatch. Verify neighbor establishment, learned route and the user task after the approved correction."
+        },
+        {
+          "id": "rebuild",
+          "label": "Rebuild the entire tunnel stack",
+          "feedback": "Existing evidence supports the tunnel checkpoint. A broad rebuild adds change risk without addressing the observed mismatch."
+        }
+      ],
+      "answer": "area",
+      "recovery": [
+        "Record the mismatch, intended baseline, change owner and rollback point.",
+        "Obtain the exercise instructor’s approval for the scoped dummy-setting correction.",
+        "Recheck adjacency and the expected learned route; do not treat either alone as service acceptance.",
+        "Verify bidirectional synthetic traffic and the application task, then document remaining uncertainty."
+      ],
+      "handoff": "Brief each checkpoint separately: underlay, security/tunnel, peer registration, adjacency, learned routes and mission-service test. These labels do not verify a particular DMVPN phase or JNN/CPN configuration.",
+      "sourceIds": [
+        "dmvpn",
+        "ospf"
+      ]
+    },
+    {
+      "id": "satellite",
+      "title": "Distinguish acquisition from usable service",
+      "mission": "A fictional remote training site depends on a satellite transport service. Keep dependent teams informed while the service owner resolves the blocking checkpoint.",
+      "symptom": "A synthetic terminal indicates acquisition, but the site cannot use its training applications.",
+      "evidence": [
+        {
+          "id": "indication",
+          "label": "Read the synthetic terminal indications",
+          "observation": "Acquisition indicator present. Receive test passed. Authorized transmit/service acceptance is pending. These are invented exercise states, not STT display labels.",
+          "meaning": "Finding or receiving a signal is not proof of usable two-way service. No equipment action or threshold follows from these synthetic labels."
+        },
+        {
+          "id": "handoff",
+          "label": "Read the exercise coordination status",
+          "observation": "The fictional hub/service owner has not confirmed the approved two-way test window. Local teams are waiting for acceptance.",
+          "meaning": "Ownership and coordination can block readiness even when local indications appear healthy. Do not transmit or alter radio parameters outside approved procedures."
+        },
+        {
+          "id": "dependencies",
+          "label": "Inspect dependent services",
+          "observation": "Local compute and identity tests pass. Remote transport acceptance has not passed. Remote routing and application tests remain blocked, not failed by independent diagnosis.",
+          "meaning": "Mark downstream work blocked by an unmet prerequisite. Avoid rebuilding unrelated systems while the transport checkpoint is unresolved."
+        },
+        {
+          "id": "criteria",
+          "label": "Read the exercise acceptance criteria",
+          "observation": "The fictional service owner must confirm the approved bidirectional transport test; then teams validate routes and the training user task. No real frequencies, pointing data, power settings or authorization values are included.",
+          "meaning": "Acceptance needs separate transport and mission-service evidence. Equipment-specific criteria require the applicable manual and qualified review."
+        }
+      ],
+      "required": [
+        "indication",
+        "handoff",
+        "dependencies",
+        "criteria"
+      ],
+      "choices": [
+        {
+          "id": "ready",
+          "label": "Declare ready on the acquisition indicator",
+          "feedback": "The exercise still lacks approved bidirectional transport acceptance and a successful user task."
+        },
+        {
+          "id": "increase",
+          "label": "Change transmit settings to force service",
+          "feedback": "No evidence or authority supports a transmit change. Use the applicable approved procedure and service owner; this simulator supplies no transmit instructions."
+        },
+        {
+          "id": "coordinate",
+          "label": "Track the hub acceptance blocker and coordinate the approved test",
+          "feedback": "Supported: identify the owner, pending acceptance evidence and downstream impact, then resume dependent tests after the service gate passes."
+        }
+      ],
+      "answer": "coordinate",
+      "recovery": [
+        "Record local indications and the missing acceptance evidence using synthetic identifiers.",
+        "Assign the fictional service owner and coordinate the approved exercise test; do not improvise transmit actions.",
+        "Keep dependent tasks marked blocked until transport acceptance is confirmed.",
+        "After acceptance, validate routing and the training application separately before reporting mission readiness."
+      ],
+      "handoff": "Brief the critical-path blocker, responsible service owner, next evidence needed and impact on the rehearsal. This is a dependency exercise, not an STT/RHN operating procedure.",
+      "sourceIds": [
+        "satcom"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "ps-errors",
+      "title": "Microsoft — PowerShell 5.1 error handling",
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_try_catch_finally?view=powershell-5.1",
+      "scope": "Vendor language behavior. Does not document an Army builder."
+    },
+    {
+      "id": "ps-scripts",
+      "title": "Microsoft — PowerShell 5.1 scripts",
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scripts?view=powershell-5.1",
+      "scope": "Vendor script concepts. Actual builder runtime and recovery behavior remain unknown."
+    },
+    {
+      "id": "dmvpn",
+      "title": "Cisco — Troubleshoot DMVPN Issues",
+      "url": "https://www.cisco.com/c/en/us/support/docs/security/dynamic-multipoint-vpn-dmvpn/111976-dmvpn-troubleshoot-00.html",
+      "scope": "Generic vendor diagnostic workflow. Army node design, phase and software applicability unverified."
+    },
+    {
+      "id": "ospf",
+      "title": "Cisco — Troubleshoot OSPF Neighbor Problems",
+      "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13699-29.html",
+      "scope": "Vendor neighbor-state reasoning. A 2-way state can be normal on some network types."
+    },
+    {
+      "id": "satcom",
+      "title": "Army AL&T — Simplifying SATCOM",
+      "url": "https://asc.army.mil/web/news-alt-jas17-simplifying-satcom/",
+      "scope": "Historical training/support context. Does not supply an STT acquisition, transmit or RHN procedure."
+    }
+  ]
+}

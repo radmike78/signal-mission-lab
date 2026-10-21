@@ -1,0 +1,34 @@
+[Unit]
+Description=Signal Mission Lab rootless training application
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=120
+StartLimitBurst=5
+
+[Container]
+Image=localhost/signal-mission-lab:reviewed
+ContainerName=signal-mission-lab
+Pull=never
+User=10001:10001
+ReadOnly=true
+DropCapability=all
+NoNewPrivileges=true
+PidsLimit=128
+PodmanArgs=--memory=512m --cpus=1
+Network=slirp4netns:allow_host_loopback=false
+PublishPort=127.0.0.1:8080:8080
+Environment=SML_SERVE_WEB=1
+Environment=SML_ALLOWED_HOSTS=localhost,127.0.0.1
+HealthCmd=python -c "import urllib.request; assert urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=3).status == 200"
+HealthInterval=30s
+HealthTimeout=5s
+HealthRetries=3
+HealthOnFailure=kill
+
+[Service]
+Restart=on-failure
+RestartSec=5
+TimeoutStartSec=120
+
+[Install]
+WantedBy=default.target

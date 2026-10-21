@@ -1,0 +1,21 @@
+FROM docker.io/library/node:24-bookworm-slim AS web
+WORKDIR /build
+COPY web/package.json web/package-lock.json /build/web/
+RUN npm ci --prefix web --ignore-scripts --no-audit --no-fund
+COPY web /build/web
+COPY data /build/data
+RUN npm run build --prefix web
+
+FROM docker.io/library/python:3.12-slim
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+WORKDIR /app
+COPY backend/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt && useradd --uid 10001 --create-home app
+COPY backend /app/backend
+COPY data /app/data
+COPY --from=web /build/web/dist /app/web/dist
+COPY index.html app.js styles.css /app/web/dist/legacy/
+COPY data /app/web/dist/legacy/data
+USER 10001
+EXPOSE 8080
+CMD ["python", "-m", "uvicorn", "backend.app:app", "--host", "0.0.0.0", "--port", "8080", "--no-access-log", "--no-proxy-headers"]
