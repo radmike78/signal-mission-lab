@@ -13,7 +13,7 @@ const SignalProducts=React.lazy(()=>import('./signal-products').then(m=>({defaul
 import {ApplicationSupport} from './applications';
 import {ITFoundations} from './foundations';
 import {TroubleshootingWorkbench} from './troubleshooting';
-import {nativeApp,practiceStore} from './runtime';
+import {nativeApp,nativePlatform,practiceStore} from './runtime';
 import type {PracticeKind,PracticeResult} from './practice-store';
 import {OfflinePanel,startOffline} from './offline';
 import {App as NativeApp} from '@capacitor/app';
@@ -29,7 +29,7 @@ function App(){
  const fault=catalog.faults.find(f=>f.id===faultId)!;const exercise=exercises.exercises.find(e=>e.id===exerciseId)!;const decisionNode=exercise.nodes.find(n=>n.id===decision)!;
  const [storageError,setStorageError]=useState('');
  useEffect(()=>{void practiceStore.read().then(setRecords).catch(()=>setStorageError('Device history is unavailable. Practice still works.'));},[]);
- useEffect(()=>{if(!nativeApp)return;let disposed=false;let remove:(()=>Promise<void>)|undefined;void NativeApp.addListener('backButton',()=>{if(tab==='Mission')void NativeApp.exitApp();else setTab('Mission');}).then(handle=>{if(disposed)void handle.remove();else remove=()=>handle.remove();});return()=>{disposed=true;void remove?.();};},[tab]);
+ useEffect(()=>{if(!nativeApp||nativePlatform!=='android')return;let disposed=false;let remove:(()=>Promise<void>)|undefined;void NativeApp.addListener('backButton',()=>{if(tab==='Mission')void NativeApp.exitApp();else setTab('Mission');}).then(handle=>{if(disposed)void handle.remove();else remove=()=>handle.remove();});return()=>{disposed=true;void remove?.();};},[tab]);
  function save(kind:PracticeKind,score:number,total:number){void practiceStore.add({kind,score,total,at:new Date().toISOString()}).then(setRecords).catch(()=>setStorageError('Could not save this result. Device history may be unavailable.'));}
  const mentorTopics:Record<string,string>={mdmp:'mdmp-method',radar:'q53-purpose',signal:'fm6-signal-role',estimates:'fm6-running-estimates',operations:'adp5-operations-process',planning:'fm602-planning',c2:'adp6-c2'};
  const claim=corpus.claims.find(c=>c.id===mentorTopics[topic]);

@@ -32,6 +32,7 @@ jobs:
       - name: Compile APK and unsigned release bundle
         working-directory: web/android
         run: ./gradlew --no-daemon :app:assembleDebug :app:bundleRelease
+      - run: python scripts/verify_mobile_build.py android
       - uses: actions/upload-artifact@v4
         with:
           name: android-test-builds
@@ -62,6 +63,7 @@ jobs:
       - run: python scripts/prepare_mobile.py ios
       - name: Compile unsigned iOS simulator app
         run: xcodebuild -project web/ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath artifacts/ios CODE_SIGNING_ALLOWED=NO build
+      - run: python scripts/verify_mobile_build.py ios
       - name: Preserve simulator app bundle
         run: ditto -c -k --keepParent artifacts/ios/Build/Products/Debug-iphonesimulator/App.app artifacts/ios-simulator.zip
       - uses: actions/upload-artifact@v4
