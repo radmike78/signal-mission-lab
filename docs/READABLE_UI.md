@@ -1,0 +1,9 @@
+# Large-type, focused interface
+
+This milestone makes the user's preference for large type the default: desktop body text 20px, mobile body text 18px; clear page titles (48px or larger desktop, 45px mobile); prominent section headings; large navigation labels, disclosure controls and minimum 56px desktop form controls. Secondary metadata stays legible rather than using the former 8–12px labels. Spacing and line length support reading without compressing content into tiny cards.
+
+Signal Products initially displays the product choice, title and short purpose. Ownership, use and timing are in one disclosure; review prompts, examples and sources remain available separately. The role filter is optional. Applications begins with purpose and moves users/examples into a disclosure. IT lesson explanations, terms, related systems and evidence are optional; vendor entries open individually. Equipment dependencies, support roles, associations and source provenance are on demand. Selected-equipment uncertainty and retrieval-pending notices remain available without obscuring their status.
+
+The three primary navigation areas remain visible. More learning tools closes when a destination is selected. Repeated page breadcrumb/subtitle/badge elements and sidebar decoration are removed from the visible layout. Safety boundaries, source notes, existing activities, assignments and grading remain in place. No APIs, database schema, permissions or data retention are changed.
+
+Validation includes production TypeScript build, existing model/content/backend suites and desktop/mobile browser journeys. Browser regression checks cover the larger font sizes, optional text disclosure, menu closure and mobile overflow. Screenshots are captured in CI for visual review. This is a UI milestone; previously documented doctrine and production-release limitations remain.
