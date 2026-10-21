@@ -88,7 +88,7 @@ const fs=require('fs');
  await page.getByRole('heading',{name:'Diagnosis supported'}).waitFor();
  await snap('troubleshoot');
  await nav('Applications');
- await page.getByRole('heading',{name:'What is this system for?'}).waitFor();
+ await page.getByRole('heading',{name:'Choose a system'}).waitFor();
  assert(!await page.getByText('Who uses it:',{exact:true}).isVisible(),'supporting text hidden initially');
  await page.getByText('Who uses it? See an example',{exact:true}).click();
  assert(await page.getByText('Who uses it:',{exact:true}).isVisible(),'purpose details available');
