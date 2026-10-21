@@ -13,3 +13,10 @@ docs/screenshots
 **/*.pfx
 **/.ssh
 **/secrets
+
+web/android
+web/ios
+**/*.keystore
+**/*.jks
+**/*.p12
+**/*.mobileprovision

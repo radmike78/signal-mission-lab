@@ -65,3 +65,5 @@ Build the OCI image with `podman build --format oci -f deploy/Containerfile -t l
 ## IT foundations for Soldiers
 
 Open **IT foundations** from the navigation or homepage. Nine introductory lessons explain computing/VMs, switching, routing, DNS/identity, storage, firewalls, containers, recovery and security. Vendor examples have scoped public references and are separated from verified Army applicability. Use the synthetic dependency lab to connect the concepts to a user outcome. See [curriculum and manual gaps](docs/IT_FOUNDATIONS_AND_MANUAL_GAPS.md).
+
+Offline/PWA and Android/iOS preparation: see [offline/mobile build and release gates](docs/OFFLINE_MOBILE.md). Store editions bundle public learning; signing, native device acceptance and store publication require owner action. Draft privacy and listing text are under `mobile/store/`.
