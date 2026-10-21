@@ -8,6 +8,7 @@ from backend.provenance import validate_corpus
 from backend.technology import validate_technology
 from backend.recovery import validate_content
 from backend.application_support import validate_applications
+from backend.signal_products import validate_signal_products
 
 def main():
     try:
@@ -17,6 +18,7 @@ def main():
         result.update(validate_technology(json.loads((ROOT / "data/technology-learning.json").read_text(encoding="utf-8")), values[0]))
         result.update(validate_content(json.loads((ROOT / "data/recovery-exercises.json").read_text(encoding="utf-8"))))
         result.update(validate_applications(json.loads((ROOT / "data/application-support.json").read_text(encoding="utf-8"))))
+        result.update(validate_signal_products(json.loads((ROOT / "data/signal-products.json").read_text(encoding="utf-8"))))
     except (ValueError, KeyError, TypeError, OSError):
         print('Source publication checks failed. Review corpus metadata locally; no input echoed.', file=sys.stderr)
         return 1
@@ -25,3 +27,4 @@ def main():
 
 if __name__ == '__main__':
     raise SystemExit(main())
+

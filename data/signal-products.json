@@ -1,0 +1,500 @@
+{
+  "schema_version": 1,
+  "reviewed": "2026-10-21",
+  "notice": "Public educational context only. Examples, suggested contents and review prompts are editorial, not completed orders or mandatory templates. Current formats, responsibilities and approvals depend on applicable doctrine, orders and unit SOP. Do not enter or upload operational documents, classified information, CUI or COMSEC.",
+  "sources": [
+    {
+      "id": "fm60",
+      "title": "FM 6-0 \u2014 Commander and Staff Organization and Operations",
+      "edition": "16 May 2022",
+      "url": "https://armypubs.army.mil/epubs/DR_pubs/DR_a/ARN35404-FM_6-0-000-WEB-1.pdf",
+      "status": "content_reviewed",
+      "scope": "Paragraph 2-68; paragraphs 6-39\u20136-45; chapter 9; appendices E and F. Public doctrine context; current-edition applicability requires review."
+    },
+    {
+      "id": "call-estimate",
+      "title": "CALL \u2014 Staff Processes in LSCO Pt. 2: Running Estimates",
+      "edition": "6 September 2024",
+      "url": "https://www.army.mil/article/279458/staff_processes_in_lsco_pt_2_running_estimates_crawling_when_we_need_to_run",
+      "status": "content_reviewed",
+      "scope": "Refocusing running estimates and staff tools. Lessons learned, not a mandatory universal template."
+    },
+    {
+      "id": "call-sustainment",
+      "title": "CALL 22-657 \u2014 Sustainment in Support of Large Scale Combat Operations",
+      "edition": "CALL 22-657; public Army file posted January 2023",
+      "url": "https://api.army.mil/e2/c/downloads/2023/01/31/e43e5094/22-657-sustainment-in-large-scale-combat-operations-public.pdf",
+      "status": "content_reviewed",
+      "scope": "Chapter 18, printed pages 117\u2013121. BSB S6 context. Older template references do not establish current annex numbering."
+    },
+    {
+      "id": "esbe",
+      "title": "Paving the Way: Tactical communications across the Indo-Pacific",
+      "edition": "21 September 2023",
+      "url": "https://www.army.mil/article/270162/paving_the_way_tactical_communications_across_the_indo_pacific",
+      "status": "content_reviewed",
+      "scope": "Network/PACE coordination, team preparation and sustainment in one ESB-E example. Does not prescribe universal unit products."
+    },
+    {
+      "id": "fm50-followup",
+      "title": "FM 5-0 \u2014 Planning and Orders Production: revised public PDF",
+      "edition": "2024 edition referenced by Army sources; PDF body not retrieved in this review",
+      "url": "https://armypubs.army.mil/epubs/DR_pubs/DR_a/ARN44590-FM_5-0-001-WEB-3.pdf",
+      "status": "retrieval_pending",
+      "scope": "Discovered through Army University Press references. Retrieval exceeded document size limit. Exact Annex H appendix/tab structure is not asserted."
+    }
+  ],
+  "products": [
+    {
+      "id": "annex-h",
+      "name": "Annex H \u2014 Signal",
+      "stage": "Plan and brief",
+      "audience": "S6/G6 staff",
+      "purpose": "Explains the signal support for the operation and connects it to the base order.",
+      "owner": "S6/G6 develops staff input; coordinate tasks through the operations staff and command approval process.",
+      "users": "Commander, staff, subordinate S6s and supporting Signal units use it to understand responsibilities and support.",
+      "when": "Prepare during planning; update when the order or support concept changes.",
+      "contents": [
+        "Mission support concept",
+        "responsibilities",
+        "coordination",
+        "sustainment",
+        "reporting references. Confirm the prescribed format."
+      ],
+      "example": "Compare a fictional staff collaboration requirement with the support concept: is an owner assigned for delivering and testing the service?",
+      "pitfall": "Do not bury essential tasking in an annex without coordinating the base order. An annex is not a device configuration.",
+      "source_ids": [
+        "fm60"
+      ],
+      "locator": "Paragraph 2-68; chapter 6",
+      "kind": "doctrine_context"
+    },
+    {
+      "id": "soi",
+      "name": "SOI \u2014 Signal Operating Instructions",
+      "stage": "Plan and brief",
+      "audience": "Both",
+      "purpose": "Instructions for coordinating communications within a command.",
+      "owner": "Authorized Signal personnel maintain and distribute the applicable instructions under higher-headquarters guidance.",
+      "users": "Operators and supported staff use the authorized edition for consistent communications procedures.",
+      "when": "Before an event and whenever the authorized edition or instructions change.",
+      "contents": [
+        "Edition control",
+        "authorized distribution",
+        "user acknowledgement",
+        "a reference to applicable procedures."
+      ],
+      "example": "In a fictional exercise, check whether all training participants were briefed on the same approved edition.",
+      "pitfall": "This lesson describes purpose only. It does not display or generate frequencies, call signs, authentication data or COMSEC.",
+      "source_ids": [
+        "call-sustainment"
+      ],
+      "locator": "Chapter 18, printed pages 117\u2013119",
+      "kind": "lessons_context"
+    },
+    {
+      "id": "running-estimate",
+      "name": "Signal running estimate",
+      "stage": "Plan and brief",
+      "audience": "S6/G6 staff",
+      "purpose": "A continuing assessment of whether current and future operations can be supported.",
+      "owner": "S6/G6 synthesizes inputs from staff, supported users and Signal units.",
+      "users": "Commander and planners use conclusions, recommendations and risk to make decisions.",
+      "when": "Maintain continuously; update when facts, assumptions or supportability change, not just before a briefing.",
+      "contents": [
+        "Assessment",
+        "supporting facts",
+        "assumptions to verify",
+        "limits",
+        "recommendation",
+        "risk",
+        "decision needed."
+      ],
+      "example": "A fictional service has not passed its acceptance check. Recommend a rehearsal or fallback and explain the consequence for the planned user task.",
+      "pitfall": "An equipment percentage or red/amber/green slide alone does not explain what the commander should do.",
+      "source_ids": [
+        "call-estimate"
+      ],
+      "locator": "Refocusing Running Estimates; Refocusing Staff Tools",
+      "kind": "lessons_context"
+    },
+    {
+      "id": "network-diagram",
+      "name": "Network diagrams supporting Annex H",
+      "stage": "Plan and brief",
+      "audience": "Both",
+      "purpose": "A visual explanation of the planned relationships and dependencies supporting communications.",
+      "owner": "S6/G6 and network planners coordinate with supporting teams and service owners.",
+      "users": "Staff use an overview to understand support; technicians use separately authorized detail for implementation.",
+      "when": "Review during planning, before rehearsal and after an approved change.",
+      "contents": [
+        "Purpose and audience",
+        "legend",
+        "conceptual dependencies",
+        "owner",
+        "revision date",
+        "unresolved interface questions."
+      ],
+      "example": "Trace a dummy training user task from the user to a shared application and its supporting services. Ask what evidence proves the task works.",
+      "pitfall": "A line on a diagram is not proof of interoperability. Exact appendix/tab placement and technical interfaces require applicable doctrine and approved documentation.",
+      "source_ids": [
+        "call-sustainment"
+      ],
+      "locator": "Chapter 18, printed pages 117\u2013121",
+      "kind": "lessons_context"
+    },
+    {
+      "id": "pace",
+      "name": "PACE communications plan",
+      "stage": "Plan and brief",
+      "audience": "Both",
+      "purpose": "Identifies primary, alternate, contingency and emergency ways to meet a communication need.",
+      "owner": "Warfighting-function leads develop their needs with S6/G6 advice and available support.",
+      "users": "Users and operators need to understand the intended method and transition triggers.",
+      "when": "Plan by user need and phase; rehearse before use and reassess after changes.",
+      "contents": [
+        "Communication need",
+        "distinct options",
+        "dependencies",
+        "transition trigger",
+        "responsible users",
+        "rehearsal result."
+      ],
+      "example": "If a training chat service and its supposed alternate share the same unavailable transport, question whether the alternate is independent.",
+      "pitfall": "Four application names are not four independent paths. S6/G6 supports the functional lead rather than inventing every staff workflow.",
+      "source_ids": [
+        "fm60"
+      ],
+      "locator": "Paragraphs 6-39\u20136-41",
+      "kind": "doctrine_context"
+    },
+    {
+      "id": "sync",
+      "name": "Signal synchronization matrix / support timeline",
+      "stage": "Plan and brief",
+      "audience": "Both",
+      "purpose": "An editorial worksheet aligning support actions with the events they must enable.",
+      "owner": "Staff planners, Signal company leaders and team chiefs coordinate dependencies and deadlines.",
+      "users": "Supported staff and delivery teams use it to see who must finish what before the next event.",
+      "when": "Build during planning; revise when event timing or support tasks change.",
+      "contents": [
+        "Event",
+        "required user outcome",
+        "prerequisite",
+        "owner",
+        "readiness check",
+        "unresolved dependency."
+      ],
+      "example": "Place a dummy service rehearsal before the training briefing it must support. Identify who resolves a missed prerequisite.",
+      "pitfall": "A tidy timeline is not evidence of completed coordination. This is a teaching aid, not a prescribed universal matrix.",
+      "source_ids": [
+        "esbe"
+      ],
+      "locator": "Network and PACE coordination with G6s",
+      "kind": "editorial_aid"
+    },
+    {
+      "id": "requirements",
+      "name": "Signal requirements and support-request worksheet",
+      "stage": "Plan and brief",
+      "audience": "Both",
+      "purpose": "Captures the user outcome and coordination needed before choosing a support solution.",
+      "owner": "Supported user describes the task; S6/G6 validates needs with the supporting Signal organization.",
+      "users": "Planners and Signal units use agreed requirements to scope support and identify gaps.",
+      "when": "Start at mission receipt; revisit assumptions before committing resources.",
+      "contents": [
+        "User task",
+        "training priority",
+        "service owner",
+        "support window",
+        "capacity questions",
+        "constraints",
+        "acceptance measure."
+      ],
+      "example": "Replace \u201cneed internet\u201d with \u201cauthorized training staff must share and retrieve a dummy planning update.\u201d",
+      "pitfall": "A request is not an approval or a resource allocation. Local request formats and lead times must be confirmed.",
+      "source_ids": [
+        "fm60"
+      ],
+      "locator": "Paragraph 2-68; chapter 6 planning considerations",
+      "kind": "editorial_aid"
+    },
+    {
+      "id": "comstat",
+      "name": "Communications status report / Signal COP",
+      "stage": "Operate and recover",
+      "audience": "Both",
+      "purpose": "A shared status view that explains communications availability and user impact.",
+      "owner": "Operators report evidence; the designated staff or network-operations owner maintains the consolidated view.",
+      "users": "S6/G6 and commanders use it to prioritize restoration and understand limits.",
+      "when": "Update at required reporting points and when a significant change occurs.",
+      "contents": [
+        "Time observed",
+        "service",
+        "affected training task",
+        "scope",
+        "evidence",
+        "action owner",
+        "next update."
+      ],
+      "example": "Report \u201cdummy shared workspace unavailable; local client opens; service-owner check pending\u201d rather than \u201cnetwork red.\u201d",
+      "pitfall": "Status colors need definitions, time and evidence. This editorial view is not a replacement for the unit reporting SOP.",
+      "source_ids": [
+        "call-sustainment"
+      ],
+      "locator": "Chapter 18: network reporting requirements and staff assessment context",
+      "kind": "editorial_aid"
+    },
+    {
+      "id": "rehearsal",
+      "name": "Communications rehearsal plan and results",
+      "stage": "Operate and recover",
+      "audience": "Both",
+      "purpose": "Organizes tests so users demonstrate the required communications before the event.",
+      "owner": "S6/G6 coordinates with staff users, application owners and supporting teams.",
+      "users": "Operators and staff verify function and understand fallback transitions.",
+      "when": "Schedule after prerequisites are ready and before the supported event.",
+      "contents": [
+        "Task",
+        "participants by role",
+        "prerequisite",
+        "expected result",
+        "observed result",
+        "fallback check",
+        "unresolved issue owner."
+      ],
+      "example": "Two authorized training users exchange a dummy update; confirm receipt, correct view and the agreed fallback behavior.",
+      "pitfall": "A ping or radio check alone does not prove the application workflow works. Record observed results instead of a blanket \u201call green.\u201d",
+      "source_ids": [
+        "fm60"
+      ],
+      "locator": "Paragraphs 6-44\u20136-45; table 6-3",
+      "kind": "doctrine_context"
+    },
+    {
+      "id": "site",
+      "name": "Site reconnaissance and readiness checklist",
+      "stage": "Prepare the unit",
+      "audience": "Signal units",
+      "purpose": "An editorial checklist for confirming that a proposed training setup can be supported.",
+      "owner": "Signal team leaders coordinate with the supported staff, facilities, safety and logistics owners.",
+      "users": "Company/platoon leaders use it to surface prerequisites before equipment arrives.",
+      "when": "During coordination and reconnaissance; recheck before occupying the training site.",
+      "contents": [
+        "Approved access",
+        "power and environmental questions",
+        "space and cabling needs",
+        "sustainment",
+        "owner for unresolved constraints."
+      ],
+      "example": "The training site has no confirmed power support. Identify the responsible coordinator before promising service availability.",
+      "pitfall": "This is not an engineering, electrical-safety or siting authorization. No real site locations or operational layout belong in this app.",
+      "source_ids": [
+        "esbe"
+      ],
+      "locator": "Expeditionary preparation, environment and transport lessons",
+      "kind": "editorial_aid"
+    },
+    {
+      "id": "taskorg",
+      "name": "Signal task organization and support responsibilities",
+      "stage": "Prepare the unit",
+      "audience": "Both",
+      "purpose": "An editorial role map showing who provides, receives and coordinates support.",
+      "owner": "Operations staff and commanders establish relationships; Signal planners explain the support implications.",
+      "users": "S6/G6, Signal company leaders and team chiefs use the agreed responsibilities to avoid gaps.",
+      "when": "Coordinate during planning and review whenever teams or supported requirements change.",
+      "contents": [
+        "Supported role",
+        "supporting role",
+        "task",
+        "authority to coordinate",
+        "handoff",
+        "unresolved resource gap."
+      ],
+      "example": "A training help request reaches an operator but nobody owns the application. Assign the missing coordination role.",
+      "pitfall": "A diagram does not create command authority or change a support relationship. Actual responsibilities follow orders and policy.",
+      "source_ids": [
+        "esbe"
+      ],
+      "locator": "Independent teams and supported-G6 coordination",
+      "kind": "editorial_aid"
+    },
+    {
+      "id": "handover",
+      "name": "Service acceptance and shift handover record",
+      "stage": "Operate and recover",
+      "audience": "Signal units",
+      "purpose": "An editorial record of what works, what remains unresolved and who is taking responsibility.",
+      "owner": "Outgoing and incoming operators coordinate with service owners and the supported user.",
+      "users": "Teams use it to continue support without losing evidence or unfinished actions.",
+      "when": "At service handoff, shift change and recovery verification.",
+      "contents": [
+        "Dummy task result",
+        "remaining limitation",
+        "action owner",
+        "next check",
+        "acknowledgement by role."
+      ],
+      "example": "An incoming training operator finds a service marked available but no user-task test. Request verification and retain the limitation.",
+      "pitfall": "A signed checklist does not certify interoperability. Keep actual credentials and configuration records in authorized systems.",
+      "source_ids": [
+        "fm60"
+      ],
+      "locator": "Chapter 9: continuous operations and SOPs",
+      "kind": "editorial_aid"
+    },
+    {
+      "id": "sop",
+      "name": "Signal SOP / TACSOP contributions",
+      "stage": "Operate and recover",
+      "audience": "Both",
+      "purpose": "Standing procedures that make recurring support tasks consistent.",
+      "owner": "The designated unit owner maintains procedures with staff and operators; approval follows unit policy.",
+      "users": "Staff and teams use them for reporting, coordination, shifts and routine support.",
+      "when": "Review before training and after approved changes or lessons learned.",
+      "contents": [
+        "Purpose",
+        "roles",
+        "triggers",
+        "steps by role",
+        "reporting",
+        "escalation",
+        "version control",
+        "references."
+      ],
+      "example": "Two shifts classify the same dummy outage differently. Clarify the reporting definition in the training SOP.",
+      "pitfall": "A standing procedure is not the mission order. Verify currency instead of copying an old unit template.",
+      "source_ids": [
+        "fm60"
+      ],
+      "locator": "Chapter 9: command post SOPs",
+      "kind": "doctrine_context"
+    },
+    {
+      "id": "drill",
+      "name": "Signal battle-drill / incident checklist",
+      "stage": "Operate and recover",
+      "audience": "Both",
+      "purpose": "A rehearsed response aid for a defined event requiring prompt action.",
+      "owner": "Unit leaders and technical owners define authorized actions and escalation.",
+      "users": "Operators and staff use the trigger to coordinate a consistent response.",
+      "when": "Rehearse in training; review after an incident or relevant change.",
+      "contents": [
+        "Trigger",
+        "permitted first checks",
+        "responsibilities",
+        "escalation",
+        "reporting",
+        "recovery verification."
+      ],
+      "example": "A synthetic shared-service outage triggers scope checks, owner notification and a dummy task retest after an approved recovery.",
+      "pitfall": "Do not turn a generic checklist into permission to change real devices or bypass security controls.",
+      "source_ids": [
+        "fm60"
+      ],
+      "locator": "Appendix E: battle drills",
+      "kind": "doctrine_context"
+    },
+    {
+      "id": "risk",
+      "name": "Signal risk, assumptions and decision log",
+      "stage": "Plan and brief",
+      "audience": "Both",
+      "purpose": "An editorial record of uncertainty, mission impact and decisions needed from the appropriate authority.",
+      "owner": "Planners and technical owners supply evidence; decision and risk acceptance follow command policy.",
+      "users": "The commander and staff use it to see what remains unresolved and what choices are needed.",
+      "when": "Maintain through planning, rehearsal and changes.",
+      "contents": [
+        "Assumption",
+        "evidence needed",
+        "affected training task",
+        "risk",
+        "proposed action",
+        "decision owner",
+        "review point."
+      ],
+      "example": "A training service depends on an unconfirmed external provider. Record the assumption and the decision needed before rehearsal.",
+      "pitfall": "Listing a risk does not mitigate it or mean it has been accepted.",
+      "source_ids": [
+        "call-estimate"
+      ],
+      "locator": "Conclusions, recommendations and associated risk",
+      "kind": "editorial_aid"
+    },
+    {
+      "id": "sustainment",
+      "name": "Signal equipment and sustainment readiness tracker",
+      "stage": "Prepare the unit",
+      "audience": "Signal units",
+      "purpose": "An editorial tracker linking equipment condition and support resources to the promised service.",
+      "owner": "Operators, team chiefs, maintenance and supply personnel coordinate with unit leadership.",
+      "users": "Company and ESB planners use it to identify missing support and restoration blockers.",
+      "when": "Before tasking, during preparation and as equipment condition changes.",
+      "contents": [
+        "Capability needed",
+        "serviceability evidence",
+        "accountable owner",
+        "support shortfall",
+        "approved maintenance/supply follow-up."
+      ],
+      "example": "A training team has a terminal but no verified supporting power kit. Identify the shortfall before declaring the capability ready.",
+      "pitfall": "An inventory count is not a readiness test. This does not replace maintenance or property-accountability systems.",
+      "source_ids": [
+        "esbe"
+      ],
+      "locator": "Equipment transport, environmental damage and component replacement lessons",
+      "kind": "editorial_aid"
+    },
+    {
+      "id": "spectrum",
+      "name": "Spectrum coordination and approval tracker",
+      "stage": "Prepare the unit",
+      "audience": "Both",
+      "purpose": "An editorial way to track whether required spectrum coordination has been completed.",
+      "owner": "Authorized spectrum managers coordinate applicable requests and approvals.",
+      "users": "S6/G6 and teams need to know whether the required authorization is confirmed.",
+      "when": "Coordinate early; confirm applicability before the training event and after changes.",
+      "contents": [
+        "Requirement described generically",
+        "responsible role",
+        "approval status",
+        "dependency",
+        "follow-up deadline."
+      ],
+      "example": "A fictional training event has an unresolved coordination requirement. Mark it as a blocker and contact the authorized manager.",
+      "pitfall": "This is not a frequency assignment, transmission authorization or spectrum request form. No actual frequencies or emitter parameters are collected.",
+      "source_ids": [
+        "fm60"
+      ],
+      "locator": "Chapter 6: spectrum planning considerations",
+      "kind": "editorial_aid"
+    },
+    {
+      "id": "aar",
+      "name": "Signal after-action review / improvement record",
+      "stage": "Prepare the unit",
+      "audience": "Both",
+      "purpose": "Captures what happened, why it mattered and what to improve for the next event.",
+      "owner": "Leaders and participants compare observations with the intended training outcome.",
+      "users": "Staff and Signal units use agreed actions to improve procedures and future preparation.",
+      "when": "After rehearsal or execution; track actions to the next verification.",
+      "contents": [
+        "Intended outcome",
+        "observation",
+        "supporting evidence",
+        "discussion",
+        "recommendation",
+        "owner",
+        "follow-up test."
+      ],
+      "example": "The dummy update test failed because the service owner was not included in preparation. Assign a coordination fix and test it next time.",
+      "pitfall": "A lesson identified becomes useful when the improvement is assigned and verified. Avoid uploading real incident records.",
+      "source_ids": [
+        "fm60"
+      ],
+      "locator": "Appendix F: after action reports",
+      "kind": "doctrine_context"
+    }
+  ]
+}

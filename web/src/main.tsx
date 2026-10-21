@@ -9,14 +9,15 @@ import {LearningPanel} from './learning';
 import {DoctrineEvidence} from './doctrine';
 import {MissionGuide} from './mission';
 import {EquipmentExplorer} from './equipment';
+const SignalProducts=React.lazy(()=>import('./signal-products').then(m=>({default:m.SignalProducts})));
 import {ApplicationSupport} from './applications';
 import {ITFoundations} from './foundations';
 import {TroubleshootingWorkbench} from './troubleshooting';
-type Tab = 'Applications'|'IT foundations'|'Mission'|'MDMP'|'Knowledge graph'|'Architecture'|'Troubleshoot'|'Assessment'|'Instructor'|'Mentor';
+type Tab = 'Signal Products'|'Applications'|'IT foundations'|'Mission'|'MDMP'|'Knowledge graph'|'Architecture'|'Troubleshoot'|'Assessment'|'Instructor'|'Mentor';
 type Result = {kind:string;score:number;total:number;at:string};
 const primaryTabs:Tab[]=['Mission','Troubleshoot','Instructor'];
 const tabLabel=(tab:Tab)=>tab==='Instructor'?'My training':tab;
-const tabs:Tab[]=['Mission','MDMP','Knowledge graph','Architecture','Troubleshoot','Assessment','Instructor','Mentor','IT foundations','Applications'];
+const tabs:Tab[]=['Mission','MDMP','Knowledge graph','Architecture','Troubleshoot','Assessment','Instructor','Mentor','IT foundations','Applications','Signal Products'];
 const steps=[['Receipt of mission','Understand the fictional exercise and time available.','Produce a training timeline and initial questions.'],['Mission analysis','Identify specified tasks, assumptions, constraints and information needs.','Produce a problem statement and initial staff estimate.'],['COA development','Develop distinct ways to meet the fictional user outcome.','Produce alternative service concepts and evaluation criteria.'],['COA analysis','Walk through a synthetic outage and recovery.','Record risks, dependencies and decision points.'],['COA comparison','Compare alternatives against the same criteria.','Produce an explained comparison, including uncertainty.'],['COA approval','Brief the training decision and residual risks.','Record the exercise director’s selected approach.'],['Orders production, dissemination and transition','Communicate the fictional training decision and rehearse understanding.','Produce a training brief and acceptance checklist.']];
 const questions=assessment.map(q=>({q:q.question,o:q.options,a:q.answer,why:q.rationale}));
 function readResults():Result[]{try{const data=JSON.parse(sessionStorage.getItem('sml-results')||'[]');return Array.isArray(data)?data.filter(x=>['assessment','diagnosis'].includes(x.kind)&&Number.isFinite(x.score)&&Number.isFinite(x.total)&&typeof x.at==='string').slice(-50):[]}catch{return []}}
@@ -28,6 +29,7 @@ function App(){
  const claim=corpus.claims.find(c=>c.id===mentorTopics[topic]);
  return <><aside className="rail"><div className="brand">S<span>ML</span></div><p className="eyebrow">SIGNAL MISSION LAB</p><p className="rail-copy">Learn. Design.<br/>Think mission-first.</p><nav aria-label="Learning areas">{primaryTabs.map((t,i)=><button key={t} aria-current={tab===t?'page':undefined} onClick={()=>setTab(t)}><span aria-hidden="true">0{i+1}</span>{tabLabel(t)}</button>)}<details className="secondary-nav"><summary>More learning tools</summary><div>{tabs.filter(t=>!primaryTabs.includes(t)).map(t=><button key={t} aria-current={tab===t?'page':undefined} onClick={()=>setTab(t)}>{tabLabel(t)}</button>)}</div></details></nav><small>UNOFFICIAL EDUCATION<br/>Synthetic training only</small></aside><main><header className={tab==='Mission'?'page-header mission-header':'page-header'}><p className="eyebrow">SIGNAL WORKSPACE <span className="breadcrumb-divider">/</span> {tabLabel(tab).toUpperCase()}</p><div className="heading"><h1>{tabLabel(tab)}</h1><span className="badge">Training environment</span></div><p>Build understanding before building a network.</p></header>{tab!=='Mission'&&<div className="boundary"><strong>Fictional training only.</strong> No classified information, CUI, COMSEC, real network plans or uploads.</div>}
  <div hidden={tab!=='Mission'}><MissionGuide onExplore={id=>{setNode(id);setTab('Knowledge graph');}} onArchitecture={()=>setTab('Architecture')} onMDMP={()=>setTab('MDMP')} onFoundations={()=>setTab('IT foundations')} onTroubleshoot={()=>setTab('Troubleshoot')}/></div>
+ {tab==='Signal Products'&&<React.Suspense fallback={<p role="status">Loading Signal products…</p>}><SignalProducts/></React.Suspense>}
  {tab==='Applications'&&<ApplicationSupport/>}
  {tab==='IT foundations'&&<ITFoundations onExplore={id=>{setNode(id);setTab('Knowledge graph');}}/>}
  {tab==='MDMP'&&<><section><h2>Practice the planning process</h2><p>Seven guided stages. Teaching prompts below are editorial exercises; current doctrine edition review is pending.</p><div className="steps">{steps.map((s,i)=><button key={s[0]} aria-pressed={step===i} onClick={()=>setStep(i)}>{i+1}. {s[0]}</button>)}</div><article><p className="eyebrow">STAGE {step+1} / 7</p><h2>{steps[step][0]}</h2><p>{steps[step][1]}</p><h3>Expected learning product</h3><p>{steps[step][2]}</p></article></section><section><h2>Guided decision exercise</h2><label>Exercise<select value={exerciseId} onChange={e=>{setExercise(e.target.value);setDecision(exercises.exercises.find(x=>x.id===e.target.value)!.start)}}>{exercises.exercises.map(e=><option key={e.id} value={e.id}>{e.title}</option>)}</select></label><p>{exercise.context}</p>{'evidence' in decisionNode&&<p className="boundary">{decisionNode.evidence}</p>}{'feedback' in decisionNode&&<p role="status">{decisionNode.feedback}</p>}{'prompt' in decisionNode&&<h3>{decisionNode.prompt}</h3>}{'choices' in decisionNode&&decisionNode.choices?.map(c=><button key={c.text} onClick={()=>setDecision(c.next)}>{c.text}</button>)}<button onClick={()=>setDecision(exercise.start)}>Restart exercise</button></section><DoctrineEvidence/></>}
@@ -40,3 +42,4 @@ function App(){
  <footer>Unofficial educational platform · No Army endorsement · <a href="/legacy/">Original prototype</a> · Technical verification and production deployment pending</footer></main></>;
 }
 createRoot(document.getElementById('root')!).render(<App/>);
+
