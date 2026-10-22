@@ -19,7 +19,7 @@ Local browser execution used an npm-distributed Chromium binary because the stan
 
 The Mobile preparation workflow compiles an Android debug APK and unsigned release AAB, and a separate unsigned iOS simulator app. It inspects compiled privacy/configuration resources and merged Android release permissions before uploading test artifacts. Platform, security and rootless Podman workflows remain required. Refer to the latest checks on PR #3 for exact commit status and artifact availability; older failed attempts are retained for traceability.
 
-Initial CI exposed missing Python/build-script dependencies in the OCI build stage and the Android setup action's retired `tools` package default. Both build definitions were corrected. The iOS simulator build and rootless Podman rerun passed before this report; final commit checks must also pass before merge.
+Initial CI exposed missing Python/build-script dependencies in the OCI build stage and the Android setup action's retired `tools` package default. Both build definitions were corrected. The compiled Android check also accounts for AndroidX’s app-scoped dynamic-receiver permission only when it is signature-protected; it rejects network or sensitive permissions. The iOS simulator build and rootless Podman rerun passed before this report; final commit checks must also pass before merge.
 
 ## Remaining acceptance and release risks
 

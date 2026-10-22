@@ -11,7 +11,12 @@ if sys.argv[1]=='android':
     ns='{http://schemas.android.com/apk/res/android}'
     for manifest in manifests:
         root=ET.parse(manifest).getroot()
-        assert not root.findall('uses-permission'),'Unexpected Android permissions'
+        permissions=[node.get(ns+'name') for node in root.findall('uses-permission')]
+        internal=root.get('package')+'.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
+        assert all(name==internal for name in permissions),f'Unexpected Android permissions: {permissions}'
+        if internal in permissions:
+            declared=[node for node in root.findall('permission') if node.get(ns+'name')==internal]
+            assert len(declared)==1 and declared[0].get(ns+'protectionLevel')=='signature', 'Receiver permission must be app-signature-only'
         app=root.find('application')
         assert app.get(ns+'allowBackup')=='false'
         assert app.get(ns+'usesCleartextTraffic')=='false'
