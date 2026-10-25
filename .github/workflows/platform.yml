@@ -65,6 +65,7 @@ jobs:
           NODE_PATH="$PWD/web/node_modules" node scripts/browser-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/mission-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/troubleshooting-check.cjs
+          NODE_PATH="$PWD/web/node_modules" node scripts/offline-check.cjs
       - name: Connected learning browser journeys
         run: |
           NODE_PATH="$PWD/web/node_modules" node scripts/connected-check.cjs

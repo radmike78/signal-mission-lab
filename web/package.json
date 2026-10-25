@@ -1,1 +1,36 @@
-{"name":"signal-mission-lab-web","private":true,"version":"0.2.0","type":"module","scripts":{"dev":"vite --host 0.0.0.0","build":"tsc --noEmit && vite build","preview":"vite preview --host 0.0.0.0"},"dependencies":{"react":"19.2.0","react-dom":"19.2.0"},"devDependencies":{"@types/react":"19.2.2","@types/react-dom":"19.2.2","playwright":"1.62.1","typescript":"5.9.3","vite":"7.3.7"}}
+{
+  "name": "signal-mission-lab-web",
+  "private": true,
+  "version": "0.3.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "python3 ../scripts/generate_app_icons.py && tsc --noEmit && vite build && python3 ../scripts/build_offline.py",
+    "preview": "vite preview --host 0.0.0.0",
+    "mobile:android": "python3 ../scripts/prepare_mobile.py android",
+    "mobile:ios": "python3 ../scripts/prepare_mobile.py ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.3",
+    "@capacitor/app": "8.1.2",
+    "@capacitor/browser": "8.0.5",
+    "@capacitor/core": "8.5.3",
+    "@capacitor/ios": "8.5.3",
+    "@capacitor/preferences": "8.0.1",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.3",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "playwright": "1.62.1",
+    "typescript": "5.9.3",
+    "vite": "7.3.7"
+  },
+  "overrides": {
+    "xcode": {
+      "uuid": "11.1.1"
+    }
+  }
+}

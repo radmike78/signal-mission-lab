@@ -1,3 +1,4 @@
+import {nativeApp} from './runtime';
 import React, {useState} from 'react';
 import assessment from '../../data/assessment.json';
 import catalog from '../../data/catalog.json';
@@ -17,6 +18,7 @@ type Session={token:string;account:Account};
 export function LearningPanel(){
  const [credential,setCredential]=useState(''),[session,setSession]=useState<Session|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[cohorts,setCohorts]=useState<Cohort[]>([]),[progress,setProgress]=useState<Progress|null>(null),[callsign,setCallsign]=useState('Alpha'),[learner,setLearner]=useState(''),[activity,setActivity]=useState('assessment'),[assignments,setAssignments]=useState<Assignment[]>([]),[selected,setSelected]=useState(''),[attempts,setAttempts]=useState<Attempt[]>([]),[answers,setAnswers]=useState<Record<string,number>>({}),[diagnostic,setDiagnostic]=useState<Diagnosis>({checks:[],diagnosis:''}),[notice,setNotice]=useState(''),[confirmDelete,setConfirmDelete]=useState(false);
  async function api<T>(path:string,token:string,method='GET',body?:unknown):Promise<T>{
+  if(nativeApp)throw Error('Instructor services are available in the web edition.');
   const response=await fetch('/api/learning'+path,{method,headers:{Authorization:'Bearer '+token,...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined,credentials:'omit',cache:'no-store',signal:AbortSignal.timeout(10000)});
   if(response.status===401){disconnect();throw Error('Access expired or was revoked. Request a new lab credential.');}
   if(!response.ok){
