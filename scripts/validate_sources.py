@@ -9,12 +9,14 @@ from backend.technology import validate_technology
 from backend.recovery import validate_content
 from backend.application_support import validate_applications
 from backend.signal_products import validate_signal_products
+from backend.failure_guides import validate_failure_guides
 
 def main():
     try:
         values = [json.loads((ROOT / 'data' / name).read_text(encoding='utf-8'))
                   for name in ['catalog.json', 'sources.json', 'publications.json', 'equipment-coverage.json']]
         result = validate_corpus(*values)
+        result.update(validate_failure_guides(json.loads((ROOT / "data/network-failures.json").read_text(encoding="utf-8")), values[0]))
         result.update(validate_technology(json.loads((ROOT / "data/technology-learning.json").read_text(encoding="utf-8")), values[0]))
         result.update(validate_content(json.loads((ROOT / "data/recovery-exercises.json").read_text(encoding="utf-8"))))
         from backend.recovery import validate_transfer

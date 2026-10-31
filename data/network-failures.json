@@ -1,0 +1,801 @@
+{
+  "schema_version": 1,
+  "review_status": "human_review_pending",
+  "scope": "Prioritized learning checks, not measured Army failure-frequency rankings. Each catalog entry has an explicit coverage status. Commercial references do not establish Army configurations or interoperability.",
+  "sources": [
+    {
+      "id": "ospf",
+      "title": "Cisco: Troubleshoot OSPF Neighbor Problems",
+      "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13699-29.html",
+      "locator": "Adjacencies; Neighbor States; Typical Reasons",
+      "status": "public_page_retrieved",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "id": "ospf-mtu",
+      "title": "Cisco: Neighbors Stuck in Exstart/Exchange",
+      "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html",
+      "locator": "MTU mismatch; other causes of Exstart/Exchange",
+      "status": "public_page_retrieved",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "id": "dmvpn",
+      "title": "Cisco: Troubleshoot DMVPN Issues",
+      "url": "https://www.cisco.com/c/en/us/support/docs/security/dynamic-multipoint-vpn-dmvpn/111976-dmvpn-troubleshoot-00.html",
+      "locator": "DMVPN Troubleshooting Workflow; underlay; NHRP; IPsec; MTU",
+      "status": "public_page_retrieved",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "id": "gre",
+      "title": "Cisco: Understand GRE Tunnel Keepalives",
+      "url": "https://www.cisco.com/c/en/us/support/docs/ip/generic-routing-encapsulation-gre/118370-technote-gre-00.html",
+      "locator": "Tunnel line protocol; keepalive and encryption limitations",
+      "status": "public_page_retrieved",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "id": "taclane",
+      "title": "General Dynamics: TACLANE Encryptor Training",
+      "url": "https://gdmissionsystems.com/encryption/taclane-network-encryption/taclane-encryptor-training",
+      "locator": "Course audience and prerequisites; not an operator manual",
+      "status": "direct_access_403_search_excerpt_only",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "id": "comsec",
+      "title": "Army PM Tactical Radios: Communications Security",
+      "url": "https://cpec2in.army.mil/Organizations/PM-Tactical-Radios/Communications-Security/",
+      "locator": "COMSEC portfolio and key management role; not handling procedures",
+      "status": "direct_access_403_search_excerpt_only",
+      "retrieved": "2026-10-31"
+    }
+  ],
+  "issues": [
+    {
+      "id": "ospf-neighbor",
+      "title": "OSPF: the expected neighbor is missing",
+      "purpose": "OSPF exchanges link-state information so routers can calculate paths. Neighbors must agree on required parameters.",
+      "why": "Absent or invalid Hellos prevent neighbor formation. An interface, area, timer, authentication or delivery mismatch can interrupt this exchange.",
+      "check": "Compare interface state and expected peer parameters on both ends. Identify the neighbor state before choosing a cause. Two-way can be normal between routers that are neither designated nor backup designated router on broadcast networks.",
+      "action": "In a synthetic lab, correct only the demonstrated mismatch against the approved design; preserve the original value for rollback.",
+      "verify": "Confirm the adjacency expected for this network type, required routes, and the user service. FULL alone is not application acceptance.",
+      "sources": [
+        "ospf"
+      ],
+      "scope": "Commercial technology principle; confirm applicability, software release and approved baseline before use."
+    },
+    {
+      "id": "ospf-exchange",
+      "title": "OSPF: stuck exchanging the database",
+      "purpose": "Adjacency requires synchronizing routing information, beyond discovering a neighbor.",
+      "why": "A maximum transmission unit (MTU) mismatch can prevent database exchange. Exstart/Exchange is evidence to investigate, not proof of one cause.",
+      "check": "Compare both interface MTUs and the usable path size. Examine database-exchange observations on both peers before concluding MTU is responsible.",
+      "action": "Use the approved design to resolve the demonstrated cause. Do not make ignoring MTU checks the default fix.",
+      "verify": "Verify stable adjacency, expected routes and representative application traffic, including larger transfers.",
+      "sources": [
+        "ospf-mtu"
+      ],
+      "scope": "Commercial technology principle; confirm applicability, software release and approved baseline before use."
+    },
+    {
+      "id": "dmvpn-underlay",
+      "title": "DMVPN: transport cannot reach the peer",
+      "purpose": "The outer network must deliver tunnel traffic before the overlay can work.",
+      "why": "An unreachable outer endpoint prevents subsequent tunnel stages.",
+      "check": "Compare bidirectional outer-path reachability separately from tunnel-address reachability.",
+      "action": "Restore the authorized transport path before changing overlay settings.",
+      "verify": "Recheck both directions, then tunnel and application acceptance.",
+      "sources": [
+        "dmvpn"
+      ],
+      "scope": "Commercial technology principle; confirm applicability, software release and approved baseline before use."
+    },
+    {
+      "id": "dmvpn-nhrp",
+      "title": "DMVPN: endpoint mapping is wrong",
+      "purpose": "NHRP associates overlay destinations with reachable transport endpoints.",
+      "why": "Missing or incorrect registration/mapping can prevent the intended forwarding path.",
+      "check": "Compare the expected peer and observed mapping for the approved DMVPN phase.",
+      "action": "Correct the demonstrated mapping fault using the authorized phase-specific design.",
+      "verify": "Verify required peer paths and user traffic, not only registration.",
+      "sources": [
+        "dmvpn"
+      ],
+      "scope": "Commercial technology principle; confirm applicability, software release and approved baseline before use."
+    },
+    {
+      "id": "vpn-encryption",
+      "title": "Encryption: tunnel and security state disagree",
+      "purpose": "Encryption protects traffic; encapsulation alone does not establish protection.",
+      "why": "Incompatible security negotiation or a blocked path can prevent protected traffic. GRE status depends on release and configuration.",
+      "check": "Distinguish outer reachability, security-association state and bidirectional protected counters.",
+      "action": "Coordinate the approved correction. Never remove protection to make traffic pass.",
+      "verify": "Verify protected traffic in both directions and the intended service.",
+      "sources": [
+        "dmvpn",
+        "gre"
+      ],
+      "scope": "Commercial technology principle; confirm applicability, software release and approved baseline before use. Router IPsec and a dedicated TACLANE are separate protection mechanisms; these checks are not TACLANE procedures."
+    },
+    {
+      "id": "tunnel-size",
+      "title": "Tunnels: small tests pass, applications stall",
+      "purpose": "Encapsulation needs packet space on the underlying path.",
+      "why": "Overhead can leave less room for inner packets.",
+      "check": "Compare small and representative-size synthetic transfers; success with small packets is insufficient.",
+      "action": "Resolve the demonstrated size limitation against the approved design.",
+      "verify": "Repeat representative transfers in both directions.",
+      "sources": [
+        "dmvpn"
+      ],
+      "scope": "Commercial technology principle; confirm applicability, software release and approved baseline before use."
+    },
+    {
+      "id": "taclane-boundary",
+      "title": "TACLANE: isolate the fault boundary first",
+      "purpose": "A dedicated encryptor has a separate protection role from a router. This lesson teaches that distinction; it does not provide device setup.",
+      "why": "A failed service does not by itself prove a keying fault. Guessing at device or security settings obscures the original failure.",
+      "check": "In a fictional diagram, distinguish local connectivity, the transport path, encryptor status and remote service evidence. Actual status interpretation requires the approved model manual.",
+      "action": "Use the model/release-specific approved operator manual and qualified support. Do not bypass the encryptor or alter keying to test a theory.",
+      "verify": "Require the authorized protection checks and end-to-end service acceptance. No model-specific checklist is verified here.",
+      "sources": [
+        "taclane"
+      ],
+      "scope": "Editorial fault-isolation exercise. Manufacturer training listing found; direct page access returned 403. No TACLANE operator procedure has been verified."
+    },
+    {
+      "id": "comsec-readiness",
+      "title": "COMSEC: readiness is a separate prerequisite",
+      "purpose": "COMSEC includes equipment and key-management responsibilities. A saved network configuration does not establish cryptographic readiness.",
+      "why": "Public product descriptions cannot establish which material, authorization or handling procedure a particular system needs.",
+      "check": "For a training scenario, identify the responsible COMSEC support role and the approved procedure needed before operation. Do not enter operational identifiers, keys or material here.",
+      "action": "Refer actual handling, keying, accountability and incident actions to authorized personnel and approved procedures. No fill, zeroize or recovery sequence is provided.",
+      "verify": "Use authorized acceptance criteria for the exact system. This app records no COMSEC readiness or operational status.",
+      "sources": [
+        "comsec"
+      ],
+      "scope": "Public awareness only. Applicability differs by system; this is not a universal Army COMSEC checklist."
+    }
+  ],
+  "records": [
+    {
+      "id": "jnn",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "cpn",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "cpce",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "dcgsa",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "afatds",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "q53",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "radio",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "wint-inc1",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "wint-inc2",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "thn",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "rhn",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "tcn",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "pop",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "sne",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "vwp",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "nosc",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "stt",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "stt-plus",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "hclos",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "trilos",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "t2c2",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "smart-t",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "snap",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "dket",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "phoenix-d",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "phoenix-e",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "snn",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "gbs",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "grrip",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "mcn-ae",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "direct",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "sincgars",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "leader",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "prc148d",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "prc163",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "manpack",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "prc158",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "prc162",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "cnr",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "itn",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "nett-warrior",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "vha",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "jenm",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "tsi",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "ngtt",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "mom",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "saams",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "ngc2",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "lcn-t",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "nite",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "satcom-fot",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "prc117",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "prc150",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "prc152",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "vrc103",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "vrc104",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "vrc110",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "prc160",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "scout",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "htll",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "seeker",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "hf",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "tacsat",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "retrans",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "tropo",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "baseband",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "cabling",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "power",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "edge",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "wireless",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "uno",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "crypto",
+      "topics": [
+        "taclane-boundary",
+        "comsec-readiness"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "jbc-p",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "mmc-s",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "mmc-t",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "cpi2",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "itn-aviation",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "axs",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "trc170",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "prc154",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "prc155",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "psc5",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "trc190",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "gait",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "pacstar",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "iq-core",
+      "topics": [
+        "ospf-neighbor",
+        "ospf-exchange",
+        "dmvpn-underlay",
+        "dmvpn-nhrp",
+        "vpn-encryption",
+        "tunnel-size"
+      ],
+      "applicability": "Study links only: use these lessons only where the approved architecture actually includes these technologies. No Army variant configuration is verified.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    },
+    {
+      "id": "bccs",
+      "topics": [],
+      "applicability": "No researched failure guide published for this entry yet.",
+      "manual_needed": "Approved model and software-release operator/maintenance troubleshooting reference, public-release status, and qualified technical review."
+    }
+  ]
+}
