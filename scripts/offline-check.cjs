@@ -12,10 +12,11 @@ const fs=require('node:fs');
  await page.goto(url);await page.evaluate(async()=>{await navigator.serviceWorker.ready;});
  await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
  await nav('Offline & privacy');await page.getByText('Offline learning is ready on this browser.',{exact:true}).waitFor();
+ // Route at context scope so Service Worker-owned network requests are included.
  // API traffic is deliberately outside the offline allowlist, even after a successful response.
- await page.route('**/api/offline-probe',route=>route.fulfill({status:200,contentType:'application/json',body:'{"private":"not-cacheable"}'}));
+ await context.route('**/api/offline-probe',route=>route.fulfill({status:200,contentType:'application/json',body:'{"private":"not-cacheable"}'}));
  await page.evaluate(()=>fetch('/api/offline-probe',{headers:{Authorization:'Bearer synthetic-test'}}).then(r=>r.json()));
- await page.unroute('**/api/offline-probe');
+ await context.unroute('**/api/offline-probe');
  await page.evaluate(()=>localStorage.setItem('unrelated-setting','keep'));
  await context.setOffline(true);await page.reload();
  await page.getByRole('heading',{name:'What is your mission?',exact:true}).waitFor();
