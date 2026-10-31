@@ -34,7 +34,7 @@ class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
 class Diagnosis(StrictModel):
     fault: Literal["dns", "identity", "power"]
-    checks: list[int] = Field(max_length=len(core.QUIZ))
+    checks: list[int] = Field(max_length=core.DIAGNOSTIC_CHECK_LIMIT)
     diagnosis: Literal["dns", "identity", "power"]
 class Answers(StrictModel):
     answers: dict[str,int] = Field(max_length=len(core.QUIZ))

@@ -26,6 +26,8 @@ def mentor(topic):
     if claim is None:
         return {"answer": "Insufficient reviewed evidence. Ask an instructor to review a public source.", "citations": [], "mode": "deterministic retrieval; no generative AI"}
     return {"answer": claim["statement"], "citations": [claim], "mode": "deterministic retrieval; no generative AI", "limitation": claim["scope"]}
+DIAGNOSTIC_CHECK_LIMIT = max(len(f["checks"]) for f in catalog()["faults"])
+
 def diagnose(fault_id, checks, diagnosis):
     faults = catalog()["faults"]
     fault = next((f for f in faults if f["id"] == fault_id), None)
