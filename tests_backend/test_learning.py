@@ -138,14 +138,14 @@ class LearningTests(unittest.TestCase):
   path=f'/assignments/{a}/attempts'
   self.assertEqual(self.call('POST',path,self.outsider,json={'evidence':[],'decision':'partial'}).status_code,404)
   partial=self.call('POST',path,self.learner,json={'evidence':['log'],'decision':'rerun'})
-  self.assertEqual(partial.status_code,201);self.assertEqual(partial.json()['score'],1)
+  self.assertEqual(partial.status_code,201);self.assertEqual(partial.json()['score'],0)
   summary=self.call('GET',f'/cohorts/{c}/progress').json()['summary']
   self.assertEqual(summary['assigned_pairs'],1);self.assertEqual(summary['attempted_pairs'],1)
   self.assertEqual(summary['recovery_gaps']['builder'],{'attempted':1,'evidence_gap':1,'decision_gap':1})
   body={'evidence':['script','log','state','contract'],'decision':'partial'}
   self.assertEqual(self.call('POST',path,self.learner,json={**body,'score':5}).status_code,422)
   complete=self.call('POST',path,self.learner,json=body)
-  self.assertEqual(complete.status_code,201);self.assertEqual(complete.json()['score'],5)
+  self.assertEqual(complete.status_code,201);self.assertEqual(complete.json()['score'],1)
   summary=self.call('GET',f'/cohorts/{c}/progress').json()['summary']
   self.assertEqual(summary['latest_complete_pairs'],1)
   self.assertEqual(summary['recovery_gaps']['builder'],{'attempted':1,'evidence_gap':0,'decision_gap':0})

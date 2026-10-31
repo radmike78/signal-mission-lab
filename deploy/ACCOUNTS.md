@@ -30,7 +30,7 @@ Removing a learner deletes their attempts for that cohort. Deleting a cohort rem
 
 ## Same-origin deployment
 
-Set `SML_SERVE_WEB=1` to serve the packaged React app and API together. Specify `SML_ALLOWED_HOSTS` as a comma-separated explicit hostname allowlist; defaults accept loopback and test hosts only. The normal account service requires HTTPS. The `SML_ENV=local` exception is for loopback development only; `SML_ENV=test` also allows test SQLite.
+Set `SML_SERVE_WEB=1` to serve the packaged React app and API together. Specify `SML_ALLOWED_HOSTS` as a comma-separated explicit hostname allowlist; defaults accept loopback and test hosts only. The normal account service requires HTTPS. The `SML_ENV=local` HTTP exception is enforced only for a numeric loopback peer and loopback URL host; forwarded headers cannot grant the exception. `SML_ENV=test` allows fixture HTTP and test SQLite; never set it on a real-user deployment.
 
 TLS termination must set the ASGI scheme only through a trusted proxy. The image defaults to ignoring all proxy headers. If terminating TLS upstream, explicitly override the startup command with `--proxy-headers --forwarded-allow-ips` restricted to the actual proxy IPs. Never use a wildcard proxy trust setting. Restrict origin-network access to that proxy. Validate this arrangement on the chosen host before public access.
 

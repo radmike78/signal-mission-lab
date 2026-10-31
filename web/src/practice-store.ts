@@ -1,5 +1,5 @@
 /** Bounded local formative results only. Never store mission text or credentials. */
-export type PracticeKind='assessment'|'diagnosis'|'builder'|'routing'|'satellite';
+export type PracticeKind='assessment'|'diagnosis'|'builder'|'routing'|'satellite'|'builder-transfer'|'routing-transfer'|'satellite-transfer';
 export type PracticeResult={kind:PracticeKind;score:number;total:number;at:string};
 export function parsePracticeHistory(raw:string|null):PracticeResult[]{
  if(!raw||raw.length>30000)return [];
@@ -7,7 +7,7 @@ export function parsePracticeHistory(raw:string|null):PracticeResult[]{
  return value.slice(-50).flatMap((r:unknown)=>{
   if(!r||typeof r!=='object')return [];
   const x=r as Record<string,unknown>;
-  if(typeof x.kind!=='string'||!['assessment','diagnosis','builder','routing','satellite'].includes(x.kind)||typeof x.score!=='number'||typeof x.total!=='number'||!Number.isFinite(x.score)||!Number.isFinite(x.total)||x.total<=0||x.total>100||x.score<0||x.score>x.total||typeof x.at!=='string'||x.at.length>30||!Number.isFinite(Date.parse(x.at)))return [];
+  if(typeof x.kind!=='string'||!['assessment','diagnosis','builder','routing','satellite','builder-transfer','routing-transfer','satellite-transfer'].includes(x.kind)||typeof x.score!=='number'||typeof x.total!=='number'||!Number.isFinite(x.score)||!Number.isFinite(x.total)||x.total<=0||x.total>100||x.score<0||x.score>x.total||typeof x.at!=='string'||x.at.length>30||!Number.isFinite(Date.parse(x.at)))return [];
   return [{kind:x.kind as PracticeKind,score:x.score,total:x.total,at:x.at}];
  });}catch{return [];}
 }

@@ -327,14 +327,14 @@
       "scenario": "Three fictional application VMs stop together, but user laptops remain powered. Which shared dependency should you investigate?",
       "options": [
         "The host and its resource/storage health",
-        "Only one user password",
-        "The color of a network cable"
+        "A single application identity permission",
+        "One laptop's local name-resolution cache"
       ],
       "answer": 0,
       "feedback": [
         "The shared host is a plausible common dependency. Check evidence before concluding it is the cause.",
-        "A single password does not explain three VMs stopping together.",
-        "Cable appearance is not evidence of host or application health."
+        "That check does not best fit the observations. The shared host is a plausible common dependency. Check evidence before concluding it is the cause.",
+        "That check does not best fit the observations. The shared host is a plausible common dependency. Check evidence before concluding it is the cause."
       ],
       "source_ids": [
         "hyperv",
@@ -374,15 +374,15 @@
       ],
       "scenario": "A fictional VM link is up, but the VM was attached to a different training VLAN. What is the useful next check?",
       "options": [
-        "Disable every security control",
+        "Compare the upstream route table before checking local attachment",
         "Compare intended VLAN membership and virtual-switch attachment",
-        "Replace the application database immediately"
+        "Inspect the database service account before checking the local link"
       ],
       "answer": 1,
       "feedback": [
-        "Removing safeguards does not establish the Layer 2 mismatch.",
+        "That check does not best fit the observations. Compare intended and observed logical attachment before changing anything.",
         "Compare intended and observed logical attachment before changing anything.",
-        "A database replacement is not justified by a VLAN mismatch."
+        "That check does not best fit the observations. Compare intended and observed logical attachment before changing anything."
       ],
       "source_ids": [
         "cisco-vlan",
@@ -422,14 +422,14 @@
       ],
       "scenario": "A synthetic request reaches the remote training network, but replies cannot return. Which missing requirement best explains this?",
       "options": [
-        "More VM memory in every case",
-        "A different application logo",
+        "Guest memory pressure on the application host",
+        "A client-side name-resolution cache",
         "A usable return route"
       ],
       "answer": 2,
       "feedback": [
-        "Memory pressure is a separate hypothesis requiring evidence.",
-        "Branding does not establish network reachability.",
+        "That check does not best fit the observations. Request and reply paths both matter. Policy or service faults can also exist.",
+        "That check does not best fit the observations. Request and reply paths both matter. Policy or service faults can also exist.",
         "Request and reply paths both matter. Policy or service faults can also exist."
       ],
       "source_ids": [
@@ -471,14 +471,14 @@
       "scenario": "A synthetic user reaches the application, signs in successfully, but is denied a restricted task. Which area best fits the evidence?",
       "options": [
         "Authorization for that task",
-        "Assume all transport is down",
-        "Assume every server is powered off"
+        "The name-resolution service used before sign-in",
+        "The path MTU for the initial connection"
       ],
       "answer": 0,
       "feedback": [
         "Successful sign-in and a denied action point toward permission checks; inspect the actual denial.",
-        "An application response shows some connectivity, though not every path is proven.",
-        "A responding application is inconsistent with every server being off."
+        "That check does not best fit the observations. Successful sign-in and a denied action point toward permission checks; inspect the actual denial.",
+        "That check does not best fit the observations. Successful sign-in and a denied action point toward permission checks; inspect the actual denial."
       ],
       "source_ids": [
         "ms-dns",
@@ -519,15 +519,15 @@
       ],
       "scenario": "A training VM is on and reachable, but its application cannot read the attached data volume. What should you investigate?",
       "options": [
-        "Whether the web page uses a dark theme",
+        "The application's external DNS record",
         "Storage availability, host access and the data path",
-        "Assume that reachability proves storage is healthy"
+        "The remote routing adjacency only"
       ],
       "answer": 1,
       "feedback": [
-        "Appearance does not explain inaccessible data.",
+        "That check does not best fit the observations. Storage is a separate dependency; inspect evidence without destructive changes.",
         "Storage is a separate dependency; inspect evidence without destructive changes.",
-        "A reachable VM does not prove its attached storage is usable."
+        "That check does not best fit the observations. Storage is a separate dependency; inspect evidence without destructive changes."
       ],
       "source_ids": [
         "netapp",
@@ -568,14 +568,14 @@
       ],
       "scenario": "A fictional route exists, but the simulated firewall records a denial for the needed application. What is the best next step?",
       "options": [
-        "Add a permanent allow-all rule",
-        "Disable logging and try again",
+        "Investigate the identity role before reviewing the recorded flow denial",
+        "Change the default route before comparing the denied flow",
         "Review the intended flow and the matching policy with its owner"
       ],
       "answer": 2,
       "feedback": [
-        "An allow-all rule expands access beyond the approved need.",
-        "Removing evidence makes diagnosis harder.",
+        "That check does not best fit the observations. Reconcile the required flow with approved policy; no live device is changed here.",
+        "That check does not best fit the observations. Reconcile the required flow with approved policy; no live device is changed here.",
         "Reconcile the required flow with approved policy; no live device is changed here."
       ],
       "source_ids": [
@@ -615,14 +615,14 @@
       "scenario": "A fictional disconnected lab cannot download a required image. Which planning gap should be addressed?",
       "options": [
         "Approved local image and dependency availability",
-        "An automatic assumption that the software is incompatible",
-        "A request to expose the lab directly to the Internet"
+        "The cluster's external DNS record only",
+        "The running application's user permissions only"
       ],
       "answer": 0,
       "feedback": [
         "Stage approved artifacts and their dependencies using an authorized process.",
-        "A missing download does not establish compatibility or incompatibility.",
-        "Do not change a disconnected boundary to bypass an unmet dependency."
+        "That check does not best fit the observations. Stage approved artifacts and their dependencies using an authorized process.",
+        "That check does not best fit the observations. Stage approved artifacts and their dependencies using an authorized process."
       ],
       "source_ids": [
         "redhat"
@@ -661,15 +661,15 @@
       ],
       "scenario": "Two training VMs use the same physical host and data volume. What has not been established?",
       "options": [
-        "That the VMs have names",
+        "That each VM has a separate guest operating system",
         "Independence from host/storage failure and tested recovery",
-        "That applications use computing resources"
+        "That the two VM applications can be restarted separately"
       ],
       "answer": 1,
       "feedback": [
-        "Names do not demonstrate resilience.",
+        "That check does not best fit the observations. A shared dependency can affect both VMs; test the intended recovery outcome.",
         "A shared dependency can affect both VMs; test the intended recovery outcome.",
-        "Resource use alone does not establish recovery."
+        "That check does not best fit the observations. A shared dependency can affect both VMs; test the intended recovery outcome."
       ],
       "source_ids": [
         "nist-recovery",
@@ -709,14 +709,14 @@
       ],
       "scenario": "A fictional user can reach the training app. What is stronger evidence of appropriate access control?",
       "options": [
-        "Every user has administrator privileges",
-        "The network diagram uses a lock icon",
+        "A successful reachability test from each client",
+        "A complete route table for the destination network",
         "Authorized actions succeed and unauthorized actions are denied"
       ],
       "answer": 2,
       "feedback": [
-        "Universal administrator access violates least privilege.",
-        "An icon is not evidence of enforcement.",
+        "That check does not best fit the observations. Test allowed and denied actions; document results and limitations.",
+        "That check does not best fit the observations. Test allowed and denied actions; document results and limitations.",
         "Test allowed and denied actions; document results and limitations."
       ],
       "source_ids": [

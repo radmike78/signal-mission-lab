@@ -1,6 +1,7 @@
 """Bounded in-process rate limiting; trusted edge must also impose distributed limits."""
 from collections import OrderedDict
 import hashlib
+import ipaddress
 import os
 from threading import Lock
 import time
@@ -31,7 +32,19 @@ def store_dependency():
         raise HTTPException(503,'Persistent learning service is not configured') from error
 
 def principal(request: Request):
-    if os.environ.get("SML_ENV") not in {"test","local"} and request.url.scheme != "https":
+    mode = os.environ.get("SML_ENV")
+    # Test mode is isolated fixture infrastructure. Local HTTP additionally needs
+    # a numeric loopback peer AND loopback URL; Host/X-Forwarded-For cannot bypass it.
+    def loopback(value):
+        try:
+            address = ipaddress.ip_address(value)
+            return address.is_loopback or bool(getattr(address, 'ipv4_mapped', None) and address.ipv4_mapped.is_loopback)
+        except (ValueError, TypeError):
+            return False
+    local_http = (mode == 'local' and request.client is not None
+                  and loopback(request.client.host)
+                  and (request.url.hostname == 'localhost' or loopback(request.url.hostname)))
+    if request.url.scheme != 'https' and mode != 'test' and not local_http:
         raise HTTPException(426,"HTTPS is required for account access")
     # Never trust forwarded headers for rate-limit identity.
     client=request.client.host if request.client else 'unknown'

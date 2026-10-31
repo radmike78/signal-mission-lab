@@ -53,7 +53,7 @@ const fs=require('node:fs');
  if(!await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth))throw Error('Mobile overflow');
  await page.screenshot({path:'artifacts/screenshots/troubleshooting-mobile.png',fullPage:true});
  await nav('Mission');await nav('Troubleshoot');
- if(await w.getByLabel('Issue to work on',{exact:true}).inputValue()!=='builder')throw Error('State survived navigation');
+ if(await w.getByLabel('Issue to work on',{exact:true}).inputValue()!=='satellite')throw Error('Case was lost during navigation');
  await page.getByText('Other practice incidents',{exact:true}).click();await page.getByLabel('Synthetic incident').selectOption('power');
  if(errors.length)throw Error(errors.join('\n'));
  console.log('Focused troubleshooting passed: one check, optional depth, early-decision gate, resume, all cases, reset, mobile and legacy.');

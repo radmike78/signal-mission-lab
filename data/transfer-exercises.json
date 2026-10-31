@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "review_status": "human_review_pending",
+  "notice": "Editorial fictional reasoning practice. No Army configurations, alarm labels, commands or real equipment performance are represented. Technical review remains pending.",
+  "cases": [
+    {
+      "id": "builder-access",
+      "skill": "builder",
+      "title": "A different build failure",
+      "symptom": "A dummy workload and its service registration exist. The data volume exists too, but the application cannot read it.",
+      "steps": [
+        {
+          "prompt": "Which check best separates the likely causes?",
+          "options": [
+            "Compare the attachment error and effective access of the workload identity",
+            "Check only whether the volume name is listed",
+            "Recreate the workload before reading the error"
+          ],
+          "answer": 0,
+          "feedback": "The invented attachment log reports access denied for the workload identity. The expected volume exists and is healthy; this is an access mismatch, not a missing volume."
+        },
+        {
+          "prompt": "What is the supported next action?",
+          "options": [
+            "Create a second volume with another name",
+            "Have the access owner correct the specific dummy identity permission under the exercise baseline",
+            "Apply a broad administrator role to every workload"
+          ],
+          "answer": 1,
+          "feedback": "Use the observed access failure and the approved owner/baseline. Do not recreate healthy objects or broaden unrelated permissions."
+        },
+        {
+          "context": "For this final check, assume the owner completed the approved scoped correction. The volume is attached and the application health check now passes.",
+          "prompt": "Which evidence would demonstrate restoration?",
+          "options": [
+            "Accept the volume attachment indicator alone",
+            "Confirm a workload object exists",
+            "Have the intended dummy user complete the application task using its data"
+          ],
+          "answer": 2,
+          "feedback": "Re-test the original user task after the prerequisite checks. A status indicator alone is not end-to-end acceptance."
+        }
+      ]
+    },
+    {
+      "id": "builder-registration",
+      "skill": "builder",
+      "title": "A build that stopped late",
+      "symptom": "The dummy workload runs and its data can be read locally, but the service cannot be discovered by a training user.",
+      "steps": [
+        {
+          "prompt": "Which check best separates the likely causes?",
+          "options": [
+            "Recheck the physical storage path first",
+            "Compare the registration step log with the expected service entry",
+            "Assume the builder completed because the workload runs"
+          ],
+          "answer": 1,
+          "feedback": "The synthetic log says the final registration step never ran. Local workload and data checks pass. The expected training service entry is absent."
+        },
+        {
+          "prompt": "What is the supported next action?",
+          "options": [
+            "Follow the approved missing-registration recovery step and validate the entry",
+            "Recreate the healthy workload and data volume",
+            "Disable user authentication to test discovery"
+          ],
+          "answer": 0,
+          "feedback": "Recover only the incomplete step after confirming the contract. Registration, authentication and the user task are separate checkpoints."
+        },
+        {
+          "context": "Assume the exercise owner completed the approved registration step. The service is now discoverable; sign-in and task completion have not yet been tested.",
+          "prompt": "Which evidence would demonstrate restoration?",
+          "options": [
+            "Stop when the entry appears in the directory",
+            "Repeat the authorized dummy user task and verify the intended data result",
+            "Accept the original builder completion text"
+          ],
+          "answer": 1,
+          "feedback": "Re-test the original user task after the prerequisite checks. A status indicator alone is not end-to-end acceptance."
+        }
+      ]
+    },
+    {
+      "id": "routing-return",
+      "skill": "routing",
+      "title": "A route that works one way",
+      "symptom": "In a fictional network, the expected OSPF adjacency is full and the forward route exists. Requests arrive at the remote application, but replies never return.",
+      "steps": [
+        {
+          "prompt": "Which check best separates the likely causes?",
+          "options": [
+            "Inspect the destination-side return route and reply-path observations",
+            "Reset OSPF simply because the application is unreachable",
+            "Rebuild the tunnel before examining packets"
+          ],
+          "answer": 0,
+          "feedback": "The dummy reply-path observation shows no route back to the source network. The approved baseline contains that return path; local application and modeled policy checks pass."
+        },
+        {
+          "prompt": "What is the supported next action?",
+          "options": [
+            "Adjust OSPF area IDs until the symptom changes",
+            "Remove all firewall restrictions",
+            "Ask the route owner to restore the missing dummy return path with a rollback point"
+          ],
+          "answer": 2,
+          "feedback": "A healthy adjacency and forward path cannot substitute for a return path. Correct the documented missing dependency, then test the service."
+        },
+        {
+          "context": "Assume the owner restored the approved return route. Both route lookups now succeed. The user service still needs acceptance.",
+          "prompt": "Which evidence would demonstrate restoration?",
+          "options": [
+            "Treat FULL adjacency as proof of application success",
+            "Verify bidirectional dummy traffic and the original application task",
+            "Accept the forward route alone"
+          ],
+          "answer": 1,
+          "feedback": "Re-test the original user task after the prerequisite checks. A status indicator alone is not end-to-end acceptance."
+        }
+      ]
+    },
+    {
+      "id": "routing-size",
+      "skill": "routing",
+      "title": "Small tests work, larger tasks fail",
+      "symptom": "The fictional tunnel and routes are present. Small messages succeed, but a larger dummy product repeatedly fails.",
+      "steps": [
+        {
+          "prompt": "Which check best separates the likely causes?",
+          "options": [
+            "Reinstall the application before checking the path",
+            "Compare packet-size and fragmentation observations across the modeled path",
+            "Change the OSPF area because a transfer failed"
+          ],
+          "answer": 1,
+          "feedback": "The invented path test reports a packet-size limit after encapsulation. Small exchanges pass; the large dummy product does not. No interface value or live command is supplied."
+        },
+        {
+          "prompt": "What is the supported next action?",
+          "options": [
+            "Have the network owner validate the documented packet-size baseline and approved scoped correction",
+            "Replace every route with a static default",
+            "Rebuild the tunnel security profile on speculation"
+          ],
+          "answer": 0,
+          "feedback": "A test must exercise the failure condition. The next check is packet-size behavior, not an unsupported routing or security change."
+        },
+        {
+          "context": "Assume the owner corrected the modeled path constraint using the exercise baseline. A small test passes again.",
+          "prompt": "Which evidence would demonstrate restoration?",
+          "options": [
+            "Run only the same small test",
+            "Accept that the tunnel icon is green",
+            "Repeat the original larger dummy transfer and confirm receipt/readability"
+          ],
+          "answer": 2,
+          "feedback": "Re-test the original user task after the prerequisite checks. A status indicator alone is not end-to-end acceptance."
+        }
+      ]
+    },
+    {
+      "id": "satellite-service",
+      "skill": "satellite",
+      "title": "Transport accepted, application still fails",
+      "symptom": "The fictional service owner has confirmed the approved two-way transport test. A training user cannot open an application by name.",
+      "steps": [
+        {
+          "prompt": "Which check best separates the likely causes?",
+          "options": [
+            "Repeat acquisition without checking the accepted transport evidence",
+            "Compare name resolution with the approved application reachability test",
+            "Increase transmit settings to improve a name lookup"
+          ],
+          "answer": 1,
+          "feedback": "The synthetic transport acceptance remains valid and the dummy application is reachable through its supplied test endpoint. The name lookup returns no matching record."
+        },
+        {
+          "prompt": "What is the supported next action?",
+          "options": [
+            "Escalate the missing dummy name record to its service owner and preserve the accepted transport baseline",
+            "Repoint the terminal because the application name failed",
+            "Rebuild all local VMs"
+          ],
+          "answer": 0,
+          "feedback": "The evidence points to a name-service dependency after transport acceptance. Do not treat every downstream symptom as a satellite fault."
+        },
+        {
+          "context": "Assume the name-service owner restored the approved dummy record. The lookup now returns the expected test endpoint.",
+          "prompt": "Which evidence would demonstrate restoration?",
+          "options": [
+            "Have the authorized user open the application by name and complete the intended task",
+            "Accept the name record without testing the application",
+            "Accept the original acquisition indication alone"
+          ],
+          "answer": 0,
+          "feedback": "Re-test the original user task after the prerequisite checks. A status indicator alone is not end-to-end acceptance."
+        }
+      ]
+    },
+    {
+      "id": "satellite-local",
+      "skill": "satellite",
+      "title": "A local prerequisite blocks acquisition",
+      "symptom": "An invented terminal has power but no acquisition indication. Its approved exercise checklist calls for checking the local connection path before any transmit/service request.",
+      "steps": [
+        {
+          "prompt": "Which check best separates the likely causes?",
+          "options": [
+            "Request a transmit setting change before reviewing local checks",
+            "Rebuild the downstream application",
+            "Inspect the supplied local-path self-test and checklist status"
+          ],
+          "answer": 2,
+          "feedback": "The invented self-test reports an open local connection path. This is not a real STT alarm label or a procedure; the exercise baseline requires maintainer review before proceeding."
+        },
+        {
+          "prompt": "What is the supported next action?",
+          "options": [
+            "Ask the authorized maintainer to address the documented local-path blocker; keep dependent tasks blocked",
+            "Declare the terminal ready because it has power",
+            "Bypass the local check and force a transmit test"
+          ],
+          "answer": 0,
+          "feedback": "Resolve the observed prerequisite within the documented authority. Acquisition afterward is progress, not proof of usable service."
+        },
+        {
+          "context": "Assume the qualified maintainer cleared the dummy local-path fault. The invented acquisition indication appears, but two-way service has not been accepted.",
+          "prompt": "Which evidence would demonstrate restoration?",
+          "options": [
+            "Release all application teams immediately",
+            "Coordinate authorized two-way transport acceptance, then routing and the dummy user task",
+            "Use the acquisition indication as final acceptance"
+          ],
+          "answer": 1,
+          "feedback": "Re-test the original user task after the prerequisite checks. A status indicator alone is not end-to-end acceptance."
+        }
+      ]
+    }
+  ]
+}

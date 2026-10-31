@@ -39,3 +39,14 @@ main table{display:block;max-width:100%;overflow-x:auto} .foundation-vendors>det
 .native-app .rail{padding-top:calc(2rem + env(safe-area-inset-top));padding-left:calc(1.5rem + env(safe-area-inset-left))}
 .native-app main{padding-top:calc(2rem + env(safe-area-inset-top));padding-bottom:calc(3rem + env(safe-area-inset-bottom));padding-right:calc(2rem + env(safe-area-inset-right))}
 @media(max-width:800px){.native-app .rail{padding-top:calc(1rem + env(safe-area-inset-top))}.native-app main{padding-top:1rem;padding-right:calc(1rem + env(safe-area-inset-right));padding-left:calc(1rem + env(safe-area-inset-left))}}
+
+/* Focused learning: preserve large type while wrapping narrow controls. */
+.skip-link{position:fixed;top:8px;left:8px;z-index:100;transform:translateY(-180%);background:#d0df84;color:#0e1210;padding:14px 20px;font-size:20px}
+.skip-link:focus{transform:none}
+main :is(button,select,summary,legend){overflow-wrap:anywhere;max-width:100%;white-space:normal;min-width:0}
+main :is(h1,h2,h3):focus-visible{outline:2px solid #d0df84;outline-offset:6px}
+main:focus{outline:none}
+.focused-workbench select{width:100%;min-width:0}
+.result-step{border-top:1px solid #53613e;padding:12px 0;margin:24px 0}
+.result-step>summary{font-size:1.3rem;line-height:1.4}
+main :is(h1,h2,h3,h4),.rail nav button{overflow-wrap:anywhere;min-width:0}

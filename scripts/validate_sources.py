@@ -17,6 +17,8 @@ def main():
         result = validate_corpus(*values)
         result.update(validate_technology(json.loads((ROOT / "data/technology-learning.json").read_text(encoding="utf-8")), values[0]))
         result.update(validate_content(json.loads((ROOT / "data/recovery-exercises.json").read_text(encoding="utf-8"))))
+        from backend.recovery import validate_transfer
+        result.update(validate_transfer(json.loads((ROOT / 'data/transfer-exercises.json').read_text(encoding='utf-8'))))
         result.update(validate_applications(json.loads((ROOT / "data/application-support.json").read_text(encoding="utf-8"))))
         result.update(validate_signal_products(json.loads((ROOT / "data/signal-products.json").read_text(encoding="utf-8"))))
     except (ValueError, KeyError, TypeError, OSError):
