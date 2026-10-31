@@ -1,22 +1,38 @@
 const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
+const http=require('node:http'),path=require('node:path');
 (async()=>{
  const bundled=process.env.SML_CHROMIUM_PACKAGE?require(process.env.SML_CHROMIUM_PACKAGE).default:null;
  if(bundled)bundled.setGraphicsMode=false;
  const browser=await chromium.launch(bundled?{headless:true,args:['--disable-gpu','--disable-software-rasterizer',...bundled.args.filter(a=>!a.includes('disable-web-security')&&!a.includes('allow-running-insecure-content'))],executablePath:process.env.SML_CHROMIUM_EXECUTABLE||await bundled.executablePath()}:{headless:true,args:['--no-sandbox']});
  const context=await browser.newContext({viewport:{width:390,height:844}});
  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
- const url=process.env.SML_URL||'http://127.0.0.1:8070';
+ // Use a real same-origin endpoint: browser interception is unreliable across SW versions.
+ const root=path.resolve(__dirname,'../web/dist');
+ const fixture=http.createServer((req,res)=>{
+  const pathname=new URL(req.url,'http://127.0.0.1').pathname;
+  if(pathname==='/api/offline-probe'){
+   res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'});
+   res.end('{"private":"not-cacheable"}');return;
+  }
+  const file=path.resolve(root,'.'+decodeURIComponent(pathname==='/'?'/index.html':pathname));
+  if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}
+  fs.readFile(file,(error,body)=>{
+   if(error){res.writeHead(404);res.end();return;}
+   const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.webmanifest':'application/manifest+json','.png':'image/png'};
+   res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream'});res.end(body);
+  });
+ });
+ await new Promise(resolve=>fixture.listen(0,'127.0.0.1',resolve));
+ const url='http://127.0.0.1:'+fixture.address().port;
+ try{
  const nav=async(name)=>{const button=page.getByRole('navigation').getByRole('button',{name:new RegExp(name+'$')});if(!await button.isVisible())await page.getByText('More learning tools',{exact:true}).click();await button.click();};
  await page.goto(url);await page.evaluate(async()=>{await navigator.serviceWorker.ready;});
  await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
  await nav('Offline & privacy');await page.getByText('Offline learning is ready on this browser.',{exact:true}).waitFor();
- // Route at context scope so Service Worker-owned network requests are included.
  // API traffic is deliberately outside the offline allowlist, even after a successful response.
- await context.route('**/api/offline-probe',route=>route.fulfill({status:200,contentType:'application/json',body:'{"private":"not-cacheable"}'}));
  await page.evaluate(()=>fetch('/api/offline-probe',{headers:{Authorization:'Bearer synthetic-test'}}).then(r=>r.json()));
- await context.unroute('**/api/offline-probe');
  await page.evaluate(()=>localStorage.setItem('unrelated-setting','keep'));
  await context.setOffline(true);await page.reload();
  await page.getByRole('heading',{name:'What is your mission?',exact:true}).waitFor();
@@ -36,5 +52,6 @@ const fs=require('node:fs');
  const keys=await page.evaluate(async()=>{const result=[];for(const name of await caches.keys())for(const r of await(await caches.open(name)).keys())result.push(new URL(r.url).pathname);return result;});
  assert(keys.length>5);assert(keys.every(p=>p==='/'||p==='/index.html'||p==='/manifest.webmanifest'||p.startsWith('/assets/')||p.startsWith('/icons/')),'private/unexpected cache entry');
  await nav('Offline & privacy');fs.mkdirSync('artifacts/screenshots',{recursive:true});await page.screenshot({path:'artifacts/screenshots/offline-mobile.png',fullPage:true});
- assert.deepEqual(errors,[]);await browser.close();console.log('PASS offline cold reload, lazy lessons, practice persistence/erase, cache privacy and mobile layout');
+ assert.deepEqual(errors,[]);console.log('PASS offline cold reload, lazy lessons, practice persistence/erase, cache privacy and mobile layout');
+ }finally{await browser.close();await new Promise(resolve=>fixture.close(resolve));}
 })().catch(error=>{console.error(error);process.exit(1)});
