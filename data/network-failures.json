@@ -71,7 +71,7 @@
       "title": "OSPF: stuck exchanging the database",
       "purpose": "Adjacency requires synchronizing routing information, beyond discovering a neighbor.",
       "why": "A maximum transmission unit (MTU) mismatch can prevent database exchange. Exstart/Exchange is evidence to investigate, not proof of one cause.",
-      "check": "Compare both interface MTUs and the usable path size. Also inspect packet loss and duplicate router identifiers before concluding MTU is responsible.",
+      "check": "Compare both interface MTUs and the usable path size. Examine database-exchange observations on both peers before concluding MTU is responsible.",
       "action": "Use the approved design to resolve the demonstrated cause. Do not make ignoring MTU checks the default fix.",
       "verify": "Verify stable adjacency, expected routes and representative application traffic, including larger transfers.",
       "sources": [
