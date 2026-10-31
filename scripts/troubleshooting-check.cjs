@@ -7,7 +7,7 @@ const fs=require('node:fs');
  await page.goto(process.env.SML_URL||'http://127.0.0.1:8070');
  const nav=name=>page.getByRole('navigation').getByRole('button',{name:new RegExp(name+'$')}).click();
  await nav('Troubleshoot');const w=page.locator('.diagnostic-workbench');
- if(await page.getByRole('navigation').getByRole('button').count()!==3)throw Error('Secondary tools visible on entry');
+ if(await page.getByRole('navigation').getByRole('button').count()!==4)throw Error('Secondary tools visible on entry');
  fs.mkdirSync('artifacts/screenshots',{recursive:true});
  await page.screenshot({path:'artifacts/screenshots/troubleshooting-focused-start.png',fullPage:true});
  if(await w.getByRole('radio').count())throw Error('Decision choices exposed before checks');

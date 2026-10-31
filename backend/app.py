@@ -34,10 +34,10 @@ class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
 class Diagnosis(StrictModel):
     fault: Literal["dns", "identity", "power"]
-    checks: list[int] = Field(max_length=3)
+    checks: list[int] = Field(max_length=len(core.QUIZ))
     diagnosis: Literal["dns", "identity", "power"]
 class Answers(StrictModel):
-    answers: dict[str,int] = Field(max_length=3)
+    answers: dict[str,int] = Field(max_length=len(core.QUIZ))
 @app.middleware("http")
 async def boundary(request, call_next):
     response = await call_next(request)

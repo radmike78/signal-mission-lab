@@ -56,16 +56,16 @@ class LearningTests(unittest.TestCase):
  def test_learner_assignment_isolation(self):
   c=self.cohort();self.enroll(c);a=self.assignment(c)
   self.assertEqual(self.call('GET','/assignments',self.outsider).json(),[])
-  body={'answers':{'mission':0,'interop':1,'identity':1}}
+  body={'answers':{'mission':0,'interop':1,'identity':1,'impact-scope':1,'information-age':0,'recovery-validation':2,'restoration-uncertainty':1}}
   self.assertEqual(self.call('POST',f'/assignments/{a}/attempts',self.outsider,json=body).status_code,404)
   self.assertEqual(self.call('GET',f'/cohorts/{c}/progress',self.learner).status_code,403)
   self.assertEqual(len(self.call('GET','/assignments',self.learner).json()),1)
  def test_score_is_server_computed_and_persists(self):
   c=self.cohort();self.enroll(c);a=self.assignment(c)
-  body={'answers':{'mission':0,'interop':1,'identity':1}}
+  body={'answers':{'mission':0,'interop':1,'identity':1,'impact-scope':1,'information-age':0,'recovery-validation':2,'restoration-uncertainty':1}}
   self.assertEqual(self.call('POST',f'/assignments/{a}/attempts',self.learner,json={**body,'score':999}).status_code,422)
   r=self.call('POST',f'/assignments/{a}/attempts',self.learner,json=body)
-  self.assertEqual(r.status_code,201);self.assertEqual((r.json()['score'],r.json()['total']),(3,3))
+  self.assertEqual(r.status_code,201);self.assertEqual((r.json()['score'],r.json()['total']),(7,7))
   self.assertEqual(len(self.call('GET','/attempts',self.learner).json()),1)
   self.assertEqual(self.call('GET','/attempts',self.outsider).json(),[])
   self.assertEqual(len(self.call('GET',f'/cohorts/{c}/progress').json()['attempts']),1)
@@ -79,7 +79,7 @@ class LearningTests(unittest.TestCase):
   self.assertEqual(r.json()['score'],100)
  def test_membership_removal_erases_access_and_attempts(self):
   c=self.cohort();self.enroll(c);a=self.assignment(c)
-  body={'answers':{'mission':0,'interop':1,'identity':1}}
+  body={'answers':{'mission':0,'interop':1,'identity':1,'impact-scope':1,'information-age':0,'recovery-validation':2,'restoration-uncertainty':1}}
   self.call('POST',f'/assignments/{a}/attempts',self.learner,json=body)
   self.assertEqual(self.call('DELETE',f'/cohorts/{c}/members/'+self.learner['account_id']).status_code,204)
   self.assertEqual(self.call('GET','/assignments',self.learner).json(),[])
@@ -115,8 +115,8 @@ class LearningTests(unittest.TestCase):
  def test_attempt_limit(self):
   c=self.cohort();self.enroll(c);a=self.assignment(c)
   for _ in range(20):
-   self.assertEqual(self.call('POST',f'/assignments/{a}/attempts',self.learner,json={'answers':{'mission':0,'interop':1,'identity':1}}).status_code,201)
-  self.assertEqual(self.call('POST',f'/assignments/{a}/attempts',self.learner,json={'answers':{'mission':0,'interop':1,'identity':1}}).status_code,409)
+   self.assertEqual(self.call('POST',f'/assignments/{a}/attempts',self.learner,json={'answers':{'mission':0,'interop':1,'identity':1,'impact-scope':1,'information-age':0,'recovery-validation':2,'restoration-uncertainty':1}}).status_code,201)
+  self.assertEqual(self.call('POST',f'/assignments/{a}/attempts',self.learner,json={'answers':{'mission':0,'interop':1,'identity':1,'impact-scope':1,'information-age':0,'recovery-validation':2,'restoration-uncertainty':1}}).status_code,409)
 
  def test_default_account_access_requires_https(self):
   with patch.dict(os.environ,{'SML_ENV':'production'}):
