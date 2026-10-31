@@ -36,6 +36,20 @@ const content=require('../data/transfer-exercises.json');
  assert(await page.locator('.equipment-shortlist').isHidden(),'equipment detail expanded on entry');assert(await page.locator('.preparation-brief').isHidden(),'preparation detail expanded on entry');
  const words=await page.locator('main').innerText().then(t=>t.split(/\s+/).length);assert(words<500,'mission result too dense: '+words);
  require('fs').mkdirSync('artifacts/screenshots',{recursive:true});await page.screenshot({path:'artifacts/screenshots/mission-focused-review.png',fullPage:true});
- assert.deepEqual(errors,[]);console.log('PASS focused brief, keyboard destination, 320px layout, preserved case, offline lazy practice, six varied cases, locked first choices, durable outcomes and review prompts');
+ for(const [text,expected] of [
+  ['For a fictional brigade exercise, support CPCE and STT at multiple locations and practice recovery from outages.','satellite'],
+  ['For a fictional brigade exercise, support CPCE and CPN at multiple locations and focus on availability.','routing'],
+  ['For a fictional battalion exercise, support CPCE at one location and focus on user access.','builder']
+ ]){
+  await page.getByRole('button',{name:'Start over',exact:true}).click();await page.getByLabel('Tell us what your team needs to accomplish').fill(text);await page.getByLabel('This is a fictional, non-sensitive training mission.').check();await page.getByRole('button',{name:'Understand my mission →',exact:true}).click();
+  await page.getByLabel('Required user outcome',{exact:true}).selectOption('access');await page.getByLabel('Synthetic exercise observation',{exact:true}).selectOption('passed');
+  await page.getByRole('button',{name:'Practice a service problem →',exact:true}).click();await page.getByRole('complementary',{name:'Mission practice handoff'}).waitFor();assert.equal(await page.getByLabel('Issue to work on',{exact:true}).inputValue(),expected);
+  await page.getByRole('button',{name:'Show the check result',exact:true}).click();await page.locator('.check-observation').waitFor();
+  await page.getByRole('button',{name:'Return to my mission brief',exact:true}).click();assert.equal(await page.getByLabel('Synthetic exercise observation',{exact:true}).inputValue(),'passed');
+  await page.getByRole('button',{name:'Practice a service problem →',exact:true}).click();await page.locator('.check-observation').waitFor();
+  await page.getByLabel('Issue to work on',{exact:true}).selectOption(expected==='builder'?'routing':'builder');assert.equal(await page.getByRole('complementary',{name:'Mission practice handoff'}).count(),0);
+  await nav('Mission');
+ }
+ assert.deepEqual(errors,[]);console.log('PASS focused brief, keyboard destination, 320px layout, preserved case, offline lazy practice, six varied cases, locked first choices, durable outcomes, review prompts and mission-to-practice handoffs');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});

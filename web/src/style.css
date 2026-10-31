@@ -50,3 +50,6 @@ main:focus{outline:none}
 .result-step{border-top:1px solid #53613e;padding:12px 0;margin:24px 0}
 .result-step>summary{font-size:1.3rem;line-height:1.4}
 main :is(h1,h2,h3,h4),.rail nav button{overflow-wrap:anywhere;min-width:0}
+
+.practice-handoff{max-width:1060px;border-left:3px solid var(--accent);padding:8px 20px;margin:24px 0;background:var(--surface)}
+.practice-handoff p{margin-top:8px}.practice-suggestion{max-width:65ch}
