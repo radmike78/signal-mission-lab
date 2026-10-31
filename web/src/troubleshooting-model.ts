@@ -11,5 +11,5 @@ export function evaluateDiagnosis(caseId:string,evidenceIds:readonly string[],ch
  if(!training||!Array.isArray(evidenceIds)||evidenceIds.length>training.evidence.length||new Set(evidenceIds).size!==evidenceIds.length||evidenceIds.some(id=>!training.evidence.some(e=>e.id===id)))throw Error('Use the supplied exercise evidence.');
  const choice=training.choices.find(c=>c.id===choiceId);if(!choice)throw Error('Use a supplied diagnosis.');
  const missing=training.required.filter(id=>!evidenceIds.includes(id));
- return {supported:choiceId===training.answer&&missing.length===0,missing,feedback:choice.feedback,reason:missing.length?'Collect the missing evidence before making a supported recovery decision.':choiceId===training.answer?'The evidence supports this recovery decision within the fictional case.':'The collected evidence does not support that recovery decision.'};
+ return {score:Number(choiceId===training.answer&&missing.length===0),total:1,supported:choiceId===training.answer&&missing.length===0,missing,feedback:choice.feedback,reason:missing.length?'Collect the missing evidence before making a supported recovery decision.':choiceId===training.answer?'The evidence supports this recovery decision within the fictional case.':'The collected evidence does not support that recovery decision.'};
 }

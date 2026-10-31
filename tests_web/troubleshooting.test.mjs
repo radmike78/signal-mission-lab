@@ -7,7 +7,7 @@ for(const c of diagnosticCases){
  });
  test(`${c.id}: evidence cannot compensate for an unsupported recovery decision`,()=>{
   const ids=c.evidence.map(e=>e.id);
-  for(const choice of c.choices)assert.equal(evaluateDiagnosis(c.id,ids,choice.id).supported,choice.id===c.answer);
+  for(const choice of c.choices){const r=evaluateDiagnosis(c.id,ids,choice.id);assert.equal(r.supported,choice.id===c.answer);assert.equal(r.score,Number(choice.id===c.answer));assert.equal(r.total,1);}
   assert.equal(evaluateDiagnosis(c.id,ids.slice(1),c.answer).supported,false);
  });
  test(`${c.id}: all source references resolve and recovery has explicit acceptance`,()=>{

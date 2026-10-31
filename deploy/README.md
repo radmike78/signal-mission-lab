@@ -1,21 +1,21 @@
 # Deployment overview
 
-For current persistent-account setup, use [ACCOUNTS.md](ACCOUNTS.md). That runbook covers database migrations, separate administrative/runtime identities, credential provisioning, quotas, deletion, TLS and same-origin hosting. The notes below describe the initial static milestone and are retained as historical context; the service now has optional accounts and persistence.
+Signal Mission Lab bundles a React public-training interface with an optional same-origin FastAPI instructor service. PostgreSQL stores bounded assigned-activity records when accounts are configured. The offline mobile edition omits account services; the web edition also supports local device practice without an account. The mentor is deterministic source retrieval, not a generative AI service.
 
-# Deployment boundary
+Build the web edition with:
 
-The React application is a self-contained static training build. It does not send learner inputs to the API. Build with `npm ci --prefix web --ignore-scripts && npm run build --prefix web && python scripts/package_web.py`. Publish only `web/dist` to a static host that enforces `_headers`. The original application remains under `/legacy/`.
+```
+npm ci --prefix web --ignore-scripts
+npm run build --prefix web
+python scripts/package_web.py
+```
 
-The optional FastAPI service is separately testable; it is not connected to the browser and has no accounts or persistence. Run locally with `python -m uvicorn backend.app:app --host 127.0.0.1 --port 8080 --no-access-log`. Its request bodies only accept bounded enumerations and numeric answers. No upload or free-text endpoints.
+Publish only `web/dist` to a static host that enforces `_headers`, or use the rootless [Podman deployment](PODMAN.md) to serve the UI and API together. The original prototype is retained under `/legacy/`; it is outside the offline-cache allowlist.
 
-Container definition: `docker build -f deploy/Dockerfile.api -t sml-api .`. Runtime requirements: read-only filesystem, drop all capabilities, no-new-privileges, non-root UID 10001, constrained CPU/memory/PIDs, no Internet egress, internal network only. This container has not been built in the implementation environment; Docker is unavailable.
+Use [ACCOUNTS.md](ACCOUNTS.md) for PostgreSQL TLS, separate migration/runtime identities, ephemeral lab credentials, authorization, retention and trusted-proxy setup. The default container binds to loopback and ignores proxy headers. Public account access requires validated HTTPS and restricted origin-network access. `SML_ENV=local` permits HTTP only for numeric loopback peers and loopback URL hosts. Never use `SML_ENV=test` for real-user hosting.
 
-Before exposing any API: enforce HTTPS at a trusted reverse proxy; set the actual hostname allowlist; apply connection, body, header and request-time limits; enforce rate limits; verify returned security headers; disable request-body logging; configure a private vulnerability reporting channel. Do not expose development servers.
+The container runs as UID 10001 with a read-only filesystem, dropped capabilities, no-new-privileges and resource limits. It is exercised in rootless Podman CI. Private database networking, distributed edge limits, real-host backups/restores, monitoring, retention, identity-provider choices and production security review remain deployment responsibilities. The Quadlet networking setting alone does not prohibit Internet egress.
 
-Future learner/instructor service: select an OIDC provider, implement server-validated roles and cohort ownership checks, use PostgreSQL on a private network with TLS and a separate migration role. Do not deploy persistent learning records until authorization, isolation, deletion, backup and restore tests pass. The current session review is not an authenticated instructor dashboard.
+No real users, operational data or restricted publications should be provisioned. Do not submit classified information, CUI, COMSEC or actual plans. Client-side text screening is a best-effort guard, not classification or DLP enforcement. See [learning review follow-up](../docs/LEARNING_REVIEW_FOLLOWUP.md) for current rubric and implementation limits, and [offline/mobile instructions](../docs/OFFLINE_MOBILE.md) for store-preparation gates.
 
-No deployment credentials are required for local validation. Live hosting needs the owner's chosen account/project, domain and deployment identity. Any generative mentor needs a provider decision, secret configuration, budgets, a reviewed corpus and prompt-injection evaluations. Do not put secrets into source control or chat.
-
-## Current Podman deployment path
-
-Use [PODMAN.md](PODMAN.md) for the current rootless OCI/Quadlet workflow. It supersedes historical Docker-only and no-runtime-validation notes above. The image includes UI/API/legacy content; persistent PostgreSQL is separate. A dedicated Podman CI job builds and exercises the constrained image; actual host deployment is not performed by this repository change.
+Live hosting and signed store releases require the owner's hosting/domain and developer-account decisions. Keep credentials in approved secret handling, never source control or chat. A future generative mentor requires a separate reviewed design, source/permission boundaries, prompt-injection evaluations and budget controls before connection.

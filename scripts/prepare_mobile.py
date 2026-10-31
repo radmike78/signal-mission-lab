@@ -11,8 +11,8 @@ from pathlib import Path
 from generate_app_icons import icon
 ROOT = Path(__file__).resolve().parents[1]
 WEB = ROOT/'web'
-VERSION = '0.3.0'
-BUILD = 1
+VERSION = '0.4.0'
+BUILD = 2
 
 def run(*args):
     subprocess.run(args, cwd=WEB, check=True)

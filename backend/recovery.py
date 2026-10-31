@@ -15,13 +15,13 @@ def grade(case_id, evidence, decision):
         raise ValueError('Use a supplied recovery decision')
     missing = [e for e in case['required'] if e not in evidence]
     decision_supported = decision == case['answer']
-    # Separate dimensions: evidence exposure (4) plus a supported decision (1).
-    # Both dimensions must pass to receive a complete 5/5 result.
-    return {'score':len(evidence)+int(decision_supported), 'total':len(case['required'])+1,
+    # v2: exposure is reported separately and earns no correctness credit.
+    # Historical 0..5 attempts remain unchanged and are labeled legacy in the UI.
+    return {'score':int(not missing and decision_supported), 'total':1,
             'supported':not missing and decision_supported, 'missing':missing,
             'evidence_count':len(evidence), 'decision_supported':decision_supported,
             'feedback':choice['feedback'],
-            'boundary':'Formative self-reported evidence exposure and decision selection; not demonstrated equipment performance.'}
+            'boundary':'Evidence reviewed is separate from correctness. A supported decision requires all supplied evidence and the correct choice; no equipment performance is certified.'}
 
 def summarize(members, assignments, attempts):
     """Latest attempt per enrolled learner/assignment from the complete authorized cohort set."""
@@ -59,3 +59,26 @@ def validate_content(content):
         if len(choices)!=3 or len(set(choices))!=3 or case['answer'] not in choices or not case['sourceIds'] or not set(case['sourceIds'])<=ids:
             raise ValueError('Invalid recovery choice or source')
     return {'recovery_cases':len(cases),'recovery_review':'human_review_pending'}
+
+def validate_transfer(content):
+    """Build-time checks for bounded editorial reasoning cases, not fact approval."""
+    import re
+    if content.get('schema_version') != 1 or content.get('review_status') != 'human_review_pending':
+        raise ValueError('Transfer content requires technical review')
+    cases=content.get('cases',[])
+    if len(cases)!=6 or len({c['id'] for c in cases})!=6:
+        raise ValueError('Expected six distinct transfer cases')
+    for skill in CASES:
+        if sum(c.get('skill')==skill for c in cases)!=2:raise ValueError('Each skill needs two cases')
+    for case in cases:
+        if not re.fullmatch('[a-z-]{1,40}',case['id']) or case.get('skill') not in CASES:
+            raise ValueError('Invalid transfer case')
+        steps=case.get('steps',[])
+        if len(steps)!=3:raise ValueError('Expected check, recovery and acceptance decisions')
+        for step in steps:
+            options=step.get('options',[]);answer=step.get('answer')
+            if len(options)!=3 or len(set(options))!=3 or type(answer) is not int or not 0<=answer<len(options):
+                raise ValueError('Invalid transfer answers')
+            for text in [step.get('prompt'),step.get('feedback'),*options]:
+                if not isinstance(text,str) or not 1<=len(text)<=1000:raise ValueError('Unbounded transfer text')
+    return {'transfer_cases':len(cases),'transfer_review':'human_review_pending'}
