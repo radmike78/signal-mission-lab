@@ -23,3 +23,23 @@ class EquipmentMissionTests(unittest.TestCase):
         for q in questions:
             self.assertIn(q['answer'], range(len(q['options'])))
             self.assertTrue(q['rationale'])
+
+    def test_publication_gate_rejects_unreviewed_assertions_and_broken_content(self):
+        import copy
+        from backend.equipment_mission import validate_equipment_mission
+        data = json.loads((ROOT/'data/equipment-mission-learning.json').read_text())
+        catalog = json.loads((ROOT/'data/catalog.json').read_text())
+        self.assertEqual(validate_equipment_mission(data,catalog)['equipment_mission_lessons'],10)
+        mutations = [lambda d:d.update(review_status='verified'),
+                     lambda d:d['sources'][0].update(url='https://www.army.mil.evil.test/manual'),
+                     lambda d:d['sources'][0].update(url='https://user:password@www.army.mil/manual'),
+                     lambda d:d['sources'].append(d['sources'][0]),
+                     lambda d:d['records'].append(d['records'][0]),
+                     lambda d:d['records'][0].update(source='missing'),
+                     lambda d:d['records'][0].update(id='unknown-system'),
+                     lambda d:d['records'][0].update(proof=''),
+                     lambda d:d['records'][0]['exercises'].pop('WFX'),
+                     lambda d:d['records'][0]['exercises'].update(COMMEX='')]
+        for mutate in mutations:
+            changed=copy.deepcopy(data);mutate(changed)
+            with self.assertRaises(ValueError):validate_equipment_mission(changed,catalog)

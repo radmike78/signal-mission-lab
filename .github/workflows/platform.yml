@@ -1,12 +1,17 @@
 name: Platform validation
 on:
   push:
+    branches: [main]
   pull_request:
+concurrency:
+  group: platform-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     services:
       postgres:
         image: postgres:17-alpine
@@ -69,6 +74,7 @@ jobs:
           NODE_PATH="$PWD/web/node_modules" node scripts/review-followup-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/failure-guide-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/equipment-mission-check.cjs
+          NODE_PATH="$PWD/web/node_modules" node scripts/accessibility-check.cjs
       - name: Connected learning browser journeys
         run: |
           NODE_PATH="$PWD/web/node_modules" node scripts/connected-check.cjs

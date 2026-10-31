@@ -17,6 +17,7 @@ const assert=require('node:assert/strict');
  assert(await review.isDisabled());
  for(const textarea of await panel.getByRole('textbox').all())await textarea.fill('Synthetic observation for instructor discussion.');
  await review.click();assert(await panel.getByRole('region',{name:'Leader update review'}).isVisible());
+ await page.waitForFunction(()=>document.activeElement?.textContent==='Your draft briefing');
  await panel.getByRole('checkbox').first().check();
  await panel.getByRole('textbox').first().fill('Revised synthetic evidence');
  assert.equal(await panel.getByRole('region',{name:'Leader update review'}).count(),0);

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect,useRef,useState} from 'react';
 import content from '../../data/equipment-mission-learning.json';
 const fields=[
  ['failure','What failed, and what evidence supports that?'],
@@ -11,6 +11,8 @@ const fields=[
 export function EquipmentMission({node}:{node:string}){
  const record=content.records.find(r=>r.id===node);
  const [stage,setStage]=useState('COMMEX'),[draft,setDraft]=useState<Record<string,string>>({}),[review,setReview]=useState(false),[checked,setChecked]=useState<string[]>([]);
+ const reviewHeading=useRef<HTMLHeadingElement>(null);
+ useEffect(()=>{if(review)reviewHeading.current?.focus();},[review]);
  if(!record)return null;
  const source=content.sources.find(s=>s.id===record.source)!;
  const complete=fields.every(([id])=>draft[id]?.trim());
@@ -22,10 +24,11 @@ export function EquipmentMission({node}:{node:string}){
  <h4>Explain the impact to leaders</h4><p><strong>Possible failure scope:</strong> {record.impact}</p><p><strong>Effect on the mission:</strong> {record.consequence}</p><p><strong>Check what remains available:</strong> {record.remaining}</p>
  <label htmlFor="equipment-exercise">Practice environment</label><select id="equipment-exercise" value={stage} onChange={e=>{setStage(e.target.value);setDraft({});setReview(false);setChecked([]);}}>{Object.keys(record.exercises).map(s=><option key={s}>{s}</option>)}</select>
  <p>{record.exercises[stage as keyof typeof record.exercises]}</p>
+ <details><summary>Worked example: explain it to a leader</summary><p>This fictional example distinguishes observations from possible effects. The 15-minute update is an exercise choice, not a prescribed reporting interval.</p><blockquote>{record.brief_example}</blockquote></details>
  <details><summary>Practice a leader update</summary><p><strong>Synthetic incident:</strong> {record.scenario}</p><p>{record.lesson} Use fictional roles and observations only. Drafts stay in memory and clear when you leave this equipment or change the exercise.</p>
- {fields.map(([id,label])=><div key={id}><label htmlFor={'impact-'+id}>{label}</label><textarea id={'impact-'+id} maxLength={600} rows={3} value={draft[id]||''} onChange={e=>{setDraft({...draft,[id]:e.target.value});setReview(false);setChecked([]);}}/></div>)}
+ {fields.map(([id,label])=><div key={id}><label htmlFor={'impact-'+id}>{label}</label><textarea id={'impact-'+id} maxLength={600} rows={3} autoComplete="off" spellCheck={false} value={draft[id]||''} onChange={e=>{setDraft({...draft,[id]:e.target.value});setReview(false);setChecked([]);}}/></div>)}
  <button disabled={!complete} onClick={()=>setReview(true)}>Review my leader update</button>
- {review&&<div role="region" aria-label="Leader update review"><h4>Your draft briefing</h4><blockquote>{fields.map(([id,label])=><p key={id}><strong>{label}</strong><br/>{draft[id]}</p>)}</blockquote><p>Self-review or instructor observation. Completing fields does not establish that the explanation is correct.</p>{rubric.map((text,i)=><label className="toggle" key={text}><input type="checkbox" checked={checked.includes(String(i))} onChange={()=>setChecked(checked.includes(String(i))?checked.filter(x=>x!==String(i)):[...checked,String(i)])}/>{text}</label>)}<p role="status">{checked.length}/{rubric.length} discussion criteria reviewed. Ask an instructor to challenge unsupported claims and validate the proposed recovery test.</p></div>}
+ {review&&<div role="region" aria-label="Leader update review"><h4 ref={reviewHeading} tabIndex={-1}>Your draft briefing</h4><blockquote>{fields.map(([id,label])=><p key={id}><strong>{label}</strong><br/>{draft[id]}</p>)}</blockquote><p>Self-review or instructor observation. Completing fields does not establish that the explanation is correct.</p>{rubric.map((text,i)=><label className="toggle" key={text}><input type="checkbox" checked={checked.includes(String(i))} onChange={()=>setChecked(checked.includes(String(i))?checked.filter(x=>x!==String(i)):[...checked,String(i)])}/>{text}</label>)}<p role="status">{checked.length}/{rubric.length} discussion criteria reviewed. Ask an instructor to challenge unsupported claims and validate the proposed recovery test.</p></div>}
  <button onClick={()=>{setDraft({});setReview(false);setChecked([]);}}>Clear practice draft</button></details>
  <details><summary>Sources and training limits</summary><p>{content.scope}</p><a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a><p>Public reference supports purpose/context. Setup dependency explanations, mission impacts, exercises and rubric are editorial teaching material; technical and instructor review remain pending.</p></details>
  </section>;

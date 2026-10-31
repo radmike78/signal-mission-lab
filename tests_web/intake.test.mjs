@@ -65,3 +65,15 @@ test('BCCS and TSI stacks are explicit study choices, not inferred from a generi
  assert.deepEqual(interpretDescription('A fictional brigade uses TSIv3, without BCCS.').answers.systems,['tsi']);
  assert.equal(interpretDescription('A fictional brigade needs a server stack.').answers.systems,undefined);
 });
+
+test('Mounted systems, HF and STT variants retain their explicit study identities',()=>{
+ const x=interpretDescription('Fictional brigade COMMEX with JBC-P, MMC-S, MMC-T, HF, STT+ and SINCGARS at one location for recovery.');
+ for(const id of ['jbc-p','mmc-s','mmc-t','hf','stt-plus','sincgars'])assert.ok(x.answers.systems.includes(id),id);
+ assert.equal(x.answers.systems.includes('stt'),false);
+ const expanded=interpretDescription('Fictional brigade uses Joint Battle Command-Platform and Mounted Mission Command-Software with high frequency radio.');
+ for(const id of ['jbc-p','mmc-s','hf'])assert.ok(expanded.answers.systems.includes(id),id);
+ const excluded=interpretDescription('Fictional brigade uses CPN, without JBC-P, excluding MMC-S, no HF, without STT+.');
+ assert.deepEqual(excluded.answers.systems,['cpn']);
+ const distinct=interpretDescription('Fictional brigade studies STT and STT Plus.');
+ assert.ok(distinct.answers.systems.includes('stt'));assert.ok(distinct.answers.systems.includes('stt-plus'));
+});

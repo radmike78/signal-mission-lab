@@ -1,4 +1,6 @@
 {
+  "schema_version": 1,
+  "review_status": "human_review_pending",
   "scope": "Public-purpose summaries plus editorial synthetic training scenarios. Not a technical manual, configuration authority, readiness certification or automatic impact prediction. Confirm equipment variants and approved procedures. Do not enter operational data.",
   "reviewed": "2026-10-31",
   "sources": [
@@ -53,7 +55,8 @@
         "STAFFEX": "Have the supported staff complete a reporting or coordination task using STT. Confirm the recipient can use the information, not just that it was sent.",
         "WFX": "Inject this synthetic fault: Receive lock is indicated, but a remote application cannot be reached. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
         "Mission rehearsal": "Explain why STT is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
-      }
+      },
+      "brief_example": "The STT indicates receive lock, but our remote application test failed. That does not yet identify whether the fault is in satellite access, the network path or the application. The tested remote exchange is unavailable to the affected staff users. Local services and alternates need separate checks. We are tracing the failed path and will request the responsible owner\u2019s help when isolated. Restoration time is unknown; next update in 15 minutes."
     },
     {
       "id": "jnn",
@@ -74,7 +77,8 @@
         "STAFFEX": "Have the supported staff complete a reporting or coordination task using JNN. Confirm the recipient can use the information, not just that it was sent.",
         "WFX": "Inject this synthetic fault: Local users reach their gateway but cannot reach remote services. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
         "Mission rehearsal": "Explain why JNN is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
-      }
+      },
+      "brief_example": "Tested local users can reach their gateway but cannot reach the remote service. We have not established that every remote destination is affected. The staff cannot complete the tested digital exchange. Local gateway reachability is confirmed; an alternate reporting path has not been validated. We are checking the WAN handoff, routes and return path with the responsible owners. Restoration time is unknown; next update in 15 minutes."
     },
     {
       "id": "cpn",
@@ -95,7 +99,8 @@
         "STAFFEX": "Have the supported staff complete a reporting or coordination task using CPN. Confirm the recipient can use the information, not just that it was sent.",
         "WFX": "Inject this synthetic fault: Local collaboration works, but the remote report is not delivered. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
         "Mission rehearsal": "Explain why CPN is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
-      }
+      },
+      "brief_example": "Local collaboration works, but the battalion\u2019s test report was not delivered to the remote recipient. The staff cannot rely on that reporting exchange yet. We have not isolated the failed component or verified an alternate. We are checking the path and confirming whether the recipient\u2019s service is available. We need the recipient to participate in the retest. Restoration time is unknown; next update in 15 minutes."
     },
     {
       "id": "bccs",
@@ -116,7 +121,8 @@
         "STAFFEX": "Have the supported staff complete a reporting or coordination task using BCCS. Confirm the recipient can use the information, not just that it was sent.",
         "WFX": "Inject this synthetic fault: The stack is powered, but multiple users cannot open a required service. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
         "Mission rehearsal": "Explain why BCCS is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
-      }
+      },
+      "brief_example": "The server stack is powered on, but several test users cannot open the required service. The staff task using that service is disrupted; we have not shown that the entire network is down. We are checking shared server dependencies and will coordinate with the application owner. Other services and alternates need separate validation. Restoration time is unknown; next update in 15 minutes."
     },
     {
       "id": "tsi",
@@ -137,7 +143,8 @@
         "STAFFEX": "Have the supported staff complete a reporting or coordination task using TSI. Confirm the recipient can use the information, not just that it was sent.",
         "WFX": "Inject this synthetic fault: The COP opens, but remote updates have stopped. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
         "Mission rehearsal": "Explain why TSI is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
-      }
+      },
+      "brief_example": "CPCE opens, but remote updates have stopped. The staff can see the display, but should treat remote information as potentially stale and check its timestamp before using it. We have not isolated the synchronization failure or verified an alternate update method. We are checking the data exchange with the remote owner. Restoration time is unknown; next update in 15 minutes. Recovery will include a fresh remote update confirmed by the staff."
     },
     {
       "id": "jbc-p",
@@ -158,7 +165,8 @@
         "STAFFEX": "Have the supported staff complete a reporting or coordination task using JBC-P. Confirm the recipient can use the information, not just that it was sent.",
         "WFX": "Inject this synthetic fault: Own position displays, but remote tracks are stale and a message is undelivered. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
         "Mission rehearsal": "Explain why JBC-P is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
-      }
+      },
+      "brief_example": "The display shows our own position, but remote tracks are stale and the test message is undelivered. We have not independently verified position accuracy. Mounted leaders cannot rely on current remote updates or that message path. An alternate communications method still needs testing. We are separating the position-source, transport and messaging checks. Restoration time is unknown; next update in 15 minutes."
     },
     {
       "id": "mmc-s",
@@ -179,7 +187,8 @@
         "STAFFEX": "Have the supported staff complete a reporting or coordination task using MMC-S. Confirm the recipient can use the information, not just that it was sent.",
         "WFX": "Inject this synthetic fault: The application starts, but remote messages do not arrive. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
         "Mission rehearsal": "Explain why MMC-S is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
-      }
+      },
+      "brief_example": "MMC-S starts, but remote test messages are not arriving. Local application startup is confirmed; remote exchange is not. Mounted staff may miss reports through that path. We are identifying the installed compute and transport baseline before assigning the fault. We have not validated an alternate or a restoration estimate. We will coordinate a two-way test with the recipient and provide the next update in 15 minutes."
     },
     {
       "id": "trilos",
@@ -200,7 +209,8 @@
         "STAFFEX": "Have the supported staff complete a reporting or coordination task using TRILOS. Confirm the recipient can use the information, not just that it was sent.",
         "WFX": "Inject this synthetic fault: Radio link status is healthy, but users cannot pass data. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
         "Mission rehearsal": "Explain why TRILOS is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
-      }
+      },
+      "brief_example": "TRILOS reports a radio link, but our end-to-end data test fails. That indication does not prove the Ethernet and IP handoff works. Users cannot complete the tested exchange through this path. We have not established that antenna alignment is the cause or that another path has sufficient capacity. We are checking the handoff with the network owner. Restoration time is unknown; next update in 15 minutes."
     },
     {
       "id": "sincgars",
@@ -221,7 +231,8 @@
         "STAFFEX": "Have the supported staff complete a reporting or coordination task using SINCGARS. Confirm the recipient can use the information, not just that it was sent.",
         "WFX": "Inject this synthetic fault: One station cannot communicate while other stations on the net can. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
         "Mission rehearsal": "Explain why SINCGARS is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
-      }
+      },
+      "brief_example": "One station failed its radio check while other net members can communicate. We have not shown that the entire net is unavailable. Reports from that station may be delayed. We are checking that station using the applicable operator procedure and coordinating another two-way check. Its alternate method is not yet verified. Restoration time is unknown; next update in 15 minutes."
     },
     {
       "id": "hf",
@@ -242,7 +253,8 @@
         "STAFFEX": "Have the supported staff complete a reporting or coordination task using HF. Confirm the recipient can use the information, not just that it was sent.",
         "WFX": "Inject this synthetic fault: The antenna tunes successfully, but the destination cannot be contacted. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
         "Mission rehearsal": "Explain why HF is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
-      }
+      },
+      "brief_example": "The antenna tunes, but we have not established contact with the destination. A successful tune does not prove a usable propagation path. The intended HF reporting exchange is unavailable in this test. We are checking the approved mode, antenna arrangement and propagation assumptions with the distant station. No alternate or restoration estimate is verified yet. Next update in 15 minutes; recovery requires the intended voice or data exchange."
     }
   ]
 }
