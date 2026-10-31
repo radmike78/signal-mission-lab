@@ -16,6 +16,12 @@ class APITests(unittest.TestCase):
  def test_grade(self):
   self.assertEqual(self.client.post('/api/assessment',json={"answers":{"mission":0,"interop":1,"identity":1,"impact-scope":1,"information-age":0,"recovery-validation":2,"restoration-uncertainty":1}}).json()['score'],7)
 
+ def test_assessment_rejects_extra_answers(self):
+  from backend.core import QUIZ
+  answers={q['id']:q['answer'] for q in QUIZ}
+  answers['forged-extra-question']=0
+  self.assertEqual(self.client.post('/api/assessment',json={'answers':answers}).status_code,422)
+
  def test_forged_length_still_limited(self):
   self.assertEqual(self.client.post('/api/assessment',content='x'*2049,headers={'content-length':'1'}).status_code,413)
  def test_chunked_body_still_limited(self):

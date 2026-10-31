@@ -18,8 +18,8 @@ class MemberInput(Strict):
 class AssignmentInput(Strict):
     activity: Literal['assessment','dns','identity','power','builder','routing','satellite']
 class Submission(Strict):
-    answers: dict[str,int] = Field(default_factory=dict,max_length=3)
-    checks: list[int] = Field(default_factory=list,max_length=3)
+    answers: dict[str,int] = Field(default_factory=dict,max_length=len(core.QUIZ))
+    checks: list[int] = Field(default_factory=list,max_length=len(core.QUIZ))
     diagnosis: Literal['dns','identity','power'] | None = None
     evidence: list[str] = Field(default_factory=list,max_length=4)
     decision: str | None = Field(default=None,max_length=24)
