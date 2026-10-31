@@ -14,7 +14,7 @@ class APITests(unittest.TestCase):
  def test_oversize(self):
   self.assertEqual(self.client.post('/api/assessment',content='x'*2049).status_code,413)
  def test_grade(self):
-  self.assertEqual(self.client.post('/api/assessment',json={"answers":{"mission":0,"interop":1,"identity":1}}).json()['score'],3)
+  self.assertEqual(self.client.post('/api/assessment',json={"answers":{"mission":0,"interop":1,"identity":1,"impact-scope":1,"information-age":0,"recovery-validation":2,"restoration-uncertainty":1}}).json()['score'],7)
 
  def test_forged_length_still_limited(self):
   self.assertEqual(self.client.post('/api/assessment',content='x'*2049,headers={'content-length':'1'}).status_code,413)

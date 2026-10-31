@@ -26,8 +26,8 @@ class CoreTests(unittest.TestCase):
   self.assertEqual(core.diagnose("dns",[0,0],"power")["score"],17)
   with self.assertRaises(ValueError): core.diagnose("dns",[-1],"dns")
  def test_assessment(self):
-  self.assertEqual(core.grade({"mission":0,"interop":1,"identity":1})["score"],3)
-  for value in [{},{"mission":True,"interop":1,"identity":1}]:
+  self.assertEqual(core.grade({"mission":0,"interop":1,"identity":1,"impact-scope":1,"information-age":0,"recovery-validation":2,"restoration-uncertainty":1})["score"],7)
+  for value in [{},{"mission":0,"interop":1,"identity":1},{**{q["id"]:q["answer"] for q in core.QUIZ},"mission":True}]:
    with self.assertRaises(ValueError): core.grade(value)
 
  def test_supplied_publication_states(self):
