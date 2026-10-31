@@ -28,5 +28,49 @@
     ],
     "answer": 1,
     "rationale": "Transport and authentication are separate dependencies."
+  },
+  {
+    "question": "The STT path is unavailable, but local services work. What should you report?",
+    "options": [
+      "All communications are lost.",
+      "Identify affected remote exchanges, verified local services, tested alternatives and the next update.",
+      "Wait until the cause is certain before reporting any impact."
+    ],
+    "answer": 1,
+    "rationale": "Report the verified scope and mission effect promptly; distinguish uncertainty from facts and validate alternatives.",
+    "id": "impact-scope"
+  },
+  {
+    "question": "CPCE opens, but remote updates have stopped. What is the critical staff impact?",
+    "options": [
+      "The displayed information may be stale; verify timestamps and inform affected users.",
+      "A visible COP proves all information is current.",
+      "All command post power has failed."
+    ],
+    "answer": 0,
+    "rationale": "Application availability and information freshness are separate. The staff needs to understand the age and limits of its information.",
+    "id": "information-age"
+  },
+  {
+    "question": "When is a restored service adequately validated in a STAFFEX or WFX training task?",
+    "options": [
+      "When the equipment power light is green.",
+      "When a technician can ping one local interface.",
+      "When the supported staff completes the required exchange and the recipient confirms usable information."
+    ],
+    "answer": 2,
+    "rationale": "Technical indicators are intermediate checks. Recovery must be validated against the supported user task.",
+    "id": "recovery-validation"
+  },
+  {
+    "question": "Restoration time is unknown. What should the Soldier tell the leader?",
+    "options": [
+      "Give an optimistic estimate without evidence.",
+      "State that restoration time is unknown, explain current actions and assistance needed, and give the next update time.",
+      "Say only that the team is working on it."
+    ],
+    "answer": 1,
+    "rationale": "Uncertainty should be explicit. A concrete next update and verified alternatives support leader decisions without inventing an ETA.",
+    "id": "restoration-uncertainty"
   }
 ]

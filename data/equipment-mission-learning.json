@@ -1,0 +1,248 @@
+{
+  "scope": "Public-purpose summaries plus editorial synthetic training scenarios. Not a technical manual, configuration authority, readiness certification or automatic impact prediction. Confirm equipment variants and approved procedures. Do not enter operational data.",
+  "reviewed": "2026-10-31",
+  "sources": [
+    {
+      "id": "network",
+      "title": "Army WIN-T Increment 1 overview",
+      "url": "https://www.army.mil/article/168300/"
+    },
+    {
+      "id": "server",
+      "title": "Army Tactical Mission Command program",
+      "url": "https://cpec2in.army.mil/Organizations/PM-Mission-Command/Tactical-Mission-Command/"
+    },
+    {
+      "id": "mounted",
+      "title": "Army Mounted Mission Command program",
+      "url": "https://cpec2in.army.mil/Organizations/PM-Mission-Command/Mounted-Mission-Command/"
+    },
+    {
+      "id": "radio",
+      "title": "Public military communications practical application",
+      "url": "https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B191956%20Communication%20Equipment%20Practical%20Application.pdf"
+    },
+    {
+      "id": "hf",
+      "title": "NETCOM HF training",
+      "url": "https://www.army.mil/article/252037/netcom_offers_training_for_a_timeless_technology_high_frequency_hf_radio_communications"
+    },
+    {
+      "id": "los",
+      "title": "Army High Capacity Radio Systems",
+      "url": "https://cpec2in.army.mil/Organizations/PM-Tactical-Network/Network-Modernization/High-Capacity-Radio-Systems/"
+    }
+  ],
+  "records": [
+    {
+      "id": "stt",
+      "name": "STT",
+      "purpose": "Provides satellite transport for a supported network node.",
+      "mission": "Connect a command post to remote headquarters when the approved network design uses SATCOM.",
+      "path": "Power and site \u2192 terminal acquisition \u2192 authorized access \u2192 node handoff \u2192 remote service",
+      "why": "Antenna acquisition does not prove two-way network access.",
+      "impact": "The satellite path is unavailable; local command post services may still work.",
+      "consequence": "Remote reporting and data exchange using this path are disrupted.",
+      "remaining": "Local services and independently tested alternate transport.",
+      "proof": "Verify terminal status and the node handoff, then exchange a report with a remote endpoint.",
+      "scenario": "Receive lock is indicated, but a remote application cannot be reached.",
+      "lesson": "Do not report all communications lost. Identify which path and services have actually failed.",
+      "source": "network",
+      "exercises": {
+        "COMMEX": "Bring up the approved STT training baseline. Verify terminal status and the node handoff, then exchange a report with a remote endpoint. Identify what each indicator proves and what remains untested.",
+        "STAFFEX": "Have the supported staff complete a reporting or coordination task using STT. Confirm the recipient can use the information, not just that it was sent.",
+        "WFX": "Inject this synthetic fault: Receive lock is indicated, but a remote application cannot be reached. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
+        "Mission rehearsal": "Explain why STT is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
+      }
+    },
+    {
+      "id": "jnn",
+      "name": "JNN",
+      "purpose": "Connects command post users and systems to a wider tactical network; traditionally a brigade node.",
+      "mission": "Provide the approved network access needed for staff coordination and reporting.",
+      "path": "Power \u2192 LAN/VLANs \u2192 routing/security path \u2192 transport \u2192 remote services",
+      "why": "A healthy physical interface does not prove correct VLANs, routes or a return path.",
+      "impact": "The affected network path can isolate multiple staff systems.",
+      "consequence": "Reports, coordination and application exchanges using that path may be delayed.",
+      "remaining": "Unaffected local networks and validated alternate communications.",
+      "proof": "Test an endpoint, gateway, remote address and required application separately.",
+      "scenario": "Local users reach their gateway but cannot reach remote services.",
+      "lesson": "Separate a shared upstream fault from individual application failures.",
+      "source": "network",
+      "exercises": {
+        "COMMEX": "Bring up the approved JNN training baseline. Test an endpoint, gateway, remote address and required application separately. Identify what each indicator proves and what remains untested.",
+        "STAFFEX": "Have the supported staff complete a reporting or coordination task using JNN. Confirm the recipient can use the information, not just that it was sent.",
+        "WFX": "Inject this synthetic fault: Local users reach their gateway but cannot reach remote services. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
+        "Mission rehearsal": "Explain why JNN is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
+      }
+    },
+    {
+      "id": "cpn",
+      "name": "CPN",
+      "purpose": "Provides battalion command post access to the tactical network in the applicable architecture.",
+      "mission": "Connect battalion staff services with higher headquarters and remote users.",
+      "path": "Power \u2192 local access \u2192 approved routing/security baseline \u2192 transport \u2192 service test",
+      "why": "A working local LAN does not establish battalion-to-brigade connectivity.",
+      "impact": "The battalion can lose remote network access while retaining local services.",
+      "consequence": "Routine digital reporting and receipt of remote updates can stop.",
+      "remaining": "Local services and separately verified voice or alternate data paths.",
+      "proof": "Exchange a synthetic report with higher headquarters and confirm receipt.",
+      "scenario": "Local collaboration works, but the remote report is not delivered.",
+      "lesson": "State which exchange failed and whether priority reporting has a verified alternative.",
+      "source": "network",
+      "exercises": {
+        "COMMEX": "Bring up the approved CPN training baseline. Exchange a synthetic report with higher headquarters and confirm receipt. Identify what each indicator proves and what remains untested.",
+        "STAFFEX": "Have the supported staff complete a reporting or coordination task using CPN. Confirm the recipient can use the information, not just that it was sent.",
+        "WFX": "Inject this synthetic fault: Local collaboration works, but the remote report is not delivered. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
+        "Mission rehearsal": "Explain why CPN is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
+      }
+    },
+    {
+      "id": "bccs",
+      "name": "BCCS",
+      "purpose": "Legacy server infrastructure supporting mission command services.",
+      "mission": "Host the services required by the supported staff; confirm the actual legacy baseline.",
+      "path": "Power/cooling \u2192 hardware/storage \u2192 host environment \u2192 common services \u2192 applications",
+      "why": "Server power does not prove that hosted services or databases are available.",
+      "impact": "A shared server dependency may affect several staff applications.",
+      "consequence": "Staff members may lose access to collaboration, stored information or application services.",
+      "remaining": "Unaffected services and approved manual or alternate reporting methods, after validation.",
+      "proof": "Check required services and have a staff user complete a synthetic task.",
+      "scenario": "The stack is powered, but multiple users cannot open a required service.",
+      "lesson": "Report the failed service and user task rather than calling every network link down.",
+      "source": "server",
+      "exercises": {
+        "COMMEX": "Bring up the approved BCCS training baseline. Check required services and have a staff user complete a synthetic task. Identify what each indicator proves and what remains untested.",
+        "STAFFEX": "Have the supported staff complete a reporting or coordination task using BCCS. Confirm the recipient can use the information, not just that it was sent.",
+        "WFX": "Inject this synthetic fault: The stack is powered, but multiple users cannot open a required service. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
+        "Mission rehearsal": "Explain why BCCS is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
+      }
+    },
+    {
+      "id": "tsi",
+      "name": "TSI",
+      "purpose": "Server infrastructure hosting CPCE and critical common services.",
+      "mission": "Support command post applications and information exchange for staff work.",
+      "path": "Power/cooling \u2192 storage/virtualization \u2192 network \u2192 common services \u2192 CPCE/data exchange",
+      "why": "A running virtual machine does not establish healthy application or synchronization services.",
+      "impact": "Application access or remote data synchronization may be degraded.",
+      "consequence": "The staff may act on stale information if update age is not recognized.",
+      "remaining": "Verified local functions and independent reporting channels.",
+      "proof": "Verify service health, remote update timestamps and completion of a staff task.",
+      "scenario": "The COP opens, but remote updates have stopped.",
+      "lesson": "A visible COP is not proof that the information is current.",
+      "source": "server",
+      "exercises": {
+        "COMMEX": "Bring up the approved TSI training baseline. Verify service health, remote update timestamps and completion of a staff task. Identify what each indicator proves and what remains untested.",
+        "STAFFEX": "Have the supported staff complete a reporting or coordination task using TSI. Confirm the recipient can use the information, not just that it was sent.",
+        "WFX": "Inject this synthetic fault: The COP opens, but remote updates have stopped. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
+        "Mission rehearsal": "Explain why TSI is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
+      }
+    },
+    {
+      "id": "jbc-p",
+      "name": "JBC-P",
+      "purpose": "Mounted situational awareness, mapping and messaging system.",
+      "mission": "Support mounted reporting and exchange of position and situational information.",
+      "path": "Vehicle power/wiring \u2192 computer/display \u2192 position source \u2192 communications \u2192 messaging",
+      "why": "A map can display without a healthy remote communications path.",
+      "impact": "Mounted messages or remote situational updates may fail while navigation remains available.",
+      "consequence": "Leaders may have delayed reports or stale awareness of other platforms.",
+      "remaining": "Verified own-position functions and independent communications.",
+      "proof": "Confirm valid position, send a message, obtain receipt and inspect update age.",
+      "scenario": "Own position displays, but remote tracks are stale and a message is undelivered.",
+      "lesson": "Distinguish position availability from remote information exchange.",
+      "source": "mounted",
+      "exercises": {
+        "COMMEX": "Bring up the approved JBC-P training baseline. Confirm valid position, send a message, obtain receipt and inspect update age. Identify what each indicator proves and what remains untested.",
+        "STAFFEX": "Have the supported staff complete a reporting or coordination task using JBC-P. Confirm the recipient can use the information, not just that it was sent.",
+        "WFX": "Inject this synthetic fault: Own position displays, but remote tracks are stale and a message is undelivered. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
+        "Mission rehearsal": "Explain why JBC-P is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
+      }
+    },
+    {
+      "id": "mmc-s",
+      "name": "MMC-S",
+      "purpose": "Mounted Mission Command software modernizing the mounted application environment.",
+      "mission": "Support mounted mission command tasks on the fielded computing and transport baseline.",
+      "path": "Approved software baseline \u2192 platform identity/position \u2192 available transport \u2192 data exchange",
+      "why": "A software upgrade does not establish that new transport hardware was installed.",
+      "impact": "The application may be usable locally while remote exchange fails.",
+      "consequence": "Mounted coordination may rely on incomplete or delayed information.",
+      "remaining": "Tested local functions and separately verified transport alternatives.",
+      "proof": "Validate a synthetic message and remote update through the installed transport.",
+      "scenario": "The application starts, but remote messages do not arrive.",
+      "lesson": "Identify the installed software, compute and transport boundaries before assigning the fault.",
+      "source": "mounted",
+      "exercises": {
+        "COMMEX": "Bring up the approved MMC-S training baseline. Validate a synthetic message and remote update through the installed transport. Identify what each indicator proves and what remains untested.",
+        "STAFFEX": "Have the supported staff complete a reporting or coordination task using MMC-S. Confirm the recipient can use the information, not just that it was sent.",
+        "WFX": "Inject this synthetic fault: The application starts, but remote messages do not arrive. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
+        "Mission rehearsal": "Explain why MMC-S is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
+      }
+    },
+    {
+      "id": "trilos",
+      "name": "TRILOS",
+      "purpose": "High-capacity terrestrial line-of-sight network transport.",
+      "mission": "Provide an approved terrestrial path between nodes, including transport diversity where designed.",
+      "path": "Site/path \u2192 mast/antenna \u2192 compatible radio configuration \u2192 RF link \u2192 Ethernet/IP handoff",
+      "why": "RF link establishment does not prove that the connected IP network is configured correctly.",
+      "impact": "The terrestrial path may be unavailable or unstable.",
+      "consequence": "Traffic using this path can be delayed or redirected onto a lower-capacity alternative.",
+      "remaining": "Other validated paths; capacity must be checked before claiming equivalent service.",
+      "proof": "Inspect RF/link evidence and then validate the remote service across the handoff.",
+      "scenario": "Radio link status is healthy, but users cannot pass data.",
+      "lesson": "Investigate the data handoff instead of assuming antenna alignment is the cause.",
+      "source": "los",
+      "exercises": {
+        "COMMEX": "Bring up the approved TRILOS training baseline. Inspect RF/link evidence and then validate the remote service across the handoff. Identify what each indicator proves and what remains untested.",
+        "STAFFEX": "Have the supported staff complete a reporting or coordination task using TRILOS. Confirm the recipient can use the information, not just that it was sent.",
+        "WFX": "Inject this synthetic fault: Radio link status is healthy, but users cannot pass data. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
+        "Mission rehearsal": "Explain why TRILOS is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
+      }
+    },
+    {
+      "id": "sincgars",
+      "name": "SINCGARS",
+      "purpose": "VHF combat net voice and data radio family.",
+      "mission": "Support the assigned net and required command-and-control exchanges.",
+      "path": "Power/audio/antenna \u2192 approved mode/net configuration \u2192 synchronization/security readiness \u2192 radio check",
+      "why": "Frequency hopping, time alignment and encryption have distinct functions.",
+      "impact": "A station or net segment may be unable to exchange required traffic.",
+      "consequence": "Reports and coordination may be delayed even when a radio powers on normally.",
+      "remaining": "Other stations and alternate communications only after checks.",
+      "proof": "Use the applicable operator procedure and complete an intelligible two-way radio check.",
+      "scenario": "One station cannot communicate while other stations on the net can.",
+      "lesson": "Establish whether the fault is local before declaring the entire net unavailable.",
+      "source": "radio",
+      "exercises": {
+        "COMMEX": "Bring up the approved SINCGARS training baseline. Use the applicable operator procedure and complete an intelligible two-way radio check. Identify what each indicator proves and what remains untested.",
+        "STAFFEX": "Have the supported staff complete a reporting or coordination task using SINCGARS. Confirm the recipient can use the information, not just that it was sent.",
+        "WFX": "Inject this synthetic fault: One station cannot communicate while other stations on the net can. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
+        "Mission rehearsal": "Explain why SINCGARS is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
+      }
+    },
+    {
+      "id": "hf",
+      "name": "HF",
+      "purpose": "A radio communications category using propagation and antennas suited to the intended path.",
+      "mission": "Provide an authorized voice or data path, including beyond-line-of-sight communications when conditions support it.",
+      "path": "Requirement/path \u2192 authorized frequencies/mode \u2192 antenna/feedline/coupler \u2192 radio configuration \u2192 contact",
+      "why": "Successful antenna tuning does not prove a usable propagation path; ALE cannot create one.",
+      "impact": "The intended HF path may not support contact or the required data service.",
+      "consequence": "A contingency reporting method may be unavailable or slower than planned.",
+      "remaining": "Other verified paths and any lower-rate service actually demonstrated.",
+      "proof": "Validate contact and the required voice/data exchange; record conditions and limitations.",
+      "scenario": "The antenna tunes successfully, but the destination cannot be contacted.",
+      "lesson": "Check the complete path and propagation assumptions rather than equating tuning with connectivity.",
+      "source": "hf",
+      "exercises": {
+        "COMMEX": "Bring up the approved HF training baseline. Validate contact and the required voice/data exchange; record conditions and limitations. Identify what each indicator proves and what remains untested.",
+        "STAFFEX": "Have the supported staff complete a reporting or coordination task using HF. Confirm the recipient can use the information, not just that it was sent.",
+        "WFX": "Inject this synthetic fault: The antenna tunes successfully, but the destination cannot be contacted. Brief the affected staff task, validated alternatives and next update. Restore service and have the staff validate recovery.",
+        "Mission rehearsal": "Explain why HF is required for the fictional mission, who depends on it, and how its loss changes the communications plan. Rehearse the alternate before declaring it available."
+      }
+    }
+  ]
+}

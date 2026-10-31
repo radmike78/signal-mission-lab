@@ -6,7 +6,7 @@ const assert=require('node:assert/strict');
  const context=await browser.newContext({viewport:{width:320,height:844}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(process.env.SML_URL||'http://127.0.0.1:8070');
  await page.evaluate(async()=>await navigator.serviceWorker.ready);await page.waitForFunction(()=>!!navigator.serviceWorker.controller);await context.setOffline(true);
- const nav=page.getByRole('navigation').getByRole('button',{name:/Knowledge graph$/});if(!await nav.isVisible())await page.getByText('More learning tools',{exact:true}).click();await nav.click();
+ const nav=page.getByRole('navigation').getByRole('button',{name:/Equipment$/});if(!await nav.isVisible())await page.getByText('More learning tools',{exact:true}).click();await nav.click();
  await page.getByLabel('Search systems',{exact:true}).fill('cpn');await page.getByRole('button',{name:/^CPN/}).click();
  const guide=page.getByRole('region',{name:'Why systems fail'});await guide.getByRole('heading',{name:'Why does it fail?',exact:true}).waitFor();
  const select=guide.getByLabel('Work on one issue',{exact:true});assert.equal(await select.locator('option').count(),6);
