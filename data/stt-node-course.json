@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "id": "stt-node-foundations",
+  "title": "STT and network-node foundations",
+  "review_status": "human_review_pending",
+  "configuration_authority": false,
+  "scope": "Public role context plus editorial diagnostic teaching and fictional checks. This course is not an operator technical manual, approved configuration baseline, equipment emulator or qualification. Unit variants and interfaces require authoritative documentation and qualified review.",
+  "goal": "Connect the staff reporting task to transport, network services, authorized application access and a verified recovery handoff.",
+  "sources": [
+    {
+      "id": "army-legacy",
+      "kind": "Army purpose/context",
+      "title": "WIN-T Increment 1",
+      "url": "https://www.army.mil/article/168300/",
+      "published": "2016-06-02; page also identifies a 2015 update",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked",
+      "locator": "Main Components",
+      "claim": "The historical Army overview associates JNN with brigade headquarters, BnCPN with battalion headquarters, and STT with satellite communications supporting those nodes.",
+      "scope": "Historical role context only. Does not establish current unit allocation, variant, configuration or interoperability."
+    },
+    {
+      "id": "army-ath",
+      "kind": "Army purpose/context",
+      "title": "Mission Network: At-The-Halt",
+      "url": "https://cpec2in.army.mil/Organizations/PM-Tactical-Network/Mission-Network/TNT-ATH/",
+      "published": "Undated program page",
+      "retrieved": "2026-11-02",
+      "status": "direct_access_403_search_excerpt_checked",
+      "locator": "Network Node Capabilities and SATCOM Capabilities",
+      "claim": "The program overview describes legacy JNN/CPN and STT relationships alongside modernization and replacement efforts.",
+      "scope": "Search-visible program summary only; direct retrieval returned 403. No timeline is treated as proof of this unit\u2019s fielding or baseline."
+    },
+    {
+      "id": "dns-concept",
+      "kind": "Vendor concept education",
+      "title": "Domain Name System (DNS) in Windows and Windows Server",
+      "url": "https://learn.microsoft.com/en-us/windows-server/networking/dns/dns-overview",
+      "published": "Edition date not established in retrieved page",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked",
+      "locator": "What is DNS? and Using DNS in Windows and Windows Server",
+      "claim": "DNS resolves names to addresses and can support discovery of authentication services in Windows networks.",
+      "scope": "Vendor networking concept only. This does not prove that a particular Army node uses Windows DNS or Active Directory."
+    },
+    {
+      "id": "access-concept",
+      "kind": "Vendor concept education",
+      "title": "Kerberos authentication troubleshooting guidance",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/kerberos-authentication-troubleshooting-guidance",
+      "published": "Edition date not established in retrieved page",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked",
+      "locator": "Troubleshooting checklist; Check infrastructure; clock synchronization",
+      "claim": "Kerberos troubleshooting considers supporting services and time synchronization as well as the authentication result.",
+      "scope": "Vendor authentication concept only. No Army authentication baseline, clock setting or corrective command is specified."
+    }
+  ],
+  "modules": [
+    {
+      "id": "mission",
+      "title": "Start with the staff task",
+      "outcome": "Explain why the equipment is present and define success from the receiving staff\u2019s perspective.",
+      "explain": "In the historical WIN-T context, JNN and BnCPN are network nodes; STT provides satellite transport in conjunction with them. They perform complementary roles. The staff needs a usable information exchange, not merely several powered devices.",
+      "why": "Choose a fictional sender, intended recipient and dummy product first. That requirement tells you which path, service and acceptance evidence matter. Identifying a box does not establish its software baseline or every service it hosts.",
+      "failure": "If the team checks only equipment lights, it can report success while the recipient still lacks the report. That delays staff coordination and can leave leaders with an incorrect view of communications availability.",
+      "checks": [
+        "State the fictional staff task: send a dummy report to the designated training recipient.",
+        "Describe the node and transport roles separately; identify the relevant system owners.",
+        "Define acceptance: an authorized training user sends the product, the recipient confirms receipt/readability, and required information is current."
+      ],
+      "scenario": "A team reports that every box has power. The recipient has not received the dummy report.",
+      "sources": [
+        "army-legacy",
+        "army-ath"
+      ],
+      "discussion": "Ask the learner to explain what the staff loses if the exchange fails, without declaring every communications method unavailable.",
+      "checkpoint": {
+        "question": "What is the strongest next training requirement?",
+        "options": [
+          {
+            "label": "Declare success because the equipment is powered.",
+            "feedback": "Power is a prerequisite. It does not prove delivery or usability."
+          },
+          {
+            "label": "Define and demonstrate the intended staff information exchange.",
+            "feedback": "This connects equipment operation to an observable user outcome."
+          },
+          {
+            "label": "Select equipment quantities from the echelon alone.",
+            "feedback": "Echelon provides context, but does not establish the needed inventory or compatibility."
+          }
+        ],
+        "answer": 1
+      }
+    },
+    {
+      "id": "transport",
+      "title": "Separate terminal indications from transport acceptance",
+      "outcome": "Explain why a local terminal indication cannot establish the complete reporting path.",
+      "explain": "STT is a transport component in the public JNN/CPN context. In this fictional lesson, a receive indication is one observation. It does not establish every remaining dependency, a return path, node handoff or remote application result.",
+      "why": "Treat setup as a sequence of dependencies: safe power/site preparation using the applicable manual, the authorized terminal/access process, the supported network handoff, and then the user exchange. This is a conceptual sequence, not terminal operating instructions.",
+      "failure": "If a team equates a receive indication with a working service, it can stop testing before the actual failed boundary. Uncoordinated changes can also destroy useful evidence or interfere with the responsible owner\u2019s troubleshooting.",
+      "checks": [
+        "Record the exact indication and what it actually proves in the applicable baseline.",
+        "Use the authorized operator publication and access coordination process; no settings are supplied here.",
+        "Test the node handoff and remote user task separately after transport acceptance."
+      ],
+      "scenario": "The invented terminal displays a receive indication. The staff\u2019s remote report remains undelivered.",
+      "sources": [
+        "army-legacy",
+        "army-ath"
+      ],
+      "discussion": "Have the learner list which owner must validate each remaining boundary. Do not accept a made-up terminal procedure.",
+      "checkpoint": {
+        "question": "Which report is justified by the evidence?",
+        "options": [
+          {
+            "label": "The receive indication is present; usable two-way transport and the staff task remain unverified.",
+            "feedback": "This preserves the difference between an observation and the wider outcome."
+          },
+          {
+            "label": "The satellite link proves the remote application works.",
+            "feedback": "An indication at one component does not validate downstream services."
+          },
+          {
+            "label": "Increase transmit settings without the authorized procedure or coordination.",
+            "feedback": "A failed user task does not authorize an arbitrary terminal change."
+          }
+        ],
+        "answer": 0
+      }
+    },
+    {
+      "id": "network",
+      "title": "Distinguish path reachability from name resolution",
+      "outcome": "Choose a check that separates transport/network reachability from name lookup.",
+      "explain": "A network path and a name-resolution service answer different questions. DNS translates names into addresses. A successful address-based reachability check does not by itself prove name lookup or application behavior.",
+      "why": "Use separate, approved tests for the endpoint, local network/gateway, remote path and name resolution. Compare results at each boundary. This prevents a name-service problem being treated automatically as a satellite fault.",
+      "failure": "A wrong or unavailable name-service dependency can prevent users locating a service even when a tested path works. Other users and services may still be available; confirm the scope before briefing the outage.",
+      "checks": [
+        "Verify the fictional endpoint\u2019s local connectivity and supplied gateway check.",
+        "Compare the supplied address-based reachability result with a separate name-lookup result.",
+        "After correction by the responsible owner, repeat name resolution and the intended application task; do not bypass certificate or identity checks."
+      ],
+      "scenario": "A supplied remote-address reachability test succeeds. A separate lookup for the training service name fails.",
+      "sources": [
+        "dns-concept"
+      ],
+      "discussion": "Ask why an address-based check is not a substitute for the named, authenticated application task.",
+      "checkpoint": {
+        "question": "What should the learner investigate next?",
+        "options": [
+          {
+            "label": "Assume the STT has lost all connectivity.",
+            "feedback": "The successful reachability observation contradicts that broad conclusion."
+          },
+          {
+            "label": "Disable application identity or certificate validation.",
+            "feedback": "Bypassing protection does not diagnose name resolution."
+          },
+          {
+            "label": "Investigate the name-resolution dependency, then retest the named service.",
+            "feedback": "The two observations isolate a useful boundary without claiming that the whole application is healthy."
+          }
+        ],
+        "answer": 2
+      }
+    },
+    {
+      "id": "access",
+      "title": "Keep reachability, identity and time distinct",
+      "outcome": "Explain why a reachable application can still reject an authorized user.",
+      "explain": "Reachability does not establish successful authentication or authorization. In the vendor Kerberos example, supporting services and synchronized time are relevant dependencies. This example does not identify the authentication technology inside a particular Army system.",
+      "why": "Preserve access controls while collecting evidence. Compare the intended training account\u2019s result, application/identity-service health, and approved time/certificate checks where they apply. The responsible system owner determines the applicable baseline and correction.",
+      "failure": "If the team treats a login failure as proof of a transport outage, it may restart working transport and delay restoration. If it bypasses identity controls instead, it changes the security boundary rather than demonstrating an authorized user task.",
+      "checks": [
+        "Confirm which fictional user and task are authorized for the exercise.",
+        "Use the applicable system\u2019s approved checks to distinguish denied access from an unreachable service.",
+        "After the owner resolves the verified dependency, confirm the authorized account works and an unauthorized test account remains denied."
+      ],
+      "scenario": "The fictional application can be reached. An intended training account is rejected. No cause has yet been isolated.",
+      "sources": [
+        "access-concept"
+      ],
+      "discussion": "Require the learner to distinguish authentication from authorization, and explain which evidence would justify a correction.",
+      "checkpoint": {
+        "question": "Which action best preserves diagnostic reasoning?",
+        "options": [
+          {
+            "label": "Remove access controls so the report can pass.",
+            "feedback": "That changes the requirement and cannot demonstrate authorized recovery."
+          },
+          {
+            "label": "Inspect applicable identity, authorization and supporting-service evidence with the owner.",
+            "feedback": "This tests the failed boundary while leaving protections in place."
+          },
+          {
+            "label": "Declare that a reachable page proves login and permissions are correct.",
+            "feedback": "A page response is not authentication or authorization evidence."
+          }
+        ],
+        "answer": 1
+      }
+    },
+    {
+      "id": "application",
+      "title": "Verify application data, not just an open screen",
+      "outcome": "Recognize that application availability and current remote information are different outcomes.",
+      "explain": "In the fictional service model, the local application, network handoff and synchronization are separate dependencies. An open display can remain usable locally while remote data is stale. The actual hosting and synchronization architecture must come from the applicable baseline.",
+      "why": "Identify the required information source, expected update and receiving user. Observe timestamps and a newly generated dummy product after correction. A local screenshot or a sender\u2019s submission message is incomplete evidence.",
+      "failure": "A staff can continue working from an old view without realizing remote updates have stopped. The impact is potentially stale information and delayed coordination, not automatic proof that every local application or communications path failed.",
+      "checks": [
+        "Confirm that the local application and a local dummy record work.",
+        "Test the relevant remote path and whether a new update reaches the application.",
+        "If a dependency is corrected, repeat both the information exchange and freshness checks after that last change."
+      ],
+      "scenario": "The local display opens. Remote data remains stale even after the modeled network handoff is repaired.",
+      "sources": [],
+      "discussion": "Ask the learner to brief the information\u2019s limits to the staff before claiming that it is current.",
+      "checkpoint": {
+        "question": "What does this support?",
+        "options": [
+          {
+            "label": "A separate application/synchronization dependency still needs investigation.",
+            "feedback": "Restoring one dependency can expose another unresolved fault in the model."
+          },
+          {
+            "label": "An open display proves current remote information.",
+            "feedback": "Display availability and data freshness are separate observations."
+          },
+          {
+            "label": "Repeat the same handoff change until all symptoms disappear.",
+            "feedback": "Repeated changes to a verified boundary do not isolate the remaining service dependency."
+          }
+        ],
+        "answer": 0
+      }
+    },
+    {
+      "id": "handoff",
+      "title": "Prove recovery and brief its limits",
+      "outcome": "Hand over a tested staff service with a bounded explanation of remaining uncertainty.",
+      "explain": "A recovery claim should name the tested user task and its evidence. In this course, acceptance requires sender submission, recipient receipt/readability and a current remote update after the last change. This is an editorial training rubric, not an equipment qualification standard.",
+      "why": "Every change can invalidate prior acceptance evidence. Separate what is observed, what is inferred and what remains unknown. Give leaders affected users/tasks, verified remaining capability, current actions, assistance needed and a next-update commitment without inventing restoration estimates.",
+      "failure": "An unsupported \u201call restored\u201d report can cause the staff to rely on a service that has not been retested. An overbroad \u201call communications lost\u201d report can hide useful local or alternate capability. An untested alternate is still unknown.",
+      "checks": [
+        "Repeat the original dummy staff exchange after the last modeled change.",
+        "Confirm receipt/readability at the recipient and retrieve current information.",
+        "Brief the tested scope, any unverified alternatives or dependencies, who owns follow-up and when the next update will occur."
+      ],
+      "scenario": "The sender accepts the dummy report, but recipient receipt and the current update have not been checked.",
+      "sources": [],
+      "discussion": "Have the learner deliver a short initial impact report and a final handoff. Challenge unsupported scope, alternates and estimates.",
+      "checkpoint": {
+        "question": "What is the defensible handoff?",
+        "options": [
+          {
+            "label": "All services are restored because the sender accepted the report.",
+            "feedback": "Sender submission does not establish delivery or freshness."
+          },
+          {
+            "label": "Promise a restoration time without supporting evidence.",
+            "feedback": "A confident estimate without evidence does not help a leader assess the situation."
+          },
+          {
+            "label": "Sender submission is confirmed; recipient delivery and freshness still need verification.",
+            "feedback": "This states the observed progress while preserving the remaining acceptance requirements."
+          }
+        ],
+        "answer": 2
+      }
+    }
+  ],
+  "capstones": [
+    {
+      "lane_id": "lane-01",
+      "title": "One unavailable handoff",
+      "task": "Collect evidence, give a bounded impact report, restore the modeled handoff and verify the original staff exchange."
+    },
+    {
+      "lane_id": "lane-02",
+      "title": "Working path, stale application information",
+      "task": "Separate a working network path from a failed synchronization dependency; prove current information and recipient delivery."
+    },
+    {
+      "lane_id": "lane-03",
+      "title": "Two independent failures",
+      "task": "Discover why the first correction is insufficient. Resolve the remaining dependency and repeat acceptance after the last change."
+    }
+  ],
+  "manual_gaps": [
+    "Exact STT, JNN/CPN or modernized-node variant and software/firmware baseline.",
+    "Applicable public operator/maintainer publication, edition and authorized safety/access procedures.",
+    "Approved interface and service descriptions, including ownership and acceptance criteria.",
+    "Qualified technical review of the curriculum and a supervised, authorized equipment acceptance exercise."
+  ],
+  "instructor_criteria": [
+    "Learner explains node versus transport roles without inferring the unit baseline.",
+    "Learner distinguishes observed indications from usable two-way service.",
+    "Learner separates path, name-resolution, access and application evidence.",
+    "Learner identifies the staff task and bounds the outage report.",
+    "Learner verifies delivery, readability and freshness after the last change.",
+    "Learner states remaining uncertainty, responsible owners and the next update."
+  ]
+}

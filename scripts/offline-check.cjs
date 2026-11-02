@@ -37,13 +37,14 @@ const http=require('node:http'),path=require('node:path');
  await context.setOffline(true);await page.reload();
  await page.getByRole('heading',{name:'What is your mission?',exact:true}).waitFor();
  // Lazy-loaded Signal products must work even though never opened online.
- for(const name of ['Exercise lane','Signal Products','Applications','IT foundations','MDMP','Equipment','Architecture','Mentor','Troubleshoot','Assessment']){
+ for(const name of ['Courses','Exercise lane','Signal Products','Applications','IT foundations','MDMP','Equipment','Architecture','Mentor','Troubleshoot','Assessment']){
   await nav(name);await page.getByRole('heading',{name,exact:true}).waitFor();
+  if(name==='Courses')await page.getByRole('region',{name:'STT and network-node course'}).waitFor();
   if(name==='Exercise lane')await page.getByLabel('Lane code').waitFor();
   if(name==='Signal Products')await page.getByLabel('Signal product',{exact:true}).waitFor();
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),name+' overflows mobile');
  }
- for(const group of await page.locator('fieldset').all())await group.getByRole('radio').first().check();
+ for(const group of await page.locator('fieldset:visible').all())await group.getByRole('radio').first().check();
  await page.getByRole('button',{name:'Check answers',exact:true}).click();await nav('My training');
  await page.locator('tbody tr').first().waitFor();assert.equal(await page.locator('tbody tr').count(),1);
  await page.reload();await nav('My training');await page.locator('tbody tr').first().waitFor();assert.equal(await page.locator('tbody tr').count(),1);
