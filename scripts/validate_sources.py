@@ -12,12 +12,14 @@ from backend.signal_products import validate_signal_products
 from backend.failure_guides import validate_failure_guides
 from backend.equipment_mission import validate_equipment_mission
 from backend.exercise_lanes import validate_exercise_lanes
+from backend.stt_course import validate_stt_course
 
 def main():
     try:
         values = [json.loads((ROOT / 'data' / name).read_text(encoding='utf-8'))
                   for name in ['catalog.json', 'sources.json', 'publications.json', 'equipment-coverage.json']]
         result = validate_corpus(*values)
+        result.update(validate_stt_course(json.loads((ROOT / "data/stt-node-course.json").read_text(encoding="utf-8")), json.loads((ROOT / "data/exercise-lanes.json").read_text(encoding="utf-8"))))
         result.update(validate_exercise_lanes(json.loads((ROOT / "data/exercise-lanes.json").read_text(encoding="utf-8"))))
         result.update(validate_equipment_mission(json.loads((ROOT / "data/equipment-mission-learning.json").read_text(encoding="utf-8")), values[0]))
         result.update(validate_failure_guides(json.loads((ROOT / "data/network-failures.json").read_text(encoding="utf-8")), values[0]))

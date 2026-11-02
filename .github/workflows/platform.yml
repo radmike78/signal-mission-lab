@@ -76,6 +76,7 @@ jobs:
           NODE_PATH="$PWD/web/node_modules" node scripts/equipment-mission-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/accessibility-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/exercise-lane-check.cjs
+          NODE_PATH="$PWD/web/node_modules" node scripts/stt-course-check.cjs
       - name: Connected learning browser journeys
         run: |
           NODE_PATH="$PWD/web/node_modules" node scripts/connected-check.cjs

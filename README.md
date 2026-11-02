@@ -15,6 +15,10 @@ python -m http.server 8000 --directory web/dist
 
 Open `http://localhost:8000`. Mission requirements, guided MDMP exercises, equipment/provenance exploration, interactive synthetic dependencies, troubleshooting, assessments, session review and deterministic citation retrieval work without accounts or external services. The original prototype is preserved at `/legacy/` in the packaged build. To run it directly, serve the repository root as before.
 
+## STT and network-node foundations
+
+Open **Courses**, or select **Learn STT and network nodes** on the mission homepage. Six short lessons cover the staff task, transport indications, path/name services, authorized access, application freshness and recovery handoff. First-choice lesson checks remain separate from the three practical exercise lanes. The web edition can download a printable, offline instructor packet with answer explanations, capstones, observation criteria and references. See [course behavior and evidence limits](docs/STT_NODE_COURSE.md). This is a guided foundation, not an approved operator course or equipment qualification.
+
 ## FastAPI and persistent learning
 
 ```bash

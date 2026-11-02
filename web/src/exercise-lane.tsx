@@ -3,8 +3,8 @@ import {laneActions,laneContent,MAX_LANE_EVENTS,replayLane,laneDebrief,type Lane
 import {nativeApp} from './runtime';
 import type {PracticeKind} from './practice-store';
 const groups=['Checks','Changes','Verify','Initial impact','Final handoff'] as const;
-export function ExerciseLane({onPractice}:{onPractice?:(kind:PracticeKind,score:number,total:number)=>void}){
- const [laneId,setLane]=useState('lane-01'),[mode,setMode]=useState('commex'),[events,setEvents]=useState<LaneAction[]>([]),[group,setGroup]=useState<typeof groups[number]>('Checks'),[error,setError]=useState('');
+export function ExerciseLane({onPractice,initialLaneId='lane-01'}:{initialLaneId?:string;onPractice?:(kind:PracticeKind,score:number,total:number)=>void}){
+ const [laneId,setLane]=useState(initialLaneId),[mode,setMode]=useState('commex'),[events,setEvents]=useState<LaneAction[]>([]),[group,setGroup]=useState<typeof groups[number]>('Checks'),[error,setError]=useState('');
  const saved=useRef(false),observation=useRef<HTMLParagraphElement>(null),reviewHeading=useRef<HTMLHeadingElement>(null);
  const state=replayLane(laneId,mode,events),debrief=state.finished?laneDebrief(laneId,mode,events):null;
  const lane=laneContent.lanes.find(l=>l.id===laneId)!,environment=laneContent.modes.find(m=>m.id===mode)!;

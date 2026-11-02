@@ -22,3 +22,7 @@ test('exercise lane results persist only bounded summary fields',()=>{
  const lane={...record,kind:'exercise-lane',score:4,total:4};
  assert.deepEqual(parsePracticeHistory(JSON.stringify([{...lane,events:['inspect-path'],brief:'not stored'}])),[lane]);
 });
+test('STT/node course history excludes answers and instructor material',()=>{
+ const course={...record,kind:'stt-node-course',score:5,total:6};
+ assert.deepEqual(parsePracticeHistory(JSON.stringify([{...course,answers:{mission:0},packet:'not stored'}])),[course]);
+});
