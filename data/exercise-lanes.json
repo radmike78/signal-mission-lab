@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "review_status": "human_review_pending",
+  "scope": "Editorial simulation of a fictional staff reporting service. State, observations, action costs and scoring are invented. This is not an Army equipment emulator, a prescribed exercise standard or readiness certification. No operational inputs or external AI connection.",
+  "modes": [
+    {"id":"commex","title":"COMMEX","task":"Establish a fictional digital reporting exchange and prove sender, recipient and current information work together."},
+    {"id":"staffex","title":"STAFFEX","task":"Restore the fictional staff's ability to deliver a dummy report to the intended recipient and use a current update."},
+    {"id":"wfx","title":"WFX","task":"During an invented disruption, brief the staff's reporting impact, restore the exchange and verify information freshness before declaring recovery."}
+  ],
+  "lanes": [
+    {"id":"lane-01","title":"Lane 01","handoff":false,"sync":true,"instructor_fault":"The modeled network handoff is unavailable. The application synchronization configuration is healthy. A link indication alone does not establish the remote path."},
+    {"id":"lane-02","title":"Lane 02","handoff":true,"sync":false,"instructor_fault":"The modeled network path works, but application synchronization is unavailable. Repairing an already healthy handoff does not restore this dependency."},
+    {"id":"lane-03","title":"Lane 03","handoff":false,"sync":false,"instructor_fault":"Two independent modeled faults: the handoff and application synchronization. Restoring the path exposes the remaining application fault. Both must be resolved and the user exchange retested."}
+  ]
+}

@@ -18,3 +18,7 @@ test('a storage failure does not poison later operations',async()=>{
  await assert.rejects(store.add(record));fail=false;await store.add(record);assert.deepEqual(await store.read(),[record]);
  await assert.rejects(store.add({...record,score:-1}));assert.equal((await store.read()).length,1);
 });
+test('exercise lane results persist only bounded summary fields',()=>{
+ const lane={...record,kind:'exercise-lane',score:4,total:4};
+ assert.deepEqual(parsePracticeHistory(JSON.stringify([{...lane,events:['inspect-path'],brief:'not stored'}])),[lane]);
+});
