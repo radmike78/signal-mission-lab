@@ -2,6 +2,8 @@
 
 The course adds a guided path from the staff reporting task through transport, network services, authorized access, application information and a bounded recovery handoff. It is reachable from Courses or the mission homepage. It is deliberately a public-source foundation with editorial teaching, not an approved operator/maintainer course, validated equipment emulator or qualification.
 
+The course now links to **IT professional labs** for concrete configuration/output interpretation. See [technical labs](IT_TECHNICAL_LABS.md); the six introductory checks and eight technical lab attempts remain separate.
+
 ## Six lessons and separate practice
 
 1. Start with the staff task: node versus transport roles and a receiving-user outcome.

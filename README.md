@@ -71,3 +71,7 @@ Build the OCI image with `podman build --format oci -f deploy/Containerfile -t l
 Open **IT foundations** from the navigation or homepage. Nine introductory lessons explain computing/VMs, switching, routing, DNS/identity, storage, firewalls, containers, recovery and security. Vendor examples have scoped public references and are separated from verified Army applicability. Use the synthetic dependency lab to connect the concepts to a user outcome. See [curriculum and manual gaps](docs/IT_FOUNDATIONS_AND_MANUAL_GAPS.md).
 
 Offline/PWA and Android/iOS preparation: see [offline/mobile build and release gates](docs/OFFLINE_MOBILE.md). Store editions bundle public learning; signing, native device acceptance and store publication require owner action. Draft privacy and listing text are under `mobile/store/`.
+
+## IT professional technical labs
+
+Open **Technical labs** from More learning tools, or use the course’s **Open technical labs** button. Eight offline cases add configuration comparisons, diagnostic commands and supplied outputs for IPv4, VLANs, DNS, OSPF, DMVPN, Windows identity/time, Linux storage/services and VM listeners. Learners diagnose a fault, plan a bounded correction and verify recovery. These are synthetic vendor-context exercises, not a live terminal or equipment qualification. See [IT technical labs](docs/IT_TECHNICAL_LABS.md) for scope, sources, practical tasks and validation.
