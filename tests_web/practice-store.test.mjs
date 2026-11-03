@@ -26,3 +26,8 @@ test('STT/node course history excludes answers and instructor material',()=>{
  const course={...record,kind:'stt-node-course',score:5,total:6};
  assert.deepEqual(parsePracticeHistory(JSON.stringify([{...course,answers:{mission:0},packet:'not stored'}])),[course]);
 });
+
+test('technical lab history persists only score summary',()=>{
+ const lab={...record,kind:'technical-lab',score:2,total:3};
+ assert.deepEqual(parsePracticeHistory(JSON.stringify([{...lab,choices:[0,1,2],configuration:'not stored',evidence:['prefix'],labId:'subnet'}])),[lab]);
+});

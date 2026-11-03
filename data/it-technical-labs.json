@@ -1,0 +1,1023 @@
+{
+  "schema_version": 1,
+  "id": "it-professional-labs",
+  "title": "IT professional labs",
+  "review_status": "human_review_pending",
+  "configuration_authority": false,
+  "scope": "Synthetic diagnostic workbench, not a live terminal, equipment emulator or approved unit configuration. Commands are reference examples; Inspect reveals supplied outputs and never runs commands or connects to devices. Vendor/version compatibility and qualified technical review remain required.",
+  "sources": [
+    {
+      "id": "ip",
+      "title": "Microsoft: IP addressing and subnetting",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/tcpip-addressing-and-subnetting",
+      "scope": "Subnet masks and local versus routed delivery; not an Army addressing plan.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "get-ip",
+      "title": "Microsoft: Get-NetIPAddress",
+      "url": "https://learn.microsoft.com/en-us/powershell/module/nettcpip/get-netipaddress?view=windowsserver2025-ps",
+      "scope": "Windows IP inspection syntax. Lab values and reduced outputs are editorial.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "tcp",
+      "title": "Microsoft: Test-NetConnection",
+      "url": "https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection?view=windowsserver2025-ps",
+      "scope": "Windows TCP testing syntax; a successful TCP connection does not establish application health.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "dns",
+      "title": "Microsoft: Resolve-DnsName",
+      "url": "https://learn.microsoft.com/en-us/powershell/module/dnsclient/resolve-dnsname?view=windowsserver2025-ps",
+      "scope": "DNS query syntax and server selection; no Army DNS baseline is inferred.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "vlan",
+      "title": "Cisco: VLAN trunking, IOS XE 17",
+      "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html",
+      "scope": "Switchport/trunk concepts and verification. Confirm device and release before using syntax.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "ospf",
+      "title": "Cisco: OSPF neighbor problems",
+      "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13699-29.html",
+      "scope": "Neighbor states and adjacency dependencies; this lab uses a point-to-point link, not a broadcast DR election.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "mtu",
+      "title": "Cisco: OSPF Exstart/Exchange troubleshooting",
+      "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html",
+      "scope": "MTU mismatch as one cause of stalled database exchange; the state alone is not a unique diagnosis.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "dmvpn",
+      "title": "Cisco: DMVPN troubleshooting",
+      "url": "https://www.cisco.com/c/en/us/support/docs/security/dynamic-multipoint-vpn-dmvpn/111976-dmvpn-troubleshoot-00.html",
+      "scope": "Underlay, NHRP, protected overlay and routing checks. No keys, profiles or Army tunnel template are supplied.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "kerberos",
+      "title": "Microsoft: Kerberos troubleshooting",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/kerberos-authentication-troubleshooting-guidance",
+      "scope": "Authentication dependencies and clock synchronization; not a fielded Army identity architecture.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "time",
+      "title": "Microsoft: Windows Time tools",
+      "url": "https://learn.microsoft.com/en-us/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings",
+      "scope": "W32Time inspection and domain time hierarchy; no universal timing policy is asserted.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "systemctl",
+      "title": "systemd: systemctl",
+      "url": "https://www.freedesktop.org/software/systemd/man/latest/systemctl.html",
+      "scope": "Upstream service inspection; installed systemd version, privileges and unit names vary.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "journal",
+      "title": "systemd: journalctl",
+      "url": "https://www.freedesktop.org/software/systemd/man/latest/journalctl.html",
+      "scope": "Upstream unit log filtering; fictional service messages are not vendor error transcripts.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "ss",
+      "title": "iproute2 ss manual",
+      "url": "https://man7.org/linux/man-pages/man8/ss.8.html",
+      "scope": "Socket inspection options and listening addresses. The generic lab service is not an Army application.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "df",
+      "title": "GNU coreutils: df manual",
+      "url": "https://man7.org/linux/man-pages/man1/df.1.html",
+      "scope": "GNU df file-path, byte-capacity and inode inspection options; supplied values are fictional.",
+      "retrieved": "2026-11-02",
+      "status": "page_content_checked"
+    }
+  ],
+  "labs": [
+    {
+      "id": "subnet",
+      "title": "IPv4: why the host never reaches its gateway",
+      "platform": "Windows PowerShell / generic IPv4 Ethernet",
+      "bridge": "Foundation for client LANs behind JNN/CPN; this is not their approved addressing plan.",
+      "objective": "Calculate the on-link subnet and explain ARP versus next-hop forwarding.",
+      "scenario": "A fictional client can reach its gateway but cannot reach a server in a different /24. The test bench has no proxy ARP, VPN or more-specific route.",
+      "topology": [
+        "Client",
+        "LAN switch",
+        "Router",
+        "Server"
+      ],
+      "concepts": [
+        "An IPv4 prefix separates network bits from host bits. /24 is 255.255.255.0; /16 is 255.255.0.0.",
+        "With /16, 10.20.30.50 and 10.20.40.20 appear on the same 10.20.0.0 network. With /24, they are on different networks.",
+        "On Ethernet, Address Resolution Protocol (ARP) resolves an IPv4 next hop to a MAC address. Local delivery resolves the destination; remote delivery resolves the gateway. The most-specific matching route wins, so /16 on-link overrides /0."
+      ],
+      "baseline": "Approved client: 10.20.30.50/24\nGateway: 10.20.30.1\nRemote service: 10.20.40.20:443\nClient LAN: 10.20.30.0/24\nServer LAN: 10.20.40.0/24",
+      "observed": "Client: 10.20.30.50/16\nGateway: 10.20.30.1\nConnected route: 10.20.0.0/16 on-link\nDefault route: 0.0.0.0/0 via 10.20.30.1",
+      "evidence": [
+        {
+          "id": "prefix",
+          "title": "Read the address and prefix",
+          "command": "Get-NetIPAddress -InterfaceAlias Ethernet -AddressFamily IPv4",
+          "output": "IPAddress: 10.20.30.50\nPrefixLength: 16\nAddressState: Preferred",
+          "meaning": "The address is usable, but the prefix differs from the /24 baseline."
+        },
+        {
+          "id": "path",
+          "title": "Compare gateway and destination tests",
+          "command": "Test-NetConnection -ComputerName 10.20.40.20 -Port 443",
+          "output": "Gateway ICMP test (separate supplied observation): success\nRemoteAddress: 10.20.40.20\nRemotePort: 443\nTcpTestSucceeded: False",
+          "meaning": "A reachable gateway does not mean the host is actually choosing it for this destination."
+        },
+        {
+          "id": "arp",
+          "title": "Inspect the packet-path observation",
+          "command": "Supplied packet observation; no command is executed",
+          "output": "Client broadcasts: Who has 10.20.40.20?\nNo ARP reply. No destination TCP packet reaches router.",
+          "meaning": "The workstation is trying local delivery to the remote server. This narrows the fault before transport or DNS is blamed."
+        }
+      ],
+      "required_evidence": [
+        "prefix",
+        "path",
+        "arp"
+      ],
+      "decisions": [
+        {
+          "question": "Which finding explains all three observations?",
+          "answer": 1,
+          "options": [
+            {
+              "label": "The remote DNS record is missing.",
+              "feedback": "The test uses an IP address; DNS does not explain the on-link ARP attempt."
+            },
+            {
+              "label": "The /16 prefix makes the remote /24 appear local.",
+              "feedback": "The connected /16 route wins over /0, so the host ARPs for the destination rather than forwarding through the gateway."
+            },
+            {
+              "label": "The satellite terminal must be reacquired.",
+              "feedback": "The failure occurs in local next-hop selection before the router receives the service traffic."
+            }
+          ]
+        },
+        {
+          "question": "Which correction belongs in the approved change?",
+          "answer": 0,
+          "options": [
+            {
+              "label": "Restore the client prefix to /24 and keep the documented address and gateway.",
+              "feedback": "This restores the intended subnet boundary. Record the prior value and a rollback plan before an authorized change."
+            },
+            {
+              "label": "Add an arbitrary static route for every failed server.",
+              "feedback": "That hides the incorrect baseline and grows fragile exceptions."
+            },
+            {
+              "label": "Disable the host firewall.",
+              "feedback": "Firewall removal does not correct the on-link route selection."
+            }
+          ]
+        },
+        {
+          "question": "Which recovery evidence is sufficient for this client task?",
+          "answer": 2,
+          "options": [
+            {
+              "label": "The gateway responds to one ping.",
+              "feedback": "This was already true during the fault; it does not prove remote service delivery."
+            },
+            {
+              "label": "The IP address still begins with 10.20.",
+              "feedback": "Shared leading octets do not establish the correct prefix or user outcome."
+            },
+            {
+              "label": "Confirm /24, gateway forwarding, TCP service access and the receiving-user exchange.",
+              "feedback": "These checks tie the corrected configuration to the original failed task without inferring other hosts are fixed."
+            }
+          ]
+        }
+      ],
+      "recovery": "PrefixLength: 24\nRemote packet next hop: 10.20.30.1\nTcpTestSucceeded to 10.20.40.20:443: True\nFictional receiving user confirms new test report R-104.",
+      "impact": "Leader brief: one client had an incorrect subnet boundary, preventing remote delivery before the node transport. R-104 was received after the approved correction; other clients remain outside this test.",
+      "sources": [
+        "ip",
+        "get-ip",
+        "tcp"
+      ],
+      "practical": "On an isolated Windows pair and router, calculate the /24 network, broadcast (.255), host range (.1\u2013.254) and gateway. Have an instructor vary the prefix and observe next-hop behavior. Capture only synthetic traffic."
+    },
+    {
+      "id": "vlan",
+      "title": "VLANs: link up does not mean the right LAN",
+      "platform": "Cisco IOS XE 17 switch concepts",
+      "bridge": "Useful at access switches and server virtual networks supporting mission nodes; port numbers and VLANs are fictional.",
+      "objective": "Trace an untagged access frame into its VLAN and check the uplink before changing a host.",
+      "scenario": "A client in the intended staff VLAN cannot resolve its local gateway. The physical link is up.",
+      "topology": [
+        "Client",
+        "Access port",
+        "Uplink trunk",
+        "Gateway"
+      ],
+      "concepts": [
+        "A virtual LAN (VLAN) separates Layer 2 traffic. An access port places ordinary untagged client frames into its access VLAN; an 802.1Q trunk can carry multiple VLANs.",
+        "A VLAN is a Layer 2 broadcast domain. The host IP alone cannot place the cable into the correct VLAN.",
+        "Check operational switchport mode, access VLAN, VLAN existence and trunk forwarding. An allowed list alone does not establish spanning-tree forwarding."
+      ],
+      "baseline": "Client: 10.20.30.50/24; gateway 10.20.30.1\nAccess port Gi1/0/7: VLAN 30\nUplink Gi1/0/48: trunk, VLAN 30 allowed and forwarding",
+      "observed": "interface GigabitEthernet1/0/7\n switchport mode access\n switchport access vlan 20\n! Gi1/0/48 carries VLANs 20,30",
+      "evidence": [
+        {
+          "id": "port",
+          "title": "Inspect the client port",
+          "command": "show interfaces GigabitEthernet1/0/7 switchport",
+          "output": "Operational Mode: static access\nAccess Mode VLAN: 20 (TRAINING-OTHER)",
+          "meaning": "An active link can still put the client in the wrong broadcast domain."
+        },
+        {
+          "id": "trunk",
+          "title": "Inspect VLAN and trunk forwarding",
+          "command": "show interfaces trunk",
+          "output": "Gi1/0/48: trunking\nVlans allowed: 20,30\nVlans allowed and active: 20,30\nVlans in spanning tree forwarding state and not pruned: 20,30",
+          "meaning": "The supplied uplink can carry the intended VLAN; this rules out one alternative cause."
+        },
+        {
+          "id": "host",
+          "title": "Check host and gateway placement",
+          "command": "Supplied endpoint and gateway inventory",
+          "output": "Client MAC is learned on Gi1/0/7 in VLAN 20.\nGateway 10.20.30.1 is on VLAN 30.\nClient address/prefix match the approved /24.",
+          "meaning": "The client and its gateway are separated at Layer 2 despite compatible IP settings."
+        }
+      ],
+      "required_evidence": [
+        "port",
+        "trunk",
+        "host"
+      ],
+      "decisions": [
+        {
+          "question": "What is the supported fault?",
+          "answer": 0,
+          "options": [
+            {
+              "label": "The client access port is assigned to VLAN 20 instead of VLAN 30.",
+              "feedback": "The MAC placement and switchport evidence locate the mismatch; the trunk already forwards VLAN 30."
+            },
+            {
+              "label": "A DNS timeout caused the VLAN change.",
+              "feedback": "ARP to a gateway uses its IP; DNS does not assign switch access VLANs."
+            },
+            {
+              "label": "The router needs a new default route.",
+              "feedback": "The workstation cannot yet reach its own gateway at Layer 2."
+            }
+          ]
+        },
+        {
+          "question": "Which lab change corrects the documented mismatch?",
+          "answer": 2,
+          "options": [
+            {
+              "label": "Allow every VLAN on every trunk.",
+              "feedback": "The uplink already forwards VLAN 30. Expanding access changes isolation without addressing this port."
+            },
+            {
+              "label": "Move the client to an unrecorded IP range.",
+              "feedback": "That abandons the approved design instead of correcting the wrong access membership."
+            },
+            {
+              "label": "On the authorized lab port, replace switchport access vlan 20 with switchport access vlan 30.",
+              "feedback": "Use the confirmed physical port, device syntax and approved VLAN. Preserve segmentation and rollback information."
+            }
+          ]
+        },
+        {
+          "question": "What establishes recovery?",
+          "answer": 1,
+          "options": [
+            {
+              "label": "The link LED is green.",
+              "feedback": "Link was up during the fault."
+            },
+            {
+              "label": "Confirm access VLAN 30, correct MAC learning, gateway ARP and the remote staff transaction.",
+              "feedback": "Layer 2 placement and the user task are separate acceptance checks."
+            },
+            {
+              "label": "The trunk allows VLAN 30.",
+              "feedback": "This also was true before the correction; the client port still needed fixing."
+            }
+          ]
+        }
+      ],
+      "recovery": "Gi1/0/7: static access, VLAN 30\nClient MAC learned in VLAN 30\nGateway ARP resolved\nReceiving-user test report R-105 accepted.",
+      "impact": "Leader brief: one access port placed a workstation in the wrong LAN. Corrected membership restored the tested user exchange; no trunk or wider segmentation change was needed.",
+      "sources": [
+        "vlan",
+        "ip"
+      ],
+      "practical": "Use an isolated switch or supported emulator. Label two access VLANs and a trunk, inspect membership at each hop, then change only the assigned training port. Explain why physical link status was insufficient."
+    },
+    {
+      "id": "dns",
+      "title": "DNS: separate name failure from TCP reachability",
+      "platform": "Windows PowerShell / DNS A-record lab",
+      "bridge": "Supports mission applications on node-hosted infrastructure; resolver values are not an Army baseline.",
+      "objective": "Compare answers from the configured and designated resolver, then separate DNS, TCP, TLS and user acceptance.",
+      "scenario": "The application hostname fails, but the remote IP accepts TCP connections. The fictional app uses a single A record and no load balancer.",
+      "topology": [
+        "Client",
+        "Resolver",
+        "Server IP",
+        "Application"
+      ],
+      "concepts": [
+        "DNS maps a name to records; TCP tests a specific address and port. These are different dependencies.",
+        "NXDOMAIN is a negative DNS answer, not the same as a query timeout. Compare the exact query and server before changing a record.",
+        "A TCP 443 success does not prove a valid TLS certificate, authentication or current application data. Keep the hostname for normal application verification."
+      ],
+      "baseline": "Client resolver: 10.20.30.10\nreport.training.example A 10.20.40.20\nApplication TCP port: 443",
+      "observed": "Configured client resolver: 10.20.30.99\nApproved resolver: 10.20.30.10\nClient IP/prefix/gateway: match baseline",
+      "evidence": [
+        {
+          "id": "ip-test",
+          "title": "Test the known service IP",
+          "command": "Test-NetConnection -ComputerName 10.20.40.20 -Port 443",
+          "output": "RemoteAddress: 10.20.40.20\nRemotePort: 443\nTcpTestSucceeded: True",
+          "meaning": "This establishes TCP connectivity to one endpoint, not the entire application."
+        },
+        {
+          "id": "bad-answer",
+          "title": "Query the configured resolver",
+          "command": "Resolve-DnsName -Name report.training.example -Type A -Server 10.20.30.99 -DnsOnly",
+          "output": "DNS response summary: NXDOMAIN\nServer: 10.20.30.99",
+          "meaning": "The configured resolver answers negatively for the exact fictional name."
+        },
+        {
+          "id": "good-answer",
+          "title": "Compare the approved resolver",
+          "command": "Resolve-DnsName -Name report.training.example -Type A -Server 10.20.30.10 -DnsOnly",
+          "output": "Name: report.training.example\nType: A\nIPAddress: 10.20.40.20",
+          "meaning": "The supplied comparison supports a client resolver mismatch. It does not establish every DNS server or record is healthy."
+        }
+      ],
+      "required_evidence": [
+        "ip-test",
+        "bad-answer",
+        "good-answer"
+      ],
+      "decisions": [
+        {
+          "question": "Which fault is supported by these results?",
+          "answer": 2,
+          "options": [
+            {
+              "label": "TCP 443 is blocked across the entire network.",
+              "feedback": "The explicit TCP test succeeded to the selected server IP."
+            },
+            {
+              "label": "The application certificate is definitely valid.",
+              "feedback": "No TLS handshake or certificate validation is shown."
+            },
+            {
+              "label": "The client uses a resolver that lacks the required answer.",
+              "feedback": "The two explicit queries isolate a resolver-dependent difference alongside working TCP reachability."
+            }
+          ]
+        },
+        {
+          "question": "What is the appropriate correction for this baseline?",
+          "answer": 1,
+          "options": [
+            {
+              "label": "Use a permanent hosts-file entry and ignore DNS.",
+              "feedback": "That creates a separate mapping and hides the assigned resolver error."
+            },
+            {
+              "label": "Restore the approved resolver assignment through the authorized static or DHCP management path.",
+              "feedback": "Correct the configuration owner, confirm the effective value, and re-query. Do not send private queries to an arbitrary public resolver."
+            },
+            {
+              "label": "Browse by IP and bypass certificate warnings.",
+              "feedback": "That can break hostname validation and authentication; it does not restore the intended service path."
+            }
+          ]
+        },
+        {
+          "question": "Which evidence supports the user-facing recovery claim?",
+          "answer": 0,
+          "options": [
+            {
+              "label": "The default client resolver now returns the expected A record, TCP works, TLS validates and a new report is received.",
+              "feedback": "Each dependency is checked separately, ending with the receiving user."
+            },
+            {
+              "label": "The IP still responds on port 443.",
+              "feedback": "This was true during the fault and does not verify resolution."
+            },
+            {
+              "label": "A cached page opens on the client.",
+              "feedback": "A cached page can open with no current server exchange."
+            }
+          ]
+        }
+      ],
+      "recovery": "Default resolver: 10.20.30.10\nreport.training.example A: 10.20.40.20\nTCP 443: success; hostname certificate validation: success\nNew report R-106 acknowledged by receiving user.",
+      "impact": "Leader brief: the tested client had a name-resolution configuration fault while the server IP path remained usable. Named access and a fresh report exchange were verified after correction.",
+      "sources": [
+        "dns",
+        "tcp"
+      ],
+      "practical": "In an isolated lab, query a supplied fictional zone through two designated test resolvers. Record the query, answering server, response code and address. Verify TCP separately and explain why port 443 is not an application-health test."
+    },
+    {
+      "id": "ospf",
+      "title": "OSPF: interpret EXSTART and a missing route",
+      "platform": "Cisco IOS/IOS XE OSPFv2 concepts",
+      "bridge": "Routing foundation relevant to routed mission networks; no JNN/CPN router image or configuration template is assumed.",
+      "objective": "Use neighbor state, interface MTUs and route evidence to isolate an adjacency fault.",
+      "scenario": "Two training routers share a point-to-point OSPF link. Hellos are received, but the remote LAN is not learned. Neither router has an alternate route for it.",
+      "topology": [
+        "Client LAN",
+        "R1",
+        "R2",
+        "Server LAN"
+      ],
+      "concepts": [
+        "Open Shortest Path First (OSPF) exchanges Hellos and synchronizes link-state information before computing routes. EXSTART starts database description negotiation; FULL means database synchronization with that neighbor is complete.",
+        "An interface maximum transmission unit (MTU) mismatch can stop database description exchange. EXSTART alone is insufficient: compare both ends and other adjacency parameters.",
+        "A neighbor state and a route-table entry answer different questions. After FULL, confirm the expected destination prefix and then data-plane delivery."
+      ],
+      "baseline": "Link: 10.255.0.0/30, area 0, point-to-point\nR1: 10.255.0.1; R2: 10.255.0.2\nApproved end-to-end link MTU: 1500\nExpected remote LAN: 10.20.40.0/24",
+      "observed": "R1 interface: MTU 1500, area 0, Hello 10, Dead 40\nR2 interface: MTU 1400, area 0, Hello 10, Dead 40\nRouter IDs unique; authentication agrees in supplied lab inventory",
+      "evidence": [
+        {
+          "id": "neighbor",
+          "title": "Read adjacency state",
+          "command": "show ip ospf neighbor",
+          "output": "R1 neighbor 2.2.2.2: EXSTART/-\nAddress: 10.255.0.2\nInterface: GigabitEthernet0/1",
+          "meaning": "Hellos reached the peer, but database synchronization has not completed."
+        },
+        {
+          "id": "mtus",
+          "title": "Compare both interface profiles",
+          "command": "show ip ospf interface GigabitEthernet0/1",
+          "output": "R1: area 0, point-to-point, Hello 10, Dead 40\nR2: area 0, point-to-point, Hello 10, Dead 40\nCompanion interface inventory: R1 MTU 1500; R2 MTU 1400",
+          "meaning": "OSPF interface output and the supplied physical-interface MTU inventory must be read together. Actual display fields vary by release."
+        },
+        {
+          "id": "route",
+          "title": "Look for the destination prefix",
+          "command": "show ip route 10.20.40.20",
+          "output": "No matching route or default route in the supplied R1 table.\nExpected learned prefix: 10.20.40.0/24",
+          "meaning": "A working adjacent link is not enough to forward toward the remote LAN."
+        }
+      ],
+      "required_evidence": [
+        "neighbor",
+        "mtus",
+        "route"
+      ],
+      "decisions": [
+        {
+          "question": "Which hypothesis has the strongest supporting evidence?",
+          "answer": 1,
+          "options": [
+            {
+              "label": "Different OSPF process numbers necessarily prevent neighbors.",
+              "feedback": "Process IDs are locally significant; the supplied MTU mismatch is a stronger finding."
+            },
+            {
+              "label": "The interface MTU mismatch is preventing successful database exchange.",
+              "feedback": "The mismatch plus EXSTART supports this fault in the supplied case. Other EXSTART causes remain possible on real systems."
+            },
+            {
+              "label": "EXSTART means the remote LAN is fully reachable.",
+              "feedback": "Neither adjacency synchronization nor a destination route is established."
+            }
+          ]
+        },
+        {
+          "question": "Which authorized correction should be evaluated?",
+          "answer": 0,
+          "options": [
+            {
+              "label": "Align both interface MTUs with the validated 1500-byte lab path, then recheck adjacency and routes.",
+              "feedback": "Use the documented link capability. Do not force a larger MTU on a path that cannot carry it."
+            },
+            {
+              "label": "Use mtu-ignore as the first fix without checking packet size.",
+              "feedback": "Suppressing a check can hide a data-plane size problem; it is not a substitute for validating the path."
+            },
+            {
+              "label": "Restart every router in the exercise.",
+              "feedback": "This adds disruption and does not correct the mismatched settings."
+            }
+          ]
+        },
+        {
+          "question": "Which reference results support restored routing?",
+          "answer": 2,
+          "options": [
+            {
+              "label": "One Hello packet arrives.",
+              "feedback": "Hellos were already reaching the peer."
+            },
+            {
+              "label": "The OSPF process exists.",
+              "feedback": "A running process does not prove adjacency, a selected route or forwarding."
+            },
+            {
+              "label": "FULL adjacency, expected /24 via the peer, packet delivery and receiving-user confirmation.",
+              "feedback": "This checks control plane, selected route, data plane and the staff task independently."
+            }
+          ]
+        }
+      ],
+      "recovery": "R1/R2 MTU: 1500 on validated path\nNeighbor: FULL/-\nO 10.20.40.0/24 [110/2] via 10.255.0.2\nNew report R-107 delivered and acknowledged.",
+      "impact": "Leader brief: the routers exchanged Hellos but did not complete routing synchronization. Correcting the documented MTU mismatch restored the tested route and report exchange; this does not prove all routes or packet sizes.",
+      "sources": [
+        "ospf",
+        "mtu"
+      ],
+      "practical": "On an isolated two-router emulator, compare network type, area, timers, router IDs, authentication agreement and MTU. Observe EXSTART, FULL and the route table. Add a second fault later so the state name cannot become a memorized answer."
+    },
+    {
+      "id": "dmvpn",
+      "title": "DMVPN: underlay reachability is not an overlay",
+      "platform": "Cisco IOS/IOS XE DMVPN concepts",
+      "bridge": "Teaches underlay/overlay reasoning; no Army encryption or COMSEC setup is included.",
+      "objective": "Read tunnel-to-NBMA mappings and distinguish physical transport from NHRP and protected user traffic.",
+      "scenario": "A fictional spoke reaches the approved hub underlay IP but has no usable hub overlay session. Only the mapping excerpt is under investigation.",
+      "topology": [
+        "Spoke LAN",
+        "Spoke router",
+        "Hub router",
+        "Service LAN"
+      ],
+      "concepts": [
+        "The underlay carries outer packets. Tunnel addresses identify the overlay; NBMA addresses identify transport endpoints.",
+        "Next Hop Resolution Protocol (NHRP) associates tunnel addresses with underlay endpoints. A correct path to the real hub cannot fix a mapping pointing elsewhere. Dynamic Multipoint VPN (DMVPN) combines tunneling, resolution and protected connectivity.",
+        "A tunnel interface shown as up does not establish NHRP registration, protected bidirectional traffic, routing or application delivery. Check each dependency."
+      ],
+      "baseline": "Hub tunnel IP: 10.250.0.1\nHub NBMA IP: 192.0.2.10\nSpoke tunnel IP: 10.250.0.2\nApproved protected overlay required; security parameters omitted",
+      "observed": "interface Tunnel0\n ip nhrp map 10.250.0.1 192.0.2.99\n ip nhrp nhs 10.250.0.1\n! Partial excerpt only; not a deployable tunnel configuration",
+      "evidence": [
+        {
+          "id": "underlay",
+          "title": "Check the approved hub transport endpoint",
+          "command": "ping 192.0.2.10",
+          "output": "Approved hub underlay IP: reachable from supplied transport test.\nConfigured 192.0.2.99: no response.",
+          "meaning": "Transport to the intended hub exists; do not equate that with overlay service."
+        },
+        {
+          "id": "map",
+          "title": "Compare tunnel mapping with inventory",
+          "command": "show ip nhrp",
+          "output": "Supplied mapping summary:\n10.250.0.1 -> NBMA 192.0.2.99\nApproved inventory: 10.250.0.1 -> 192.0.2.10",
+          "meaning": "The mapping points at a different underlay address from the approved hub."
+        },
+        {
+          "id": "session",
+          "title": "Inspect the hub session",
+          "command": "show dmvpn",
+          "output": "Supplied session summary: hub peer not UP\nNo receiving-user traffic acceptance recorded.",
+          "meaning": "There is no evidence of a functioning protected overlay session or staff exchange."
+        }
+      ],
+      "required_evidence": [
+        "underlay",
+        "map",
+        "session"
+      ],
+      "decisions": [
+        {
+          "question": "Which mismatch should be resolved first?",
+          "answer": 0,
+          "options": [
+            {
+              "label": "The hub tunnel address maps to the wrong NBMA endpoint.",
+              "feedback": "The supplied mapping and inventory disagree while the real hub is reachable through the underlay."
+            },
+            {
+              "label": "Every protected tunnel needs encryption removed for testing.",
+              "feedback": "Removing protection changes the service and is unnecessary to identify this mapping mismatch."
+            },
+            {
+              "label": "A successful underlay ping proves DMVPN is restored.",
+              "feedback": "The overlay session and receiving-user task are still unverified."
+            }
+          ]
+        },
+        {
+          "question": "What belongs in the bounded change plan?",
+          "answer": 2,
+          "options": [
+            {
+              "label": "Invent a new crypto profile and rotate keys.",
+              "feedback": "No evidence supports a security-profile change; this exercise supplies no keying configuration."
+            },
+            {
+              "label": "Send user traffic over an unprotected bypass.",
+              "feedback": "That does not restore the required protected service."
+            },
+            {
+              "label": "Correct the approved tunnel-to-NBMA mapping on the authorized lab spoke, preserving the required protection.",
+              "feedback": "Verify the device syntax and configuration owner, keep the previous value for rollback, then check registration and protected traffic."
+            }
+          ]
+        },
+        {
+          "question": "Which checks establish the required service?",
+          "answer": 1,
+          "options": [
+            {
+              "label": "Tunnel0 says up/up.",
+              "feedback": "An interface status alone does not establish the overlay dependencies."
+            },
+            {
+              "label": "Correct mapping, hub session UP, expected routes, protected counters increasing both ways and a new report received.",
+              "feedback": "These are distinct acceptance observations; counters are lab-provided evidence, not instructions to configure a cryptographic device."
+            },
+            {
+              "label": "The hub underlay ping succeeds.",
+              "feedback": "It succeeded before correction and never proved overlay acceptance."
+            }
+          ]
+        }
+      ],
+      "recovery": "Mapping: 10.250.0.1 -> 192.0.2.10\nHub session: UP; expected service route installed\nSupplied protected-flow counters: transmit and receive increase\nNew report R-108 received through the required protected path.",
+      "impact": "Leader brief: transport to the hub was available, but the spoke referenced the wrong endpoint for its overlay. Protected service and the tested report exchange were verified after the mapping correction.",
+      "sources": [
+        "dmvpn"
+      ],
+      "practical": "In a permitted isolated vendor lab, label inner and outer addresses on a packet diagram. Compare the mapping and session tables. An instructor supplies security status; do not substitute this page for device security or COMSEC procedures."
+    },
+    {
+      "id": "time",
+      "title": "Windows identity: trace clock skew before resetting accounts",
+      "platform": "Windows Server / domain-joined client concepts",
+      "bridge": "Supports identity-dependent applications on server infrastructure; not a BCCS/TSI domain design.",
+      "objective": "Correlate an explicit authentication error with time-source evidence without weakening authentication.",
+      "scenario": "The training client resolves the server and reaches its TCP service. Domain sign-in to the fictional report service fails.",
+      "topology": [
+        "Client clock",
+        "Domain time",
+        "Ticket service",
+        "Report app"
+      ],
+      "concepts": [
+        "TCP reachability, authentication and authorization are different checks. Opening a port cannot prove a ticket is usable.",
+        "Kerberos tickets are time-bounded. Compare client, server and domain time evidence rather than guessing from a login failure alone.",
+        "A configured time source is not proof of recent successful synchronization. Check source, last synchronization and measured offset. Do not relax policy to hide drift."
+      ],
+      "baseline": "Domain-joined client\nApproved time source: domain hierarchy\nLab client/server clock acceptance: within documented domain policy\nDNS and TCP service checks required separately",
+      "observed": "Client is using Local CMOS Clock.\nClient clock is 12 minutes ahead of lab domain controller.\nServer clock agrees with domain controller.",
+      "evidence": [
+        {
+          "id": "auth",
+          "title": "Read the authentication error",
+          "command": "Supplied authentication log excerpt",
+          "output": "Service authentication failed: KRB_AP_ERR_SKEW\nClient ahead of domain/server time by 00:12:00",
+          "meaning": "The explicit error and comparison support a time-related authentication failure; other errors need different investigation."
+        },
+        {
+          "id": "time-source",
+          "title": "Inspect synchronization status",
+          "command": "w32tm /query /status",
+          "output": "Source: Local CMOS Clock\nLast Successful Sync Time: no recent domain synchronization in supplied record",
+          "meaning": "This is inconsistent with the documented domain time dependency."
+        },
+        {
+          "id": "network",
+          "title": "Separate name and TCP dependencies",
+          "command": "Test-NetConnection -ComputerName report.training.example -Port 443",
+          "output": "Name resolves to 10.20.40.20\nTcpTestSucceeded: True\nAuthentication still fails.",
+          "meaning": "The selected network path is usable, but identity remains a separate failure."
+        }
+      ],
+      "required_evidence": [
+        "auth",
+        "time-source",
+        "network"
+      ],
+      "decisions": [
+        {
+          "question": "What is the supported diagnosis?",
+          "answer": 2,
+          "options": [
+            {
+              "label": "The user definitely lacks the application role.",
+              "feedback": "Authorization has not yet been reached; the supplied error concerns clock skew."
+            },
+            {
+              "label": "DNS must be replaced because sign-in failed.",
+              "feedback": "The named endpoint resolved and its TCP service was reached."
+            },
+            {
+              "label": "The client lost its approved time synchronization and its clock skew breaks authentication.",
+              "feedback": "The error, offset and source evidence agree. This is more specific than a generic login failure."
+            }
+          ]
+        },
+        {
+          "question": "Which correction preserves the intended identity design?",
+          "answer": 1,
+          "options": [
+            {
+              "label": "Disable time checks or extend ticket tolerance until login works.",
+              "feedback": "That hides the synchronization fault and changes authentication policy."
+            },
+            {
+              "label": "Restore authorized domain time synchronization, verify offset and retry normal authentication.",
+              "feedback": "Use the administrator-approved procedure; retain logs and avoid unnecessary account or domain changes."
+            },
+            {
+              "label": "Repeatedly reset the user password.",
+              "feedback": "Password changes do not correct the observed clock offset."
+            }
+          ]
+        },
+        {
+          "question": "What evidence should the recovery handoff contain?",
+          "answer": 0,
+          "options": [
+            {
+              "label": "Approved time source and recent sync, acceptable measured offset, successful normal sign-in and a new report received.",
+              "feedback": "This connects the clock correction to authenticated application use; it does not infer every account or server is healthy."
+            },
+            {
+              "label": "The displayed desktop clock looks close.",
+              "feedback": "Visual similarity does not establish synchronization source, offset or authentication."
+            },
+            {
+              "label": "A TCP connection still succeeds.",
+              "feedback": "TCP already succeeded while authentication failed."
+            }
+          ]
+        }
+      ],
+      "recovery": "Source: lab domain hierarchy\nRecent synchronization: recorded; measured offset: 0.2 seconds\nNormal authentication and assigned-role check: success\nReport R-109 received by intended user.",
+      "impact": "Leader brief: the tested client had working name and TCP access but failed identity checks because of clock drift. Normal authenticated report delivery was verified after time synchronization was restored.",
+      "sources": [
+        "kerberos",
+        "time",
+        "tcp"
+      ],
+      "practical": "On an isolated domain lab or supplied log set, identify time source, synchronization age and offset. Trace an authentication event to its client, server and domain context. Explain why a password reset is not a clock repair."
+    },
+    {
+      "id": "storage",
+      "title": "Linux services: diagnose a full filesystem",
+      "platform": "Linux VM / systemd / GNU-style df concepts",
+      "bridge": "Server administration skills for infrastructure supporting mission applications; service and disk layout are fictional.",
+      "objective": "Distinguish a powered VM, a running service, free bytes, free inodes and application progress.",
+      "scenario": "The VM is running, but the report queue stops accepting updates. The data directory is on the /var filesystem.",
+      "topology": [
+        "VM",
+        "Data mount",
+        "Feed service",
+        "Receiving user"
+      ],
+      "concepts": [
+        "VM power and guest OS availability do not establish application health. A service can fail when its data filesystem cannot accept writes.",
+        "Filesystems can exhaust bytes or inodes. df -h examines byte capacity; df -i examines inode capacity. Check the actual data path, not an unrelated mount.",
+        "Service status says whether a unit is active; the journal explains failures. Restarting without resolving the write failure usually reproduces the outage."
+      ],
+      "baseline": "Data path: /var/lib/training-feed\nMount: /dev/vdb1 on /var\nService: training-feed.service\nApproved capacity alert: before the data mount is full",
+      "observed": "[Service]\nExecStart=/opt/training-feed/bin/feed\nWorkingDirectory=/var/lib/training-feed\n# Fictional application; no BCCS/TSI service names inferred",
+      "evidence": [
+        {
+          "id": "capacity",
+          "title": "Inspect the data filesystem",
+          "command": "df -h /var/lib/training-feed",
+          "output": "Filesystem /dev/vdb1\nSize 20G; Used 20G; Avail 0; Use% 100%; Mounted on /var",
+          "meaning": "The filesystem containing the application data has no available byte capacity in this supplied case."
+        },
+        {
+          "id": "inodes",
+          "title": "Check inode capacity independently",
+          "command": "df -i /var/lib/training-feed",
+          "output": "Filesystem /dev/vdb1\nIUse% 12%; IFree 1150000; Mounted on /var",
+          "meaning": "Inodes remain available. The evidence supports exhausted byte capacity rather than inode exhaustion."
+        },
+        {
+          "id": "logs",
+          "title": "Correlate status and unit logs",
+          "command": "journalctl -u training-feed.service -n 20 --no-pager",
+          "output": "Companion systemctl status: failed\nFictional feed log: write /var/lib/training-feed/queue.db failed: No space left on device\nService exited with failure.",
+          "meaning": "The application write failure occurs on the same full filesystem. These are invented teaching messages, not an Army application transcript."
+        }
+      ],
+      "required_evidence": [
+        "capacity",
+        "inodes",
+        "logs"
+      ],
+      "decisions": [
+        {
+          "question": "Which failure is supported?",
+          "answer": 1,
+          "options": [
+            {
+              "label": "The hypervisor must be powered off.",
+              "feedback": "The running guest supplied filesystem and service observations."
+            },
+            {
+              "label": "Exhausted byte capacity on /var prevents the service from writing its queue.",
+              "feedback": "The path, byte-capacity result and write error agree; inode availability rules out a competing explanation."
+            },
+            {
+              "label": "A new default gateway is required.",
+              "feedback": "Changing routing does not free space on the local data filesystem."
+            }
+          ]
+        },
+        {
+          "question": "Which recovery plan protects the data?",
+          "answer": 0,
+          "options": [
+            {
+              "label": "Identify growth and apply approved retention, archival or capacity expansion; validate available space before controlled service recovery.",
+              "feedback": "Check backups and ownership. Preserve the database and evidence; use the documented storage procedure and rollback plan."
+            },
+            {
+              "label": "Delete the queue database and every log file.",
+              "feedback": "Unreviewed deletion can destroy reports and diagnostic evidence."
+            },
+            {
+              "label": "Restart the service repeatedly until it works.",
+              "feedback": "The full data filesystem remains unchanged; restarts alone do not create capacity."
+            }
+          ]
+        },
+        {
+          "question": "What confirms the service recovered?",
+          "answer": 2,
+          "options": [
+            {
+              "label": "The VM remains powered on.",
+              "feedback": "The VM was already on during the failure."
+            },
+            {
+              "label": "The service process starts once.",
+              "feedback": "That does not demonstrate sustained writes, queue progress or delivery."
+            },
+            {
+              "label": "Verify byte/inode headroom, stable unit status, no recurring write errors, queue progress and a new report received.",
+              "feedback": "This tests the repaired dependency and the downstream user task; monitor growth to detect recurrence."
+            }
+          ]
+        }
+      ],
+      "recovery": "/var: 65% bytes used; 12% inodes used\ntraining-feed.service: active (running)\nNo recurring write errors during the lab observation window\nQueue advances; report R-110 received.",
+      "impact": "Leader brief: the guest stayed online, but its full data filesystem stopped report processing. Capacity and stable queue progress were verified after the approved storage recovery; monitor growth and report any remaining backlog.",
+      "sources": [
+        "systemctl",
+        "journal",
+        "df"
+      ],
+      "practical": "In a disposable VM with a dedicated small test volume, inspect df -h, df -i, systemctl status and journalctl. Use instructor-provided sample data, never fill the root disk or delete a real application database. Document the data-preserving recovery."
+    },
+    {
+      "id": "listener",
+      "title": "VM networking: local health is not remote service",
+      "platform": "Linux guest / iproute2 socket inspection",
+      "bridge": "Applies to services on VM infrastructure; does not prescribe BCCS/TSI virtual switches or application bindings.",
+      "objective": "Trace guest listener scope before blaming the hypervisor, switch or firewall.",
+      "scenario": "A fictional application is healthy from inside its VM, but remote clients cannot connect. The approved service design calls for the guest service IP, not loopback.",
+      "topology": [
+        "Remote client",
+        "Guest vNIC",
+        "TCP listener",
+        "App process"
+      ],
+      "concepts": [
+        "A connected virtual NIC does not prove the guest process is listening on an address reachable through that NIC.",
+        "127.0.0.1 is loopback. A process bound only there accepts local connections but not connections to the guest service IP.",
+        "Check IP/route, socket address and port, permitted policy and application response separately. Exposing a listener requires the approved interface and access controls."
+      ],
+      "baseline": "Guest IP: 10.20.40.20/24\nFictional lab HTTP service: TCP 8080\nApproved bind address: 10.20.40.20\nAllowed source: training client subnet only",
+      "observed": "# Fictional application configuration\nBIND_ADDRESS=127.0.0.1\nPORT=8080\n# vNIC connected; guest IP and route match baseline",
+      "evidence": [
+        {
+          "id": "listener",
+          "title": "Read the listening socket",
+          "command": "ss -lnt",
+          "output": "State LISTEN\nLocal Address:Port 127.0.0.1:8080\nNo listener on 10.20.40.20:8080",
+          "meaning": "The process listens only on loopback. -l selects listeners, -n keeps numeric addresses, and -t selects TCP."
+        },
+        {
+          "id": "local",
+          "title": "Compare local health with remote access",
+          "command": "Supplied local HTTP health check",
+          "output": "Inside VM, http://127.0.0.1:8080/health returns 200.\nGuest application process is running.",
+          "meaning": "A healthy loopback response does not demonstrate exposure on the service interface. HTTP is confined to this fictional isolated lab."
+        },
+        {
+          "id": "remote",
+          "title": "Inspect the remote port test and policy",
+          "command": "Test-NetConnection -ComputerName 10.20.40.20 -Port 8080",
+          "output": "TcpTestSucceeded: False\nSupplied routing, vNIC placement and intended source policy: match baseline\nNo supplied evidence of a listener on the guest service IP.",
+          "meaning": "A remote TCP failure alone could have many causes. The socket evidence and baseline mismatch provide the specific finding."
+        }
+      ],
+      "required_evidence": [
+        "listener",
+        "local",
+        "remote"
+      ],
+      "decisions": [
+        {
+          "question": "What explains local success and remote failure here?",
+          "answer": 0,
+          "options": [
+            {
+              "label": "The application is bound only to loopback instead of the approved guest IP.",
+              "feedback": "The listener table directly confirms the mismatch, while local health explains why an inside-VM test can pass."
+            },
+            {
+              "label": "Every VM must have two virtual NICs.",
+              "feedback": "No supplied design or evidence requires a second interface."
+            },
+            {
+              "label": "An HTTP 200 on loopback proves remote readiness.",
+              "feedback": "That result only tests the local listener and health endpoint."
+            }
+          ]
+        },
+        {
+          "question": "What correction fits the documented design?",
+          "answer": 2,
+          "options": [
+            {
+              "label": "Bind to every interface and remove all access controls.",
+              "feedback": "Broad exposure and policy removal exceed the approved service scope."
+            },
+            {
+              "label": "Rebuild the entire VM.",
+              "feedback": "The observed binding mismatch is a narrower, reversible configuration issue."
+            },
+            {
+              "label": "Set the approved service IP in the application configuration and perform its documented controlled reload or restart.",
+              "feedback": "Check interface availability, change ownership and rollback. Preserve the intended client restrictions; do not assume every application reloads the same way."
+            }
+          ]
+        },
+        {
+          "question": "Which result set establishes remote recovery?",
+          "answer": 1,
+          "options": [
+            {
+              "label": "The VM console opens.",
+              "feedback": "Console access does not traverse the application listener."
+            },
+            {
+              "label": "The socket listens on 10.20.40.20:8080, permitted remote TCP and application tests pass, and the receiver confirms a new report.",
+              "feedback": "This verifies exposure, policy scope and user acceptance. Production TLS and identity requirements would be checked in their own documented design."
+            },
+            {
+              "label": "The local health response remains 200.",
+              "feedback": "That result was already successful during the outage."
+            }
+          ]
+        }
+      ],
+      "recovery": "LISTEN 10.20.40.20:8080\nPermitted remote TCP test: True\nRemote application exchange: success; intended access restrictions retained\nReport R-111 acknowledged by receiving user.",
+      "impact": "Leader brief: the VM and process were running, but the service was available only inside the guest. Correcting the approved bind address restored the tested remote report exchange without expanding the intended access scope.",
+      "sources": [
+        "ss",
+        "tcp",
+        "systemctl"
+      ],
+      "practical": "Use a disposable isolated VM and generic test application. Compare a loopback listener with a listener on its assigned guest IP. Read ss output, then test from a second permitted host. Keep the lab off operational networks."
+    }
+  ]
+}
