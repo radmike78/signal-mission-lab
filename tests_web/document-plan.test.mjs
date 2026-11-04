@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {screenDocumentText,validateDocument,candidateTasks,draftRequirement,updateRequirement,unresolvedFields,planningWarnings,exportWorksheet,worksheetMarkdown,SAMPLE_DIRECTIVE} from '../web/src/document-plan-model.ts';
+import {screenDocumentText,validateDocument,candidateTasks,draftRequirement,updateRequirement,unresolvedFields,planningWarnings,exportWorksheet,worksheetMarkdown,sourceSuggestions,applySourceSuggestions,opposingPassages,SAMPLE_DIRECTIVE} from '../web/src/document-plan-model.ts';
 import {wordTextParts} from '../web/src/document-zip.ts';
 import {zipSync,strToU8} from '../web/node_modules/fflate/esm/browser.js';
 const doc={format:'Text',digest:'a'.repeat(64),blocks:SAMPLE_DIRECTIVE.split('\n').map((text,i)=>({text,locator:'Text paragraph '+(i+1)})),warnings:[]};
@@ -45,4 +45,28 @@ test('Word unzip limits skip attachments and reject missing or excessive text pa
  assert.throws(()=>wordTextParts(zipSync({'missing.xml':strToU8(xml)})));
  assert.throws(()=>wordTextParts(zipSync({'word/document.xml':strToU8('x'.repeat(1000001))})));
  assert.throws(()=>wordTextParts(new Uint8Array(100)));
+});
+test('source suggestions quote only explicit simple exchanges and preserve reviewer answers',()=>{
+ const source=doc.blocks.findIndex(b=>b.text.includes('Alpha will'));
+ const suggestions=sourceSuggestions(doc,source);
+ assert.deepEqual(suggestions.map(s=>[s.field,s.value]),[['sender','Team Alpha'],['information','a status report'],['recipient','Team Bravo'],['timing','before each command update']]);
+ const manual=updateRequirement(draftRequirement(doc,source),'sender','Fictional training sender');
+ const applied=applySourceSuggestions(doc,{...manual,reviewed:true});
+ assert.equal(applied.sender,'Fictional training sender');assert.equal(applied.fieldSources.sender,undefined);assert.equal(applied.reviewed,false);
+ assert.equal(applied.recipient,'Team Bravo');assert.equal(applied.application,'');
+ const packet=exportWorksheet(doc,'COMMEX',[applied]);assert.equal(packet.schema_version,2);assert.equal(packet.requirements[0].field_sources.recipient.quote,'Team Bravo');
+ const edited=updateRequirement(applied,'recipient','Fictional alternate recipient');assert.equal(edited.fieldSources.recipient,undefined);
+ assert.throws(()=>exportWorksheet(doc,'COMMEX',[{...applied,fieldSources:{recipient:{source,quote:'not in the source'}}}]));
+ assert.match(worksheetMarkdown(doc,'COMMEX',[applied]),/Field citations:/);
+});
+test('negated, conditional, compound and ambiguous exchanges abstain rather than invent details',()=>{
+ for(const text of ['Team Alpha will not submit a status report to Team Bravo.','Team Alpha will submit a status report to Team Bravo if the link is available.','Team Alpha will submit and acknowledge a status report to Team Bravo.','Team Alpha will submit a status report to Team Bravo or Team Charlie.','The fictional report needs delivery.','Team Alpha will submit a report to Team Bravo after the exercise.','Team Alpha and Team Charlie will submit a report to Team Bravo.']){
+  const fixture={...doc,blocks:[{locator:'Text paragraph 1',text}]};assert.deepEqual(sourceSuggestions(fixture,0),[],text);
+ }
+ assert.throws(()=>sourceSuggestions(doc,-1));
+});
+test('opposing wording is paired for review without pretending to resolve scope or all conflicts',()=>{
+ const fixture={...doc,blocks:[{locator:'P1',text:'Team Alpha will submit a status report to Team Bravo.'},{locator:'P2',text:'Team Alpha must not submit a status report to Team Bravo.'},{locator:'P3',text:'Team Alpha will submit a status report to Team Charlie.'}]};
+ assert.deepEqual(opposingPassages(fixture),[[0,1]]);
+ assert.equal(exportWorksheet(fixture,'WFX',[draftRequirement(fixture,0)]).opposing_passages[0][1].locator,'P2');assert.match(worksheetMarkdown(fixture,'WFX',[draftRequirement(fixture,0)]),/must not submit/);
 });

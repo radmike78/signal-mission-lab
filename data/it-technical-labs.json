@@ -117,15 +117,39 @@
       "scope": "GNU df file-path, byte-capacity and inode inspection options; supplied values are fictional.",
       "retrieved": "2026-11-02",
       "status": "page_content_checked"
+    },
+    {
+      "id": "nist-encryption",
+      "title": "NIST: encryption terminology",
+      "url": "https://csrc.nist.gov/glossary/term/encryption",
+      "scope": "Plaintext/ciphertext and encryption/decryption concepts only; not a TACLANE operating procedure.",
+      "retrieved": "2026-11-04",
+      "status": "page_content_checked"
+    },
+    {
+      "id": "gd-taclane",
+      "title": "General Dynamics: TACLANE operator training",
+      "url": "https://gdmissionsystems.com/encryption/taclane-network-encryption/taclane-encryptor-training",
+      "scope": "Manufacturer search excerpt establishes the product training context and networking prerequisites. Direct page access returned 403. Exact model alarms, menus and procedures remain unverified.",
+      "retrieved": "2026-11-04",
+      "status": "search_excerpt_checked_direct_403"
+    },
+    {
+      "id": "gd-manuals",
+      "title": "General Dynamics: software and documentation requests",
+      "url": "https://gdmissionsystems.com/encryption/cyber-customer-support/cyber-software-request-form",
+      "scope": "Manufacturer search excerpt identifies an authorized documentation request route. Direct access returned 403. No request was submitted and no operator manual was obtained.",
+      "retrieved": "2026-11-04",
+      "status": "search_excerpt_checked_direct_403"
     }
   ],
   "labs": [
     {
       "id": "subnet",
-      "title": "IPv4: why the host never reaches its gateway",
+      "title": "IPv4: verify the provided plan and forwarding path",
       "platform": "Windows PowerShell / generic IPv4 Ethernet",
       "bridge": "Foundation for client LANs behind JNN/CPN; this is not their approved addressing plan.",
-      "objective": "Calculate the on-link subnet and explain ARP versus next-hop forwarding.",
+      "objective": "Compare the assigned address, prefix and gateway with the provided plan, then interpret next-hop forwarding. Subnet calculation is not required.",
       "scenario": "A fictional client can reach its gateway but cannot reach a server in a different /24. The test bench has no proxy ARP, VPN or more-specific route.",
       "topology": [
         "Client",
@@ -231,7 +255,7 @@
         "get-ip",
         "tcp"
       ],
-      "practical": "On an isolated Windows pair and router, calculate the /24 network, broadcast (.255), host range (.1\u2013.254) and gateway. Have an instructor vary the prefix and observe next-hop behavior. Capture only synthetic traffic."
+      "practical": "Use the instructor-provided addressing plan in an isolated client/router lab. Compare Get-NetIPAddress and the supplied route/neighbor evidence with that plan. Identify a changed prefix, explain its effect on the packet path, restore the documented setting through the approved lab procedure and verify the receiving-user task. No subnet calculation is assessed."
     },
     {
       "id": "vlan",
@@ -1018,6 +1042,234 @@
         "systemctl"
       ],
       "practical": "Use a disposable isolated VM and generic test application. Compare a loopback listener with a listener on its assigned guest IP. Read ss output, then test from a second permitted host. Keep the lab off operational networks."
+    },
+    {
+      "platform": "TACLANE/inline IP encryption concepts \u2014 synthetic observations",
+      "bridge": "Foundation for protected network paths supporting C2. No security configuration, keying operation or model-specific status interpretation is supplied.",
+      "topology": [
+        "Source PT LAN",
+        "Local encryptor",
+        "CT to peer",
+        "Receiver PT LAN"
+      ],
+      "sources": [
+        "nist-encryption",
+        "gd-taclane",
+        "gd-manuals",
+        "tcp"
+      ],
+      "concepts": [
+        "TACLANE names a family of network encryptors. Confirm the exact model, software and approved network design before applying any equipment-specific procedure. This lesson models an inline protected IP path; other product modes are outside its scope.",
+        "In this teaching model, the plaintext (PT/red) side faces the protected user network; the ciphertext (CT/black) side carries encrypted traffic across transport to the remote encryptor. Encryption and routing solve different dependencies. Color terms describe the boundary, not a license to move data between networks.",
+        "Trace both directions: source LAN, local plaintext path, protected encryptor pair and ciphertext transport, remote plaintext path, then receiving application. A link indication, reachable endpoint or healthy-looking device alone cannot establish that whole exchange."
+      ],
+      "id": "taclane-transport",
+      "title": "TACLANE: separate ciphertext transport from protected service",
+      "objective": "Identify plaintext and ciphertext dependencies and isolate a supplied transport fault without changing cryptographic state.",
+      "scenario": "The fictional staff cannot send reports across a protected path. Local client access works, but the ciphertext-side transport handoff is down. These are independent instructor observations, not actual TACLANE display text.",
+      "baseline": "Source PT LAN -> local encryptor\nCT transport -> remote encryptor -> receiver PT LAN\nApproved CT handoff: connected to the designated transport port\nApproved receiving-user task: new report accepted\nNo security parameters or key material are shown.",
+      "observed": "Local plaintext client path: available\nCiphertext transport handoff: physical link down\nNo ciphertext forwarding beyond that handoff\nPeer/protected user exchange: not yet verified",
+      "evidence": [
+        {
+          "id": "local-path",
+          "title": "Check the local plaintext boundary",
+          "command": "Instructor-supplied fictional observation; no TACLANE command or menu is represented",
+          "output": "Training client reaches its approved local service gateway.\nNo local client addressing mismatch is supplied.",
+          "meaning": "This narrows the initial fault location but does not establish remote protected service."
+        },
+        {
+          "id": "ct-handoff",
+          "title": "Inspect the ciphertext transport handoff",
+          "command": "Instructor-supplied fictional observation; no TACLANE command or menu is represented",
+          "output": "Fictional port inspection: CT handoff disconnected at the designated transport switch.\nTransport port has no physical link.\nThe approved diagram identifies that exact handoff.",
+          "meaning": "A documented physical transport break is present. This evidence does not diagnose key state or establish the health of the remote device."
+        },
+        {
+          "id": "end-to-end",
+          "title": "Check remote acceptance evidence",
+          "command": "Instructor-supplied fictional observation; no TACLANE command or menu is represented",
+          "output": "The new test report has not been received.\nProtected-path acceptance evidence is absent.\nNo supplied cryptographic alarm or key-state diagnosis.",
+          "meaning": "The remote staff task is unavailable. Do not infer a key fault from a failed application exchange alone."
+        }
+      ],
+      "decisions": [
+        {
+          "question": "Which finding is supported before changing the encryptor?",
+          "answer": 1,
+          "options": [
+            {
+              "label": "The key material must be replaced.",
+              "feedback": "No supplied evidence identifies a key problem. The transport handoff is visibly disconnected."
+            },
+            {
+              "label": "The documented ciphertext transport handoff is physically disconnected.",
+              "feedback": "The diagram and port observation locate an upstream dependency failure. Cryptographic or application health cannot yet be concluded."
+            },
+            {
+              "label": "The local gateway response proves the protected path is usable.",
+              "feedback": "That only verifies the selected local path; the remote receiving task still fails."
+            }
+          ]
+        },
+        {
+          "question": "What is the bounded recovery action?",
+          "answer": 0,
+          "options": [
+            {
+              "label": "Have the authorized operator restore the designated transport handoff and verify it against the approved diagram.",
+              "feedback": "Correct the observed physical dependency and preserve the red/black boundary. Use the exact equipment publications for any further device operation."
+            },
+            {
+              "label": "Connect the plaintext LAN directly to the ciphertext transport.",
+              "feedback": "That bypasses the required protection boundary and does not restore the approved service."
+            },
+            {
+              "label": "Change security settings until the report goes through.",
+              "feedback": "Trial-and-error security changes are unsupported by the supplied evidence and may add failures."
+            }
+          ]
+        },
+        {
+          "question": "What supports the restored-service claim?",
+          "answer": 2,
+          "options": [
+            {
+              "label": "The transport link light returns.",
+              "feedback": "That removes one fault, but does not establish protected traffic or receiving-user acceptance."
+            },
+            {
+              "label": "A local client still reaches its gateway.",
+              "feedback": "This observation was already true during the outage."
+            },
+            {
+              "label": "Verify transport, the authorized peer/security status, both traffic directions and a fresh report acknowledged at the receiving endpoint.",
+              "feedback": "These are separate acceptance observations. Use model-specific authorized status guidance rather than guessing from generic labels."
+            }
+          ]
+        }
+      ],
+      "recovery": "Reference observations after the approved handoff repair:\nCT transport forwarding restored\nAuthorized operator confirms the required protected peer state\nBidirectional protected test traffic confirmed\nNew report T-201 received and acknowledged",
+      "impact": "Leader brief: the tested protected reporting path was unavailable because its ciphertext transport handoff was disconnected. Restoring the handoff and verifying the protected exchange recovered that report task; other peers and services are not covered.",
+      "practical": "With an instructor, label PT/red and CT/black on an approved training diagram and trace both directions. Compare supplied link, transport, peer and receiving-user evidence. For any actual device, obtain the model/software operator manual and authorized instruction; do not infer menus, alarms, keying or security actions from this workbench.",
+      "required_evidence": [
+        "local-path",
+        "ct-handoff",
+        "end-to-end"
+      ]
+    },
+    {
+      "platform": "TACLANE/inline IP encryption concepts \u2014 synthetic observations",
+      "bridge": "Foundation for protected network paths supporting C2. No security configuration, keying operation or model-specific status interpretation is supplied.",
+      "topology": [
+        "Source PT LAN",
+        "Local encryptor",
+        "CT to peer",
+        "Receiver PT LAN"
+      ],
+      "sources": [
+        "nist-encryption",
+        "gd-taclane",
+        "gd-manuals",
+        "tcp"
+      ],
+      "concepts": [
+        "TACLANE names a family of network encryptors. Confirm the exact model, software and approved network design before applying any equipment-specific procedure. This lesson models an inline protected IP path; other product modes are outside its scope.",
+        "In this teaching model, the plaintext (PT/red) side faces the protected user network; the ciphertext (CT/black) side carries encrypted traffic across transport to the remote encryptor. Encryption and routing solve different dependencies. Color terms describe the boundary, not a license to move data between networks.",
+        "Trace both directions: source LAN, local plaintext path, protected encryptor pair and ciphertext transport, remote plaintext path, then receiving application. A link indication, reachable endpoint or healthy-looking device alone cannot establish that whole exchange."
+      ],
+      "id": "taclane-plaintext",
+      "title": "TACLANE: healthy protected path, missing plaintext return route",
+      "objective": "Distinguish a protected-path observation from downstream routing and prove both directions of the supported exchange.",
+      "scenario": "The fictional encryptor pair passes a separate authorized protected-path test. A client request reaches the server, but the reply never returns. The supplied remote plaintext router has no route to the client subnet.",
+      "baseline": "Client LAN: 10.31.10.0/24 (provided, no subnet calculation needed)\nServer LAN: 10.42.20.0/24\nRemote PT router must use the approved next hop for the client LAN\nNo unprotected bypass is permitted",
+      "observed": "Authorized protected-path test: passes independently\nServer receives client request and generates response\nRemote PT router: no matching client-LAN route or default\nNo approved path for the reply in the supplied table",
+      "evidence": [
+        {
+          "id": "protected-path",
+          "title": "Separate the protected-path test",
+          "command": "Instructor-supplied fictional observation; no TACLANE command or menu is represented",
+          "output": "Authorized operator reports the separate peer/protected-path test meets its documented criteria.\nThese criteria are not device menu or alarm definitions.",
+          "meaning": "This evidence supports that bounded test, not every attached network or application."
+        },
+        {
+          "id": "reply-path",
+          "title": "Inspect the remote plaintext route",
+          "command": "Instructor-supplied fictional observation; no TACLANE command or menu is represented",
+          "output": "Destination client LAN: 10.31.10.0/24\nRemote PT router lookup: no matching route; no default\nInstructor trace: reply dropped at that router",
+          "meaning": "The return-path lookup identifies a routing dependency outside the tested protected exchange."
+        },
+        {
+          "id": "receiver",
+          "title": "Compare application and traffic evidence",
+          "command": "Instructor-supplied fictional observation; no TACLANE command or menu is represented",
+          "output": "Server receives new client request T-202.\nServer generates its reply.\nClient does not receive the reply.",
+          "meaning": "One-way application flow is consistent with the supplied return-route failure. More than a protected peer indication is needed for user acceptance."
+        }
+      ],
+      "decisions": [
+        {
+          "question": "Which fault explains the observed one-way exchange?",
+          "answer": 0,
+          "options": [
+            {
+              "label": "The remote plaintext router lacks the approved return route to the client LAN.",
+              "feedback": "The router lookup and reply trace identify that dependency even though the separate protected-path test passes."
+            },
+            {
+              "label": "Every healthy peer indication proves all application routes are correct.",
+              "feedback": "A protected-path test does not populate downstream routing or prove application acceptance."
+            },
+            {
+              "label": "The encryptor must be replaced because one application fails.",
+              "feedback": "The supplied evidence locates a narrower return-routing fault; replacement is unsupported."
+            }
+          ]
+        },
+        {
+          "question": "Which correction preserves the approved design?",
+          "answer": 2,
+          "options": [
+            {
+              "label": "Remove protection and bridge the two LANs.",
+              "feedback": "That changes the required security boundary rather than fixing the documented return path."
+            },
+            {
+              "label": "Change the provided subnet plan at both sites.",
+              "feedback": "The supplied addresses match the plan; the missing return route is the specific finding."
+            },
+            {
+              "label": "Restore the approved client-LAN route on the responsible plaintext router through its authorized change process.",
+              "feedback": "Use the documented next hop and routing method, retain rollback information, and repeat the receiving-user exchange. No route value is invented here."
+            }
+          ]
+        },
+        {
+          "question": "What does recovery require?",
+          "answer": 1,
+          "options": [
+            {
+              "label": "Repeat only the already-passing protected-path test.",
+              "feedback": "It passed before the routing correction and did not establish application recovery."
+            },
+            {
+              "label": "Confirm the return route and forwarding, repeat the protected-path acceptance check, and verify the client receives the new server response.",
+              "feedback": "The route and two-way user transaction test the repaired dependency and required service together."
+            },
+            {
+              "label": "Show that the server received a request once.",
+              "feedback": "The server already received requests while the reply path failed."
+            }
+          ]
+        }
+      ],
+      "recovery": "Reference observations after the approved return-route repair:\nClient LAN route selected via documented PT next hop\nReply forwards toward the required protected path\nProtected-path acceptance remains satisfied\nClient receives the response to new test T-203",
+      "impact": "Leader brief: the separate protected-path test passed, but a missing remote plaintext return route prevented the tested client exchange. The approved route repair and a new two-way transaction verified recovery for that client/server task.",
+      "practical": "Use an isolated generic routed lab or instructor-supplied packet trace to follow a request and reply. Treat encryptor status as supplied evidence; do not emulate keys or cryptographic behavior. Explain why a route repair and a protected-path test answer different questions, then brief the exact supported task.",
+      "required_evidence": [
+        "protected-path",
+        "reply-path",
+        "receiver"
+      ]
     }
   ]
 }

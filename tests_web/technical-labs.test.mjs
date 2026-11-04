@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {technicalLabs,labSummary,inspectLab,answerLab} from '../web/src/technical-lab-model.ts';
 const empty=()=>({inspected:[],choices:[]});
 const inspectAll=lab=>lab.evidence.reduce((a,e)=>inspectLab(lab.id,a,e.id),empty());
-test('all eight cases require evidence and preserve ordered first choices',()=>{
+test('all ten cases require evidence and preserve ordered first choices',()=>{
  for(const lab of technicalLabs.labs){
   assert.throws(()=>answerLab(lab.id,empty(),0,lab.decisions[0].answer));
   let a=inspectAll(lab);assert.equal(labSummary(lab.id,a).ready,true);

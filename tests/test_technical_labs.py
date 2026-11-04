@@ -13,8 +13,8 @@ class TechnicalLabTests(unittest.TestCase):
         self.content = json.loads((ROOT/'data/it-technical-labs.json').read_text())
 
     def test_complete_path_with_inspectable_evidence_and_reference_recovery(self):
-        self.assertEqual(validate_technical_labs(self.content)['it_technical_labs'], 8)
-        self.assertEqual(sum(len(lab['evidence']) for lab in self.content['labs']), 24)
+        self.assertEqual(validate_technical_labs(self.content)['it_technical_labs'], 10)
+        self.assertEqual(sum(len(lab['evidence']) for lab in self.content['labs']), 30)
 
     def test_publication_rejects_broken_sources_incomplete_decisions_and_false_authority(self):
         changes = [lambda c:c.update(configuration_authority=True), lambda c:c.update(schema_version=True),
@@ -22,6 +22,7 @@ class TechnicalLabTests(unittest.TestCase):
                    lambda c:c['sources'][0].update(url='https://learn.microsoft.com.evil.test/help'),
                    lambda c:c['sources'][0].update(url='https://user:secret@learn.microsoft.com/help'),
                    lambda c:c['sources'][0].update(status='not_checked'),
+                   lambda c:c['sources'][0].update(status='search_excerpt_checked_direct_403'),
                    lambda c:c['sources'].append(c['sources'][0]),
                    lambda c:c['labs'][0].update(sources=['missing']),
                    lambda c:c['labs'][0].update(required_evidence=['prefix']),

@@ -42,7 +42,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
   const record=area.getByRole('button',{name:'Record lab result',exact:true});await record.click();assert(await record.isDisabled());
  }
  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('sml-practice-v1')));
- assert.equal(saved.length,8);assert(saved.every(r=>r.kind==='technical-lab'&&r.total===3));assert.equal(saved[0].score,2);
+ assert.equal(saved.length,technicalLabs.labs.length);assert(saved.every(r=>r.kind==='technical-lab'&&r.total===3));assert.equal(saved[0].score,2);
  for(const r of saved)assert.deepEqual(Object.keys(r).sort(),['at','kind','score','total']);
  await area.getByLabel('Technical lab',{exact:true}).selectOption('subnet');assert.match(await area.getByRole('status').first().innerText(),/2\/3 supported/);
  await area.getByRole('button',{name:'Reset this lab attempt',exact:true}).click();assert.match(await area.getByRole('status').first().innerText(),/0\/3 evidence/);
@@ -55,12 +55,13 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
    const audit=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();assert.deepEqual(audit.violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)})),[]);
   }
  }
+ await area.getByLabel('Technical lab',{exact:true}).selectOption('taclane-plaintext');await area.getByRole('heading',{name:'Inspect the remote plaintext route',exact:true}).evaluate(e=>e.scrollIntoView({block:'start'}));await page.screenshot({path:'artifacts/screenshots/taclane-plaintext-mobile.png'});
  await area.getByLabel('Technical lab',{exact:true}).selectOption('ospf');
  await area.getByLabel('Observed configuration',{exact:true}).scrollIntoViewIfNeeded();
  await page.screenshot({path:'artifacts/screenshots/technical-lab-ospf-mobile.png'});
  await page.reload();await nav('Technical labs');await area.getByLabel('Technical lab',{exact:true}).waitFor();assert.match(await area.getByRole('status').first().innerText(),/0\/3 evidence.*0\/3 decisions/);
  await nav('My training');await page.getByRole('cell',{name:'IT technical lab decisions',exact:true}).first().waitFor();
  await page.getByRole('button',{name:'Clear device practice',exact:true}).click();await page.waitForFunction(()=>localStorage.getItem('sml-practice-v1')===null);
- assert.deepEqual(errors,[]);console.log('PASS eight offline technical labs, evidence gates, first-choice decisions, reference recovery, navigation continuity, summary history, desktop/mobile accessibility and layout');
+ assert.deepEqual(errors,[]);console.log('PASS ten offline technical labs, evidence gates, first-choice decisions, reference recovery, navigation continuity, summary history, desktop/mobile accessibility and layout');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});

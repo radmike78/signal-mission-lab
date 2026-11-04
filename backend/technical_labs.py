@@ -25,15 +25,17 @@ def validate_technical_labs(content):
     source_ids = set()
     for source in sources:
         text(source['id'], 1)
-        if source['id'] in source_ids or source['status'] != 'page_content_checked':
+        if source['id'] in source_ids or source['status'] not in {'page_content_checked', 'search_excerpt_checked_direct_403'}:
             raise ValueError('Duplicate or unchecked technical source')
         source_ids.add(source['id'])
-        validate_url(source['url'], {'learn.microsoft.com', 'www.cisco.com', 'www.freedesktop.org', 'man7.org'})
+        validate_url(source['url'], {'learn.microsoft.com', 'www.cisco.com', 'www.freedesktop.org', 'man7.org', 'csrc.nist.gov', 'gdmissionsystems.com'})
+        if source['status'] == 'search_excerpt_checked_direct_403':
+            validate_url(source['url'], {'gdmissionsystems.com'})
         date.fromisoformat(source['retrieved'])
         text(source['title'])
         text(source['scope'])
     labs = content['labs']
-    if not isinstance(labs, list) or len(labs) != 8 or {lab['id'] for lab in labs} != {'subnet', 'vlan', 'dns', 'ospf', 'dmvpn', 'time', 'storage', 'listener'}:
+    if not isinstance(labs, list) or len(labs) != 10 or {lab['id'] for lab in labs} != {'subnet', 'vlan', 'dns', 'ospf', 'dmvpn', 'time', 'storage', 'listener', 'taclane-transport', 'taclane-plaintext'}:
         raise ValueError('Incomplete technical path')
     for lab in labs:
         for field in ('title', 'platform', 'bridge', 'objective', 'scenario', 'baseline', 'observed', 'recovery', 'impact', 'practical'):

@@ -63,3 +63,9 @@ Troubleshooting now presents one symptom and one check at a time, with optional 
 ## BCCS and TSI stack coverage (19 October 2026)
 
 Added distinct BCCS stack coverage, fuller TSI aliases, scoped public Army references, mission-intake recognition and links from existing computing lessons. No mandatory course or navigation area was added. Catalog now contains 87 entries. Exact stack baselines and equipment procedures remain pending; see `BCCS_TSI_COVERAGE.md`.
+
+## Current planning and protected-network learning milestone (4 November 2026)
+
+Added local PDF/DOCX/text document review, cited editable Signal requirements, optional exact-source field suggestions, opposing-wording review and schema-v2 exports. Added two TACLANE dependency/troubleshooting cases and adjusted addressing practice to verify a supplied plan without calculation. Disconnected CI artifacts now contain an integrity verifier and are boot-tested from the extracted ZIP. All of these are synthetic training features; they do not authorize actual controlled documents or establish equipment readiness.
+
+The next engineering gaps are OCR and table/layout validation; an approved local/in-enclave semantic-analysis adapter with citation/abstention evaluations; richer multi-task and constraint reconciliation; trusted signed offline release/update processes; organization identity and authenticated reviewer workflows; and broader equipment/manual validation and instructor-observed practical skills. Controlled/classified use additionally needs a sponsoring system owner, a defined authorized processing boundary and its security authorization. No classified-data toggle or external AI data path is enabled.

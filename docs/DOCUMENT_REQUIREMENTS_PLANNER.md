@@ -40,3 +40,11 @@ The next stages are verified OCR, better table/layout handling, a structured ana
 Node tests cover source linkage, explicit gaps, negative requirements, invalid evidence, content limits, escaping and Word text-part limits. Browser checks cover offline TXT/PDF/DOCX import, review/edit/export, retained session state, rejected formats and sensitive markers, empty-text PDF, XML entities, reset/reload, no application writes and desktop/mobile accessibility. Existing PR checks cover the rest of the application, dependencies, containers and native builds. These tests do not establish semantic accuracy across arbitrary orders.
 
 For separate unclassified/CUI and classified editions, see [proposed deployment boundaries](CONTROLLED_ENVIRONMENT_ARCHITECTURE.md). The current build remains training-only.
+
+## Source-backed suggestions and opposing wording
+
+The second iteration recognizes only a simple explicit sender-will/shall/must-send/submit/provide/transmit-information-to-recipient pattern with optional supported timing wording. It abstains on conditional, negative or compound/ambiguous patterns. Suggestions remain opt-in, fill only empty answers and never infer application, equipment, support owner or protection settings. Each applied field keeps its exact quote and source reference. Manual field editing removes that citation and invalidates the review acknowledgement. Narrow grammar matching is not general semantic analysis.
+
+A separate check pairs matching directive wording with opposite negation for human review. It does not resolve precedence, different scopes or every contradiction. Worksheet schema version 2 exports field-level provenance and paired passages in JSON; Markdown includes retained field citations and the opposing passages. Earlier version-1 consumers need to accommodate these additive fields and version change.
+
+The disconnected package now includes an integrity verifier, which rejects changed, missing, extra or symlinked files before startup. It does not establish authenticity, trusted origin or authorization. CI extracts the actual ZIP, verifies it and runs the document browser journey from a fresh local origin, including offline parser workers, CSP, explicit exports and no external app requests. Browser/OS traffic outside the application remains a separate host concern.
