@@ -1,6 +1,8 @@
 /** Transparent candidate matching and editable planning; no AI or equipment allocation. */
 export type SourceBlock={locator:string;text:string};
-export type PlanningDocument={format:string;digest:string;blocks:SourceBlock[];warnings:string[]};
+export type OCRPage={page:number;text:string;confidence:number;preview:string};
+export type PlanningDocument={format:string;digest:string;blocks:SourceBlock[];warnings:string[];ocr?:{pages:OCRPage[];reviewed:boolean}};
+export function ocrSourceBlocks(pages:OCRPage[],reviewed:boolean):SourceBlock[]{return pages.flatMap(p=>p.text.split(/\r?\n/).filter(line=>line.trim()).map((text,i)=>({locator:'OCR page '+p.page+' paragraph '+(i+1)+(reviewed?' (reviewed transcription)':' (unreviewed transcription)'),text:text.trim()})));}
 export const exerciseTypes=['Mission','COMMEX','VALEX','STAFFEX','WFX'] as const;
 export type EvidenceKind='Derived'|'Assumption'|'Unresolved';
 export type FieldSource={source:number;quote:string};
@@ -20,19 +22,31 @@ export function screenDocumentText(raw:string){
  return text;
 }
 export function validateDocument(doc:PlanningDocument){
- if(!doc||!['Text','PDF','DOCX'].includes(doc.format)||!/^[a-f0-9]{64}$/.test(doc.digest)||!Array.isArray(doc.blocks)||!doc.blocks.length||doc.blocks.length>300||!Array.isArray(doc.warnings)||doc.warnings.length>40)throw Error('Unsupported document structure.');
+ if(!doc||!['Text','PDF','DOCX','OCR image','OCR PDF'].includes(doc.format)||!/^[a-f0-9]{64}$/.test(doc.digest)||!Array.isArray(doc.blocks)||!doc.blocks.length||doc.blocks.length>300||!Array.isArray(doc.warnings)||doc.warnings.length>40)throw Error('Unsupported document structure.');
  for(const b of doc.blocks)if(typeof b.locator!=='string'||b.locator.length>100||!b.locator.length||typeof b.text!=='string'||!b.text.trim()||b.text.length>10000)throw Error('Invalid source passage.');
  if(new Set(doc.blocks.map(b=>b.locator)).size!==doc.blocks.length)throw Error('Duplicate source references.');
  screenDocumentText(doc.blocks.map(b=>b.text).join('\n'));
  for(const w of doc.warnings)if(typeof w!=='string'||w.length>500)throw Error('Invalid extraction warning.');
+ if(doc.format.startsWith('OCR')){
+  if(!doc.ocr||typeof doc.ocr.reviewed!=='boolean'||!Array.isArray(doc.ocr.pages)||doc.ocr.pages.length<1||doc.ocr.pages.length>3)throw Error('Invalid OCR review state.');
+  doc.ocr.pages.forEach((p,i)=>{if(p.page!==i+1||typeof p.text!=='string'||p.text.length>10000||!Number.isFinite(p.confidence)||p.confidence<0||p.confidence>100||typeof p.preview!=='string'||p.preview.length>2_000_000||!/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(p.preview))throw Error('Invalid OCR page.');});
+  if(JSON.stringify(ocrSourceBlocks(doc.ocr.pages,doc.ocr.reviewed))!==JSON.stringify(doc.blocks))throw Error('Detached OCR transcription.');
+ }else if(doc.ocr)throw Error('Unexpected OCR metadata.');
  return doc;
 }
+export function requireOCRReview(doc:PlanningDocument){validateDocument(doc);if(doc.ocr&&!doc.ocr.reviewed)throw Error('Review every OCR page before planning.');}
+export function confirmOCR(doc:PlanningDocument,texts:string[],acknowledged:boolean[]):PlanningDocument{
+ validateDocument(doc);if(!doc.ocr||texts.length!==doc.ocr.pages.length||acknowledged.length!==texts.length||!acknowledged.every(value=>value===true))throw Error('Review every OCR page.');
+ const pages=doc.ocr.pages.map((page,i)=>{if(typeof texts[i]!=='string'||!texts[i].trim())throw Error('An OCR page cannot be omitted.');screenDocumentText('Fictional OCR transcription: '+texts[i]);return {...page,text:texts[i].normalize('NFKC')};});
+ const blocks=ocrSourceBlocks(pages,true);
+ return validateDocument({...doc,blocks,ocr:{pages,reviewed:true}});
+}
 export function candidateTasks(doc:PlanningDocument){
- validateDocument(doc);
+ requireOCRReview(doc);
  return doc.blocks.flatMap((b,index)=>/\b(?:will|shall|must|submit|provide|establish|maintain|report|conduct|verify|acknowledge)\b/i.test(b.text)&&!/^\s*(?:refer to|see |annex|appendix|attachment)/i.test(b.text)?[index]:[]).slice(0,40);
 }
 export function draftRequirement(doc:PlanningDocument,source:number):Requirement{
- validateDocument(doc);if(!Number.isInteger(source)||!doc.blocks[source])throw Error('Choose an existing source passage.');
+ requireOCRReview(doc);if(!Number.isInteger(source)||!doc.blocks[source])throw Error('Choose an existing source passage.');
  const text=doc.blocks[source].text,restriction=/\b(?:will not|must not|shall not|do not|prohibited)\b/i.test(text);
  const voice=!restriction&&/\b(?:voice|radio|call)\b/i.test(text),report=!restriction&&/\b(?:report|submit|acknowledge|exchange)\b/i.test(text);
  return {id:'R'+(source+1),source,kind:restriction?'Unresolved':'Derived',capability:restriction?'Clarify how this restriction constrains the supported information exchange.':voice?'Provide voice coordination for the task’s named participants.':report?'Provide a verified information exchange for this task.':'Clarify the communication capability needed to support this task.',why:restriction?'The passage contains a restriction. Review its exact scope before deriving a service.':voice?'Voice coordination needs an agreed participant set, coverage, authorized method and receiving-user check.':report?'An information exchange needs a sender, intended recipient, usable format, delivery timing and acknowledgement.':'This is a candidate task. Its Signal relevance must be established by the reviewer.',sender:'',recipient:'',information:'',timing:'',application:'',owner:'',alternate:'',acceptance:voice?'Named participants complete an intelligible two-way test under the required exercise conditions.':report?'The intended recipient receives, opens and acknowledges a new test report within the agreed time.':'Define an observable supported-user task and its receiving-user acceptance check.',impact:'',reviewed:false};
@@ -42,7 +56,7 @@ export type RequirementField=typeof requirementFields[number];
 export type FieldSuggestion={field:RequirementField;value:string;source:number;quote:string};
 /** Deliberately narrow grammar. Abstain on ambiguity, restrictions and multiple clauses. */
 export function sourceSuggestions(doc:PlanningDocument,source:number):FieldSuggestion[]{
- validateDocument(doc);if(!Number.isInteger(source)||!doc.blocks[source])throw Error('Choose an existing source passage.');
+ requireOCRReview(doc);if(!Number.isInteger(source)||!doc.blocks[source])throw Error('Choose an existing source passage.');
  const original=doc.blocks[source].text;
  if(/\b(?:not|never|unless|except|if|either|or|and|after|until|while|once|using|via|with|through|from|prohibited|may|should)\b/i.test(original))return [];
  const text=original.replace(/^\s*\d+[.)]\s*/,'').trim();
@@ -84,7 +98,7 @@ export function planningWarnings(doc:PlanningDocument){
  return [...doc.warnings,...(/\b(?:annex|appendix|attachment)\b/i.test(text)?['Referenced annexes or attachments may be missing. Confirm what was supplied before relying on this worksheet.']:[]),'Candidate matching can miss tasks, exceptions and intent. Review every source passage; add overlooked tasks manually.','No equipment, bandwidth, frequencies, security settings or architecture are inferred. Confirm available assets and the approved design separately.'];
 }
 export function exportWorksheet(doc:PlanningDocument,exercise:string,rows:Requirement[]){
- validateDocument(doc);if(!(exerciseTypes as readonly string[]).includes(exercise)||!rows.length||rows.length>40||new Set(rows.map(r=>r.id)).size!==rows.length)throw Error('Invalid worksheet.');
+ requireOCRReview(doc);if(!(exerciseTypes as readonly string[]).includes(exercise)||!rows.length||rows.length>40||new Set(rows.map(r=>r.id)).size!==rows.length)throw Error('Invalid worksheet.');
  const safe=rows.map(row=>{
   if(!Number.isInteger(row.source)||!doc.blocks[row.source]||row.id!=='R'+(row.source+1)||!['Derived','Assumption','Unresolved'].includes(row.kind)||typeof row.reviewed!=='boolean')throw Error('Invalid requirement evidence.');
   const fields=Object.fromEntries(requirementFields.map(field=>{if(typeof row[field]!=='string'||row[field].length>1200)throw Error('Invalid worksheet field.');if(row[field].trim())screenDocumentText('Fictional worksheet field: '+row[field]);return [field,row[field]];})) as Record<RequirementField,string>;
@@ -94,10 +108,10 @@ export function exportWorksheet(doc:PlanningDocument,exercise:string,rows:Requir
   }));
   return {id:row.id,source:{locator:doc.blocks[row.source].locator,quote:doc.blocks[row.source].text},classification:row.kind,...fields,field_sources,reviewed:row.reviewed,unresolved:unresolvedFields(row)};
  });
- return {schema_version:2,title:'Draft Signal requirements worksheet',exercise,analysis:'Local rule-based candidate matching, optional source-backed field suggestions and human editing; no AI analysis',source:{format:doc.format,sha256:doc.digest},warnings:planningWarnings(doc),opposing_passages:opposingPassages(doc).map(pair=>pair.map(index=>doc.blocks[index])),requirements:safe,scope:'Fictional training only. Reviewer acknowledgement is self-reported and does not establish approval or readiness.'};
+ return {schema_version:2,title:'Draft Signal requirements worksheet',exercise,analysis:'Local rule-based candidate matching, optional source-backed field suggestions and human editing; no AI analysis',source:{format:doc.format,sha256:doc.digest,...(doc.ocr?{ocr:{reviewed_transcription:true,pages:doc.ocr.pages.map(p=>({page:p.page,engine_confidence:p.confidence})),note:'Source quotations are human-reviewed OCR transcriptions, not guaranteed verbatim text. Confidence is not measured accuracy.'}}:{})},warnings:planningWarnings(doc),opposing_passages:opposingPassages(doc).map(pair=>pair.map(index=>doc.blocks[index])),requirements:safe,scope:'Fictional training only. Reviewer acknowledgement is self-reported and does not establish approval or readiness.'};
 }
 export function worksheetMarkdown(doc:PlanningDocument,exercise:string,rows:Requirement[]){
  const packet=exportWorksheet(doc,exercise,rows),escape=(s:string)=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replace(/[\\`*_{}\[\]()#+!|]/g,'\\$&');
  const opposing=packet.opposing_passages.map(pair=>'### Opposing wording — human review required\n\n'+pair.map(block=>'Source: '+escape(block.locator)+'\n\n'+block.text.split('\n').map(line=>'> '+escape(line)).join('\n')).join('\n\n')).join('\n\n');
- return `# Draft Signal requirements worksheet\n\n${escape(exercise)} · ${packet.analysis}\n\nSource SHA-256: ${doc.digest}\n\n${packet.scope}\n\n`+packet.requirements.map(r=>`## ${r.id} — ${r.classification}\n\nSource: ${escape(r.source.locator)}\n\n${r.source.quote.split('\n').map(line=>'> '+escape(line)).join('\n')}\n\n`+requirementFields.map(field=>`**${field}:** ${escape(String(r[field]||'Unresolved'))}`).join('\n\n')+`\n\nField citations: ${Object.entries(r.field_sources).map(([field,e])=>escape(field)+': '+escape(e.locator)+' — '+escape(e.quote)).join('; ')||'No source-backed field suggestions retained.'}\n\nReviewer acknowledgement: ${r.reviewed?'yes (self-reported)':'pending'}\n\nMissing fields: ${r.unresolved.join(', ')||'none; factual review still required'}\n`).join('\n')+'\n## Review limits\n\n'+(opposing?opposing+'\n\n':'')+packet.warnings.map(w=>'- '+escape(w)).join('\n')+'\n';
+ return `# Draft Signal requirements worksheet\n\n${escape(exercise)} · ${packet.analysis}\n\nSource SHA-256: ${doc.digest}\n\nSource format: ${escape(doc.format)}.${doc.ocr?' Quotations are human-reviewed OCR transcriptions; compare with the original. Confidence is not measured accuracy.':''}\n\n${packet.scope}\n\n`+packet.requirements.map(r=>`## ${r.id} — ${r.classification}\n\nSource: ${escape(r.source.locator)}\n\n${r.source.quote.split('\n').map(line=>'> '+escape(line)).join('\n')}\n\n`+requirementFields.map(field=>`**${field}:** ${escape(String(r[field]||'Unresolved'))}`).join('\n\n')+`\n\nField citations: ${Object.entries(r.field_sources).map(([field,e])=>escape(field)+': '+escape(e.locator)+' — '+escape(e.quote)).join('; ')||'No source-backed field suggestions retained.'}\n\nReviewer acknowledgement: ${r.reviewed?'yes (self-reported)':'pending'}\n\nMissing fields: ${r.unresolved.join(', ')||'none; factual review still required'}\n`).join('\n')+'\n## Review limits\n\n'+(opposing?opposing+'\n\n':'')+packet.warnings.map(w=>'- '+escape(w)).join('\n')+'\n';
 }

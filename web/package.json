@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "python3 ../scripts/generate_app_icons.py && tsc --noEmit && vite build && python3 ../scripts/build_offline.py",
+    "build": "python3 ../scripts/generate_app_icons.py && tsc --noEmit && vite build && python3 ../scripts/package_ocr_assets.py && python3 ../scripts/build_offline.py",
     "preview": "vite preview --host 0.0.0.0",
     "mobile:android": "python3 ../scripts/prepare_mobile.py android",
     "mobile:ios": "python3 ../scripts/prepare_mobile.py ios"
@@ -17,10 +17,12 @@
     "@capacitor/core": "8.5.3",
     "@capacitor/ios": "8.5.3",
     "@capacitor/preferences": "8.0.1",
+    "@tesseract.js-data/eng": "1.0.0",
     "fflate": "0.8.3",
     "pdfjs-dist": "6.5.438",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "tesseract.js": "7.0.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",

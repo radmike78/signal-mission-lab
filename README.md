@@ -83,3 +83,7 @@ Open **Document planner** or the Mission homepage’s document translation link.
 A disconnected **fictional-training demonstration** ZIP is built by `python scripts/package_disconnected.py` and published by platform CI. It bundles public assets/parsers, startup instructions and checksums. See [proposed controlled-environment architecture](docs/CONTROLLED_ENVIRONMENT_ARCHITECTURE.md) for the separate unit-hosted/classified design and authorization gaps; the package does not permit actual controlled documents.
 
 The document planner can now propose sender, recipient, exchange and timing for a narrow explicit sentence pattern. Applying suggestions retains per-field quotations; manual edits remove the corresponding field citation. Opposing positive/negative wording is paired for review, without claiming complete conflict detection. The disconnected ZIP includes `verify_disconnected.py`; CI boots the extracted artifact and exercises local document import without external app requests. See [TACLANE learning scope](docs/TACLANE_FOUNDATIONS.md).
+
+## Local OCR for fictional scanned documents
+
+Document planner now offers local English OCR for PNG/JPEG and up to three scanned PDF pages. Correct and acknowledge every page before planning; citations and exports identify reviewed transcriptions. The engine, WASM and language data are bundled for offline use. No generative analysis service or operational-data permission is added. See [OCR workflow, limits and validation](docs/LOCAL_OCR.md).

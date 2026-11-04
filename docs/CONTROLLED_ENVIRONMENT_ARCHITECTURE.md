@@ -44,3 +44,5 @@ After the production build and `python scripts/package_web.py`, run `python scri
 - DoD Cloud Security Playbook, Volume 1: https://dodcio.defense.gov/Portals/0/Documents/Library/CloudSecurityPlaybookVol1.pdf — official search text retrieved; direct PDF fetch returned 403. Cloud impact levels distinguish information sensitivity: IL4/IL5 for applicable unclassified/CUI cases and IL6 up to SECRET. They describe cloud offerings and are not product certifications for an on-premises appliance or an authorization for all classified information.
 
 The current training package includes an extracted-file verifier and a fresh-origin browser smoke test of the ZIP. This improves release integrity and disconnected reproducibility; trusted release signatures, deployment hardening, authenticated reviewer workflows, OCR/model services and actual-data authorization remain unfinished.
+
+Local English OCR is now bundled in the training build with mandatory human transcription review; see [OCR scope](LOCAL_OCR.md). This closes a technical dependency for scanned-document demonstrations, not the semantic-analysis, deployment-hardening or authorization gaps.

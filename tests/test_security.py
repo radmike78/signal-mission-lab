@@ -11,6 +11,13 @@ class SecurityTests(unittest.TestCase):
         self.assertNotIn("'unsafe-inline'", headers)
         self.assertNotIn("'unsafe-eval'", headers)
 
+    def test_wasm_is_scoped_without_javascript_eval_or_external_workers(self):
+        headers = (ROOT / "_headers").read_text()
+        self.assertIn("'wasm-unsafe-eval'", headers)
+        self.assertIn("worker-src 'self'", headers)
+        self.assertNotIn("'unsafe-eval'", headers)
+        self.assertNotIn("worker-src *", headers)
+
     def test_dom_text_only(self):
         script = (ROOT / "app.js").read_text()
         self.assertNotIn(".innerHTML", script)

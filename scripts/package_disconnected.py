@@ -23,8 +23,10 @@ operational documents. An offline build is not an authorization to process them.
 
 No Internet connection is required after approved transfer of this package. All
 public parser/code assets are bundled. Document import is local, memory-only and
-rule-based; no AI or OCR service is included. DOCX/text and text-based PDF imports
-have size limits. Scanned/empty PDF pages need verified OCR before import.
+rule-based; no semantic AI service is included. Optional bundled English OCR reads
+PNG/JPEG images up to three megapixels or up to three PDF pages. Every OCR page
+requires human correction/review before planning. Recognition confidence is not
+measured accuracy. DOCX/text and text-based PDF imports have separate size limits.
 
 Exports are explicit local downloads; browser/OS downloads, caches and temporary
 files need their own host handling procedures. Clear session removes application
