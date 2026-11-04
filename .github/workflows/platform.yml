@@ -63,6 +63,7 @@ jobs:
       - run: node --test tests_web/*.test.mjs
       - run: npm run build --prefix web
       - run: python scripts/package_web.py
+      - run: python scripts/package_disconnected.py
       - run: npx --prefix web playwright install --with-deps chromium
       - name: Browser journeys
         run: |
@@ -78,6 +79,7 @@ jobs:
           NODE_PATH="$PWD/web/node_modules" node scripts/exercise-lane-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/stt-course-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/technical-labs-check.cjs
+          NODE_PATH="$PWD/web/node_modules" node scripts/document-plan-check.cjs
       - name: Connected learning browser journeys
         run: |
           NODE_PATH="$PWD/web/node_modules" node scripts/connected-check.cjs
@@ -93,6 +95,10 @@ jobs:
         with:
           name: screen-evidence
           path: artifacts/screenshots
+      - uses: actions/upload-artifact@v4
+        with:
+          name: disconnected-training-demo
+          path: artifacts/disconnected-training-demo.zip
       - uses: actions/upload-artifact@v4
         with:
           name: static-site
