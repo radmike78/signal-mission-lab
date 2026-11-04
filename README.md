@@ -75,3 +75,9 @@ Offline/PWA and Android/iOS preparation: see [offline/mobile build and release g
 ## IT professional technical labs
 
 Open **Technical labs** from More learning tools, or use the course’s **Open technical labs** button. Eight offline cases add configuration comparisons, diagnostic commands and supplied outputs for IPv4, VLANs, DNS, OSPF, DMVPN, Windows identity/time, Linux storage/services and VM listeners. Learners diagnose a fault, plan a bounded correction and verify recovery. These are synthetic vendor-context exercises, not a live terminal or equipment qualification. See [IT technical labs](docs/IT_TECHNICAL_LABS.md) for scope, sources, practical tasks and validation.
+
+## Document-to-Signal requirements demonstration
+
+Open **Document planner** or the Mission homepage’s document translation link. Import a fictional TXT/MD, text PDF or DOCX, review cited candidate tasks, and build an editable C2 communications requirements worksheet with unresolved questions and receiving-user acceptance checks. Markdown/JSON export retains selected quotations and the original-input fingerprint. The first phase uses local rule-based matching and human review; it has no AI service or upload endpoint. See [scope, limits and pilot evaluation](docs/DOCUMENT_REQUIREMENTS_PLANNER.md).
+
+A disconnected **fictional-training demonstration** ZIP is built by `python scripts/package_disconnected.py` and published by platform CI. It bundles public assets/parsers, startup instructions and checksums. See [proposed controlled-environment architecture](docs/CONTROLLED_ENVIRONMENT_ARCHITECTURE.md) for the separate unit-hosted/classified design and authorization gaps; the package does not permit actual controlled documents.
