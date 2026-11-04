@@ -11,6 +11,9 @@ operational documents. An offline build is not an authorization to process them.
 
 1. Verify every file listed in SHA256SUMS with a trusted checksum tool.
    On Linux: sha256sum -c SHA256SUMS
+   Or, after establishing trust in the release: python3 verify_disconnected.py
+   The verifier rejects changed, missing, extra or symlinked files. Run it before
+   starting the server or creating files inside the extracted package directory.
    The manifest detects changes; it is not a trusted signature or authorization.
 2. In this extracted directory, run: python3 -m http.server 8070 --bind 127.0.0.1
 3. Open http://127.0.0.1:8070 on the same machine in a current supported browser.
@@ -43,14 +46,14 @@ def package(dist: Path, output: Path):
     paths = set()
     for url in manifest['public_assets']:
         relative = 'index.html' if url == '/' else url.removeprefix('/')
-        if not relative or '..' in Path(relative).parts or Path(relative).is_absolute() or '\\' in relative:
+        if not relative or '..' in Path(relative).parts or Path(relative).is_absolute() or '\\' in relative or any(ord(c) < 32 or ord(c) == 127 for c in relative):
             raise ValueError('Unsafe public asset path')
         paths.add(relative)
     paths.update({'sw.js', 'offline-build.json', '_headers'})
     legacy = dist/'legacy'
     if legacy.exists():
         paths.update(p.relative_to(dist).as_posix() for p in legacy.rglob('*') if p.is_file())
-    contents = {'START_HERE.txt': README.encode()}
+    contents = {'START_HERE.txt': README.encode(), 'verify_disconnected.py': (Path(__file__).parent/'verify_disconnected.py').read_bytes()}
     for relative in sorted(paths):
         path = dist/relative
         if path.is_symlink() or not path.is_file() or dist.resolve() not in path.resolve().parents:

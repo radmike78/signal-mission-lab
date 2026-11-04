@@ -3,7 +3,8 @@ export type SourceBlock={locator:string;text:string};
 export type PlanningDocument={format:string;digest:string;blocks:SourceBlock[];warnings:string[]};
 export const exerciseTypes=['Mission','COMMEX','VALEX','STAFFEX','WFX'] as const;
 export type EvidenceKind='Derived'|'Assumption'|'Unresolved';
-export type Requirement={id:string;source:number;kind:EvidenceKind;capability:string;why:string;sender:string;recipient:string;information:string;timing:string;application:string;owner:string;alternate:string;acceptance:string;impact:string;reviewed:boolean};
+export type FieldSource={source:number;quote:string};
+export type Requirement={id:string;source:number;kind:EvidenceKind;capability:string;why:string;sender:string;recipient:string;information:string;timing:string;application:string;owner:string;alternate:string;acceptance:string;impact:string;reviewed:boolean;fieldSources?:Partial<Record<RequirementField,FieldSource>>};
 export const SAMPLE_DIRECTIVE=`SYNTHETIC TRAINING ONLY
 Fictional exercise memorandum
 1. Purpose: Practice the command update and report exchange between fictional training teams.
@@ -38,10 +39,44 @@ export function draftRequirement(doc:PlanningDocument,source:number):Requirement
 }
 export const requirementFields=['capability','why','sender','recipient','information','timing','application','owner','alternate','acceptance','impact'] as const;
 export type RequirementField=typeof requirementFields[number];
+export type FieldSuggestion={field:RequirementField;value:string;source:number;quote:string};
+/** Deliberately narrow grammar. Abstain on ambiguity, restrictions and multiple clauses. */
+export function sourceSuggestions(doc:PlanningDocument,source:number):FieldSuggestion[]{
+ validateDocument(doc);if(!Number.isInteger(source)||!doc.blocks[source])throw Error('Choose an existing source passage.');
+ const original=doc.blocks[source].text;
+ if(/\b(?:not|never|unless|except|if|either|or|and|after|until|while|once|using|via|with|through|from|prohibited|may|should)\b/i.test(original))return [];
+ const text=original.replace(/^\s*\d+[.)]\s*/,'').trim();
+ const match=/^([A-Za-z][A-Za-z0-9 '-]{1,79}?)\s+(?:will|shall|must)\s+(?:submit|send|provide|transmit)\s+(.{1,180}?)\s+to\s+([A-Za-z][A-Za-z0-9 '-]{1,79}?)(?:\s+((?:before|by|within|every|during|at)\s+.{1,160}?))?[.!]?$/i.exec(text);
+ if(!match||/\b(?:and|will|shall|must)\b/i.test(match[2]+' '+match[3])||/[.;!?]/.test(match.slice(1).filter(Boolean).join('')))return [];
+ const values:[RequirementField,string][]=[['sender',match[1]],['information',match[2]],['recipient',match[3]],...(match[4]?[['timing',match[4]] as [RequirementField,string]]:[])];
+ return values.map(([field,value])=>({field,value,source,quote:value}));
+}
+export function applySourceSuggestions(doc:PlanningDocument,row:Requirement):Requirement{
+ const next={...row,fieldSources:{...row.fieldSources},reviewed:false};
+ for(const suggestion of sourceSuggestions(doc,row.source))if(!next[suggestion.field].trim()){
+  next[suggestion.field]=suggestion.value;next.fieldSources[suggestion.field]={source:suggestion.source,quote:suggestion.quote};
+ }
+ return next;
+}
+/** Same wording with opposing negation is a review flag, never an automatic resolution. */
+export function opposingPassages(doc:PlanningDocument):[number,number][]{
+ validateDocument(doc);
+ const groups=new Map<string,{positive:number[];negative:number[]}>();
+ doc.blocks.forEach((block,index)=>{
+  if(!/\b(?:will|shall|must)\b/i.test(block.text))return;
+  const negative=/\b(?:will|shall|must)\s+not\b/i.test(block.text);
+  const key=block.text.toLowerCase().replace(/^\s*\d+[.)]\s*/,'').replace(/\b(?:will|shall|must|not)\b/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+  if(key.length<15)return;const group=groups.get(key)??{positive:[],negative:[]};group[negative?'negative':'positive'].push(index);groups.set(key,group);
+ });
+ const pairs:[number,number][]=[];
+ for(const group of groups.values())for(const a of group.positive)for(const b of group.negative){pairs.push([a,b]);if(pairs.length>=20)return pairs;}
+ return pairs;
+}
 export function updateRequirement(row:Requirement,field:RequirementField,value:string):Requirement{
  if(!requirementFields.includes(field)||typeof value!=='string'||value.length>1200)throw Error('Use a bounded worksheet field.');
  if(value.trim())screenDocumentText('Fictional worksheet field: '+value);
- return {...row,[field]:value,reviewed:false};
+ const fieldSources={...row.fieldSources};delete fieldSources[field];
+ return {...row,[field]:value,fieldSources,reviewed:false};
 }
 export function unresolvedFields(row:Requirement){return requirementFields.filter(field=>!row[field].trim());}
 export function planningWarnings(doc:PlanningDocument){
@@ -53,11 +88,16 @@ export function exportWorksheet(doc:PlanningDocument,exercise:string,rows:Requir
  const safe=rows.map(row=>{
   if(!Number.isInteger(row.source)||!doc.blocks[row.source]||row.id!=='R'+(row.source+1)||!['Derived','Assumption','Unresolved'].includes(row.kind)||typeof row.reviewed!=='boolean')throw Error('Invalid requirement evidence.');
   const fields=Object.fromEntries(requirementFields.map(field=>{if(typeof row[field]!=='string'||row[field].length>1200)throw Error('Invalid worksheet field.');if(row[field].trim())screenDocumentText('Fictional worksheet field: '+row[field]);return [field,row[field]];})) as Record<RequirementField,string>;
-  return {id:row.id,source:{locator:doc.blocks[row.source].locator,quote:doc.blocks[row.source].text},classification:row.kind,...fields,reviewed:row.reviewed,unresolved:unresolvedFields(row)};
+  const field_sources=Object.fromEntries(Object.entries(row.fieldSources??{}).map(([key,evidence])=>{
+   if(!requirementFields.includes(key as RequirementField)||!evidence||evidence.source!==row.source||typeof evidence.quote!=='string'||!evidence.quote.trim()||row[key as RequirementField]!==evidence.quote||!doc.blocks[row.source].text.includes(evidence.quote))throw Error('Detached field evidence.');
+   return [key,{locator:doc.blocks[row.source].locator,quote:evidence.quote}];
+  }));
+  return {id:row.id,source:{locator:doc.blocks[row.source].locator,quote:doc.blocks[row.source].text},classification:row.kind,...fields,field_sources,reviewed:row.reviewed,unresolved:unresolvedFields(row)};
  });
- return {schema_version:1,title:'Draft Signal requirements worksheet',exercise,analysis:'Local rule-based candidate matching plus human editing; no AI analysis',source:{format:doc.format,sha256:doc.digest},warnings:planningWarnings(doc),requirements:safe,scope:'Fictional training only. Reviewer acknowledgement is self-reported and does not establish approval or readiness.'};
+ return {schema_version:2,title:'Draft Signal requirements worksheet',exercise,analysis:'Local rule-based candidate matching, optional source-backed field suggestions and human editing; no AI analysis',source:{format:doc.format,sha256:doc.digest},warnings:planningWarnings(doc),opposing_passages:opposingPassages(doc).map(pair=>pair.map(index=>doc.blocks[index])),requirements:safe,scope:'Fictional training only. Reviewer acknowledgement is self-reported and does not establish approval or readiness.'};
 }
 export function worksheetMarkdown(doc:PlanningDocument,exercise:string,rows:Requirement[]){
  const packet=exportWorksheet(doc,exercise,rows),escape=(s:string)=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replace(/[\\`*_{}\[\]()#+!|]/g,'\\$&');
- return `# Draft Signal requirements worksheet\n\n${escape(exercise)} · ${packet.analysis}\n\nSource SHA-256: ${doc.digest}\n\n${packet.scope}\n\n`+packet.requirements.map(r=>`## ${r.id} — ${r.classification}\n\nSource: ${escape(r.source.locator)}\n\n${r.source.quote.split('\n').map(line=>'> '+escape(line)).join('\n')}\n\n`+requirementFields.map(field=>`**${field}:** ${escape(String(r[field]||'Unresolved'))}`).join('\n\n')+`\n\nReviewer acknowledgement: ${r.reviewed?'yes (self-reported)':'pending'}\n\nMissing fields: ${r.unresolved.join(', ')||'none; factual review still required'}\n`).join('\n')+'\n## Review limits\n\n'+packet.warnings.map(w=>'- '+escape(w)).join('\n')+'\n';
+ const opposing=packet.opposing_passages.map(pair=>'### Opposing wording — human review required\n\n'+pair.map(block=>'Source: '+escape(block.locator)+'\n\n'+block.text.split('\n').map(line=>'> '+escape(line)).join('\n')).join('\n\n')).join('\n\n');
+ return `# Draft Signal requirements worksheet\n\n${escape(exercise)} · ${packet.analysis}\n\nSource SHA-256: ${doc.digest}\n\n${packet.scope}\n\n`+packet.requirements.map(r=>`## ${r.id} — ${r.classification}\n\nSource: ${escape(r.source.locator)}\n\n${r.source.quote.split('\n').map(line=>'> '+escape(line)).join('\n')}\n\n`+requirementFields.map(field=>`**${field}:** ${escape(String(r[field]||'Unresolved'))}`).join('\n\n')+`\n\nField citations: ${Object.entries(r.field_sources).map(([field,e])=>escape(field)+': '+escape(e.locator)+' — '+escape(e.quote)).join('; ')||'No source-backed field suggestions retained.'}\n\nReviewer acknowledgement: ${r.reviewed?'yes (self-reported)':'pending'}\n\nMissing fields: ${r.unresolved.join(', ')||'none; factual review still required'}\n`).join('\n')+'\n## Review limits\n\n'+(opposing?opposing+'\n\n':'')+packet.warnings.map(w=>'- '+escape(w)).join('\n')+'\n';
 }
