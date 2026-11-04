@@ -1,4 +1,5 @@
-import {screenDocumentText,validateDocument,type PlanningDocument,type SourceBlock} from './document-plan-model';
+import {screenDocumentText,validateDocument,ocrSourceBlocks,type OCRPage,type PlanningDocument,type SourceBlock} from './document-plan-model';
+import {imageDimensions} from './ocr-image-limits';
 const MAX_BYTES=5_000_000;
 const wordNS='http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 async function digest(bytes:Uint8Array){return [...new Uint8Array(await crypto.subtle.digest('SHA-256',new Uint8Array(bytes).buffer))].map(n=>n.toString(16).padStart(2,'0')).join('');}
@@ -35,28 +36,58 @@ function unzipWord(bytes:Uint8Array,signal:AbortSignal):Promise<{name:string;xml
   if(signal.aborted){cancel();return;}worker.postMessage(bytes,[bytes.buffer]);
  });
 }
-export async function importDocument(file:File,signal:AbortSignal):Promise<PlanningDocument>{
+type ImportOptions={ocr?:boolean;progress?:(message:string)=>void};
+function ocrDocument(format:string,sha:string,pages:OCRPage[]):PlanningDocument{
+ return validateDocument({format,digest:sha,blocks:ocrSourceBlocks(pages,false),warnings:['OCR can misread names, negation, dates, numbers, tables and markings. Compare and correct every page before planning. Source quotations are reviewed transcriptions, not guaranteed verbatim text.','English print only. Confidence is an engine estimate, not measured accuracy. Images, handwriting and complex layouts require independent review.'],ocr:{pages,reviewed:false}});
+}
+export async function importDocument(file:File,signal:AbortSignal,options:ImportOptions={}):Promise<PlanningDocument>{
  check(signal);const ext=file.name.split('.').pop()?.toLowerCase();
- if(!['txt','md','pdf','docx'].includes(ext??'')||file.size<1||file.size>MAX_BYTES)throw Error('Choose TXT, MD, text PDF or DOCX, up to 5 MB.');
+ if(!['txt','md','pdf','docx',...(options.ocr?['png','jpg','jpeg']:[])].includes(ext??'')||file.size<1||file.size>MAX_BYTES)throw Error('Choose a supported document, up to 5 MB.');
  const bytes=new Uint8Array(await file.arrayBuffer());check(signal);const sha=await digest(bytes);check(signal);
  if(ext==='txt'||ext==='md'){const doc=await importText(new TextDecoder('utf-8',{fatal:true}).decode(bytes),signal);return {...doc,digest:sha};}
  if(ext==='docx'){
   const parts=await unzipWord(bytes,signal);check(signal);
   return validateDocument({format:'DOCX',digest:sha,blocks:wordParagraphs(parts),warnings:['Word references identify XML part and paragraph, not rendered pages. Verify tables, reading order and omitted comments, text boxes, images and embedded attachments against the original.']});
  }
+ if(['png','jpg','jpeg'].includes(ext??'')){
+  imageDimensions(bytes);const bitmap=await createImageBitmap(new Blob([new Uint8Array(bytes)]));
+  const canvas=document.createElement('canvas');canvas.width=bitmap.width;canvas.height=bitmap.height;
+  try{
+   if(canvas.width*canvas.height>3_000_000)throw Error('Decoded image exceeds limits.');check(signal);
+   const context=canvas.getContext('2d')!;context.fillStyle='white';context.fillRect(0,0,canvas.width,canvas.height);context.drawImage(bitmap,0,0);
+   const {localOCR}=await import('./document-ocr');
+   const page=await localOCR(signal,options.progress??(()=>{}),recognize=>recognize(canvas,1));check(signal);return ocrDocument('OCR image',sha,[page]);
+  }finally{bitmap.close();canvas.width=canvas.height=0;}
+ }
  if(new TextDecoder().decode(bytes.slice(0,5))!=='%PDF-')throw Error('Use a valid PDF.');
  const pdfjs=await import('pdfjs-dist');const workerURL=await import('pdfjs-dist/build/pdf.worker.min.mjs?url');check(signal);
  pdfjs.GlobalWorkerOptions.workerSrc=workerURL.default;
- const task=pdfjs.getDocument({data:bytes,verbosity:0,useWorkerFetch:false,useWasm:false,disableFontFace:true,useSystemFonts:false,enableXfa:false,stopAtErrors:true,maxImageSize:0});
+ const task=pdfjs.getDocument({data:bytes,verbosity:0,useWorkerFetch:false,useWasm:false,disableFontFace:true,useSystemFonts:false,enableXfa:false,stopAtErrors:true,maxImageSize:options.ocr?5_000_000:0});
  const abort=()=>{void task.destroy();};signal.addEventListener('abort',abort,{once:true});
- const timer=setTimeout(abort,20000);
+ const timer=setTimeout(abort,options.ocr?150000:20000);
  try{
   const pdf=await task.promise;if(pdf.numPages>30)throw Error('Use a PDF of 30 pages or fewer.');
-  const blocks:SourceBlock[]=[],warnings=['PDF text order and tables need comparison with the original. Images, handwriting, comments and attachments are not analyzed; OCR is not included.'];
+  if(options.ocr){
+   if(pdf.numPages>3)throw Error('OCR supports up to three PDF pages per import.');
+   const {localOCR}=await import('./document-ocr');
+   const pages=await localOCR(signal,options.progress??(()=>{}),async recognize=>{
+    const output:OCRPage[]=[];
+    for(let i=1;i<=pdf.numPages;i++){
+     check(signal);const page=await pdf.getPage(i),base=page.getViewport({scale:1});
+     const scale=Math.min(2,Math.sqrt(3_000_000/(base.width*base.height))),viewport=page.getViewport({scale});
+     if(!Number.isFinite(viewport.width)||!Number.isFinite(viewport.height)||viewport.width<1||viewport.height<1||viewport.width>4000||viewport.height>4000)throw Error('Invalid PDF page dimensions.');
+     const canvas=document.createElement('canvas');canvas.width=Math.floor(viewport.width);canvas.height=Math.floor(viewport.height);
+     try{await page.render({canvas,viewport}).promise;output.push(await recognize(canvas,i));}finally{canvas.width=canvas.height=0;page.cleanup();}
+    }
+    return output;
+   });
+   check(signal);return ocrDocument('OCR PDF',sha,pages);
+  }
+  const blocks:SourceBlock[]=[],warnings=['PDF text order and tables need comparison with the original. Images, handwriting, comments and attachments are not analyzed by text extraction; OCR was not enabled for this import.'];
   for(let i=1;i<=pdf.numPages;i++){
    check(signal);const page=await pdf.getPage(i),content=await page.getTextContent();let text='';
    for(const item of content.items)if('str' in item){text+=item.str+(item.hasEOL?'\n':' ');if(text.length>10000)throw Error('A PDF page exceeds the text limit.');}
-   if(!text.trim())throw Error('A PDF page has no readable text. Scanned/image-only or mixed scanned PDFs need verified OCR before import.');
+   if(!text.trim())throw Error('A PDF page has no readable text. Enable local OCR for a short scanned PDF, or use a verified transcription.');
    blocks.push(...splitText(text,'PDF page '+i));if(blocks.length>300||blocks.reduce((n,b)=>n+b.text.length,0)>60000)throw Error('PDF text exceeds import limits.');page.cleanup();
   }
   check(signal);return validateDocument({format:'PDF',digest:sha,blocks,warnings});

@@ -20,13 +20,14 @@ with zipfile.ZipFile(sys.argv[1]) as archive:
    if(!file.startsWith(directory+path.sep)){res.writeHead(403);res.end();return;}
    fs.readFile(file,(error,body)=>{
     if(error){res.writeHead(404);res.end();return;}
-    const mime={'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.json':'application/json','.webmanifest':'application/manifest+json','.png':'image/png','.txt':'text/plain'};
+    const mime={'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.json':'application/json','.webmanifest':'application/manifest+json','.png':'image/png','.txt':'text/plain','.wasm':'application/wasm'};
     res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream','Content-Security-Policy':csp,'X-Content-Type-Options':'nosniff'});res.end(body);
    });
   });
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
   const port=server.address().port;
   await new Promise((resolve,reject)=>{const child=spawn(process.execPath,[path.join(root,'scripts/document-plan-check.cjs')],{cwd:root,env:{...process.env,SML_URL:'http://127.0.0.1:'+port},stdio:'inherit'});child.on('error',reject);child.on('exit',code=>code===0?resolve():reject(Error('Disconnected browser journey failed.')));});
+  await new Promise((resolve,reject)=>{const child=spawn(process.execPath,[path.join(root,'scripts/ocr-check.cjs')],{cwd:root,env:{...process.env,SML_URL:'http://127.0.0.1:'+port},stdio:'inherit'});child.on('error',reject);child.on('exit',code=>code===0?resolve():reject(Error('Disconnected OCR journey failed.')));});
   console.log('PASS verified extracted disconnected artifact, fresh-origin startup, offline document workflow and no external requests');
  }finally{if(server)await new Promise(resolve=>server.close(resolve));fs.rmSync(directory,{recursive:true,force:true});}
 })().catch(error=>{console.error(error);process.exit(1)});

@@ -48,3 +48,7 @@ The second iteration recognizes only a simple explicit sender-will/shall/must-se
 A separate check pairs matching directive wording with opposite negation for human review. It does not resolve precedence, different scopes or every contradiction. Worksheet schema version 2 exports field-level provenance and paired passages in JSON; Markdown includes retained field citations and the opposing passages. Earlier version-1 consumers need to accommodate these additive fields and version change.
 
 The disconnected package now includes an integrity verifier, which rejects changed, missing, extra or symlinked files before startup. It does not establish authenticity, trusted origin or authorization. CI extracts the actual ZIP, verifies it and runs the document browser journey from a fresh local origin, including offline parser workers, CSP, explicit exports and no external app requests. Browser/OS traffic outside the application remains a separate host concern.
+
+## Local OCR update
+
+Optional local English OCR now supports bounded image/scanned-PDF import with mandatory page-by-page correction and review. The earlier text-only/scanned-page rejection behavior still applies when OCR is not selected. See [current OCR behavior and tests](LOCAL_OCR.md); all other content/handling boundaries remain in force.

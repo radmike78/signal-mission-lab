@@ -80,6 +80,7 @@ jobs:
           NODE_PATH="$PWD/web/node_modules" node scripts/stt-course-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/technical-labs-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/document-plan-check.cjs
+          NODE_PATH="$PWD/web/node_modules" node scripts/ocr-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/disconnected-check.cjs
       - name: Connected learning browser journeys
         run: |
