@@ -27,9 +27,21 @@ function pdf(text){
  await area.getByLabel('Who sends or initiates?',{exact:true}).fill('Fictional Team Alpha');await area.getByLabel('Who receives or responds?',{exact:true}).fill('Fictional Team Bravo');
  await area.getByRole('checkbox',{name:'I checked this source passage, the proposed requirement and the remaining gaps.',exact:true}).check();
  await area.getByLabel('What information or voice exchange?',{exact:true}).fill('Fictional status report');assert(!await area.getByRole('checkbox',{name:'I checked this source passage, the proposed requirement and the remaining gaps.',exact:true}).isChecked());
+ const brief=area.getByRole('region',{name:'Leadership brief',exact:true});
+ await brief.getByRole('heading',{name:'Brief leadership',exact:true}).waitFor();
+ assert.match(await brief.innerText(),/Dependencies: Unresolved/);
+ assert.match(await brief.innerText(),/Decision, authority and deadline: Unresolved/);
+ await area.getByLabel('What services, access and resources must be available?',{exact:true}).fill('Confirm fictional report service and recipient access.');
+ await area.getByLabel('What decision or clarification is needed, from whom and by when?',{exact:true}).fill('Training director to confirm the deadline before rehearsal.');
+ await area.getByLabel('What can leadership not do if this fails?',{exact:true}).fill('The fictional command update cannot use the current report.');
+ assert.match(await brief.innerText(),/Confirm fictional report service/);
+ assert.match(await brief.innerText(),/Training director to confirm/);
+ assert.match(await brief.innerText(),/cannot use the current report/);
  await area.getByLabel('Exercise context',{exact:true}).selectOption('VALEX');
  let downloading=page.waitForEvent('download');await area.getByRole('button',{name:'Download worksheet JSON',exact:true}).click();let download=await downloading;const packet=JSON.parse(fs.readFileSync(await download.path(),'utf8'));
  assert.equal(packet.exercise,'VALEX');assert.equal(packet.requirements.length,1);assert.match(packet.requirements[0].source.quote,/Team Alpha will submit/);assert.equal(packet.requirements[0].sender,'Fictional Team Alpha');assert.equal(packet.requirements[0].application,'');assert.equal(packet.requirements[0].field_sources.timing.quote,'before each command update');assert.equal(packet.requirements[0].field_sources.sender,undefined);assert(packet.requirements[0].unresolved.includes('application'));assert.match(packet.analysis,/no AI/);assert.equal(packet.source.sha256.length,64);
+ assert.equal(packet.requirements[0].dependencies,'Confirm fictional report service and recipient access.');
+ assert.equal(packet.requirements[0].decision,'Training director to confirm the deadline before rehearsal.');
  downloading=page.waitForEvent('download');await area.getByRole('button',{name:'Download worksheet Markdown',exact:true}).click();download=await downloading;assert.match(fs.readFileSync(await download.path(),'utf8'),/Text paragraph/);
  await page.getByRole('navigation').getByRole('button',{name:/Equipment$/}).click();await page.getByLabel('Search systems',{exact:true}).waitFor();await page.getByText('More learning tools',{exact:true}).click();await page.getByRole('navigation').getByRole('button',{name:'Document planner',exact:true}).click();assert.equal(await area.getByLabel('Who sends or initiates?',{exact:true}).inputValue(),'Fictional Team Alpha');
  for(const size of [{width:1280,height:900},{width:390,height:844}]){await page.setViewportSize(size);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));const audit=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();assert.deepEqual(audit.violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)})),[]);}
