@@ -37,10 +37,11 @@ const http=require('node:http'),path=require('node:path');
  await context.setOffline(true);await page.reload();
  await page.getByRole('heading',{name:'What do you want to learn?',exact:true}).waitFor();
  // Lazy-loaded Signal products must work even though never opened online.
- for(const name of ['Courses','Exercise lane','Signal Products','Applications','IT foundations','MDMP','Equipment','Architecture','Mentor','Troubleshoot','Assessment']){
+ for(const name of ['Courses','Exercise lane','Signal Products','Applications','IT foundations','Learning resources','MDMP','Equipment','Architecture','Mentor','Troubleshoot','Assessment']){
   await nav(name);await page.getByRole('heading',{name,exact:true}).waitFor();
   if(name==='Courses')await page.getByRole('region',{name:'STT and network-node course'}).waitFor();
   if(name==='Exercise lane')await page.getByLabel('Lane code').waitFor();
+  if(name==='Learning resources')await page.getByRole('link',{name:'Open O’Reilly through Army MWR Library'}).waitFor();
   if(name==='Signal Products')await page.getByLabel('Signal product',{exact:true}).waitFor();
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),name+' overflows mobile');
  }

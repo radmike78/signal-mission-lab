@@ -10,8 +10,9 @@ const topics = [
  {name:'Storage and recovery', ids:['storage','recovery','ontap-nfs-access']},
  {name:'Security and Signal systems', ids:['security','firewalls','panos-traffic-evidence','iq-core-observation','taclane-scope-check']},
 ];
-export function ITFoundations({onExplore}:{onExplore:(id:string)=>void}){
- const [area,setArea]=useState('Learn');
+const areas=['Learn','Vendors','Dependency lab'] as const;
+export function ITFoundations({initialArea, onExplore, onResources}:{initialArea:'Learn'|'Vendors';onExplore:(id:string)=>void;onResources:()=>void}){
+ const [area,setArea]=useState<typeof areas[number]>(initialArea);
  const [lessonId,setLesson]=useState<string|null>(null);
  const [answer,setAnswer]=useState<number|null>(null);
  const [checked,setChecked]=useState(false);
@@ -31,7 +32,7 @@ export function ITFoundations({onExplore}:{onExplore:(id:string)=>void}){
  }
  return <section className="it-foundations">
  <h2>IT foundations for Signal Soldiers</h2>
- <div className="steps" aria-label="IT foundations areas">{['Learn','Vendors','Dependency lab'].map(item=><button key={item} aria-pressed={area===item} onClick={()=>setArea(item)}>{item}</button>)}</div>
+ <div className="steps" aria-label="IT foundations areas">{areas.map(item=><button key={item} aria-pressed={area===item} onClick={()=>setArea(item)}>{item}</button>)}</div>
  {area==='Learn'&&!lesson&&<>
   <h3 ref={lessonHeading} tabIndex={-1}>Choose a topic</h3>
   <div className="foundation-topics">{topics.map(topic=><details key={topic.name}>
@@ -72,6 +73,7 @@ export function ITFoundations({onExplore}:{onExplore:(id:string)=>void}){
   })}</div>
  </>}
  {area==='Dependency lab'&&<><h3>Follow the service dependencies</h3><p>Fictional task: an authorized training user opens a dummy information product. Toggle availability to explore shared failure domains. This is a conceptual model, not a Cisco, PAN-OS, hypervisor or storage emulator.</p><div className="foundation-stack">{stackDependencies.map(d=><label key={d.id} className="toggle"><input type="checkbox" checked={stack[d.id]} onChange={e=>setStack({...stack,[d.id]:e.target.checked})}/>{d.label}</label>)}</div><article role="status"><h4>{simulation.usable?'Synthetic task usable':'Synthetic task blocked'}</h4><p>{simulation.message}</p><div className="steps">{stackDependencies.filter(d=>simulation.missing.includes(d.id)).map(d=><button key={d.id} onClick={()=>openLesson(d.lesson)}>Study: {d.label} →</button>)}</div></article><button onClick={()=>setStack({...initialStack})}>Restore all synthetic dependencies</button></>}
-</section>;
+ <button className="text-button" onClick={onResources}>Learning resources →</button>
+ </section>;
 }
 

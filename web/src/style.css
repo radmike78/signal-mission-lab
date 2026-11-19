@@ -100,3 +100,11 @@ main :is(h1,h2,h3,h4),.rail nav button{overflow-wrap:anywhere;min-width:0}
  .learning-entry .mission-hero { padding: .25rem 0 1rem; }
  .learning-entry .mission-hero h1 { font-size: clamp(2rem, 8.5vw, 2.8rem); margin: 0; }
 }
+
+.learning-resources { max-width: 48rem; }
+.learning-resources .resource-feature { margin: 0 0 1.3rem; }
+.learning-resources .resource-feature h3 { margin-top: 0; }
+.learning-resources .resource-feature details { margin-top: .75rem; }
+.learning-resources .foundation-topics > details ul { padding: 0 .2rem; }
+.learning-resources .foundation-topics li + li { border-top: 1px solid var(--line); margin-top: .8rem; padding-top: .8rem; }
+.learning-resources .foundation-topics li p { margin: .25rem 0; }

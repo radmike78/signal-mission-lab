@@ -6,12 +6,12 @@ import {ReadinessBrief} from './readiness';
 import {missionOptions,systemChoices,recommendation,type Mission,type Echelon,type Setting,type Priority} from './mission-model';
 import {interpretDescription,screenDescription,nextClarification,type Draft} from './mission-intake';
 
-type Props={onEquipment:()=>void;onPractice:()=>void;onDocuments:()=>void;onCourse:()=>void;onExercise:()=>void;onExplore:(id:string)=>void;onArchitecture:()=>void;onMDMP:()=>void;onFoundations:()=>void;onTroubleshoot:(practice:MissionPractice)=>void};
+type Props={onResources:()=>void;onEquipment:()=>void;onPractice:()=>void;onDocuments:()=>void;onCourse:()=>void;onExercise:()=>void;onExplore:(id:string)=>void;onArchitecture:()=>void;onMDMP:()=>void;onFoundations:()=>void;onTroubleshoot:(practice:MissionPractice)=>void};
 function Glyph({kind}:{kind:string}){
  const paths:Record<string,React.ReactNode>={network:<><rect x="9" y="3" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="5" rx="1"/><rect x="16" y="16" width="6" height="5" rx="1"/><path d="M12 9v4M5 16v-3h14v3"/></>,layers:<><path d="m12 3 10 5-10 5L2 8l10-5Z"/><path d="m2 12 10 5 10-5M2 16l10 5 10-5"/></>,scan:<><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5M7 12h10M12 7v10"/></>,compass:<><circle cx="12" cy="12" r="10"/><path d="m16 8-3 5-5 3 3-5 5-3Z"/></>};
  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">{paths[kind]||paths.network}</svg>;
 }
-export function MissionGuide({onEquipment,onPractice,onDocuments,onCourse,onExercise,onExplore,onArchitecture,onMDMP,onFoundations,onTroubleshoot}:Props){
+export function MissionGuide({onResources,onEquipment,onPractice,onDocuments,onCourse,onExercise,onExplore,onArchitecture,onMDMP,onFoundations,onTroubleshoot}:Props){
  const [plannerOpen,setPlannerOpen]=useState(false);
  const [stage,setStage]=useState(0),[answers,setAnswers]=useState<Draft>({}),[description,setDescription]=useState(''),[attested,setAttested]=useState(false),[error,setError]=useState(''),[inferred,setInferred]=useState(false),[history,setHistory]=useState<number[]>([0]);
  const {mission=null,echelon=null,systems=[],setting=null,priority=null}=answers;
@@ -45,6 +45,7 @@ export function MissionGuide({onEquipment,onPractice,onDocuments,onCourse,onExer
    <button onClick={onExercise}>Practice an exercise lane →</button>
    <button onClick={onDocuments}>Translate a fictional document into Signal requirements →</button>
   </div></details>
+  <button className="text-button" onClick={onResources}>Learning resources →</button>
  </div>;
  return <div className="mission-guide">
  <button className="text-button" onClick={()=>{setPlannerOpen(false);requestAnimationFrame(()=>heading.current?.focus());}}>← Learning topics</button>

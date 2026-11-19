@@ -66,6 +66,10 @@ Run `python scripts/validate_sources.py` to validate curated source metadata bef
 
 Build the OCI image with `podman build --format oci -f deploy/Containerfile -t localhost/signal-mission-lab:reviewed .`. Rootless systemd Quadlet configuration, file-mounted PostgreSQL secrets, smoke checks and operational instructions are in [the Podman runbook](deploy/PODMAN.md). The default listener is loopback only. Live TLS, database/identity setup and host acceptance remain required.
 
+## Learning resources
+
+Choose **Learning resources** on the home screen or in IT Foundations. Start with [O’Reilly through Army MWR Library](https://army.dodmwrlibraries.org/oreilly). Eligible patrons can use library access without a personal subscription, subject to seat availability. The guide also groups official networking, server administration, Signal School and credential resources. The guide is bundled offline; opening provider pages and enrolling in courses requires internet access.
+
 ## IT foundations for Soldiers
 
 Open **Learn IT fundamentals** from the homepage, then choose a topic and lesson. The lesson starts with a short explanation. Expand **Go deeper**, **Try a practice question**, or **Sources and limits** when needed. Nine introductory lessons explain computing/VMs, switching, routing, DNS/identity, storage, firewalls, containers, recovery and security. Vendor examples have scoped public references and are separated from verified Army applicability. Open **Vendors** for eleven product troubleshooting exercises and official credential or operator training links. Use the synthetic dependency lab to connect the concepts to a user outcome. See [curriculum and manual gaps](docs/IT_FOUNDATIONS_AND_MANUAL_GAPS.md).
