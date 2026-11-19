@@ -446,6 +446,30 @@
       "retrieved": "2026-11-18",
       "status": "metadata_checked",
       "human_review": "pending"
+    },
+    {
+      "id": "army-wint-role",
+      "title": "Army Weapon Systems Handbook: WIN-T Increment 1",
+      "url": "https://api.army.mil/e2/c/downloads/431298.pdf",
+      "kind": "Army context",
+      "edition": "2016 handbook",
+      "locator": "WIN-T Increment 1 program entry",
+      "scope": "Historical public program role. It does not establish current fielding, appliance selection, unit configuration, or interfaces.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "army-c2now-transition",
+      "title": "CECOM: Legacy WIN-T and TSI divestment and C2NOW",
+      "url": "https://www.army.mil/article/295159/cecom_ilsc_plays_a_key_role_in_enterprise_wide_divestiture_effort",
+      "kind": "Army context",
+      "edition": "2026-10-05",
+      "locator": "Divestment and C2NOW foundational products",
+      "scope": "Public context for modernization of C2 infrastructure and transport. The article does not establish a vendor baseline for the fictional cases.",
+      "retrieved": "2026-11-18",
+      "status": "content_checked",
+      "human_review": "pending"
     }
   ],
   "vendors": [
@@ -1194,7 +1218,7 @@
         "Compare the intended port assignment, client IP settings and gateway with known-good evidence. A link indicator proves physical link only.",
         "After the path is verified, check the expected application transaction. Use the supplied address plan; no subnet calculation is required."
       ],
-      "scenario": "A fictional client has link but cannot reach the assigned gateway. A known-good client on another port can reach the same gateway. What evidence best narrows the fault?",
+      "scenario": "Which non-disruptive check best distinguishes a client or local port problem from a shared gateway problem?",
       "options": [
         "Check the affected client and compare its port and supplied address settings to the approved lab baseline.",
         "Reset the gateway for everyone.",
@@ -1208,9 +1232,22 @@
       ],
       "source_ids": [
         "cisco-basics",
-        "cisco-vlan"
+        "cisco-vlan",
+        "army-wint-role"
       ],
-      "system_ids": []
+      "system_ids": [],
+      "army_case": {
+        "track": "WIN-T",
+        "source_id": "army-wint-role",
+        "scope": "The historical handbook establishes the role of WIN-T. Cisco switching is the classroom skill example. The workstation and port observations are invented.",
+        "task": "At a fictional WIN-T classroom station, a staff workstation must send a training status report to an exercise reviewer.",
+        "evidence": [
+          "The affected workstation sees physical link but cannot reach its assigned lab gateway.",
+          "A known-good workstation on another training port can reach the same gateway."
+        ],
+        "impact": "The reporter cannot submit the update; the evidence does not establish a shared transport outage.",
+        "recovery": "After the instructor resolves the fictional fault, the same workstation submits a fresh report and the reviewer confirms receipt and readability."
+      }
     },
     {
       "id": "vsphere-path-check",
@@ -1234,7 +1271,7 @@
         "Start with scope: one VM, one port group, or multiple workloads on a host. Compare guest and host-side attachment before changing shared settings.",
         "Verify reachability from the affected guest and complete the intended user task after an authorized repair."
       ],
-      "scenario": "Two guests on the same port group fail after a host move. Guests on another port group still work. Which comparison has the highest diagnostic value?",
+      "scenario": "Which comparison has the highest diagnostic value after the host move?",
       "options": [
         "Restart vCenter immediately.",
         "Compare the affected port group and uplink on the new host with the known-good path.",
@@ -1247,9 +1284,22 @@
         "Rebuilding guests can leave the same failed network dependency in place."
       ],
       "source_ids": [
-        "esxi-vm-path"
+        "esxi-vm-path",
+        "army-modern"
       ],
-      "system_ids": []
+      "system_ids": [],
+      "army_case": {
+        "track": "Mission Command Systems",
+        "source_id": "army-modern",
+        "scope": "CECOM documents VMware-based TSI and a Hyper-V upgrade path for v5/v1. The fault and virtual network in this case are fictional.",
+        "task": "A fictional TSI classroom host runs two guest services used to retrieve a practice staff report after a lab maintenance exercise.",
+        "evidence": [
+          "Both affected guests were moved to another host and share one port group.",
+          "Guests on another port group still respond. Both affected guest consoles are available."
+        ],
+        "impact": "Staff cannot open the report from affected guests even though the host and management console are up.",
+        "recovery": "Repeat the report retrieval from an affected client and confirm that the same shared guest path works without disturbing the unaffected service."
+      }
     },
     {
       "id": "steelhead-pass-through",
@@ -1273,7 +1323,7 @@
         "Compare a fresh application transaction and its timing with the Current Connections report. Capture the disposition and reason for the same time window.",
         "Pass-through alone does not establish an outage or justify changing a shared optimization policy."
       ],
-      "scenario": "A fictional file transfer completes slowly and the connection is marked pass-through. What should you record first?",
+      "scenario": "What should you record first to tell an optimization issue from a service outage?",
       "options": [
         "Declare the site offline.",
         "Treat successful transfer as proof optimization worked.",
@@ -1286,9 +1336,22 @@
         "The reason and measured behavior provide two independent pieces of evidence."
       ],
       "source_ids": [
-        "steelhead-report"
+        "steelhead-report",
+        "army-wint-role"
       ],
-      "system_ids": []
+      "system_ids": [],
+      "army_case": {
+        "track": "WIN-T",
+        "source_id": "army-wint-role",
+        "scope": "The historical WIN-T role supplies the training context. SteelHead is an illustrative WAN optimization product; the case makes no WIN-T appliance claim.",
+        "task": "During a fictional WIN-T sustainment class, a staff user needs to deliver a training attachment before the rehearsal update.",
+        "evidence": [
+          "The sample file transfer completes, but later than the classroom baseline.",
+          "The fictional optimization report marks the matching connection pass-through."
+        ],
+        "impact": "Reports can arrive late even when delivery works. Confirm what actually failed before calling it an outage.",
+        "recovery": "Have the sender repeat the same training transfer; verify receipt, measured transfer time and the report disposition as separate results."
+      }
     },
     {
       "id": "openshift-readiness",
@@ -1312,7 +1375,7 @@
         "Inspect pod state and recent events before assuming an application bug. Logs may not exist when a container never started.",
         "For host troubleshooting, practice Linux service and storage fundamentals separately. RHCSA covers Linux administration; the OpenShift case is adjacent practice."
       ],
-      "scenario": "A fictional pod remains pending and events show a claim is unbound. No container has started. Which dependency should the learner check first?",
+      "scenario": "Which dependency should the learner check first?",
       "options": [
         "Compare the storage claim status and expected class against the lab baseline.",
         "Tune application logging.",
@@ -1326,9 +1389,22 @@
       ],
       "source_ids": [
         "ocp-pods",
-        "redhat"
+        "redhat",
+        "army-c2now-transition"
       ],
-      "system_ids": []
+      "system_ids": [],
+      "army_case": {
+        "track": "C2NOW",
+        "source_id": "army-c2now-transition",
+        "scope": "The Army source explains the C2 infrastructure transition. This case practices portable container troubleshooting using OpenShift as a classroom example. It does not identify a fielded C2NOW platform.",
+        "task": "In a fictional C2NOW modernization classroom, a training team needs a containerized service to display a synthetic status report.",
+        "evidence": [
+          "The workload remains pending. A lab event says a storage claim is unbound.",
+          "There is no application startup log because the container has not started."
+        ],
+        "impact": "The team cannot publish a fresh training view. Repeated application restarts would not address the observed startup dependency.",
+        "recovery": "After the instructor restores the configured lab dependency, confirm the workload is ready and the training user can open the expected fresh report."
+      }
     },
     {
       "id": "windows-dns-triage",
@@ -1352,7 +1428,7 @@
         "Compare the failing name on the affected client with the expected resolver and a known-good peer. Distinguish DNS query errors from a service reached at the wrong address.",
         "An application test by name remains necessary after the name result is correct. Where available, practice with Resolve-DnsName on a fictional lab host."
       ],
-      "scenario": "The known application address responds in the lab, but the hostname lookup times out for one workstation. What is the best next check?",
+      "scenario": "What is the best read-only check to isolate the name-resolution fault?",
       "options": [
         "Reset the application service.",
         "Test the name using the client’s assigned resolver and compare with a known-good peer.",
@@ -1366,9 +1442,22 @@
       ],
       "source_ids": [
         "ms-dns-client",
-        "ms-dns"
+        "ms-dns",
+        "army-modern"
       ],
-      "system_ids": []
+      "system_ids": [],
+      "army_case": {
+        "track": "Mission Command Systems",
+        "source_id": "army-modern",
+        "scope": "CECOM documents Windows Server and Hyper-V in TSI modernization. This DNS case is transferable practice for a fictional hosted Mission Command service.",
+        "task": "A Soldier supporting a fictional Mission Command classroom is asked to restore the instructor-provided service name for one staff workstation.",
+        "evidence": [
+          "The workstation can reach the sample endpoint by address; the training hostname lookup times out.",
+          "A known-good workstation in the same exercise resolves the name."
+        ],
+        "impact": "One staff user cannot open the shared training view by its normal name. Other users may still be working.",
+        "recovery": "From the affected workstation, verify the expected answer and then open the application by name and retrieve the current training report."
+      }
     },
     {
       "id": "panos-traffic-evidence",
@@ -1392,7 +1481,7 @@
         "Match time, direction and service to the reported reproduction. Use the rule, action and session end reason to form a hypothesis.",
         "An allow action by itself does not confirm service health. A denied synthetic session is evidence to review with the policy owner."
       ],
-      "scenario": "A fictional connection is logged as allowed, followed by a session timeout. What is the best next step?",
+      "scenario": "What evidence should you correlate before making a policy change?",
       "options": [
         "Mark the user task successful.",
         "Open all ports in the training policy.",
@@ -1406,9 +1495,22 @@
       ],
       "source_ids": [
         "pan-traffic",
-        "pan-policy"
+        "pan-policy",
+        "army-c2now-transition"
       ],
-      "system_ids": []
+      "system_ids": [],
+      "army_case": {
+        "track": "C2NOW",
+        "source_id": "army-c2now-transition",
+        "scope": "The Army source supplies modernization context. PAN-OS is the commercial log-reading example. No C2NOW security product or policy baseline is inferred.",
+        "task": "An authorized staff user in a fictional C2NOW support workshop must read a training status display across a classroom service boundary.",
+        "evidence": [
+          "A sample log for the same transaction and time records an allow action.",
+          "The session times out and the user does not receive the training display."
+        ],
+        "impact": "Policy allowed the attempt, but the staff task still failed. The issue belongs in the handoff until the application result is verified.",
+        "recovery": "Have the affected user open the training display. Confirm the expected result and that unrelated denied access remains denied."
+      }
     },
     {
       "id": "foundry-data-freshness",
@@ -1432,7 +1534,7 @@
         "A dashboard can render normally while presenting old results. Compare its data timestamp to the expected refresh time.",
         "Use the affected build details and upstream lineage to identify the first stale input or failed change. Verify the resulting dataset timestamp and dashboard after recovery."
       ],
-      "scenario": "A fictional dashboard opens but shows yesterday’s results. Its scheduled build reports a failed upstream input. Which action starts the investigation?",
+      "scenario": "Which action starts the investigation of the stale training report?",
       "options": [
         "Trace lineage to the first stale or failed input and inspect the associated build.",
         "Reset every dashboard user’s permissions.",
@@ -1446,9 +1548,22 @@
       ],
       "source_ids": [
         "foundry-debug",
-        "army-vantage"
+        "army-vantage",
+        "army-c2now-transition"
       ],
-      "system_ids": []
+      "system_ids": [],
+      "army_case": {
+        "track": "C2NOW",
+        "source_id": "army-c2now-transition",
+        "scope": "C2NOW is the synthetic data-support setting. The Army Vantage reference identifies Foundry for Vantage only. This lesson does not identify a C2NOW platform or model a Maven workflow.",
+        "task": "A fictional C2NOW data-support class asks a staff reader to distinguish a current exercise report from a stale one.",
+        "evidence": [
+          "The classroom dashboard opens and the user is authorized. Its display contains yesterday’s dummy data.",
+          "The sample build history reports that a scheduled upstream input failed."
+        ],
+        "impact": "Readers can open the view but may brief the wrong exercise status if they trust the old data.",
+        "recovery": "Verify a successful training build and a current timestamp, then have the staff reader compare the updated display with the expected synthetic input."
+      }
     },
     {
       "id": "idrac-event-correlation",
@@ -1472,7 +1587,7 @@
         "Check the relevant hardware health view and timestamps. Compare reports from the host and application before replacing components.",
         "Collect only allowed diagnostics. Preserve logs and use authorized hardware support for corrective work."
       ],
-      "scenario": "Several fictional guests report slow writes at the time the host reports a new storage alert. What should you collect?",
+      "scenario": "What should you collect first to test whether the host alert explains the guest symptoms?",
       "options": [
         "Clear the hardware history.",
         "Correlate the storage alert and Lifecycle Log timestamps with guest and host symptoms.",
@@ -1485,9 +1600,22 @@
         "No name resolution symptom is reported."
       ],
       "source_ids": [
-        "idrac-health"
+        "idrac-health",
+        "army-modern"
       ],
-      "system_ids": []
+      "system_ids": [],
+      "army_case": {
+        "track": "Mission Command Systems",
+        "source_id": "army-modern",
+        "scope": "CECOM documents compute and storage as TSI dependencies. Dell management logs are a classroom example, with no claim about installed TSI server hardware.",
+        "task": "A fictional Mission Command hosting team must determine why several training guests cannot save a staff report promptly.",
+        "evidence": [
+          "Guest reports show slow writes within the same window.",
+          "A sample host management log records a new storage health alert."
+        ],
+        "impact": "A shared host issue could delay several staff users; a single-application explanation is premature.",
+        "recovery": "After authorized support resolves the fictional fault, repeat the same report save and read-back from affected guests and compare the result with the baseline."
+      }
     },
     {
       "id": "ontap-nfs-access",
@@ -1511,7 +1639,7 @@
         "Compare whether the storage endpoint is reachable and whether it rejects the requested access. A permission denial can point to the export policy, protocol, authentication or filesystem permissions.",
         "Verify the relevant client and export before any change. Retest only the intended access and confirm a client outside scope remains denied."
       ],
-      "scenario": "A fictional client gets permission denied for an NFS export while a known-good client can read it. What evidence best narrows the cause?",
+      "scenario": "What evidence best separates an access problem from a shared transport outage?",
       "options": [
         "Restart all storage controllers.",
         "Grant all clients broad access.",
@@ -1525,9 +1653,22 @@
       ],
       "source_ids": [
         "ontap-exports",
-        "netapp"
+        "netapp",
+        "army-modern"
       ],
-      "system_ids": []
+      "system_ids": [],
+      "army_case": {
+        "track": "Mission Command Systems",
+        "source_id": "army-modern",
+        "scope": "CECOM documents storage as a TSI dependency. ONTAP is an illustrative classroom storage product, with no claim about the installed TSI array.",
+        "task": "A fictional Mission Command classroom user needs to read a shared training artifact from a hosted service.",
+        "evidence": [
+          "The affected training client receives an NFS permission denial.",
+          "A known-good client can read the same sample export."
+        ],
+        "impact": "Access for one training client is blocked. The evidence does not support a storage outage affecting everyone.",
+        "recovery": "Verify the affected authorized client can read the required training file and confirm that an out-of-scope test client still cannot read it."
+      }
     },
     {
       "id": "iq-core-observation",
@@ -1551,7 +1692,7 @@
         "A management dashboard and a user application answer different questions. Check when the dashboard last saw the training device, then compare a separate user task.",
         "Report the observations and uncertainty to the authorized support role. This lesson uses invented outputs and supplies no deployment instructions."
       ],
-      "scenario": "A fictional management view reports an unreachable device, but the exercise user’s transaction succeeds. What should you conclude?",
+      "scenario": "What conclusion is supported by these two observations?",
       "options": [
         "The observations disagree; record their timing and check the management observation path.",
         "The user service is definitely unavailable.",
@@ -1565,9 +1706,22 @@
       ],
       "source_ids": [
         "iq-core-suite",
-        "iq-core-ncm"
+        "iq-core-ncm",
+        "army-wint-role"
       ],
-      "system_ids": []
+      "system_ids": [],
+      "army_case": {
+        "track": "WIN-T",
+        "source_id": "army-wint-role",
+        "scope": "The historical handbook describes WIN-T. IQ-Core is the commercial management example; the lesson does not infer it is present in the named WIN-T system.",
+        "task": "During a fictional WIN-T support class, a Soldier must reconcile a management observation with a staff user’s training report exchange.",
+        "evidence": [
+          "The exercise management view shows a device as unreachable.",
+          "The fictional staff user succeeds in sending a current report and obtains an acknowledgement."
+        ],
+        "impact": "Management visibility is degraded in the exercise, while the demonstrated user function still works.",
+        "recovery": "Confirm a fresh management observation and repeat the same staff transaction. Report any remaining discrepancy to the exercise support lead."
+      }
     },
     {
       "id": "taclane-scope-check",
@@ -1591,7 +1745,7 @@
         "Public material identifies equipment families and vendor training. It does not establish which settings, access or procedures apply to a unit.",
         "In this fictional case, report the visible status, time, affected user task and observations to the authorized owner. Leave approved equipment checks to qualified personnel."
       ],
-      "scenario": "A fictional classroom status card says a device is healthy while the simulated user transaction fails. What belongs in the handoff?",
+      "scenario": "What belongs in the handoff to the authorized support role?",
       "options": [
         "A statement that all service is restored.",
         "The discrepancy, time and affected user task, with a request for authorized review.",
@@ -1604,9 +1758,22 @@
         "A safeguard is not an acceptable workaround."
       ],
       "source_ids": [
-        "gd-taclane"
+        "gd-taclane",
+        "army-wint-role"
       ],
-      "system_ids": []
+      "system_ids": [],
+      "army_case": {
+        "track": "WIN-T",
+        "source_id": "army-wint-role",
+        "scope": "The historical WIN-T role frames the fictional handoff. The General Dynamics source identifies a product family, not an installed device or operating procedure.",
+        "task": "In a fictional WIN-T support class, a staff user cannot retrieve a dummy report and asks for an evidence-based equipment handoff.",
+        "evidence": [
+          "An instructor status card for the classroom device says healthy.",
+          "The expected staff transaction fails in the exercise at the same time."
+        ],
+        "impact": "The receiving user is still blocked. An equipment indication alone does not verify service.",
+        "recovery": "Have authorized exercise staff resolve the simulated issue. The affected user repeats the report retrieval and confirms that the result is readable."
+      }
     }
   ]
 }

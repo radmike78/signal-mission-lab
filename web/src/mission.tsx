@@ -35,7 +35,7 @@ export function MissionGuide({onResources,onEquipment,onPractice,onDocuments,onC
  if(!plannerOpen)return <div className="learning-entry">
   <header className="mission-hero"><div><h1 ref={heading} tabIndex={-1}>What do you want to learn?</h1></div></header>
   <div className="learning-choices" aria-label="Start learning">
-   <button onClick={onFoundations}><strong>Learn IT fundamentals</strong><span>Networking, servers, storage and security</span></button>
+   <button onClick={onFoundations}><strong>Learn IT fundamentals</strong><span>Networking, servers, and security in Army training scenarios</span></button>
    <button onClick={onEquipment}><strong>Explore Signal equipment</strong><span>What each system does and what depends on it</span></button>
    <button onClick={onPractice}><strong>Practice troubleshooting</strong><span>Investigate a fictional service problem</span></button>
    <button onClick={()=>{setPlannerOpen(true);requestAnimationFrame(()=>heading.current?.focus());}}><strong>Plan a training mission</strong><span>Turn an exercise goal into Signal requirements</span></button>

@@ -108,3 +108,6 @@ main :is(h1,h2,h3,h4),.rail nav button{overflow-wrap:anywhere;min-width:0}
 .learning-resources .foundation-topics > details ul { padding: 0 .2rem; }
 .learning-resources .foundation-topics li + li { border-top: 1px solid var(--line); margin-top: .8rem; padding-top: .8rem; }
 .learning-resources .foundation-topics li p { margin: .25rem 0; }
+
+.army-topic-picker { padding: .6rem .8rem; border: 1px solid var(--line); border-radius: .5rem; margin-block: .65rem; }
+.army-topic-picker .foundation-topics { margin-top: .5rem; }

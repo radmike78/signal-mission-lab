@@ -21,6 +21,15 @@ class TechnologyTests(unittest.TestCase):
   for change in ({'lesson_ids':['missing']},{'training':{'label':'Fake certification','source_id':'army-modern'}}):
    content=copy.deepcopy(self.content);content['vendors'][0].update(change)
    with self.assertRaises(ValueError):validate_technology(content,self.catalog)
+ def test_vendor_cases_cover_army_tracks_with_recovery_evidence(self):
+  cases={lesson['id']:lesson['army_case'] for lesson in self.content['lessons'] if 'army_case' in lesson}
+  self.assertEqual(len(cases),11)
+  self.assertEqual({case['track'] for case in cases.values()},{'WIN-T','Mission Command Systems','C2NOW'})
+  self.assertEqual(cases['vsphere-path-check']['source_id'],'army-modern')
+ def test_vendor_knowledge_does_not_substitute_for_army_case_provenance(self):
+  lesson=next(row for row in self.content['lessons'] if row['id']=='cisco-path-check')
+  lesson['army_case']['source_id']='cisco-basics'
+  with self.assertRaises(ValueError):validate_technology(self.content,self.catalog)
  def test_vendor_documents_cannot_be_marked_army_context(self):
   source=next(s for s in self.content['sources'] if s['kind']=='Vendor education')
   source['kind']='Army context'

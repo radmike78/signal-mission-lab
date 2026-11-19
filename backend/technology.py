@@ -5,7 +5,8 @@ VENDOR_HOSTS=frozenset({'learn.microsoft.com','www.cisco.com','docs.paloaltonetw
                         'www.broadcom.com','support.riverbed.com','docs.redhat.com','www.paloaltonetworks.com',
                         'www.palantir.com','www.dell.com','education.dell.com','www.netapp.com',
                         'gdmissionsystems.com','www.juniper.net','comptiacdn.azureedge.net'})
-ARMY_CONTEXT_HOSTS=frozenset({'www.army.mil','www.financialfrontline.army.mil'})
+ARMY_CONTEXT_HOSTS=frozenset({'www.army.mil','www.financialfrontline.army.mil','api.army.mil'})
+ARMY_CASE_TRACKS=frozenset({'WIN-T','Mission Command Systems','C2NOW'})
 
 def validate_technology(content, catalog):
     if content['review_status'] != 'human_review_pending':
@@ -39,11 +40,28 @@ def validate_technology(content, catalog):
                 or not isinstance(training['label'],str) or not 0<len(training['label'])<=150
                 or training['source_id'] not in vendor_sources or training['source_id'] not in vendor['source_ids']):
                 raise ValueError('Invalid vendor training reference')
+    army_sources={source['id'] for source in sources if source['kind']=='Army context'}
     for lesson in content['lessons']:
+        if 'army_case' in lesson:
+            case=lesson['army_case']
+            fields={'track','source_id','scope','task','evidence','impact','recovery'}
+            if not isinstance(case,dict) or set(case)!=fields:
+                raise ValueError('Invalid Army training case structure')
+            if any(not isinstance(case[name],str) or not case[name].strip() or len(case[name])>800
+                   for name in fields-{'evidence'}):
+                raise ValueError('Invalid Army training case narrative')
+            if (case['track'] not in ARMY_CASE_TRACKS or case['source_id'] not in army_sources
+                or case['source_id'] not in lesson['source_ids']):
+                raise ValueError('Army training case needs its public Army context source')
+            evidence=case['evidence']
+            if (not isinstance(evidence,list) or not 2<=len(evidence)<=5
+                or any(not isinstance(item,str) or not item.strip() or len(item)>500 for item in evidence)):
+                raise ValueError('Army training case needs classroom observations')
         if not set(lesson['system_ids'])<=equipment:raise ValueError('Unknown study system')
         if (not 2<=len(lesson['options'])<=5 or len(lesson['feedback'])!=len(lesson['options'])
             or type(lesson['answer']) is not int or not 0<=lesson['answer']<len(lesson['options'])):
             raise ValueError('Invalid formative exercise')
         if not lesson['terms'] or not lesson['explanation']:raise ValueError('Missing lesson explanation')
     return {'lessons':len(content['lessons']),'vendor_groups':len(content['vendors']),
+            'army_training_cases':sum('army_case' in lesson for lesson in content['lessons']),
             'technology_sources':len(sources),'army_equipment_mapping':'not_inferred'}
