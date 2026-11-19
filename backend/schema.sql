@@ -64,3 +64,14 @@ CREATE TABLE IF NOT EXISTS recovery_attempts (
  decision_supported INTEGER NOT NULL CHECK (decision_supported IN (0,1))
 );
 INSERT INTO schema_versions(version) VALUES (2) ON CONFLICT (version) DO NOTHING;
+CREATE TABLE IF NOT EXISTS course_assignments (
+ assignment_id TEXT PRIMARY KEY REFERENCES assignments(id) ON DELETE CASCADE,
+ course_id TEXT NOT NULL CHECK (course_id = 'mission-report-v1')
+);
+CREATE TABLE IF NOT EXISTS course_first_results (
+ assignment_id TEXT NOT NULL REFERENCES course_assignments(assignment_id) ON DELETE CASCADE,
+ learner_id TEXT NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
+ attempt_id TEXT NOT NULL UNIQUE REFERENCES attempts(id) ON DELETE CASCADE,
+ PRIMARY KEY (assignment_id, learner_id)
+);
+INSERT INTO schema_versions(version) VALUES (3) ON CONFLICT (version) DO NOTHING;

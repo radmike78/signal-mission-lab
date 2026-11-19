@@ -60,6 +60,29 @@ class LearningTests(unittest.TestCase):
   self.assertEqual(self.call('POST',f'/assignments/{a}/attempts',self.outsider,json=body).status_code,404)
   self.assertEqual(self.call('GET',f'/cohorts/{c}/progress',self.learner).status_code,403)
   self.assertEqual(len(self.call('GET','/assignments',self.learner).json()),1)
+ def test_mission_report_course_requires_membership_and_preserves_first_result(self):
+  c=self.cohort();self.enroll(c);a=self.assignment(c,'mission-report-v1')
+  path=f'/assignments/{a}/course'
+  self.assertEqual(self.call('GET',path,self.outsider).status_code,404)
+  self.assertEqual(self.call('GET',path,self.teacher).status_code,403)
+  lesson=self.call('GET',path,self.learner).json()
+  self.assertEqual(len(lesson['questions']),3)
+  for question in lesson['questions']:
+   self.assertEqual(set(question),{'id','prompt','options'})
+  submit=f'/assignments/{a}/attempts'
+  self.assertEqual(self.call('POST',submit,self.learner,json={'answers':{'verify':2}}).status_code,422)
+  first={'evidence':1,'isolate':1,'verify':2}
+  self.assertEqual(self.call('POST',submit,self.outsider,json={'answers':first}).status_code,404)
+  r=self.call('POST',submit,self.learner,json={'answers':first})
+  self.assertEqual(r.status_code,201);self.assertEqual((r.json()['score'],r.json()['total']),(2,3))
+  r=self.call('POST',submit,self.learner,json={'answers':{**first,'evidence':0}})
+  self.assertEqual(r.status_code,201);self.assertEqual(r.json()['score'],3)
+  progress=f'/cohorts/{c}/progress'
+  self.assertEqual(self.call('GET',progress,self.other).status_code,404)
+  first_results=self.call('GET',progress).json()['course_first_results']
+  self.assertEqual([(r['assignment_id'],r['learner_id'],r['score']) for r in first_results],[(a,self.learner['account_id'],2)])
+  self.assertEqual(self.call('DELETE',f'/cohorts/{c}/members/{self.learner["account_id"]}').status_code,204)
+  self.assertEqual(self.call('GET',progress).json()['course_first_results'],[])
  def test_score_is_server_computed_and_persists(self):
   c=self.cohort();self.enroll(c);a=self.assignment(c)
   body={'answers':{'mission':0,'interop':1,'identity':1,'impact-scope':1,'information-age':0,'recovery-validation':2,'restoration-uncertainty':1}}
@@ -130,7 +153,7 @@ class LearningTests(unittest.TestCase):
  def test_schema_migration_is_repeatable(self):
   self.db.migrate()
   with self.db.transaction() as connection:
-   self.assertEqual(self.db.execute(connection,'SELECT count(*) AS n FROM schema_versions').fetchone()['n'],2)
+   self.assertEqual(self.db.execute(connection,'SELECT count(*) AS n FROM schema_versions').fetchone()['n'],3)
  def test_attempt_limit(self):
   c=self.cohort();self.enroll(c);a=self.assignment(c)
   for _ in range(20):
@@ -196,9 +219,11 @@ class LearningTests(unittest.TestCase):
   with self.db.transaction() as connection:
    self.db.execute(connection,'DROP TABLE recovery_attempts')
    self.db.execute(connection,'DROP TABLE recovery_assignments')
-   self.db.execute(connection,'DELETE FROM schema_versions WHERE version=2')
+   self.db.execute(connection,'DROP TABLE course_first_results')
+   self.db.execute(connection,'DROP TABLE course_assignments')
+   self.db.execute(connection,'DELETE FROM schema_versions WHERE version>1')
   self.db.migrate();self.db.migrate()
   self.assertEqual(self.call('GET','/attempts',self.learner).json()[0]['score'],100)
   with self.db.transaction() as connection:
    versions=self.db.execute(connection,'SELECT version FROM schema_versions ORDER BY version').fetchall()
-   self.assertEqual([r['version'] for r in versions],[1,2])
+   self.assertEqual([r['version'] for r in versions],[1,2,3])
