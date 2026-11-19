@@ -43,3 +43,24 @@ Local TypeScript build, source/curriculum gate, 31 catalog/security/curriculum t
 Next-depth topics include TCP/UDP and subnetting, STP and routing protocols, NAT/VPN concepts, certificate/time dependencies, storage multipathing and snapshots, backup/restore tools, hardening/patching and monitoring. Server/NIC/storage hardware, endpoint protection, automation and cloud vendor coverage require additional public sources and system-specific applicability review.
 
 Screenshots: [lesson](screenshots/it-foundations.png), [vendor directory](screenshots/it-vendors.png), [mobile lesson](screenshots/it-foundations-mobile.png).
+
+## Vendor troubleshooting expansion · November 2026
+
+The curriculum now includes 20 lessons and 14 vendor or technology groups. From **IT foundations → Vendors**, open a product, launch its fictional case and review the linked objectives or training. Study links are supplemental and do not claim exam coverage, eligibility, credential award, or Army qualification. The scored cases, explanations and source metadata are bundled for offline use. External vendor pages require connectivity and may require an account. Source metadata distinguishes a checked page from a public listing or search excerpt. A curriculum reviewer should confirm details and applicable releases before external use.
+
+| Vendor | Diagnostic skill | Study path |
+|---|---|---|
+| Cisco | Compare the affected client, access port, supplied address and gateway against a known-good baseline | CCNA |
+| VMware / Broadcom | Trace guest, port group and host uplink after a VM move | VCP vSphere Foundation Administrator |
+| Riverbed | Correlate an application measurement with SteelHead pass-through status and reason | SteelHead Core |
+| Red Hat | Distinguish pod events, workload startup dependencies and application logs | RHCSA Linux foundation; OpenShift case is separate |
+| Microsoft | Compare client DNS results and verify the intended service | Windows Server Administrator AZ-802 |
+| Palo Alto Networks | Interpret the rule action and session end reason together | Network Security Professional |
+| Palantir | Locate an upstream failed build or stale dataset in Foundry | Foundry Aware and Data Engineer |
+| Dell | Correlate PowerEdge hardware health and Lifecycle Log timestamps with host and guest symptoms | PowerEdge Foundations published outline; verify availability |
+| NetApp | Separate ONTAP NFS reachability from an export or file permission problem | Data Administrator ONTAP |
+| Curtiss-Wright / PacStar | Distinguish the IQ-Core management view from the observed user service | Public product reference |
+| General Dynamics Mission Systems | Describe a mismatch between fictional status and service and hand it off for authorized review | Official TACLANE operator training referral |
+| Juniper and CompTIA | Review routing and client connectivity fundamentals | JNCIA-Junos and Network+ |
+
+The Army Vantage quick reference provides a dated Foundry example. It does not establish how Maven is configured. The vendor catalog does not infer deployed versions, configurations, authorization, or a complete Army inventory.

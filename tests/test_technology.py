@@ -11,7 +11,16 @@ class TechnologyTests(unittest.TestCase):
  def test_sources_and_systems_resolve_without_inferred_deployment(self):
   result=validate_technology(self.content,self.catalog)
   self.assertEqual(result['army_equipment_mapping'],'not_inferred')
-  self.assertEqual(result['lessons'],9)
+  self.assertGreaterEqual(result['lessons'],19)
+  vendors={row['id']:row for row in self.content['vendors']}
+  for id in ('cisco','vmware','riverbed','redhat','microsoft','palo','palantir','dell','netapp','pacstar','gdms'):
+   self.assertTrue(vendors[id]['lesson_ids'],id)
+  for id in ('cisco','vmware','riverbed','redhat','microsoft','palo','palantir','dell','netapp','gdms','juniper','comptia'):
+   self.assertIn('training',vendors[id],id)
+ def test_vendor_practice_and_training_links_fail_closed(self):
+  for change in ({'lesson_ids':['missing']},{'training':{'label':'Fake certification','source_id':'army-modern'}}):
+   content=copy.deepcopy(self.content);content['vendors'][0].update(change)
+   with self.assertRaises(ValueError):validate_technology(content,self.catalog)
  def test_vendor_documents_cannot_be_marked_army_context(self):
   source=next(s for s in self.content['sources'] if s['kind']=='Vendor education')
   source['kind']='Army context'

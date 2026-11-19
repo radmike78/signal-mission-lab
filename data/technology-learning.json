@@ -170,6 +170,282 @@
       "retrieved": "2026-10-19",
       "status": "content_checked",
       "human_review": "pending"
+    },
+    {
+      "id": "ccna",
+      "title": "Cisco CCNA exam and objectives",
+      "url": "https://www.cisco.com/site/us/en/learn/training-certifications/certifications/enterprise/ccna/index.html",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Exam topics",
+      "scope": "IP connectivity and network access are study domains. Check the linked objectives for the exam version you will take.",
+      "retrieved": "2026-11-18",
+      "status": "content_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "esxi-vm-path",
+      "title": "Broadcom: Troubleshooting virtual machine network connection issues",
+      "url": "https://knowledge.broadcom.com/external/article/324542/",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Troubleshooting VM network connectivity",
+      "scope": "Scope the affected guests and distinguish guest from shared virtual or physical networking.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "vvf-admin",
+      "title": "Broadcom: VCP VMware vSphere Foundation Administrator",
+      "url": "https://www.broadcom.com/support/education/vmware/certification/vcp-vvf-administrator",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Certification overview",
+      "scope": "Study path for deploying, managing and supporting vSphere Foundation environments.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "steelhead-report",
+      "title": "Riverbed: Current Connections report",
+      "url": "https://support.riverbed.com/bin/support/static/r3n2eogqamvf8jqdj0q0b2blf8/html/12ta89l2hc6tfqm67ipinb0tt2/sh-ug-html/steelhead/reportConnections.html",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Connection categories and pass-through reasons",
+      "scope": "Report behavior varies by RiOS release; optimize status is separate from the application outcome.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "steelhead-academy",
+      "title": "Riverbed Academy: SteelHead Core learning plan",
+      "url": "https://support.riverbed.com/",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "SteelHead updates, 3 April 2025",
+      "scope": "Lists SteelHead Core courses and a certification exam; confirm eligibility and access.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "rhcsa-ex200",
+      "title": "Red Hat: RHCSA EX200",
+      "url": "https://www.redhat.com/en/services/training/ex200-red-hat-certified-system-administrator-rhcsa-exam",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Exam objectives",
+      "scope": "Performance-based Linux administration, including services, storage and operating a running system.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "ocp-pods",
+      "title": "Red Hat: Investigating OpenShift pod issues",
+      "url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.12/html/support/troubleshooting",
+      "kind": "Vendor education",
+      "edition": "OpenShift 4.12 example",
+      "locator": "Investigating pod issues",
+      "scope": "Use release-specific support docs; events and logs are different evidence sources.",
+      "retrieved": "2026-11-18",
+      "status": "content_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "ms-dns-client",
+      "title": "Microsoft: Troubleshoot DNS client name resolution issues",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/troubleshoot-dns-client-resolution-issues",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Client diagnostics and timeout examples",
+      "scope": "Windows examples for distinguishing resolver trouble from downstream service issues.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "ms-az802",
+      "title": "Microsoft: Administering Windows Server AZ-802",
+      "url": "https://learn.microsoft.com/en-us/credentials/certifications/exams/az-802/",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Skills measured",
+      "scope": "Windows Server networking, identity, storage and administration; see the current skills outline.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "pan-traffic",
+      "title": "Palo Alto Networks: Log types and severity levels",
+      "url": "https://docs.paloaltonetworks.com/ngfw/administration/monitoring/view-and-manage-logs/log-types-and-severity-levels",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Traffic logs",
+      "scope": "Rule, action, application and session-end fields. Their presence depends on logging configuration.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "pan-study",
+      "title": "Palo Alto Networks: Network Security Professional",
+      "url": "https://www.paloaltonetworks.com/services/education/palo-alto-networks-netsec-professional",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Certification objectives",
+      "scope": "Study network security product installation, deployment and administration at the professional level.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "foundry-debug",
+      "title": "Palantir: Debug a failing pipeline",
+      "url": "https://www.palantir.com/docs/foundry/optimizing-pipelines/debug-pipeline",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Build details and Data Lineage",
+      "scope": "Find the affected build and trace upstream inputs. Generic Foundry guidance only.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "foundry-study",
+      "title": "Palantir: September 2026 certification update",
+      "url": "https://www.palantir.com/docs/foundry/announcements/2026-09",
+      "kind": "Vendor education",
+      "edition": "September 2026",
+      "locator": "Major update to Palantir certifications",
+      "scope": "Foundry Aware foundation and role-specific paths, including Data Engineer.",
+      "retrieved": "2026-11-18",
+      "status": "content_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "army-vantage",
+      "title": "Army Vantage Quick Reference",
+      "url": "https://www.financialfrontline.army.mil/Portals/148/VantageQuickStart_PrintableDeskReference_Aug2022.pdf",
+      "kind": "Army context",
+      "edition": "August 2022",
+      "locator": "Vantage Vocab: Foundry",
+      "scope": "The 2022 guide identifies Foundry as the underlying COTS platform for Vantage. It does not establish Maven configuration or present-day tenant details.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "idrac-health",
+      "title": "Dell: Monitor PowerEdge health from iDRAC10",
+      "url": "https://www.dell.com/support/kbdoc/en-us/000394350/poweredge-how-to-monitor-server-health-from-idrac10",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Storage health and Lifecycle Log",
+      "scope": "iDRAC10 example. Confirm generation and firmware; a log entry is a diagnostic clue.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "poweredge-study",
+      "title": "Dell: PowerEdge Foundations outline",
+      "url": "https://education.dell.com/content/dam/dell-emc/documents/en-us/D-PE-FN-23-Foundations_PowerEdge_Exam.pdf",
+      "kind": "Vendor education",
+      "edition": "2023 outline",
+      "locator": "Certification description",
+      "scope": "Historical published outline for study domains. Verify current availability with Dell.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "ontap-exports",
+      "title": "NetApp: How export policies control client access",
+      "url": "https://docs.netapp.com/us-en/ontap/nfs-admin/export-policies-client-access-volumes-concept.html",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Client access to volumes or qtrees",
+      "scope": "An export policy can deny client requests even when storage is reachable.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "ontap-study",
+      "title": "NetApp: Data Administrator ONTAP certification",
+      "url": "https://www.netapp.com/support-and-training/netapp-learning-services/certifications/ontap-data-administration/",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Exam overview",
+      "scope": "ONTAP administration study path. Check the vendor for the current exam and prerequisites.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "iq-core-suite",
+      "title": "Curtiss-Wright: IQ-Core Software Suite",
+      "url": "https://defense-solutions.curtisswright.com/products/networking-communications/edge-compute/iq-core-software",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Network management overview",
+      "scope": "Public capability descriptions. Do not infer a unit implementation, access path or approved procedure.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "gd-taclane",
+      "title": "General Dynamics Mission Systems: TACLANE Micro product overview",
+      "url": "https://gdmissionsystems.com/products/encryption/taclane-network-encryption/taclane-micro-kg-175d-encryptor",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Product family and operator training link",
+      "scope": "Public product identity only. No cryptographic settings, keying, or field procedures.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "gd-operator",
+      "title": "General Dynamics Mission Systems: TACLANE Encryptor Training",
+      "url": "https://gdmissionsystems.com/encryption/taclane-network-encryption/taclane-encryptor-training",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Operator course listing",
+      "scope": "Vendor search excerpt confirms operator training. Direct source returned 403. Verify enrollment and authorization through official channels.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "jncia-junos",
+      "title": "Juniper: JNCIA-Junos exam overview",
+      "url": "https://www.juniper.net/content/dam/www/assets/training/us/en/jncia-junos-exam-flyer.pdf",
+      "kind": "Vendor education",
+      "edition": "Public page; see source for revision",
+      "locator": "Exam objectives",
+      "scope": "Junos fundamentals and introductory networking objectives; confirm the current exam in the vendor portal.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
+    },
+    {
+      "id": "network-plus",
+      "title": "CompTIA: Network+ N10-009 objectives",
+      "url": "https://comptiacdn.azureedge.net/webcontent/docs/default-source/exam-objectives/comptia-network-n10-009-exam-objectives-%284-0%29-%281%29.pdf",
+      "kind": "Vendor education",
+      "edition": "N10-009 objectives v4.0",
+      "locator": "Network Troubleshooting",
+      "scope": "Vendor-neutral troubleshooting objectives, linked for general study.",
+      "retrieved": "2026-11-18",
+      "status": "metadata_checked",
+      "human_review": "pending"
     }
   ],
   "vendors": [
@@ -185,9 +461,18 @@
       "source_ids": [
         "hyperv",
         "ms-dns",
-        "army-modern"
+        "army-modern",
+        "ms-dns-client",
+        "ms-az802"
       ],
-      "army_context": "Hyper-V appears in reported tactical modernization; applicability is variant-specific."
+      "army_context": "Hyper-V appears in reported tactical modernization; applicability is variant-specific.",
+      "lesson_ids": [
+        "windows-dns-triage"
+      ],
+      "training": {
+        "label": "Microsoft Windows Server Administrator study path (AZ-802)",
+        "source_id": "ms-az802"
+      }
     },
     {
       "id": "vmware",
@@ -199,9 +484,18 @@
       ],
       "source_ids": [
         "broadcom",
-        "army-modern"
+        "army-modern",
+        "esxi-vm-path",
+        "vvf-admin"
       ],
-      "army_context": "VMware infrastructure appears in the reported tactical modernization context."
+      "army_context": "VMware infrastructure appears in the reported tactical modernization context.",
+      "lesson_ids": [
+        "vsphere-path-check"
+      ],
+      "training": {
+        "label": "VCP vSphere Foundation Administrator",
+        "source_id": "vvf-admin"
+      }
     },
     {
       "id": "cisco",
@@ -214,9 +508,17 @@
       "source_ids": [
         "cisco-basics",
         "cisco-vlan",
-        "army-switch"
+        "army-switch",
+        "ccna"
       ],
-      "army_context": "An Army installation article records historical Cisco switches; exact tactical models are unverified."
+      "army_context": "An Army installation article records historical Cisco switches; exact tactical models are unverified.",
+      "lesson_ids": [
+        "cisco-path-check"
+      ],
+      "training": {
+        "label": "Cisco CCNA study topics",
+        "source_id": "ccna"
+      }
     },
     {
       "id": "palo",
@@ -227,9 +529,18 @@
         "Application-aware policy"
       ],
       "source_ids": [
-        "pan-policy"
+        "pan-policy",
+        "pan-traffic",
+        "pan-study"
       ],
-      "army_context": "Requested technology education. No Army system-to-product mapping verified in this research."
+      "army_context": "Requested technology education. No Army system-to-product mapping verified in this research.",
+      "lesson_ids": [
+        "panos-traffic-evidence"
+      ],
+      "training": {
+        "label": "Network Security Professional objectives",
+        "source_id": "pan-study"
+      }
     },
     {
       "id": "netapp",
@@ -240,9 +551,18 @@
         "SMB, NFS, iSCSI and Fibre Channel"
       ],
       "source_ids": [
-        "netapp"
+        "netapp",
+        "ontap-exports",
+        "ontap-study"
       ],
-      "army_context": "Storage education example. No Army system-to-array mapping verified in this research."
+      "army_context": "Storage education example. No Army system-to-array mapping verified in this research.",
+      "lesson_ids": [
+        "ontap-nfs-access"
+      ],
+      "training": {
+        "label": "NetApp Data Administrator ONTAP",
+        "source_id": "ontap-study"
+      }
     },
     {
       "id": "redhat",
@@ -254,9 +574,18 @@
       ],
       "source_ids": [
         "redhat",
-        "army-modern"
+        "army-modern",
+        "ocp-pods",
+        "rhcsa-ex200"
       ],
-      "army_context": "OpenShift and KubeVirt appear in the reported modernization examples."
+      "army_context": "OpenShift and KubeVirt appear in the reported modernization examples.",
+      "lesson_ids": [
+        "openshift-readiness"
+      ],
+      "training": {
+        "label": "RHCSA EX200 Linux administration objectives",
+        "source_id": "rhcsa-ex200"
+      }
     },
     {
       "id": "other-modern",
@@ -279,9 +608,17 @@
         "Switching awareness"
       ],
       "source_ids": [
-        "army-switch"
+        "army-switch",
+        "jncia-junos"
       ],
-      "army_context": "The installation article reports replacement with Juniper switches, showing vendor diversity."
+      "army_context": "The installation article reports replacement with Juniper switches, showing vendor diversity.",
+      "training": {
+        "label": "Juniper JNCIA-Junos objectives",
+        "source_id": "jncia-junos"
+      },
+      "lesson_ids": [
+        "routing"
+      ]
     },
     {
       "id": "pacstar",
@@ -292,9 +629,114 @@
         "Modular platform awareness"
       ],
       "source_ids": [
-        "iq-core-ncm"
+        "iq-core-ncm",
+        "iq-core-suite"
       ],
-      "army_context": "Vendor technology study only. Army system-to-model mapping, installed plugins and versioned task/recovery behavior remain unverified. Learn the underlying networking and service tasks before relying on management automation."
+      "army_context": "Vendor technology study only. Army system-to-model mapping, installed plugins and versioned task/recovery behavior remain unverified. Learn the underlying networking and service tasks before relying on management automation.",
+      "lesson_ids": [
+        "iq-core-observation"
+      ]
+    },
+    {
+      "id": "riverbed",
+      "name": "Riverbed",
+      "technologies": [
+        "SteelHead",
+        "RiOS connection reporting"
+      ],
+      "army_context": "Public product education. No Army hardware, release or deployment inferred.",
+      "source_ids": [
+        "steelhead-report",
+        "steelhead-academy"
+      ],
+      "lesson_ids": [
+        "steelhead-pass-through"
+      ],
+      "training": {
+        "label": "Riverbed Academy SteelHead Core path",
+        "source_id": "steelhead-academy"
+      }
+    },
+    {
+      "id": "palantir",
+      "name": "Palantir",
+      "technologies": [
+        "Foundry",
+        "Data Lineage",
+        "Build details"
+      ],
+      "army_context": "A 2022 Army Vantage reference identifies Foundry as the underlying product. Vantage and Maven are separate contexts; no Maven mapping or configuration is inferred.",
+      "source_ids": [
+        "foundry-debug",
+        "army-vantage",
+        "foundry-study"
+      ],
+      "lesson_ids": [
+        "foundry-data-freshness"
+      ],
+      "training": {
+        "label": "Palantir Foundry Aware and Data Engineer pathways",
+        "source_id": "foundry-study"
+      }
+    },
+    {
+      "id": "dell",
+      "name": "Dell Technologies",
+      "technologies": [
+        "PowerEdge",
+        "iDRAC",
+        "Lifecycle Log"
+      ],
+      "army_context": "Public server administration skills. No particular Army server or installed iDRAC generation inferred.",
+      "source_ids": [
+        "idrac-health",
+        "poweredge-study"
+      ],
+      "lesson_ids": [
+        "idrac-event-correlation"
+      ],
+      "training": {
+        "label": "Dell PowerEdge Foundations published study outline",
+        "source_id": "poweredge-study"
+      }
+    },
+    {
+      "id": "gdms",
+      "name": "General Dynamics Mission Systems",
+      "technologies": [
+        "TACLANE family",
+        "Vendor operator training"
+      ],
+      "army_context": "Public product context. Approved instructions and authorized training govern any actual use.",
+      "source_ids": [
+        "gd-taclane",
+        "gd-operator"
+      ],
+      "lesson_ids": [
+        "taclane-scope-check"
+      ],
+      "training": {
+        "label": "Official TACLANE operator training referral",
+        "source_id": "gd-operator"
+      }
+    },
+    {
+      "id": "comptia",
+      "name": "CompTIA",
+      "technologies": [
+        "Vendor-neutral networking"
+      ],
+      "army_context": "General certification study. Check current Army credential eligibility separately.",
+      "source_ids": [
+        "network-plus"
+      ],
+      "training": {
+        "label": "CompTIA Network+ troubleshooting objectives",
+        "source_id": "network-plus"
+      },
+      "lesson_ids": [
+        "cisco-path-check"
+      ]
     }
   ],
   "lessons": [
@@ -729,6 +1171,442 @@
         "tsi",
         "bccs"
       ]
+    },
+    {
+      "id": "cisco-path-check",
+      "title": "Cisco: Trace a client connectivity fault",
+      "outcome": "Check the supplied addressing plan and locate the first failed network dependency.",
+      "terms": [
+        {
+          "term": "Access VLAN",
+          "meaning": "Logical LAN assigned to an endpoint port."
+        },
+        {
+          "term": "Gateway",
+          "meaning": "Router used to reach other networks."
+        },
+        {
+          "term": "Route",
+          "meaning": "Forwarding information for a destination prefix."
+        }
+      ],
+      "explanation": [
+        "Compare the intended port assignment, client IP settings and gateway with known-good evidence. A link indicator proves physical link only.",
+        "After the path is verified, check the expected application transaction. Use the supplied address plan; no subnet calculation is required."
+      ],
+      "scenario": "A fictional client has link but cannot reach the assigned gateway. A known-good client on another port can reach the same gateway. What evidence best narrows the fault?",
+      "options": [
+        "Check the affected client and compare its port and supplied address settings to the approved lab baseline.",
+        "Reset the gateway for everyone.",
+        "Change all clients to a new address range."
+      ],
+      "answer": 0,
+      "feedback": [
+        "This begins with the affected path and preserves the rest of the lab.",
+        "A working peer makes a shared gateway restart poorly supported.",
+        "A new address range introduces unrelated changes."
+      ],
+      "source_ids": [
+        "cisco-basics",
+        "cisco-vlan"
+      ],
+      "system_ids": []
+    },
+    {
+      "id": "vsphere-path-check",
+      "title": "VMware vSphere: Trace guest network reachability",
+      "outcome": "Separate a guest fault from a shared port group, virtual switch or host uplink dependency.",
+      "terms": [
+        {
+          "term": "vNIC",
+          "meaning": "A virtual network adapter presented to a guest."
+        },
+        {
+          "term": "Port group",
+          "meaning": "A virtual networking policy grouping for connected workloads."
+        },
+        {
+          "term": "Uplink",
+          "meaning": "Host path from a virtual switch toward the physical network."
+        }
+      ],
+      "explanation": [
+        "Start with scope: one VM, one port group, or multiple workloads on a host. Compare guest and host-side attachment before changing shared settings.",
+        "Verify reachability from the affected guest and complete the intended user task after an authorized repair."
+      ],
+      "scenario": "Two guests on the same port group fail after a host move. Guests on another port group still work. Which comparison has the highest diagnostic value?",
+      "options": [
+        "Restart vCenter immediately.",
+        "Compare the affected port group and uplink on the new host with the known-good path.",
+        "Rebuild both guests from backup."
+      ],
+      "answer": 1,
+      "feedback": [
+        "Management availability alone does not identify the forwarding issue.",
+        "A shared dependency and a recent host change are both evidenced.",
+        "Rebuilding guests can leave the same failed network dependency in place."
+      ],
+      "source_ids": [
+        "esxi-vm-path"
+      ],
+      "system_ids": []
+    },
+    {
+      "id": "steelhead-pass-through",
+      "title": "Riverbed SteelHead: Separate pass-through from outage",
+      "outcome": "Read the connection disposition and distinguish application reachability from optimization.",
+      "terms": [
+        {
+          "term": "RiOS",
+          "meaning": "Software platform used by SteelHead."
+        },
+        {
+          "term": "Optimized",
+          "meaning": "Connection reported as receiving optimization."
+        },
+        {
+          "term": "Pass-through",
+          "meaning": "Connection forwarded without optimization."
+        }
+      ],
+      "explanation": [
+        "Compare a fresh application transaction and its timing with the Current Connections report. Capture the disposition and reason for the same time window.",
+        "Pass-through alone does not establish an outage or justify changing a shared optimization policy."
+      ],
+      "scenario": "A fictional file transfer completes slowly and the connection is marked pass-through. What should you record first?",
+      "options": [
+        "Declare the site offline.",
+        "Treat successful transfer as proof optimization worked.",
+        "Record the connection reason and compare transfer timing with a valid baseline."
+      ],
+      "answer": 2,
+      "feedback": [
+        "The observed transfer completed.",
+        "Success and optimization are different measurements.",
+        "The reason and measured behavior provide two independent pieces of evidence."
+      ],
+      "source_ids": [
+        "steelhead-report"
+      ],
+      "system_ids": []
+    },
+    {
+      "id": "openshift-readiness",
+      "title": "Red Hat OpenShift: Diagnose a workload that never becomes ready",
+      "outcome": "Use pod status, recent events and logs to tell a startup dependency failure from an application failure.",
+      "terms": [
+        {
+          "term": "Pod",
+          "meaning": "Scheduling unit that runs one or more containers."
+        },
+        {
+          "term": "Event",
+          "meaning": "A recorded observation from a platform component."
+        },
+        {
+          "term": "Readiness",
+          "meaning": "Whether the workload is ready to receive service traffic."
+        }
+      ],
+      "explanation": [
+        "Inspect pod state and recent events before assuming an application bug. Logs may not exist when a container never started.",
+        "For host troubleshooting, practice Linux service and storage fundamentals separately. RHCSA covers Linux administration; the OpenShift case is adjacent practice."
+      ],
+      "scenario": "A fictional pod remains pending and events show a claim is unbound. No container has started. Which dependency should the learner check first?",
+      "options": [
+        "Compare the storage claim status and expected class against the lab baseline.",
+        "Tune application logging.",
+        "Remove readiness checks so the workload looks healthy."
+      ],
+      "answer": 0,
+      "feedback": [
+        "The event points to a startup dependency that can be checked directly.",
+        "Application logs cannot explain an event preventing startup without corroborating evidence.",
+        "Changing readiness does not bind storage or prove the application works."
+      ],
+      "source_ids": [
+        "ocp-pods",
+        "redhat"
+      ],
+      "system_ids": []
+    },
+    {
+      "id": "windows-dns-triage",
+      "title": "Microsoft Windows Server: Separate DNS from application health",
+      "outcome": "Compare the name lookup, expected endpoint and observed application response.",
+      "terms": [
+        {
+          "term": "Resolver",
+          "meaning": "Client or service that performs name resolution."
+        },
+        {
+          "term": "DNS record",
+          "meaning": "Published data that maps a name to information such as an address."
+        },
+        {
+          "term": "Timeout",
+          "meaning": "No applicable reply received within the observed interval."
+        }
+      ],
+      "explanation": [
+        "Compare the failing name on the affected client with the expected resolver and a known-good peer. Distinguish DNS query errors from a service reached at the wrong address.",
+        "An application test by name remains necessary after the name result is correct. Where available, practice with Resolve-DnsName on a fictional lab host."
+      ],
+      "scenario": "The known application address responds in the lab, but the hostname lookup times out for one workstation. What is the best next check?",
+      "options": [
+        "Reset the application service.",
+        "Test the name using the client’s assigned resolver and compare with a known-good peer.",
+        "Replace the server disk."
+      ],
+      "answer": 1,
+      "feedback": [
+        "The evidence first points to a name-resolution difference.",
+        "This checks the failing dependency without a change.",
+        "No storage symptom is provided."
+      ],
+      "source_ids": [
+        "ms-dns-client",
+        "ms-dns"
+      ],
+      "system_ids": []
+    },
+    {
+      "id": "panos-traffic-evidence",
+      "title": "Palo Alto PAN-OS: Explain a firewall traffic decision",
+      "outcome": "Interpret a matched log record without confusing a rule action with successful application delivery.",
+      "terms": [
+        {
+          "term": "Security rule",
+          "meaning": "Policy entry used to decide how matching traffic is handled."
+        },
+        {
+          "term": "Zone",
+          "meaning": "A policy grouping for traffic boundaries."
+        },
+        {
+          "term": "Session end reason",
+          "meaning": "A logged indication of how a session ended, when available."
+        }
+      ],
+      "explanation": [
+        "Match time, direction and service to the reported reproduction. Use the rule, action and session end reason to form a hypothesis.",
+        "An allow action by itself does not confirm service health. A denied synthetic session is evidence to review with the policy owner."
+      ],
+      "scenario": "A fictional connection is logged as allowed, followed by a session timeout. What is the best next step?",
+      "options": [
+        "Mark the user task successful.",
+        "Open all ports in the training policy.",
+        "Correlate the session end and return traffic with the server’s observed health."
+      ],
+      "answer": 2,
+      "feedback": [
+        "The log action does not confirm delivery.",
+        "That change expands policy without evidence.",
+        "This distinguishes firewall policy from downstream service or return-path faults."
+      ],
+      "source_ids": [
+        "pan-traffic",
+        "pan-policy"
+      ],
+      "system_ids": []
+    },
+    {
+      "id": "foundry-data-freshness",
+      "title": "Palantir Foundry: Trace a stale dashboard to the pipeline",
+      "outcome": "Use build status, timestamps and lineage to locate the first stale or failed input.",
+      "terms": [
+        {
+          "term": "Build",
+          "meaning": "A recorded execution of pipeline work."
+        },
+        {
+          "term": "Data lineage",
+          "meaning": "Relationships tracing a dataset to its inputs and downstream uses."
+        },
+        {
+          "term": "Freshness",
+          "meaning": "Age of the data relative to expected updates."
+        }
+      ],
+      "explanation": [
+        "A dashboard can render normally while presenting old results. Compare its data timestamp to the expected refresh time.",
+        "Use the affected build details and upstream lineage to identify the first stale input or failed change. Verify the resulting dataset timestamp and dashboard after recovery."
+      ],
+      "scenario": "A fictional dashboard opens but shows yesterday’s results. Its scheduled build reports a failed upstream input. Which action starts the investigation?",
+      "options": [
+        "Trace lineage to the first stale or failed input and inspect the associated build.",
+        "Reset every dashboard user’s permissions.",
+        "Treat the dashboard as current because it opens."
+      ],
+      "answer": 0,
+      "feedback": [
+        "This connects the user symptom to the earliest evidenced dependency.",
+        "A permission reset does not address the observed refresh failure.",
+        "Rendering and freshness are separate."
+      ],
+      "source_ids": [
+        "foundry-debug",
+        "army-vantage"
+      ],
+      "system_ids": []
+    },
+    {
+      "id": "idrac-event-correlation",
+      "title": "Dell PowerEdge: Correlate hardware events with host symptoms",
+      "outcome": "Use hardware management observations to separate a component alarm from a guest OS symptom.",
+      "terms": [
+        {
+          "term": "iDRAC",
+          "meaning": "Dell management controller for a PowerEdge server."
+        },
+        {
+          "term": "Lifecycle Log",
+          "meaning": "A chronological record of supported hardware and management events."
+        },
+        {
+          "term": "Degraded",
+          "meaning": "A warning state that warrants evidence gathering; it does not identify every affected application."
+        }
+      ],
+      "explanation": [
+        "Check the relevant hardware health view and timestamps. Compare reports from the host and application before replacing components.",
+        "Collect only allowed diagnostics. Preserve logs and use authorized hardware support for corrective work."
+      ],
+      "scenario": "Several fictional guests report slow writes at the time the host reports a new storage alert. What should you collect?",
+      "options": [
+        "Clear the hardware history.",
+        "Correlate the storage alert and Lifecycle Log timestamps with guest and host symptoms.",
+        "Reinstall the DNS server first."
+      ],
+      "answer": 1,
+      "feedback": [
+        "Clearing the history destroys useful evidence.",
+        "Independent timestamps help determine whether a shared storage problem explains the reports.",
+        "No name resolution symptom is reported."
+      ],
+      "source_ids": [
+        "idrac-health"
+      ],
+      "system_ids": []
+    },
+    {
+      "id": "ontap-nfs-access",
+      "title": "NetApp ONTAP: Distinguish an NFS access denial from loss of transport",
+      "outcome": "Compare client scope, applicable export policy and file permissions with a known-good client.",
+      "terms": [
+        {
+          "term": "SVM",
+          "meaning": "Storage virtual machine that provides storage services."
+        },
+        {
+          "term": "Export policy",
+          "meaning": "Rules governing client access to an NFS export."
+        },
+        {
+          "term": "Volume or qtree",
+          "meaning": "Storage object to which access policy may apply."
+        }
+      ],
+      "explanation": [
+        "Compare whether the storage endpoint is reachable and whether it rejects the requested access. A permission denial can point to the export policy, protocol, authentication or filesystem permissions.",
+        "Verify the relevant client and export before any change. Retest only the intended access and confirm a client outside scope remains denied."
+      ],
+      "scenario": "A fictional client gets permission denied for an NFS export while a known-good client can read it. What evidence best narrows the cause?",
+      "options": [
+        "Restart all storage controllers.",
+        "Grant all clients broad access.",
+        "Compare the affected client identity and protocol with the applicable policy and file permissions."
+      ],
+      "answer": 2,
+      "feedback": [
+        "A responding authorized peer does not support a controller-wide outage.",
+        "Broadening access bypasses the diagnostic question.",
+        "This follows the denial and preserves the intended permission boundary."
+      ],
+      "source_ids": [
+        "ontap-exports",
+        "netapp"
+      ],
+      "system_ids": []
+    },
+    {
+      "id": "iq-core-observation",
+      "title": "PacStar IQ-Core: Separate management visibility from user service",
+      "outcome": "Corroborate a management status with a second observation and an authorized fictional user test.",
+      "terms": [
+        {
+          "term": "Management view",
+          "meaning": "Summary of observations available to management software."
+        },
+        {
+          "term": "Polling",
+          "meaning": "Periodic retrieval of status by a management system."
+        },
+        {
+          "term": "User task",
+          "meaning": "Observable action the exercise participant must complete."
+        }
+      ],
+      "explanation": [
+        "A management dashboard and a user application answer different questions. Check when the dashboard last saw the training device, then compare a separate user task.",
+        "Report the observations and uncertainty to the authorized support role. This lesson uses invented outputs and supplies no deployment instructions."
+      ],
+      "scenario": "A fictional management view reports an unreachable device, but the exercise user’s transaction succeeds. What should you conclude?",
+      "options": [
+        "The observations disagree; record their timing and check the management observation path.",
+        "The user service is definitely unavailable.",
+        "Replace the device immediately."
+      ],
+      "answer": 0,
+      "feedback": [
+        "Scope the management symptom and confirm independent evidence before changing equipment.",
+        "The observed user transaction succeeded.",
+        "The discrepancy does not justify replacement."
+      ],
+      "source_ids": [
+        "iq-core-suite",
+        "iq-core-ncm"
+      ],
+      "system_ids": []
+    },
+    {
+      "id": "taclane-scope-check",
+      "title": "General Dynamics TACLANE: Recognize a status and support boundary",
+      "outcome": "Record a fictional service symptom and distinguish platform identity from proof of service.",
+      "terms": [
+        {
+          "term": "Product family",
+          "meaning": "Related models that require release-specific approved instructions."
+        },
+        {
+          "term": "Status indication",
+          "meaning": "An observation that may cover only one component."
+        },
+        {
+          "term": "Handoff",
+          "meaning": "A structured report to the authorized owner."
+        }
+      ],
+      "explanation": [
+        "Public material identifies equipment families and vendor training. It does not establish which settings, access or procedures apply to a unit.",
+        "In this fictional case, report the visible status, time, affected user task and observations to the authorized owner. Leave approved equipment checks to qualified personnel."
+      ],
+      "scenario": "A fictional classroom status card says a device is healthy while the simulated user transaction fails. What belongs in the handoff?",
+      "options": [
+        "A statement that all service is restored.",
+        "The discrepancy, time and affected user task, with a request for authorized review.",
+        "A proposal to bypass the protected boundary."
+      ],
+      "answer": 1,
+      "feedback": [
+        "A device indication does not verify the end user task.",
+        "An evidence-based report preserves the boundary and makes the symptom actionable.",
+        "A safeguard is not an acceptable workaround."
+      ],
+      "source_ids": [
+        "gd-taclane"
+      ],
+      "system_ids": []
     }
   ]
 }
