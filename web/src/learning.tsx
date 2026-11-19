@@ -44,6 +44,19 @@ export function LearningPanel(){
  }
  function disconnect(){setSession(null);setCredential('');setProgress(null);setCohorts([]);setAssignments([]);setAttempts([]);setAnswers({});setDiagnostic({checks:[],diagnosis:''});setLearner('');setSelected('');setConfirmDelete(false);setError('');setNotice('Disconnected. Your credential was cleared from this screen.');}
  async function openCohort(id:string,current:Session){setProgress(await api<Progress>('/cohorts/'+id+'/progress',current.token));}
+ async function downloadCohortReport(){
+  if(!session||!progress)return;
+  const report=await api<unknown>('/cohorts/'+progress.cohort.id+'/report',session.token);
+  const url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:'application/json'}));
+  const link=document.createElement('a');
+  link.href=url;
+  link.download='signal-mission-lab-cohort-report.json';
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  setNotice('Downloaded current aggregate cohort results. Repeat attempts can affect these counts.');
+ }
  const chosen=assignments.find(a=>a.id===selected);
  const recoveryCase=diagnosticCases.find(c=>c.id===chosen?.activity);
  async function saveRecovery(evidence:string[],decision:string){
@@ -63,5 +76,6 @@ export function LearningPanel(){
  <h3>Your saved results</h3><p>Training feedback only; these scores do not certify equipment readiness or qualification.</p><table><thead><tr><th>Activity</th><th>Score</th><th>Time</th></tr></thead><tbody>{attempts.map(a=><tr key={a.id}><td>{a.activity}</td><td>{recoveryResult(a.activity||progress?.assignments.find(x=>x.id===a.assignment_id)?.activity,a.score,a.total)}</td><td>{new Date(a.created_at).toLocaleString()}</td></tr>)}</tbody></table></>}
  <details><summary>Delete this synthetic account</summary><p>This erases saved attempts and memberships. For instructors, it also deletes owned cohorts and their results. Minimal synthetic audit events remain.</p><label className="toggle"><input type="checkbox" checked={confirmDelete} onChange={e=>setConfirmDelete(e.target.checked)}/>I understand that these saved learning records will be deleted.</label><button disabled={busy||!confirmDelete} onClick={()=>void perform(async()=>{await api('/me',session.token,'DELETE');disconnect();setNotice('Synthetic account and associated learning records deleted.');})}>Delete my lab account</button></details>
  </>}
+ {session?.account.role==='instructor'&&progress&&!nativeApp&&<div><button disabled={busy} onClick={()=>void perform(downloadCohortReport)}>Download aggregate cohort report</button><p>Includes current coverage and learning gaps. Share with authorized recipients. This snapshot excludes learner IDs and does not measure learning gain.</p></div>}
  {busy&&<p role="status">Updating learning records…</p>}{notice&&<p role="status">{notice}</p>}{error&&<p role="alert">{error}</p>}</section>;
 }
