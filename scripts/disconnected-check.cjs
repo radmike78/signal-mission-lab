@@ -1,9 +1,11 @@
 /* Exercise the extracted artifact from a fresh local origin, never the source dist. */
-const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),http=require('node:http');
+const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+const assert=require('node:assert/strict');
+const readline=require('node:readline');
 const {spawn,spawnSync}=require('node:child_process');
 (async()=>{
  const root=path.resolve(__dirname,'..'),directory=fs.mkdtempSync(path.join(os.tmpdir(),'sml-disconnected-'));
- let server;
+ let launcher;
  try{
   const extracted=spawnSync('python',['-c',`import pathlib,sys,zipfile
 with zipfile.ZipFile(sys.argv[1]) as archive:
@@ -13,21 +15,27 @@ with zipfile.ZipFile(sys.argv[1]) as archive:
   if(extracted.status!==0)throw Error('Disconnected package extraction failed.');
   const verified=spawnSync('python',[path.join(root,'scripts/verify_disconnected.py'),directory],{encoding:'utf8'});
   if(verified.status!==0)throw Error('Disconnected artifact integrity failed.');
-  const csp=fs.readFileSync(path.join(directory,'_headers'),'utf8').split('\n').find(line=>line.includes('Content-Security-Policy:')).split('Content-Security-Policy:')[1].trim();
-  server=http.createServer((req,res)=>{
-   let file;
-   try{const url=new URL(req.url,'http://127.0.0.1');file=path.resolve(directory,'.'+decodeURIComponent(url.pathname==='/'?'/index.html':url.pathname));}catch{res.writeHead(400);res.end();return;}
-   if(!file.startsWith(directory+path.sep)){res.writeHead(403);res.end();return;}
-   fs.readFile(file,(error,body)=>{
-    if(error){res.writeHead(404);res.end();return;}
-    const mime={'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.json':'application/json','.webmanifest':'application/manifest+json','.png':'image/png','.txt':'text/plain','.wasm':'application/wasm'};
-    res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream','Content-Security-Policy':csp,'X-Content-Type-Options':'nosniff'});res.end(body);
+  launcher=spawn('python',['-B','start_disconnected.py','--port','0'],{cwd:directory,stdio:['ignore','pipe','inherit']});
+  const url=await new Promise((resolve,reject)=>{
+   const lines=readline.createInterface({input:launcher.stdout});
+   const timer=setTimeout(()=>{lines.close();reject(Error('Offline launcher did not start.'));},10000);
+   const finish=()=>{clearTimeout(timer);lines.close();};
+   launcher.once('error',error=>{finish();reject(error);});
+   launcher.once('exit',()=>{finish();reject(Error('Offline launcher exited early.'));});
+   lines.once('line',line=>{
+    finish();
+    if(!/^http:\/\/127\.0\.0\.1:[0-9]+$/.test(line)){reject(Error('Offline launcher returned an invalid address.'));return;}
+    resolve(line);
    });
   });
-  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
-  const port=server.address().port;
-  await new Promise((resolve,reject)=>{const child=spawn(process.execPath,[path.join(root,'scripts/document-plan-check.cjs')],{cwd:root,env:{...process.env,SML_URL:'http://127.0.0.1:'+port},stdio:'inherit'});child.on('error',reject);child.on('exit',code=>code===0?resolve():reject(Error('Disconnected browser journey failed.')));});
-  await new Promise((resolve,reject)=>{const child=spawn(process.execPath,[path.join(root,'scripts/ocr-check.cjs')],{cwd:root,env:{...process.env,SML_URL:'http://127.0.0.1:'+port},stdio:'inherit'});child.on('error',reject);child.on('exit',code=>code===0?resolve():reject(Error('Disconnected OCR journey failed.')));});
+  const home=await fetch(url);
+  assert.equal(home.status,200);
+  assert.match(home.headers.get('Content-Security-Policy'),/default-src 'none'/);
+  assert.equal(home.headers.get('X-Content-Type-Options'),'nosniff');
+  assert.equal((await fetch(url+'/start_disconnected.py')).status,404);
+  assert.equal((await fetch(url+'/api/capabilities')).status,404);
+  await new Promise((resolve,reject)=>{const child=spawn(process.execPath,[path.join(root,'scripts/document-plan-check.cjs')],{cwd:root,env:{...process.env,SML_URL:url},stdio:'inherit'});child.on('error',reject);child.on('exit',code=>code===0?resolve():reject(Error('Disconnected browser journey failed.')));});
+  await new Promise((resolve,reject)=>{const child=spawn(process.execPath,[path.join(root,'scripts/ocr-check.cjs')],{cwd:root,env:{...process.env,SML_URL:url},stdio:'inherit'});child.on('error',reject);child.on('exit',code=>code===0?resolve():reject(Error('Disconnected OCR journey failed.')));});
   console.log('PASS verified extracted disconnected artifact, fresh-origin startup, offline document workflow and no external requests');
- }finally{if(server)await new Promise(resolve=>server.close(resolve));fs.rmSync(directory,{recursive:true,force:true});}
+ }finally{if(launcher?.pid&&launcher.exitCode===null&&launcher.signalCode===null){await new Promise(resolve=>{launcher.once('exit',resolve);launcher.kill();});}fs.rmSync(directory,{recursive:true,force:true});}
 })().catch(error=>{console.error(error);process.exit(1)});

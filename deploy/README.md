@@ -10,7 +10,7 @@ npm run build --prefix web
 python scripts/package_web.py
 ```
 
-Publish only `web/dist` to a static host that enforces `_headers`, or use the rootless [Podman deployment](PODMAN.md) to serve the UI and API together. The original prototype is retained under `/legacy/`; it is outside the offline-cache allowlist.
+The browser only shows connected account controls when the same-origin API advertises configured persistence. A static host leaves those controls hidden. Publish only `web/dist` to a static host that enforces `_headers`, or use the rootless [Podman deployment](PODMAN.md) to serve the UI and API together. The original prototype is retained under `/legacy/`; it is outside the offline-cache allowlist.
 
 Use [ACCOUNTS.md](ACCOUNTS.md) for PostgreSQL TLS, separate migration/runtime identities, ephemeral lab credentials, authorization, retention and trusted-proxy setup. The default container binds to loopback and ignores proxy headers. Public account access requires validated HTTPS and restricted origin-network access. `SML_ENV=local` permits HTTP only for numeric loopback peers and loopback URL hosts. Never use `SML_ENV=test` for real-user hosting.
 

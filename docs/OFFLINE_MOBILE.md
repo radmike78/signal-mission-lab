@@ -51,3 +51,9 @@ Do not distribute this public-store package into a classified environment as an 
 - https://developer.apple.com/help/app-store-connect/manage-app-information/manage-app-privacy
 - https://support.google.com/googleplay/android-developer/answer/10787469
 - https://google.play/business/pre-launchreports/
+
+The disconnected demo ZIP includes a Python 3 loopback launcher. In the verified,
+extracted directory run `python3 -B start_disconnected.py` (or
+`py -3 -B start_disconnected.py` on Windows). The launcher checks package hashes,
+binds only to 127.0.0.1, serves only packaged public assets, and applies security
+headers. The checksum manifest does not replace a signed Windows installer.

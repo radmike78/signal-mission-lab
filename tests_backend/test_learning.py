@@ -99,6 +99,25 @@ class LearningTests(unittest.TestCase):
   self.assertEqual(r.status_code,422);self.assertNotIn('REAL UNIT',r.text)
   self.assertEqual(self.call('POST','/cohorts',json={'callsign':'Alpha','notes':'anything'}).status_code,422)
   self.assertEqual(self.call('GET',"/cohorts/1%20OR%201=1/progress").status_code,422)
+ def test_aggregate_report_enforces_owner_and_omits_individual_records(self):
+  c=self.cohort();self.enroll(c);self.assignment(c,'builder')
+  path=f'/cohorts/{c}/report'
+  self.assertEqual(self.call('GET',path,self.other).status_code,404)
+  self.assertEqual(self.call('GET',path,self.learner).status_code,403)
+  self.assertEqual(self.client.get('/api/learning'+path).status_code,401)
+  response=self.call('GET',path)
+  self.assertEqual(response.status_code,200)
+  self.assertEqual(response.headers['Cache-Control'],'no-store')
+  report=response.json()
+  self.assertEqual(report['learner_count'],1)
+  self.assertEqual(report['assignment_count'],1)
+  self.assertEqual(report['summary']['unattempted_pairs'],1)
+  self.assertEqual(report['summary'],self.call('GET',f'/cohorts/{c}/progress').json()['summary'])
+  self.assertIn('does not measure first-attempt',report['limitations'][0])
+  for account in self.created:
+   self.assertNotIn(account['account_id'],response.text)
+   self.assertNotIn(account['access_token'],response.text)
+  self.assertNotIn('attempts',report)
  def test_rate_limiter_and_configuration(self):
   from fastapi import HTTPException
   rate=RateLimiter(maximum=1);rate.check('one',1)

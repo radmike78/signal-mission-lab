@@ -15,11 +15,19 @@ operational documents. An offline build is not an authorization to process them.
    The verifier rejects changed, missing, extra or symlinked files. Run it before
    starting the server or creating files inside the extracted package directory.
    The manifest detects changes; it is not a trusted signature or authorization.
-2. In this extracted directory, run: python3 -m http.server 8070 --bind 127.0.0.1
+2. In this extracted directory, run: python3 -B start_disconnected.py
+   On Windows with the Python launcher: py -3 -B start_disconnected.py
+   The launcher verifies the files, applies security headers and listens only
+   on 127.0.0.1. Stop it with Ctrl+C when finished.
 3. Open http://127.0.0.1:8070 on the same machine in a current supported browser.
    Do not open index.html directly as a file. Workers need an HTTP/HTTPS origin.
 4. Open Document planner, load the fictional demonstration, confirm the training
    boundary, review tasks and create the requirements worksheet.
+
+5. Open Signal Coach for fictional IT lesson guidance and local attachment review.
+   Voice and generative dialogue require compatible, already installed device
+   capabilities. No speech packs or model weights are bundled. Typing and lesson
+   guidance work without those capabilities.
 
 No Internet connection is required after approved transfer of this package. All
 public parser/code assets are bundled. Document import is local, memory-only and
@@ -55,7 +63,9 @@ def package(dist: Path, output: Path):
     legacy = dist/'legacy'
     if legacy.exists():
         paths.update(p.relative_to(dist).as_posix() for p in legacy.rglob('*') if p.is_file())
-    contents = {'START_HERE.txt': README.encode(), 'verify_disconnected.py': (Path(__file__).parent/'verify_disconnected.py').read_bytes()}
+    contents = {'START_HERE.txt': README.encode()}
+    for name in ('verify_disconnected.py', 'start_disconnected.py'):
+        contents[name] = (Path(__file__).parent/name).read_bytes()
     for relative in sorted(paths):
         path = dist/relative
         if path.is_symlink() or not path.is_file() or dist.resolve() not in path.resolve().parents:
