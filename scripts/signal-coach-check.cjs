@@ -26,10 +26,11 @@ const {serveDirectory} = require('./static-fixture.cjs');
       Object.defineProperty(window, 'speechSynthesis', {value:{
         getVoices: () => [
           {lang:'en-US', localService:false},
+          {lang:'en-GB', localService:true},
           ...(window.coachTest.localVoice ? [{lang:'en-US', localService:true}] : []),
         ],
         cancel: () => {},
-        speak: utterance => window.coachTest.audio.push({text:utterance.text, local:utterance.voice.localService}),
+        speak: utterance => window.coachTest.audio.push({text:utterance.text, local:utterance.voice.localService, voiceLanguage:utterance.voice.lang, utteranceLanguage:utterance.lang}),
       }});
       window.SpeechSynthesisUtterance = class {
         constructor(text) { this.text = text; }
@@ -80,7 +81,7 @@ const {serveDirectory} = require('./static-fixture.cjs');
     assert.deepEqual(await page.evaluate(() => window.coachTest.audio),[]);
     await page.evaluate(() => { window.coachTest.speech = 'unavailable'; window.coachTest.localMic = false; });
     await coach.getByRole('button',{name:'Speak question'}).click();
-    await coach.getByText(/On-device English speech recognition is unavailable/).waitFor();
+    await coach.getByText(/On-device U.S. English speech recognition is unavailable/).waitFor();
     const replyMode = coach.getByLabel('Coach replies');
     await replyMode.selectOption('spoken');
     await question.fill('Which read-only test should I start with?');
@@ -89,6 +90,8 @@ const {serveDirectory} = require('./static-fixture.cjs');
     const lessonAudio = await page.evaluate(() => window.coachTest.audio);
     assert.equal(lessonAudio.length,1);
     assert.equal(lessonAudio[0].local,true);
+    assert.equal(lessonAudio[0].voiceLanguage,'en-US');
+    assert.equal(lessonAudio[0].utteranceLanguage,'en-US');
     assert.equal(lessonAudio[0].text,await coach.locator('.coach-reply').last().textContent());
 
     await page.evaluate(() => { window.coachTest.models = 'available'; });
@@ -105,11 +108,11 @@ const {serveDirectory} = require('./static-fixture.cjs');
     assert.equal(state.calls,1);
     assert.equal(state.destroyed,1);
     assert.equal(state.localMic,false);
-    assert.deepEqual(state.audio[1],{text:'What observation separates DNS from a service failure?',local:true});
+    assert.deepEqual(state.audio[1],{text:'What observation separates DNS from a service failure?',local:true,voiceLanguage:'en-US',utteranceLanguage:'en-US'});
     await page.evaluate(() => { window.coachTest.localVoice = false; });
     await question.fill('What should I verify next?');
     await ask.click();
-    await coach.getByText(/No usable on-device English voice/).waitFor();
+    await coach.getByText(/No usable on-device U.S. English voice/).waitFor();
     assert.equal(await page.evaluate(() => window.coachTest.audio.length),2);
     assert.equal(await coach.locator('.coach-reply').last().textContent(),'What observation separates DNS from a service failure?');
     await replyMode.selectOption('text');

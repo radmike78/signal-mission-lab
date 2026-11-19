@@ -40,11 +40,11 @@ export async function localRecognition(): Promise<Recognition | null> {
 
 export function readLocally(text: string, onError: () => void): boolean {
   const speech = window.speechSynthesis;
-  const voice = speech?.getVoices().find(item => item.localService && /^en(?:-|$)/i.test(item.lang));
+  const voice = speech?.getVoices().find(item => item.localService && item.lang.toLowerCase() === language.toLowerCase());
   if (!voice || typeof SpeechSynthesisUtterance !== 'function') return false;
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.voice = voice;
-  utterance.lang = voice.lang;
+  utterance.lang = language;
   utterance.onerror = event => {
     if (event.error !== 'canceled' && event.error !== 'interrupted') onError();
   };

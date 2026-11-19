@@ -80,7 +80,7 @@ export function SignalCoach() {
     try {
       const local = await localRecognition();
       if (attempt.signal.aborted) return;
-      if (!local) return finish('On-device English speech recognition is unavailable. Type your question instead.');
+      if (!local) return finish('On-device U.S. English speech recognition is unavailable. Type your question instead.');
       recognition.current = local;
       local.onresult = event => {
         if (attempt.signal.aborted) return;
@@ -142,7 +142,7 @@ export function SignalCoach() {
   function speakReply(text: string, note = '') {
     const showStatus = (detail: string) => setStatus([note, detail].filter(Boolean).join(' '));
     if (!readLocally(text, () => showStatus('Audio playback failed. The reply is available in the transcript.'))) {
-      showStatus('No usable on-device English voice. The reply is available in the transcript.');
+      showStatus('No usable on-device U.S. English voice. The reply is available in the transcript.');
     }
   }
 
@@ -254,7 +254,7 @@ export function SignalCoach() {
         <option value="text">Text only</option>
         <option value="spoken">Speak replies aloud</option>
       </select></label>
-      <p>You can type and hear replies without a microphone. Spoken replies use an installed English voice and also appear in the transcript.</p>
+      <p>You can type and hear replies without a microphone. Spoken replies use an installed U.S. English voice and also appear in the transcript.</p>
       <label>Your question<textarea value={question} maxLength={1200} disabled={busy || mic !== 'idle'} onChange={event => setQuestion(event.target.value)} placeholder="What should I check if the application works by IP but fails by name?"/></label>
       <div className="coach-actions">
         <button type="submit" disabled={!attested || !question.trim() || awaitingReview || mic !== 'idle' || busy}>Ask Signal Coach</button>
