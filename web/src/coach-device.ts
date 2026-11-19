@@ -38,16 +38,23 @@ export async function localRecognition(): Promise<Recognition | null> {
   return recognition;
 }
 
-export function readLocally(text: string): boolean {
+export function readLocally(text: string, onError: () => void): boolean {
   const speech = window.speechSynthesis;
   const voice = speech?.getVoices().find(item => item.localService && /^en(?:-|$)/i.test(item.lang));
-  if (!voice) return false;
+  if (!voice || typeof SpeechSynthesisUtterance !== 'function') return false;
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.voice = voice;
   utterance.lang = voice.lang;
-  speech.cancel();
-  speech.speak(utterance);
-  return true;
+  utterance.onerror = event => {
+    if (event.error !== 'canceled' && event.error !== 'interrupted') onError();
+  };
+  try {
+    speech.cancel();
+    speech.speak(utterance);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export async function localCoachReply(input: object, signal: AbortSignal): Promise<string | null> {

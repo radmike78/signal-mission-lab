@@ -24,6 +24,7 @@ export function SignalCoach() {
   const [question, setQuestion] = useState('');
   const [turns, setTurns] = useState<Turn[]>([]);
   const [generative, setGenerative] = useState(false);
+  const [responseMode, setResponseMode] = useState<'text' | 'spoken'>('text');
   const [attested, setAttested] = useState(false);
   const [scan, setScan] = useState(false);
   const [doc, setDoc] = useState<PlanningDocument | null>(null);
@@ -138,6 +139,13 @@ export function SignalCoach() {
     }
   }
 
+  function speakReply(text: string, note = '') {
+    const showStatus = (detail: string) => setStatus([note, detail].filter(Boolean).join(' '));
+    if (!readLocally(text, () => showStatus('Audio playback failed. The reply is available in the transcript.'))) {
+      showStatus('No usable on-device English voice. The reply is available in the transcript.');
+    }
+  }
+
   async function ask(event: React.FormEvent) {
     event.preventDefault();
     const draft = question.normalize('NFKC').trim();
@@ -173,12 +181,15 @@ export function SignalCoach() {
       if (work.current === task) {
         work.current = null;
         setBusy(false);
+        const response = reply || guidedReply(lab, mode, !!selected);
         setTurns(previous => [...previous.slice(-9), {
-          question: draft, reply: reply || guidedReply(lab, mode, !!selected),
+          question: draft, reply: response,
           generated: !!reply, evidence: selected?.locator,
         }]);
         setQuestion('');
-        setStatus(generative && !reply ? 'Installed AI was unavailable or did not respond. Showing lesson guidance.' : '');
+        const note = generative && !reply ? 'Installed AI was unavailable or did not respond. Showing lesson guidance.' : '';
+        setStatus(note);
+        if (responseMode === 'spoken') speakReply(response, note);
       }
     }
   }
@@ -232,9 +243,18 @@ export function SignalCoach() {
       {turn.evidence && <p>Attachment excerpt: {turn.evidence}</p>}
       <p><strong>{turn.generated ? 'Signal Coach · On-device AI' : 'Signal Coach · Lesson guidance'}</strong></p>
       <p className="coach-reply">{turn.reply}</p>
-      <button onClick={() => {if (!readLocally(turn.reply)) setStatus('No installed English speaking voice is available.');}} disabled={mic !== 'idle'}>Read reply aloud</button>
+      <button onClick={() => speakReply(turn.reply)} disabled={mic !== 'idle'}>Read reply aloud</button>
     </article>)}</div>
     <form onSubmit={ask}>
+      <label>Coach replies<select value={responseMode} disabled={busy} onChange={event => {
+        const next = event.target.value === 'spoken' ? 'spoken' : 'text';
+        setResponseMode(next);
+        if (next === 'text') window.speechSynthesis?.cancel();
+      }}>
+        <option value="text">Text only</option>
+        <option value="spoken">Speak replies aloud</option>
+      </select></label>
+      <p>You can type and hear replies without a microphone. Spoken replies use an installed English voice and also appear in the transcript.</p>
       <label>Your question<textarea value={question} maxLength={1200} disabled={busy || mic !== 'idle'} onChange={event => setQuestion(event.target.value)} placeholder="What should I check if the application works by IP but fails by name?"/></label>
       <div className="coach-actions">
         <button type="submit" disabled={!attested || !question.trim() || awaitingReview || mic !== 'idle' || busy}>Ask Signal Coach</button>
