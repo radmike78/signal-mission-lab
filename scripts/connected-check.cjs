@@ -106,21 +106,69 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
   await learner.getByRole('button',{name:'Refresh saved learning',exact:true}).click();
   const lessonAssignment=await assigned.locator('option').filter({hasText:'Restore access to a staff report'}).getAttribute('value');
   await assigned.selectOption(lessonAssignment);
-  await learner.getByRole('button',{name:'Start course',exact:true}).click();
-  await learner.getByText('Equipment and training setup',{exact:true}).click();
-  await learner.getByText(/documented Army hosting context/).waitFor();
+  const assignedCourse=learner.locator('.assigned-course');
+  const focused=async name=>{
+   const title=assignedCourse.getByRole('heading',{name,exact:true});
+   await title.waitFor();
+   if(!await title.evaluate(el=>el===document.activeElement))throw Error('Course section did not receive focus: '+name);
+  };
+  await assignedCourse.getByRole('button',{name:'Start course',exact:true}).click();
+  await focused('The problem');
+  await assignedCourse.getByRole('heading',{name:'Key learning',exact:true}).waitFor();
+  await assignedCourse.getByText('Equipment and training setup',{exact:true}).click();
+  await assignedCourse.getByText(/documented Army hosting context/).waitFor();
+  await assignedCourse.getByText('Equipment and training setup',{exact:true}).click();
+  await assignedCourse.screenshot({path:'artifacts/screenshots/course-brief-desktop.png'});
+  await learner.setViewportSize({width:390,height:844});
+  await assignedCourse.screenshot({path:'artifacts/screenshots/course-brief-mobile.png'});
   const begin=async correct=>{
-   await learner.getByLabel(correct?/Compare the affected client’s assigned resolver/:/Restart the shared report service/).check();
-   await learner.getByRole('button',{name:'Continue course',exact:true}).click();
-   await learner.getByLabel(/Ask the authorized lab owner/).check();
-   await learner.getByRole('button',{name:'Continue course',exact:true}).click();
-   await learner.getByLabel(/The affected user opens the normal hostname/).check();
-   await learner.getByRole('button',{name:'Submit course result',exact:true}).click();
-   await learner.getByText('Course completed. Score: '+(correct?'3/3':'2/3'),{exact:true}).waitFor();
+   await assignedCourse.getByRole('button',{name:'Start practice',exact:true}).click();
+   await focused('Decision 1 of 3');
+   const next=assignedCourse.getByRole('button',{name:'Next decision',exact:true});
+   if(!await next.isDisabled())throw Error('Course advanced without an answer');
+   if(!correct){
+    if(!await learner.evaluate(()=>document.documentElement.scrollWidth<=innerWidth))throw Error('Course has horizontal overflow on mobile');
+    const size=await assignedCourse.getByRole('radio').first().locator('..').evaluate(el=>parseFloat(getComputedStyle(el).fontSize));
+    if(size<16)throw Error('Course answer text is too small on mobile');
+    await assignedCourse.getByText('What the Soldier observes',{exact:true}).click();
+    await assignedCourse.getByText(/The report’s DNS lookup times out/).waitFor();
+    await assignedCourse.getByText('What the Soldier observes',{exact:true}).click();
+   }
+   const comparison=assignedCourse.getByLabel(/Compare the affected client’s resolver/);
+   if(!correct){
+    await comparison.check();
+    await assignedCourse.screenshot({path:'artifacts/screenshots/course-decision-mobile.png'});
+   }
+   const answer=correct?comparison:assignedCourse.getByLabel(/Restart the shared report service/);
+   await answer.check();
+   await next.press('Enter');
+   await focused('Decision 2 of 3');
+   if(!correct){
+    await assignedCourse.getByRole('button',{name:'Previous decision',exact:true}).click();
+    await focused('Decision 1 of 3');
+    if(!await answer.isChecked())throw Error('Course lost an answer when navigating back');
+    await assignedCourse.getByRole('button',{name:'Back to brief',exact:true}).click();
+    await focused('The problem');
+    await assignedCourse.getByRole('button',{name:'Start practice',exact:true}).click();
+    await focused('Decision 1 of 3');
+    if(!await answer.isChecked())throw Error('Course lost an answer when revisiting the brief');
+    await next.click();
+    await focused('Decision 2 of 3');
+   }
+   await assignedCourse.getByLabel(/Ask the authorized lab owner/).check();
+   await next.click();
+   await focused('Decision 3 of 3');
+   await assignedCourse.getByLabel(/The affected user opens the report by its usual hostname/).check();
+   await assignedCourse.getByRole('button',{name:'Submit course result',exact:true}).click();
+   await focused('Course completed. Score: '+(correct?'3/3':'2/3'));
+   await assignedCourse.getByRole('heading',{name:'Key takeaway',exact:true}).waitFor();
   };
   await begin(false);
-  await learner.getByRole('button',{name:'Try the course again',exact:true}).click();
+  await assignedCourse.getByRole('button',{name:'Try the course again',exact:true}).click();
+  await focused('The problem');
+  await learner.setViewportSize({width:1440,height:1100});
   await begin(true);
+  await assignedCourse.screenshot({path:'artifacts/screenshots/course-review-desktop.png'});
   await teacher.getByRole('button',{name:'Refresh saved learning',exact:true}).click();
   await teacher.getByText('1/1 enrolled learners completed their first submission.',{exact:true}).waitFor();
   await teacher.getByRole('heading',{name:/Course completion/}).locator('..').getByRole('cell',{name:'2/3',exact:true}).waitFor();
