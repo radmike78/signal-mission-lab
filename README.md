@@ -50,7 +50,7 @@ Connected screenshots: [instructor cohort](docs/screenshots/connected-instructor
 
 ## Mission-first guided workspace
 
-The homepage asks **What is your mission?** Users enter a fictional training description; a local rule-based interpreter asks for missing or ambiguous details before producing an explained equipment research shortlist, conceptual architecture and validation questions. See [UI and mission-flow details](docs/UI_MISSION_FLOW.md). Raw text stays local and is discarded after analysis. Users can review and correct the recognized fields; sensitive-content screening is heuristic, not a classification guarantee. Equipment interfaces and suitability are never inferred.
+The homepage offers IT fundamentals, equipment, troubleshooting and mission planning. Open **Plan a training mission** to describe a fictional exercise; a local rule-based interpreter asks for missing or ambiguous details before producing an explained equipment research shortlist, conceptual architecture and validation questions. See [UI and mission-flow details](docs/UI_MISSION_FLOW.md). Raw text stays local and is discarded after analysis. Users can review and correct the recognized fields; sensitive-content screening is heuristic, not a classification guarantee. Equipment interfaces and suitability are never inferred.
 
 [New homepage](docs/screenshots/mission-home.png) · [Guided questions](docs/screenshots/mission-questions.png) · [Mission brief](docs/screenshots/mission-recommendation.png) · [Mobile](docs/screenshots/mission-home-mobile.png)
 
@@ -68,7 +68,7 @@ Build the OCI image with `podman build --format oci -f deploy/Containerfile -t l
 
 ## IT foundations for Soldiers
 
-Open **IT foundations** from the navigation or homepage. Nine introductory lessons explain computing/VMs, switching, routing, DNS/identity, storage, firewalls, containers, recovery and security. Vendor examples have scoped public references and are separated from verified Army applicability. Open **Vendors** for eleven product troubleshooting exercises and official credential or operator training links. Use the synthetic dependency lab to connect the concepts to a user outcome. See [curriculum and manual gaps](docs/IT_FOUNDATIONS_AND_MANUAL_GAPS.md).
+Open **Learn IT fundamentals** from the homepage, then choose a topic and lesson. The lesson starts with a short explanation. Expand **Go deeper**, **Try a practice question**, or **Sources and limits** when needed. Nine introductory lessons explain computing/VMs, switching, routing, DNS/identity, storage, firewalls, containers, recovery and security. Vendor examples have scoped public references and are separated from verified Army applicability. Open **Vendors** for eleven product troubleshooting exercises and official credential or operator training links. Use the synthetic dependency lab to connect the concepts to a user outcome. See [curriculum and manual gaps](docs/IT_FOUNDATIONS_AND_MANUAL_GAPS.md).
 
 Offline/PWA and Android/iOS preparation: see [offline/mobile build and release gates](docs/OFFLINE_MOBILE.md). Store editions bundle public learning; signing, native device acceptance and store publication require owner action. Draft privacy and listing text are under `mobile/store/`.
 

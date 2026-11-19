@@ -35,7 +35,7 @@ const http=require('node:http'),path=require('node:path');
  await page.evaluate(()=>fetch('/api/offline-probe',{headers:{Authorization:'Bearer synthetic-test'}}).then(r=>r.json()));
  await page.evaluate(()=>localStorage.setItem('unrelated-setting','keep'));
  await context.setOffline(true);await page.reload();
- await page.getByRole('heading',{name:'What is your mission?',exact:true}).waitFor();
+ await page.getByRole('heading',{name:'What do you want to learn?',exact:true}).waitFor();
  // Lazy-loaded Signal products must work even though never opened online.
  for(const name of ['Courses','Exercise lane','Signal Products','Applications','IT foundations','MDMP','Equipment','Architecture','Mentor','Troubleshoot','Assessment']){
   await nav(name);await page.getByRole('heading',{name,exact:true}).waitFor();
