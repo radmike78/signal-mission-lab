@@ -21,6 +21,11 @@ operational documents. An offline build is not an authorization to process them.
 4. Open Document planner, load the fictional demonstration, confirm the training
    boundary, review tasks and create the requirements worksheet.
 
+5. Open Signal Coach for fictional IT lesson guidance and local attachment review.
+   Voice and generative dialogue require compatible, already installed device
+   capabilities. No speech packs or model weights are bundled. Typing and lesson
+   guidance work without those capabilities.
+
 No Internet connection is required after approved transfer of this package. All
 public parser/code assets are bundled. Document import is local, memory-only and
 rule-based; no semantic AI service is included. Optional bundled English OCR reads

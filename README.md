@@ -87,3 +87,5 @@ The document planner can now propose sender, recipient, exchange and timing for 
 ## Local OCR for fictional scanned documents
 
 Document planner now offers local English OCR for PNG/JPEG and up to three scanned PDF pages. Correct and acknowledge every page before planning; citations and exports identify reviewed transcriptions. The engine, WASM and language data are bundled for offline use. No generative analysis service or operational-data permission is added. See [OCR workflow, limits and validation](docs/LOCAL_OCR.md).
+
+Open **Signal Coach** for conversational IT lesson guidance, device speech where supported and local discussion of fictional training attachments. The optional browser AI uses an already installed model. The offline package includes the lesson fallback and OCR. See [Signal Coach workflow and device requirements](docs/SIGNAL_COACH.md).

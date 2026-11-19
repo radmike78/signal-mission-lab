@@ -8,6 +8,7 @@ import assessment from '../../data/assessment.json';
 import {LearningPanel} from './learning';
 import {DoctrineEvidence} from './doctrine';
 import {MissionGuide} from './mission';
+const SignalCoach=React.lazy(()=>import('./signal-coach').then(m=>({default:m.SignalCoach})));
 const DocumentPlanner=React.lazy(()=>import('./document-plan').then(m=>({default:m.DocumentPlanner})));
 const TechnicalLabs=React.lazy(()=>import('./technical-labs').then(m=>({default:m.TechnicalLabs})));
 const STTNodeCourse=React.lazy(()=>import('./stt-course').then(m=>({default:m.STTNodeCourse})));
@@ -25,10 +26,10 @@ import type {CaseId} from './troubleshooting-model';
 import {OfflinePanel,startOffline} from './offline';
 import {App as NativeApp} from '@capacitor/app';
 import {Browser} from '@capacitor/browser';
-type Tab = 'Document planner'|'Technical labs'|'Courses'|'Exercise lane'|'Offline & privacy'|'Signal Products'|'Applications'|'IT foundations'|'Mission'|'MDMP'|'Knowledge graph'|'Architecture'|'Troubleshoot'|'Assessment'|'Instructor'|'Mentor';
-const primaryTabs:Tab[]=['Mission','Knowledge graph','Troubleshoot','Instructor'];
+type Tab = 'Document planner'|'Technical labs'|'Courses'|'Exercise lane'|'Offline & privacy'|'Signal Products'|'Applications'|'IT foundations'|'Mission'|'MDMP'|'Knowledge graph'|'Architecture'|'Troubleshoot'|'Assessment'|'Instructor'|'Mentor'|'Signal Coach';
+const primaryTabs:Tab[]=['Mission','Knowledge graph','Troubleshoot','Instructor','Signal Coach'];
 const tabLabel=(tab:Tab)=>tab==='Instructor'?'My training':tab==='Knowledge graph'?'Equipment':tab;
-const tabs:Tab[]=['Document planner','Technical labs','Courses','Exercise lane','Mission','MDMP','Knowledge graph','Architecture','Troubleshoot','Assessment','Instructor','Mentor','IT foundations','Applications','Signal Products','Offline & privacy'];
+const tabs:Tab[]=['Document planner','Technical labs','Courses','Exercise lane','Mission','MDMP','Knowledge graph','Architecture','Troubleshoot','Assessment','Instructor','Signal Coach','Mentor','IT foundations','Applications','Signal Products','Offline & privacy'];
 const steps=[['Receipt of mission','Understand the fictional exercise and time available.','Produce a training timeline and initial questions.'],['Mission analysis','Identify specified tasks, assumptions, constraints and information needs.','Produce a problem statement and initial staff estimate.'],['COA development','Develop distinct ways to meet the fictional user outcome.','Produce alternative service concepts and evaluation criteria.'],['COA analysis','Walk through a synthetic outage and recovery.','Record risks, dependencies and decision points.'],['COA comparison','Compare alternatives against the same criteria.','Produce an explained comparison, including uncertainty.'],['COA approval','Brief the training decision and residual risks.','Record the exercise director’s selected approach.'],['Orders production, dissemination and transition','Communicate the fictional training decision and rehearse understanding.','Produce a training brief and acceptance checklist.']];
 const questions=assessment.map(q=>({q:q.question,o:q.options,a:q.answer,why:q.rationale}));
 function App(){
@@ -58,6 +59,7 @@ function App(){
  <div hidden={tab!=='Technical labs'}><React.Suspense fallback={<p role="status">Loading technical labs…</p>}>{technicalStarted&&<TechnicalLabs onPractice={save}/>}</React.Suspense></div>
  <div hidden={tab!=='Courses'}><React.Suspense fallback={<p role="status">Loading course…</p>}>{courseStarted&&<STTNodeCourse onTechnical={()=>setTab('Technical labs')} onPractice={save} onExplore={id=>{setNode(id);setTab('Knowledge graph');}} onLane={id=>{setLaneLaunch(previous=>({id,sequence:previous.sequence+1}));setLaneStarted(true);setTab('Exercise lane');}}/>}</React.Suspense></div>
  <div hidden={tab!=='Exercise lane'}><React.Suspense fallback={<p role="status">Loading exercise lane…</p>}>{laneStarted&&<ExerciseLane key={laneLaunch.sequence} initialLaneId={laneLaunch.id} onPractice={save}/>}</React.Suspense></div>
+ {tab==='Signal Coach'&&<React.Suspense fallback={<p role="status">Loading Signal Coach…</p>}><SignalCoach/></React.Suspense>}
  {tab==='Offline & privacy'&&<OfflinePanel/>}
  {tab==='Signal Products'&&<React.Suspense fallback={<p role="status">Loading Signal products…</p>}><SignalProducts/></React.Suspense>}
  {tab==='Applications'&&<ApplicationSupport/>}
