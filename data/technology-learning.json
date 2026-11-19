@@ -244,15 +244,15 @@
       "human_review": "pending"
     },
     {
-      "id": "ocp-pods",
-      "title": "Red Hat: Investigating OpenShift pod issues",
-      "url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.12/html/support/troubleshooting",
+      "id": "rhel-service-logs",
+      "title": "Red Hat: RHEL 9 systemd and log troubleshooting",
+      "url": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/index",
       "kind": "Vendor education",
-      "edition": "OpenShift 4.12 example",
-      "locator": "Investigating pod issues",
-      "scope": "Use release-specific support docs; events and logs are different evidence sources.",
+      "edition": "RHEL 9",
+      "locator": "Managing systemd; troubleshooting with log files",
+      "scope": "Use systemd to inspect the service and its journal. Installed release, service names, and available logs vary.",
       "retrieved": "2026-11-18",
-      "status": "content_checked",
+      "status": "metadata_checked",
       "human_review": "pending"
     },
     {
@@ -592,19 +592,19 @@
       "id": "redhat",
       "name": "Red Hat / open-source ecosystem",
       "technologies": [
-        "Linux containers",
-        "OpenShift",
-        "Kubernetes / KubeVirt awareness"
+        "Red Hat Enterprise Linux",
+        "Linux service and log troubleshooting",
+        "Linux container fundamentals"
       ],
       "source_ids": [
         "redhat",
         "army-modern",
-        "ocp-pods",
+        "rhel-service-logs",
         "rhcsa-ex200"
       ],
-      "army_context": "OpenShift and KubeVirt appear in the reported modernization examples.",
+      "army_context": "The Army reference documents hosting dependencies for tactical services. The Linux case teaches a transferable skill without assuming which operating system a unit uses.",
       "lesson_ids": [
-        "openshift-readiness"
+        "linux-service-dependency"
       ],
       "training": {
         "label": "RHCSA EX200 Linux administration objectives",
@@ -1354,56 +1354,56 @@
       }
     },
     {
-      "id": "openshift-readiness",
-      "title": "Red Hat OpenShift: Diagnose a workload that never becomes ready",
-      "outcome": "Use pod status, recent events and logs to tell a startup dependency failure from an application failure.",
+      "id": "linux-service-dependency",
+      "title": "Red Hat Enterprise Linux: Trace a failed service dependency",
+      "outcome": "Use service status and recent logs to distinguish a startup dependency from a client connectivity problem.",
       "terms": [
         {
-          "term": "Pod",
-          "meaning": "Scheduling unit that runs one or more containers."
+          "term": "Service unit",
+          "meaning": "A definition used by systemd to manage a background service."
         },
         {
-          "term": "Event",
-          "meaning": "A recorded observation from a platform component."
+          "term": "Journal",
+          "meaning": "Recorded messages that can be correlated with the failed start and the time it happened."
         },
         {
-          "term": "Readiness",
-          "meaning": "Whether the workload is ready to receive service traffic."
+          "term": "Dependency",
+          "meaning": "A prerequisite the service needs before it can perform its task."
         }
       ],
       "explanation": [
-        "Inspect pod state and recent events before assuming an application bug. Logs may not exist when a container never started.",
-        "For host troubleshooting, practice Linux service and storage fundamentals separately. RHCSA covers Linux administration; the OpenShift case is adjacent practice."
+        "Compare the service state with journal messages for the same time window. Find the first failed prerequisite before restarting the service.",
+        "Verify the expected service result from the affected client after the instructor resolves the fault."
       ],
-      "scenario": "Which dependency should the learner check first?",
+      "scenario": "Which check best explains why the training service did not start?",
       "options": [
-        "Compare the storage claim status and expected class against the lab baseline.",
-        "Tune application logging.",
-        "Remove readiness checks so the workload looks healthy."
+        "Compare the unavailable data directory with the supplied lab baseline and the service log.",
+        "Change the staff workstation gateway.",
+        "Restart the service repeatedly without checking the prerequisite."
       ],
       "answer": 0,
       "feedback": [
-        "The event points to a startup dependency that can be checked directly.",
-        "Application logs cannot explain an event preventing startup without corroborating evidence.",
-        "Changing readiness does not bind storage or prove the application works."
+        "The startup message gives a concrete prerequisite to verify before changing the host.",
+        "The workstation reached other training services. The evidence points to the service startup.",
+        "A restart does not make an unavailable data directory usable."
       ],
       "source_ids": [
-        "ocp-pods",
-        "redhat",
-        "army-c2now-transition"
+        "rhel-service-logs",
+        "rhcsa-ex200",
+        "army-modern"
       ],
       "system_ids": [],
       "army_case": {
-        "track": "C2NOW",
-        "source_id": "army-c2now-transition",
-        "scope": "The Army source explains the C2 infrastructure transition. This case practices portable container troubleshooting using OpenShift as a classroom example. It does not identify a fielded C2NOW platform.",
-        "task": "In a fictional C2NOW modernization classroom, a training team needs a containerized service to display a synthetic status report.",
+        "track": "Mission Command Systems",
+        "source_id": "army-modern",
+        "scope": "CECOM documents hosted tactical services and their infrastructure dependencies. This fictional Linux classroom example does not identify the operating system or application installed in a unit.",
+        "task": "In a fictional Mission Command support class, one staff user must reopen the current training report after a lab server restart.",
         "evidence": [
-          "The workload remains pending. A lab event says a storage claim is unbound.",
-          "There is no application startup log because the container has not started."
+          "The staff workstation can open other classroom services, but the report service does not start.",
+          "The fictional journal says the expected training data directory was unavailable at startup."
         ],
-        "impact": "The team cannot publish a fresh training view. Repeated application restarts would not address the observed startup dependency.",
-        "recovery": "After the instructor restores the configured lab dependency, confirm the workload is ready and the training user can open the expected fresh report."
+        "impact": "The staff user cannot retrieve the current training report even though other services are reachable.",
+        "recovery": "After the instructor restores the simulated prerequisite, verify that the service is running and have the affected user reopen the current training report."
       }
     },
     {

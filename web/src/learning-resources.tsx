@@ -27,7 +27,7 @@ const topics: {title: string; resources: Resource[]}[] = [
     }, {
       title: 'Red Hat Developer',
       url: 'https://developers.redhat.com/',
-      use: 'Find tutorials and hands-on learning for Red Hat Enterprise Linux, containers, and OpenShift.',
+      use: 'Find tutorials and hands-on learning for Red Hat Enterprise Linux and container fundamentals.',
       access: 'Public articles. Some labs and downloads require a Red Hat account.',
     }, {
       title: 'Microsoft Learn: Implement Windows Server DNS',

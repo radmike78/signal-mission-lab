@@ -53,7 +53,7 @@ The curriculum now includes 20 lessons and 14 vendor or technology groups. From 
 | Cisco | Compare the affected client, access port, supplied address and gateway against a known-good baseline | CCNA |
 | VMware / Broadcom | Trace guest, port group and host uplink after a VM move | VCP vSphere Foundation Administrator |
 | Riverbed | Correlate an application measurement with SteelHead pass-through status and reason | SteelHead Core |
-| Red Hat | Distinguish pod events, workload startup dependencies and application logs | RHCSA Linux foundation; OpenShift case is separate |
+| Red Hat | Trace a failed Linux service startup through its status, journal and prerequisite | RHCSA Linux administration |
 | Microsoft | Compare client DNS results and verify the intended service | Windows Server Administrator AZ-802 |
 | Palo Alto Networks | Interpret the rule action and session end reason together | Network Security Professional |
 | Palantir | Locate an upstream failed build or stale dataset in Foundry | Foundry Aware and Data Engineer |

@@ -5,7 +5,7 @@ import {stackDependencies,simulateStack,type StackState} from './foundations-mod
 const initialStack:StackState={power:true,compute:true,storage:true,network:true,identity:true,policy:true};
 const topics = [
  {name:'Networking', ids:['switching','routing','cisco-path-check','steelhead-pass-through']},
- {name:'Servers and virtualization', ids:['compute','containers','vsphere-path-check','openshift-readiness','idrac-event-correlation']},
+ {name:'Servers and virtualization', ids:['compute','containers','vsphere-path-check','linux-service-dependency','idrac-event-correlation']},
  {name:'Identity and applications', ids:['services','windows-dns-triage','foundry-data-freshness']},
  {name:'Storage and recovery', ids:['storage','recovery','ontap-nfs-access']},
  {name:'Security and Signal systems', ids:['security','firewalls','panos-traffic-evidence','iq-core-observation','taclane-scope-check']},
