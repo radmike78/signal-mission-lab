@@ -53,7 +53,7 @@ jobs:
           docker exec ${{ job.services.postgres.id }} pg_dump -U sml -d sml > /tmp/sml-backup.sql
           docker exec ${{ job.services.postgres.id }} createdb -U sml sml_restore
           docker exec -i ${{ job.services.postgres.id }} psql -v ON_ERROR_STOP=1 -U sml -d sml_restore < /tmp/sml-backup.sql
-          test "$(docker exec ${{ job.services.postgres.id }} psql -U sml -d sml_restore -Atc 'SELECT count(*) FROM schema_versions')" = "2"
+          test "$(docker exec ${{ job.services.postgres.id }} psql -U sml -d sml_restore -Atc 'SELECT count(*) FROM schema_versions')" = "3"
           test "$(docker exec ${{ job.services.postgres.id }} psql -U sml -d sml_restore -Atc "SELECT concat(t.score,'/',t.total,':',r.evidence_count,':',r.decision_supported) FROM attempts t JOIN recovery_attempts r ON r.attempt_id=t.id JOIN recovery_assignments a ON a.assignment_id=t.assignment_id WHERE t.id='00000000-0000-4000-8000-000000000005' AND a.case_id='builder'")" = "4/5:3:1"
 
       - run: python -m pip_audit -r backend/requirements.txt
@@ -81,6 +81,7 @@ jobs:
           NODE_PATH="$PWD/web/node_modules" node scripts/technical-labs-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/document-plan-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/ocr-check.cjs
+          NODE_PATH="$PWD/web/node_modules" node scripts/signal-coach-check.cjs
           NODE_PATH="$PWD/web/node_modules" node scripts/disconnected-check.cjs
       - name: Connected learning browser journeys
         run: |

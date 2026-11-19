@@ -35,18 +35,19 @@ const http=require('node:http'),path=require('node:path');
  await page.evaluate(()=>fetch('/api/offline-probe',{headers:{Authorization:'Bearer synthetic-test'}}).then(r=>r.json()));
  await page.evaluate(()=>localStorage.setItem('unrelated-setting','keep'));
  await context.setOffline(true);await page.reload();
- await page.getByRole('heading',{name:'What is your mission?',exact:true}).waitFor();
+ await page.getByRole('heading',{name:'What do you want to learn?',exact:true}).waitFor();
  // Lazy-loaded Signal products must work even though never opened online.
- for(const name of ['Courses','Exercise lane','Signal Products','Applications','IT foundations','MDMP','Equipment','Architecture','Mentor','Troubleshoot','Assessment']){
+ for(const name of ['Courses','Exercise lane','Signal Products','Applications','IT foundations','Learning resources','MDMP','Equipment','Architecture','Mentor','Troubleshoot','Assessment']){
   await nav(name);await page.getByRole('heading',{name,exact:true}).waitFor();
   if(name==='Courses')await page.getByRole('region',{name:'STT and network-node course'}).waitFor();
   if(name==='Exercise lane')await page.getByLabel('Lane code').waitFor();
+  if(name==='Learning resources')await page.getByRole('link',{name:'Open O’Reilly through Army MWR Library'}).waitFor();
   if(name==='Signal Products')await page.getByLabel('Signal product',{exact:true}).waitFor();
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),name+' overflows mobile');
  }
  for(const group of await page.locator('fieldset:visible').all())await group.getByRole('radio').first().check();
  await page.getByRole('button',{name:'Check answers',exact:true}).click();await nav('My training');
- await page.locator('tbody tr').first().waitFor();assert.equal(await page.locator('tbody tr').count(),1);
+ await page.locator('tbody tr').first().waitFor();assert.equal(await page.getByLabel('Lab access credential').count(),0,'static training must hide the connected account form');assert.equal(await page.locator('tbody tr').count(),1);
  await page.reload();await nav('My training');await page.locator('tbody tr').first().waitFor();assert.equal(await page.locator('tbody tr').count(),1);
  await page.getByRole('button',{name:'Clear device practice',exact:true}).click();await page.waitForFunction(()=>localStorage.getItem('sml-practice-v1')===null);
  assert.equal(await page.evaluate(()=>localStorage.getItem('unrelated-setting')),'keep');

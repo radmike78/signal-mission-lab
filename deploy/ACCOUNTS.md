@@ -45,3 +45,10 @@ No real users, operational data or paid services are provisioned by this code. B
 ## File-mounted database credentials
 
 Podman deployment can set `SML_DATABASE_URL_FILE` to a mounted secret path rather than exposing the URL in the environment. The reader limits content to 4,096 characters, rejects empty/multiline values and fails if both URL settings are supplied. Existing PostgreSQL TLS and least-privilege policies still apply. See [PODMAN.md](PODMAN.md) for rootless deployment and separate administrator/runtime secret handling.
+
+### Course schema update
+
+Apply schema version 3 with the existing administrative migration command, then
+reapply the runtime grants before deploying the updated connected API. The
+migration adds course assignment and first-submission records. Repeated
+submissions update practice history without replacing the first score.

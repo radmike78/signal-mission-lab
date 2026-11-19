@@ -16,7 +16,7 @@ function pdf(text){
  const csp=fs.readFileSync('_headers','utf8').split('\n').find(line=>line.includes('Content-Security-Policy:')).split('Content-Security-Policy:')[1].trim();
  await page.route(startURL+'/',async route=>{const response=await route.fetch();await route.fulfill({response,headers:{...response.headers(),'content-security-policy':csp}});});
  await page.goto(startURL);await page.evaluate(async()=>await navigator.serviceWorker.ready);await page.waitForFunction(()=>!!navigator.serviceWorker.controller);await context.setOffline(true);
- await page.getByRole('button',{name:'Translate a fictional document into Signal requirements →',exact:true}).click();
+ await page.getByText('Courses and planning tools',{exact:true}).click();await page.getByRole('button',{name:'Translate a fictional document into Signal requirements →',exact:true}).click();
  const area=page.getByRole('region',{name:'Document to Signal requirements',exact:true});await area.getByRole('heading',{name:'Document to Signal requirements',exact:true}).waitFor();
  const attestation=area.getByRole('checkbox').first(),file=area.getByLabel('Choose a fictional document',{exact:true});
  assert(await file.isDisabled());await area.getByRole('button',{name:'Load fictional demonstration',exact:true}).click();await attestation.check();await area.getByRole('button',{name:'Review document tasks',exact:true}).click();

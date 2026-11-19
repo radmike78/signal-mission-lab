@@ -11,3 +11,4 @@ GRANT INSERT ON audit_events TO sml_runtime;
 -- privileges are granted to the API identity. Use a separate administrative role.
 
 GRANT SELECT, INSERT ON recovery_assignments, recovery_attempts TO sml_runtime;
+GRANT SELECT, INSERT ON course_assignments, course_first_results TO sml_runtime;

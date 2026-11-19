@@ -3,7 +3,7 @@ from typing import Literal, Annotated
 from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, Response
 from pydantic import BaseModel, ConfigDict, Field
-from . import core, recovery
+from . import core, mission_report_course, recovery
 from .security import principal, store_dependency
 from .store import Store, identifier, now
 router=APIRouter(prefix='/api/learning')
@@ -16,7 +16,7 @@ class CohortInput(Strict):
 class MemberInput(Strict):
     learner_id: str = Field(pattern=r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
 class AssignmentInput(Strict):
-    activity: Literal['assessment','dns','identity','power','builder','routing','satellite']
+    activity: Literal['assessment','dns','identity','power','builder','routing','satellite','mission-report-v1']
 class Submission(Strict):
     answers: dict[str,int] = Field(default_factory=dict,max_length=len(core.QUIZ))
     checks: list[int] = Field(default_factory=list,max_length=core.DIAGNOSTIC_CHECK_LIMIT)
@@ -86,16 +86,29 @@ def remove_member(cohort_id:UUID,learner_id:UUID,user:User,db:Database):
         db.execute(connection,'DELETE FROM attempts WHERE learner_id=? AND assignment_id IN (SELECT id FROM assignments WHERE cohort_id=?)',(str(learner_id),str(cohort_id)))
         db.audit(connection,user['id'],'member.removed',str(learner_id))
     return Response(status_code=204)
+def course_first_results(db, connection, cohort_id):
+    rows = db.execute(connection, '''
+        SELECT f.assignment_id, f.learner_id, a.score, a.total, a.created_at
+        FROM course_first_results f
+        JOIN attempts a ON a.id = f.attempt_id AND a.assignment_id = f.assignment_id AND a.learner_id = f.learner_id
+        JOIN memberships m ON m.cohort_id = a.cohort_id AND m.learner_id = f.learner_id
+        WHERE a.cohort_id = ?
+        ORDER BY f.assignment_id, f.learner_id
+    ''', (str(cohort_id),)).fetchall()
+    return [dict(row) for row in rows]
+
+
 @router.get('/cohorts/{cohort_id}/progress')
 def progress(cohort_id:UUID,user:User,db:Database):
     with db.transaction() as connection:
         cohort=owner(db,connection,user,cohort_id)
         members=db.execute(connection,'SELECT learner_id FROM memberships WHERE cohort_id=? ORDER BY learner_id LIMIT 100',(str(cohort_id),)).fetchall()
-        assignments=db.execute(connection,'SELECT a.id,a.cohort_id,a.created_at,COALESCE(r.case_id,a.activity) AS activity FROM assignments a LEFT JOIN recovery_assignments r ON r.assignment_id=a.id WHERE a.cohort_id=? ORDER BY a.created_at,a.id LIMIT 100',(str(cohort_id),)).fetchall()
+        assignments=db.execute(connection,'SELECT a.id,a.cohort_id,a.created_at,COALESCE(ca.course_id,r.case_id,a.activity) AS activity FROM assignments a LEFT JOIN recovery_assignments r ON r.assignment_id=a.id LEFT JOIN course_assignments ca ON ca.assignment_id=a.id WHERE a.cohort_id=? ORDER BY a.created_at,a.id LIMIT 100',(str(cohort_id),)).fetchall()
         attempts=db.execute(connection,'SELECT t.*,r.case_id,r.evidence_count,r.decision_supported FROM attempts t LEFT JOIN recovery_attempts r ON r.attempt_id=t.id JOIN assignments a ON a.id=t.assignment_id JOIN memberships m ON m.cohort_id=a.cohort_id AND m.learner_id=t.learner_id WHERE a.cohort_id=? ORDER BY t.created_at DESC,t.id LIMIT 500',(str(cohort_id),)).fetchall()
+        first_results = course_first_results(db, connection, cohort_id)
         latest=db.execute(connection,'SELECT * FROM (SELECT t.*,r.case_id,r.evidence_count,r.decision_supported,ROW_NUMBER() OVER (PARTITION BY t.learner_id,t.assignment_id ORDER BY t.created_at DESC,t.id DESC) AS position FROM attempts t LEFT JOIN recovery_attempts r ON r.attempt_id=t.id JOIN assignments a ON a.id=t.assignment_id JOIN memberships m ON m.cohort_id=a.cohort_id AND m.learner_id=t.learner_id WHERE a.cohort_id=?) ranked WHERE position=1',(str(cohort_id),)).fetchall()
     members,assignments,attempts=([dict(x) for x in rows] for rows in (members,assignments,attempts))
-    return {'cohort':cohort,'members':members,'assignments':assignments,'attempts':attempts[:500], 'summary':recovery.summarize(members,assignments,[dict(x) for x in latest])}
+    return {'cohort':cohort,'members':members,'assignments':assignments,'attempts':attempts[:500], 'course_first_results':first_results, 'summary':recovery.summarize(members,assignments,[dict(x) for x in latest])}
 @router.post('/cohorts/{cohort_id}/assignments',status_code=201)
 def assign(cohort_id:UUID,body:AssignmentInput,user:User,db:Database):
     key=identifier()
@@ -104,23 +117,64 @@ def assign(cohort_id:UUID,body:AssignmentInput,user:User,db:Database):
         db.execute(connection,'UPDATE cohorts SET callsign=callsign WHERE id=?',(str(cohort_id),))
         count=db.execute(connection,'SELECT count(*) AS n FROM assignments WHERE cohort_id=?',(str(cohort_id),)).fetchone()['n']
         if count>=100:raise HTTPException(409,'Assignment limit reached')
-        db.execute(connection,'INSERT INTO assignments(id,cohort_id,activity,created_at) VALUES (?,?,?,?)',(key,str(cohort_id),'assessment' if body.activity in recovery.CASES else body.activity,now()))
+        db.execute(connection,'INSERT INTO assignments(id,cohort_id,activity,created_at) VALUES (?,?,?,?)',(key,str(cohort_id),'assessment' if body.activity in recovery.CASES or body.activity == mission_report_course.ID else body.activity,now()))
         if body.activity in recovery.CASES:
             db.execute(connection,'INSERT INTO recovery_assignments(assignment_id,case_id) VALUES (?,?)',(key,body.activity))
+        if body.activity == mission_report_course.ID:
+            db.execute(connection,'INSERT INTO course_assignments(assignment_id,course_id) VALUES (?,?)',(key,body.activity))
         db.audit(connection,user['id'],'assignment.created',key)
     return {'id':key,'activity':body.activity,'cohort_id':str(cohort_id)}
+
+@router.get('/cohorts/{cohort_id}/report')
+def cohort_report(cohort_id:UUID,user:User,db:Database):
+    """Owner-authorized aggregate snapshot for an instructor's pilot review.
+
+    Reuse the complete latest-result summary, rather than the limited attempt
+    history. Individual account IDs, credentials and source documents are omitted.
+    """
+    snapshot = progress(cohort_id, user, db)
+    return {
+        'schema_version': 1,
+        'generated_at': now(),
+        'cohort_callsign': snapshot['cohort']['callsign'],
+        'learner_count': len(snapshot['members']),
+        'assignment_count': len(snapshot['assignments']),
+        'summary': snapshot['summary'],
+        'measurement': 'Latest formative result per currently enrolled learner and assignment.',
+        'limitations': [
+            'Repeat attempts can improve the latest result. This report does not measure first-attempt performance or learning gain.',
+            'Public practice items and reported evidence exposure do not establish independent skill or equipment qualification.',
+            'Aggregate counts may identify participants in a small cohort. Share only with authorized recipients.',
+        ],
+    }
 @router.get('/assignments')
 def assignments(user:User,db:Database):
     with db.transaction() as connection:
-        rows=db.execute(connection,'SELECT a.id,a.cohort_id,COALESCE(r.case_id,a.activity) AS activity,a.created_at,c.callsign FROM assignments a LEFT JOIN recovery_assignments r ON r.assignment_id=a.id JOIN cohorts c ON c.id=a.cohort_id JOIN memberships m ON m.cohort_id=a.cohort_id WHERE m.learner_id=? ORDER BY a.created_at,a.id LIMIT 100',(user['id'],)).fetchall()
+        rows=db.execute(connection,'SELECT a.id,a.cohort_id,COALESCE(ca.course_id,r.case_id,a.activity) AS activity,a.created_at,c.callsign FROM assignments a LEFT JOIN recovery_assignments r ON r.assignment_id=a.id LEFT JOIN course_assignments ca ON ca.assignment_id=a.id JOIN cohorts c ON c.id=a.cohort_id JOIN memberships m ON m.cohort_id=a.cohort_id WHERE m.learner_id=? ORDER BY a.created_at,a.id LIMIT 100',(user['id'],)).fetchall()
     return [dict(row) for row in rows]
+@router.get('/assignments/{assignment_id}/course')
+def assigned_course(assignment_id: UUID, user: User, db: Database):
+    if user['role'] != 'learner':
+        raise HTTPException(403, 'Learner access required')
+    with db.transaction() as connection:
+        row = db.execute(connection, '''
+            SELECT ca.course_id FROM course_assignments ca
+            JOIN assignments a ON a.id = ca.assignment_id
+            JOIN memberships m ON m.cohort_id = a.cohort_id
+            WHERE a.id = ? AND m.learner_id = ?
+        ''', (str(assignment_id), user['id'])).fetchone()
+    if not row or row['course_id'] != mission_report_course.ID:
+        raise HTTPException(404, 'Course unavailable')
+    return mission_report_course.public_lesson()
+
+
 @router.post('/assignments/{assignment_id}/attempts',status_code=201)
 def submit(assignment_id:UUID,body:Submission,user:User,db:Database):
     if user['role']!='learner':raise HTTPException(403,'Learner access required')
     with db.transaction() as connection:
         # Serialize this learner's attempts and membership checks with deletion/revocation.
         db.execute(connection,'UPDATE accounts SET lock_version=lock_version WHERE id=?',(user['id'],))
-        row=db.execute(connection,'SELECT COALESCE(r.case_id,a.activity) AS activity,a.cohort_id FROM assignments a LEFT JOIN recovery_assignments r ON r.assignment_id=a.id JOIN memberships m ON m.cohort_id=a.cohort_id WHERE a.id=? AND m.learner_id=?',(str(assignment_id),user['id'])).fetchone()
+        row=db.execute(connection,'SELECT COALESCE(ca.course_id,r.case_id,a.activity) AS activity,a.cohort_id FROM assignments a LEFT JOIN recovery_assignments r ON r.assignment_id=a.id LEFT JOIN course_assignments ca ON ca.assignment_id=a.id JOIN memberships m ON m.cohort_id=a.cohort_id WHERE a.id=? AND m.learner_id=?',(str(assignment_id),user['id'])).fetchone()
         if not row:raise HTTPException(404,'Assignment not found')
         count=db.execute(connection,'SELECT count(*) AS n FROM attempts WHERE assignment_id=? AND learner_id=?',(str(assignment_id),user['id'])).fetchone()['n']
         if count>=20:raise HTTPException(409,'Attempt limit reached')
@@ -130,6 +184,10 @@ def submit(assignment_id:UUID,body:Submission,user:User,db:Database):
                 result=recovery.grade(row['activity'],body.evidence,body.decision);score,total=result['score'],result['total']
             elif body.evidence or body.decision is not None:
                 raise ValueError('Unexpected recovery fields')
+            elif row['activity'] == mission_report_course.ID:
+                if body.checks or body.diagnosis:raise ValueError('Unexpected diagnostic fields')
+                result = mission_report_course.grade(body.answers)
+                score, total = result['score'], result['total']
             elif row['activity']=='assessment':
                 if body.checks or body.diagnosis:raise ValueError('Unexpected diagnostic fields')
                 result=core.grade(body.answers);score,total=result['score'],result['total']
@@ -141,10 +199,15 @@ def submit(assignment_id:UUID,body:Submission,user:User,db:Database):
         db.execute(connection,'INSERT INTO attempts(id,assignment_id,cohort_id,learner_id,score,total,created_at) VALUES (?,?,?,?,?,?,?)',(key,str(assignment_id),row['cohort_id'],user['id'],score,total,timestamp))
         if row['activity'] in recovery.CASES:
             db.execute(connection,'INSERT INTO recovery_attempts(attempt_id,case_id,evidence_count,decision_supported) VALUES (?,?,?,?)',(key,row['activity'],result['evidence_count'],int(result['decision_supported'])))
+        if row['activity'] == mission_report_course.ID:
+            db.execute(connection, '''
+                INSERT INTO course_first_results(assignment_id,learner_id,attempt_id)
+                VALUES (?,?,?) ON CONFLICT (assignment_id,learner_id) DO NOTHING
+            ''', (str(assignment_id), user['id'], key))
         db.audit(connection,user['id'],'attempt.submitted',key)
     return {'id':key,'assignment_id':str(assignment_id),'score':score,'total':total,'created_at':timestamp,'feedback':result}
 @router.get('/attempts')
 def my_attempts(user:User,db:Database):
     with db.transaction() as connection:
-        rows=db.execute(connection,'SELECT t.id,t.assignment_id,t.score,t.total,t.created_at,COALESCE(r.case_id,a.activity) AS activity FROM attempts t JOIN assignments a ON a.id=t.assignment_id LEFT JOIN recovery_assignments r ON r.assignment_id=a.id WHERE t.learner_id=? ORDER BY t.created_at DESC,t.id LIMIT 100',(user['id'],)).fetchall()
+        rows=db.execute(connection,'SELECT t.id,t.assignment_id,t.score,t.total,t.created_at,COALESCE(ca.course_id,r.case_id,a.activity) AS activity FROM attempts t JOIN assignments a ON a.id=t.assignment_id LEFT JOIN recovery_assignments r ON r.assignment_id=a.id LEFT JOIN course_assignments ca ON ca.assignment_id=a.id WHERE t.learner_id=? ORDER BY t.created_at DESC,t.id LIMIT 100',(user['id'],)).fetchall()
     return [dict(row) for row in rows]

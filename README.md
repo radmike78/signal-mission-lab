@@ -50,7 +50,7 @@ Connected screenshots: [instructor cohort](docs/screenshots/connected-instructor
 
 ## Mission-first guided workspace
 
-The homepage asks **What is your mission?** Users enter a fictional training description; a local rule-based interpreter asks for missing or ambiguous details before producing an explained equipment research shortlist, conceptual architecture and validation questions. See [UI and mission-flow details](docs/UI_MISSION_FLOW.md). Raw text stays local and is discarded after analysis. Users can review and correct the recognized fields; sensitive-content screening is heuristic, not a classification guarantee. Equipment interfaces and suitability are never inferred.
+The homepage offers IT fundamentals, equipment, troubleshooting and mission planning. Open **Plan a training mission** to describe a fictional exercise; a local rule-based interpreter asks for missing or ambiguous details before producing an explained equipment research shortlist, conceptual architecture and validation questions. See [UI and mission-flow details](docs/UI_MISSION_FLOW.md). Raw text stays local and is discarded after analysis. Users can review and correct the recognized fields; sensitive-content screening is heuristic, not a classification guarantee. Equipment interfaces and suitability are never inferred.
 
 [New homepage](docs/screenshots/mission-home.png) · [Guided questions](docs/screenshots/mission-questions.png) · [Mission brief](docs/screenshots/mission-recommendation.png) · [Mobile](docs/screenshots/mission-home-mobile.png)
 
@@ -66,9 +66,13 @@ Run `python scripts/validate_sources.py` to validate curated source metadata bef
 
 Build the OCI image with `podman build --format oci -f deploy/Containerfile -t localhost/signal-mission-lab:reviewed .`. Rootless systemd Quadlet configuration, file-mounted PostgreSQL secrets, smoke checks and operational instructions are in [the Podman runbook](deploy/PODMAN.md). The default listener is loopback only. Live TLS, database/identity setup and host acceptance remain required.
 
+## Learning resources
+
+Choose **Learning resources** on the home screen or in IT Foundations. Start with [O’Reilly through Army MWR Library](https://army.dodmwrlibraries.org/oreilly). Eligible patrons can use library access without a personal subscription, subject to seat availability. The guide also groups official networking, server administration, Signal School and credential resources. The guide is bundled offline; opening provider pages and enrolling in courses requires internet access.
+
 ## IT foundations for Soldiers
 
-Open **IT foundations** from the navigation or homepage. Nine introductory lessons explain computing/VMs, switching, routing, DNS/identity, storage, firewalls, containers, recovery and security. Vendor examples have scoped public references and are separated from verified Army applicability. Use the synthetic dependency lab to connect the concepts to a user outcome. See [curriculum and manual gaps](docs/IT_FOUNDATIONS_AND_MANUAL_GAPS.md).
+Open **Learn IT fundamentals** from the homepage, then choose a topic and lesson. The lesson starts with a short explanation. Expand **Go deeper**, **Try a practice question**, or **Sources and limits** when needed. Nine introductory lessons explain computing/VMs, switching, routing, DNS/identity, storage, firewalls, containers, recovery and security. Vendor examples have scoped public references and are separated from verified Army applicability. Open **Vendors** for eleven product troubleshooting exercises and official credential or operator training links. Expand **Practice by Army system** to find fictional WIN-T, Mission Command Systems, and C2NOW cases. Each case teaches an IT skill through an affected staff task, classroom observations, a troubleshooting decision, and a user-level recovery check. Use the synthetic dependency lab to connect the concepts to a user outcome. See [curriculum and manual gaps](docs/IT_FOUNDATIONS_AND_MANUAL_GAPS.md).
 
 Offline/PWA and Android/iOS preparation: see [offline/mobile build and release gates](docs/OFFLINE_MOBILE.md). Store editions bundle public learning; signing, native device acceptance and store publication require owner action. Draft privacy and listing text are under `mobile/store/`.
 
@@ -87,3 +91,5 @@ The document planner can now propose sender, recipient, exchange and timing for 
 ## Local OCR for fictional scanned documents
 
 Document planner now offers local English OCR for PNG/JPEG and up to three scanned PDF pages. Correct and acknowledge every page before planning; citations and exports identify reviewed transcriptions. The engine, WASM and language data are bundled for offline use. No generative analysis service or operational-data permission is added. See [OCR workflow, limits and validation](docs/LOCAL_OCR.md).
+
+Open **Signal Coach** for conversational IT lesson guidance, device speech where supported and local discussion of fictional training attachments. The optional browser AI uses an already installed model. The offline package includes the lesson fallback and OCR. See [Signal Coach workflow and device requirements](docs/SIGNAL_COACH.md).

@@ -5,7 +5,7 @@ import re
 import sys
 
 
-def verify(directory: Path):
+def verified_manifest(directory: Path):
     root = directory.resolve(strict=True)
     manifest = root/'SHA256SUMS'
     if manifest.is_symlink() or not manifest.is_file() or manifest.stat().st_size > 200_000:
@@ -45,7 +45,11 @@ def verify(directory: Path):
             actual.add(name)
     if actual != set(expected):
         raise ValueError('Missing packaged file')
-    return len(actual)
+    return expected
+
+
+def verify(directory: Path):
+    return len(verified_manifest(directory))
 
 
 if __name__ == '__main__':

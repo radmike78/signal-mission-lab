@@ -41,7 +41,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
  fs.mkdirSync('artifacts/screenshots',{recursive:true});await page.screenshot({path:'artifacts/screenshots/exercise-lane-debrief-mobile.png',fullPage:true});
  const stored=await page.evaluate(()=>JSON.parse(localStorage.getItem('sml-practice-v1')));assert.equal(stored.filter(r=>r.kind==='exercise-lane').length,3);for(const r of stored)assert.deepEqual(Object.keys(r).sort(),['at','kind','score','total']);
  await lane.getByRole('button',{name:'Reset exercise lane',exact:true}).click();assert.match(await lane.getByLabel('Exercise activity').innerText(),/0\s+actions recorded/);
- await page.reload();await page.getByRole('button',{name:'Practice an exercise lane →',exact:true}).click();await lane.getByLabel('Lane code').waitFor();assert.match(await lane.getByLabel('Exercise activity').innerText(),/0\s+actions recorded/);
+ await page.reload();await page.getByText('Courses and planning tools',{exact:true}).click();await page.getByRole('button',{name:'Practice an exercise lane →',exact:true}).click();await lane.getByLabel('Lane code').waitFor();assert.match(await lane.getByLabel('Exercise activity').innerText(),/0\s+actions recorded/);
  await nav('My training');await page.locator('tbody tr').first().waitFor();assert.equal(await page.locator('tbody tr').count(),3);await page.getByRole('button',{name:'Clear device practice'}).click();await page.waitForFunction(()=>localStorage.getItem('sml-practice-v1')===null);
  assert.deepEqual(errors,[]);console.log('PASS offline stateful lanes, partial multi-fault recovery, repeatable contexts, instructor exports, cross-tab continuity, focus, mobile accessibility and bounded history');
  }finally{await browser.close();}

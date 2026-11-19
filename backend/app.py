@@ -13,6 +13,7 @@ from . import core
 from .limits import BodyLimit
 from .security import PublicAPILimit
 from .learning import router as learning_router
+from .store import configured_store
 app = FastAPI(title="Signal Mission Lab", docs_url=None, redoc_url=None, openapi_url=None)
 app.add_middleware(BodyLimit)
 app.add_middleware(PublicAPILimit)
@@ -49,7 +50,8 @@ async def boundary(request, call_next):
         response.headers["Content-Security-Policy"] = "default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'"
     response.headers["Referrer-Policy"] = "no-referrer"
     response.headers["X-Frame-Options"] = "DENY"
-    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    microphone = "(self)" if request.url.path in {"/", "/index.html"} else "()"
+    response.headers["Permissions-Policy"] = f"camera=(), microphone={microphone}, geolocation=(), payment=(), usb=()"
     response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
     response.headers["Cross-Origin-Resource-Policy"] = "same-origin"
     if request.url.scheme == "https":
@@ -57,6 +59,16 @@ async def boundary(request, call_next):
     return response
 @app.get("/health")
 def health(): return {"status":"ok", "scope":"synthetic training"}
+@app.get("/api/capabilities")
+def capabilities():
+    try:
+        configured_store()
+    except ValueError:
+        return {"connected_learning": False}
+    # Configuration advertises availability. It is not a database health probe.
+    return {"connected_learning": True}
+
+
 @app.get("/api/catalog")
 def catalog(): return core.catalog()
 @app.get("/api/graph")

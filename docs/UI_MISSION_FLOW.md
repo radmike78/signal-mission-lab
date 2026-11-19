@@ -1,6 +1,6 @@
 # Text-first mission flow — 18 October 2026
 
-The charcoal/olive homepage asks **What is your mission?** and accepts a short fictional training description. Users confirm that it contains only fictional, non-sensitive information. Examples fill the text box without automatically submitting it.
+The homepage offers four learning paths. **Plan a training mission** opens the guided workspace, which asks **What is your mission?** and accepts a short fictional training description. **Learning topics** returns to the topic chooser. Courses, exercise lanes and document planning are grouped under **Courses and planning tools**. Users confirm that it contains only fictional, non-sensitive information. Examples fill the text box without automatically submitting it.
 
 ## Interpretation and clarification
 
