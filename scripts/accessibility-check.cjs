@@ -9,7 +9,7 @@ const fs=require('node:fs');
  const context=await browser.newContext({viewport:{width:1280,height:1000}}),page=await context.newPage(),results=[];
  await page.goto(process.env.SML_URL||'http://127.0.0.1:8070');
  async function scan(name){const result=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();results.push({name,violations:result.violations});}
- for(const name of ['Mission','Document planner','Courses','Technical labs','Exercise lane','Equipment','Troubleshoot','My training','Assessment','IT foundations','Applications','Signal Products','MDMP','Architecture','Mentor','Offline & privacy']){
+ for(const name of ['Mission','Document planner','Courses','Technical labs','Exercise lane','Equipment','Troubleshoot','My training','Assessment','IT foundations','Learning resources','Applications','Signal Products','MDMP','Architecture','Mentor','Offline & privacy']){
   const button=page.getByRole('navigation').getByRole('button',{name:new RegExp(name+'$')});
   if(!await button.isVisible())await page.getByText('More learning tools',{exact:true}).click();await button.click();if(name==='Courses')await page.getByRole('region',{name:'STT and network-node course'}).waitFor();if(name==='Document planner')await page.getByRole('region',{name:'Document to Signal requirements',exact:true}).waitFor();if(name==='Technical labs')await page.getByRole('region',{name:'IT professional labs',exact:true}).waitFor();if(name==='Exercise lane')await page.getByLabel('Lane code').waitFor();await scan(name);
  }

@@ -9,7 +9,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
  page.on('pageerror',e=>errors.push(e.message));
  await page.goto(process.env.SML_URL||'http://127.0.0.1:8070');
  await page.evaluate(async()=>await navigator.serviceWorker.ready);await page.waitForFunction(()=>!!navigator.serviceWorker.controller);await context.setOffline(true);
- await page.getByRole('button',{name:'Learn STT and network nodes →',exact:true}).click();
+ await page.getByText('Courses and planning tools',{exact:true}).click();await page.getByRole('button',{name:'Learn STT and network nodes →',exact:true}).click();
  const course=page.getByRole('region',{name:'STT and network-node course'});
  await course.getByRole('heading',{name:'Start with the staff task',exact:true}).waitFor();
  async function nav(name){const b=page.getByRole('navigation').getByRole('button',{name:new RegExp(name+'$')});if(!await b.isVisible())await page.getByText('More learning tools',{exact:true}).click();await b.click();}

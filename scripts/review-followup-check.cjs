@@ -31,7 +31,7 @@ const content=require('../data/transfer-exercises.json');
  }
  await nav('My training');await page.waitForFunction(()=>JSON.parse(localStorage.getItem('sml-practice-v1')||'[]').length===6);assert.equal(await page.locator('tbody tr').count(),6);
  await page.reload();await nav('My training');await page.getByText('2/3 reasoning checks',{exact:true}).waitFor();assert.equal(await page.locator('tbody tr').count(),6);
- await nav('Mission');await page.getByLabel('Tell us what your team needs to accomplish').fill('Fictional brigade uses CPCE at one location for user access.');await page.getByLabel('This is a fictional, non-sensitive training mission.').check();await page.getByRole('button',{name:'Understand my mission →',exact:true}).click();
+ await nav('Mission');await page.getByRole('button',{name:/Plan a training mission/}).click();await page.getByLabel('Tell us what your team needs to accomplish').fill('Fictional brigade uses CPCE at one location for user access.');await page.getByLabel('This is a fictional, non-sensitive training mission.').check();await page.getByRole('button',{name:'Understand my mission →',exact:true}).click();
  await page.getByRole('heading',{name:'Your mission. A clearer path.',exact:true}).waitFor();
  assert(await page.locator('.equipment-shortlist').isHidden(),'equipment detail expanded on entry');assert(await page.locator('.preparation-brief').isHidden(),'preparation detail expanded on entry');
  const words=await page.locator('main').innerText().then(t=>t.split(/\s+/).length);assert(words<500,'mission result too dense: '+words);

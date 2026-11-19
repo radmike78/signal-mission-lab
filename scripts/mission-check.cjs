@@ -7,7 +7,7 @@ const fs=require('node:fs');
  try{
   const page=await browser.newPage({viewport:{width:1440,height:1100}});
   const base=process.env.SML_URL||'http://127.0.0.1:8070';const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  await page.goto(base);await page.getByRole('heading',{name:'What is your mission?',exact:true}).waitFor();
+  await page.goto(base);await page.getByRole('button',{name:/Plan a training mission/}).click();await page.getByRole('heading',{name:'What is your mission?',exact:true}).waitFor();
   fs.mkdirSync('artifacts/screenshots',{recursive:true});
   await page.screenshot({path:'artifacts/screenshots/mission-home.png',fullPage:true});
   const description=page.getByLabel('Tell us what your team needs to accomplish');
