@@ -25,6 +25,11 @@ const topics: {title: string; resources: Resource[]}[] = [
       use: 'Watch the introduction to Linux before working through service and storage faults.',
       access: 'No-cost on-demand videos. Registration may be required.',
     }, {
+      title: 'Red Hat Developer',
+      url: 'https://developers.redhat.com/',
+      use: 'Find tutorials and hands-on learning for Red Hat Enterprise Linux, containers, and OpenShift.',
+      access: 'Public articles. Some labs and downloads require a Red Hat account.',
+    }, {
       title: 'Microsoft Learn: Implement Windows Server DNS',
       url: 'https://learn.microsoft.com/en-us/training/modules/implement-windows-server-dns/',
       use: 'Learn how Windows resolves names and how zones and forwarders fit together.',
