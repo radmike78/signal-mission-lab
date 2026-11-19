@@ -109,6 +109,29 @@ def assign(cohort_id:UUID,body:AssignmentInput,user:User,db:Database):
             db.execute(connection,'INSERT INTO recovery_assignments(assignment_id,case_id) VALUES (?,?)',(key,body.activity))
         db.audit(connection,user['id'],'assignment.created',key)
     return {'id':key,'activity':body.activity,'cohort_id':str(cohort_id)}
+
+@router.get('/cohorts/{cohort_id}/report')
+def cohort_report(cohort_id:UUID,user:User,db:Database):
+    """Owner-authorized aggregate snapshot for an instructor's pilot review.
+
+    Reuse the complete latest-result summary, rather than the limited attempt
+    history. Individual account IDs, credentials and source documents are omitted.
+    """
+    snapshot = progress(cohort_id, user, db)
+    return {
+        'schema_version': 1,
+        'generated_at': now(),
+        'cohort_callsign': snapshot['cohort']['callsign'],
+        'learner_count': len(snapshot['members']),
+        'assignment_count': len(snapshot['assignments']),
+        'summary': snapshot['summary'],
+        'measurement': 'Latest formative result per currently enrolled learner and assignment.',
+        'limitations': [
+            'Repeat attempts can improve the latest result. This report does not measure first-attempt performance or learning gain.',
+            'Public practice items and reported evidence exposure do not establish independent skill or equipment qualification.',
+            'Aggregate counts may identify participants in a small cohort. Share only with authorized recipients.',
+        ],
+    }
 @router.get('/assignments')
 def assignments(user:User,db:Database):
     with db.transaction() as connection:

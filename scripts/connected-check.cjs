@@ -76,6 +76,14 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
   await teacher.getByRole('button',{name:'Refresh saved learning',exact:true}).click();
   await gapRow.getByRole('cell').nth(2).filter({hasText:/^0$/}).waitFor();
   if(await gapRow.getByRole('cell').allTextContents().then(v=>v.join('|'))!=='Understand a failed build|1|0|0')throw Error('Latest attempt failed to replace old gaps');
+  const downloading=teacher.waitForEvent('download');
+  await teacher.getByRole('button',{name:'Download aggregate cohort report',exact:true}).click();
+  const report=JSON.parse(fs.readFileSync(await (await downloading).path(),'utf8'));
+  if(report.schema_version!==1||report.learner_count!==1||report.summary.assigned_pairs!==2||report.summary.latest_complete_pairs!==2)throw Error('Aggregate report differs from current learning coverage');
+  for(const identity of Object.values(identities)){
+   const text=JSON.stringify(report);
+   if(text.includes(identity.account_id)||text.includes(identity.access_token))throw Error('Aggregate report exposed individual identity or credential');
+  }
   fs.mkdirSync('artifacts/screenshots',{recursive:true});
   await teacher.screenshot({path:'artifacts/screenshots/connected-instructor.png',fullPage:true});
   await learner.screenshot({path:'artifacts/screenshots/connected-learner.png',fullPage:true});
